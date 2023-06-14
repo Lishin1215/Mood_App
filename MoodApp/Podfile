@@ -8,7 +8,7 @@ target 'MoodApp' do
   pod 'SwiftLint'
 
 
- `warn_for_unused_master_specs_repo => false` 
+
   
 
 end

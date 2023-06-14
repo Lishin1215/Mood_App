@@ -88,7 +88,6 @@
 				71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */,
 				CA0A45F6B523BC2A73B48C0E /* Pods-MoodApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -104,6 +103,7 @@
 				5B0742342A39AC71008F4C3D /* Frameworks */,
 				5B0742352A39AC71008F4C3D /* Resources */,
 				719C3880AF951705BEF1CF50 /* [CP] Embed Pods Frameworks */,
+				5B07424F2A39F6C9008F4C3D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -161,6 +161,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5B07424F2A39F6C9008F4C3D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
 		719C3880AF951705BEF1CF50 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
