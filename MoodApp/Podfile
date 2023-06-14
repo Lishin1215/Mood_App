@@ -1,0 +1,14 @@
+platform :ios, '14.0'
+use_frameworks!
+
+target 'MoodApp' do
+  pod 'Kingfisher', '~> 7.0'
+  pod 'Alamofire'
+  pod 'IQKeyboardManagerSwift'
+  pod 'SwiftLint'
+
+
+ `warn_for_unused_master_specs_repo => false` 
+  
+
+end

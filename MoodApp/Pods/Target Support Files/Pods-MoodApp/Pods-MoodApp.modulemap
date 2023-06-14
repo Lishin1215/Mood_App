@@ -1,0 +1,6 @@
+framework module Pods_MoodApp {
+  umbrella header "Pods-MoodApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
