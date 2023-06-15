@@ -56,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="1310.6870229007634" y="-530.28169014084506"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="wkj-Ct-Swp">
             <objects>
-                <viewController id="mj1-xZ-Vc8" sceneMemberID="viewController">
+                <viewController id="mj1-xZ-Vc8" customClass="HomeViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E2s-0A-T1k">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

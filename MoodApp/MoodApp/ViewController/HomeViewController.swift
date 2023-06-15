@@ -8,12 +8,74 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+   
+    let calendarView = UICalendarView()
+    let gregorianCalendar = Calendar(identifier: .gregorian)
+    var selectDate: DateComponents?
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+       
+        calendarView.delegate = self
+        
+        calendarView.calendar = gregorianCalendar
+        view.addSubview(calendarView)
+        calendarView.backgroundColor = .white
+        
+        //add constraints
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            calendarView.heightAnchor.constraint(equalToConstant: 420)
+        ])
+        
+        //單選模式
+        let singleDateSelection = UICalendarSelectionSingleDate(delegate: self)
+        singleDateSelection.selectedDate = selectDate
+        calendarView.selectionBehavior = singleDateSelection
+        
     }
 
-
 }
+
+//MARK: Extension
+extension HomeViewController: UICalendarViewDelegate {
+    func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
+        
+        //示範2
+        let font = UIFont.systemFont(ofSize: 10)
+        let configuration = UIImage.SymbolConfiguration(font: font)
+        let image = UIImage(systemName: "star.fill", withConfiguration: configuration)?.withRenderingMode(.alwaysOriginal)
+        return .image(image)
+        
+//        //示範1
+//        if (dateComponents.day == selectDate?.day) && (dateComponents.year == selectDate?.year), (dateComponents.month == selectDate?.month) {
+//            return UICalendarView.Decoration.customView {
+//                //以下為他人示範
+//                let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 30.0))
+//                label.textColor = .red
+//                label.font = UIFont.systemFont(ofSize: 10.0)
+//                label.text = "今"
+//                return label
+//            }
+//        } else {
+//            return .none
+//        }
+    }
+}
+
+extension HomeViewController: UICalendarSelectionSingleDateDelegate {
+    func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
+        if let date = dateComponents {
+            self.selectDate = date
+        }
+        print(self.selectDate)
+    }
+}
+
+
+
 
