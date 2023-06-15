@@ -15,6 +15,8 @@
 		5B0742442A39AC72008F4C3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742432A39AC72008F4C3D /* Assets.xcassets */; };
 		5B0742472A39AC72008F4C3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742452A39AC72008F4C3D /* LaunchScreen.storyboard */; };
 		5B0742512A3AA87E008F4C3D /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742502A3AA87E008F4C3D /* TabBarViewController.swift */; };
+		5B0742552A3AAD2A008F4C3D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742542A3AAD2A008F4C3D /* UIColor+Extension.swift */; };
+		5B0742572A3AAD44008F4C3D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742562A3AAD44008F4C3D /* UIFont+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		5B0742462A39AC72008F4C3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B0742482A39AC72008F4C3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B0742502A3AA87E008F4C3D /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		5B0742542A3AAD2A008F4C3D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		5B0742562A3AAD44008F4C3D /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0A45F6B523BC2A73B48C0E /* Pods-MoodApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.release.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 		5B0742392A39AC71008F4C3D /* MoodApp */ = {
 			isa = PBXGroup;
 			children = (
+				5B0742532A3AACFD008F4C3D /* Extensions */,
 				5B0742522A3AA885008F4C3D /* ViewController */,
 				5B07423A2A39AC71008F4C3D /* AppDelegate.swift */,
 				5B07423C2A39AC71008F4C3D /* SceneDelegate.swift */,
@@ -91,6 +96,15 @@
 				5B07423E2A39AC71008F4C3D /* HomeViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5B0742532A3AACFD008F4C3D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5B0742542A3AAD2A008F4C3D /* UIColor+Extension.swift */,
+				5B0742562A3AAD44008F4C3D /* UIFont+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D94C7DEF15C338EDC4255E4F /* Pods */ = {
@@ -235,10 +249,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0742572A3AAD44008F4C3D /* UIFont+Extension.swift in Sources */,
 				5B0742512A3AA87E008F4C3D /* TabBarViewController.swift in Sources */,
 				5B07423F2A39AC71008F4C3D /* HomeViewController.swift in Sources */,
 				5B07423B2A39AC71008F4C3D /* AppDelegate.swift in Sources */,
 				5B07423D2A39AC71008F4C3D /* SceneDelegate.swift in Sources */,
+				5B0742552A3AAD2A008F4C3D /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
