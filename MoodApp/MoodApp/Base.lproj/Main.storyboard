@@ -72,10 +72,10 @@
             </objects>
             <point key="canvasLocation" x="1311" y="-1382"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="4H1-FW-Zze">
             <objects>
-                <tabBarController id="qgO-YG-Jjy" sceneMemberID="viewController">
+                <tabBarController id="qgO-YG-Jjy" customClass="TabBarViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="glw-i1-YyO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8CA-h7-jOy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
