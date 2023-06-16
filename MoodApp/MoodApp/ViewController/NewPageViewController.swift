@@ -55,7 +55,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @objc func buttonTapped(_ sender: UIButton) {
         
-        
+        print("hello")
     }
     
     
@@ -83,7 +83,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 let button = UIButton()
                 button.setImage(UIImage(named: buttonImages[index]), for: .normal)
                 button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-                cell.containerView.addSubview(button)
+                cell.addSubview(button)
                 
                 button.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -104,7 +104,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         //datePicker
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = .dateAndTime
-            cell.containerView.addSubview(datePicker)
+            cell.addSubview(datePicker)
             
             datePicker.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
@@ -113,12 +113,25 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 datePicker.heightAnchor.constraint(equalToConstant: 38)
             ])
             
-            
             return cell
         } else if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
             
             cell.moodLabel.text = "Write About Today"
+            
+        //textField
+            let textField = UITextField()
+            textField.backgroundColor = .lightGray
+            textField.layer.cornerRadius = 10
+            cell.addSubview(textField)
+            
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                textField.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 50),
+                textField.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 30),
+                textField.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -30),
+                textField.heightAnchor.constraint(equalToConstant: 38)
+            ])
             
             return cell
         } else {
