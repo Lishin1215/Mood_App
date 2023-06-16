@@ -53,6 +53,12 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
     
+    @objc func buttonTapped(_ sender: UIButton) {
+        
+        
+    }
+    
+    
 //height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         150
@@ -66,9 +72,47 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
+        if indexPath.row == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
         
-        
-        return cell
+            cell.moodLabel.text = "How's Your Day"
+            
+            let buttonImages = ["image 8", "image 13", "image 25", "image 7", "image 22"] //#imageLiteral(
+            for index in 0 ..< buttonImages.count {
+                let button = UIButton()
+                button.setImage(UIImage(named: buttonImages[index]), for: .normal)
+                button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+                cell.containerView.addSubview(button)
+                
+                // 根據索引決定按鈕的位置
+                button.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    button.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 50),
+                    button.widthAnchor.constraint(equalToConstant: 38),
+                    button.heightAnchor.constraint(equalTo: button.widthAnchor),
+                    button.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: CGFloat(40 + (50 * index))),
+                ])
     }
+            
+            
+            return cell
+        } else if indexPath.row == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
+            
+            cell.moodLabel.text = "Sleep Time"
+            
+            return cell
+        } else if indexPath.row == 2 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
+            
+            cell.moodLabel.text = "Write About Today"
+            
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
+            
+            return cell
+        }
+    }
+       
 }

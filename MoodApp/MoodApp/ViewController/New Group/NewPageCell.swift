@@ -12,9 +12,17 @@ class NewPageCell: UITableViewCell {
     static let reuseIdentifier = String(describing: NewPageCell.self)
     
     let containerView = UIView()
+    let moodLabel = UILabel()
+    
+//    let moodButtonOne = UIButton()
+//    let moodButtonTwo = UIButton()
+//    let moodButtonThree = UIButton()
+//    let moodButtonFour = UIButton()
+//    let moodButtonFive = UIButton()
     
 //    required init?(coder aDecoder: NSCoder) {
 //        super.init(coder: aDecoder)
+    
     // 初始化設置
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,6 +44,18 @@ class NewPageCell: UITableViewCell {
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             containerView.heightAnchor.constraint(equalToConstant: 110)])
+        
+    //label
+        containerView.addSubview(moodLabel)
+        moodLabel.font =  UIFont.boldSystemFont(ofSize: 15)
+        moodLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            moodLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            moodLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)])
+        
+    //button
+        
+        
     }
     
     required init?(coder: NSCoder) {

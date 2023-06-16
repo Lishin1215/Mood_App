@@ -58,7 +58,7 @@ extension HomeViewController: UICalendarViewDelegate {
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
         let font = UIFont.systemFont(ofSize: 10)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        if let originalImage = UIImage(named: "Ellipse 4")?.withRenderingMode(.alwaysOriginal){
+        if let originalImage = UIImage(named: "image 25")?.withRenderingMode(.alwaysOriginal){
             let scaledSize = CGSize(width: 18, height: originalImage.size.height * 18 / originalImage.size.width)
             let renderer = UIGraphicsImageRenderer(size: scaledSize)
             let scaledImage = renderer.image { _ in
