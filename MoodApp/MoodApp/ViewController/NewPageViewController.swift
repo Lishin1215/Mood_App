@@ -77,6 +77,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         
             cell.moodLabel.text = "How's Your Day"
             
+        //button
             let buttonImages = ["image 8", "image 13", "image 25", "image 7", "image 22"] //#imageLiteral(
             for index in 0 ..< buttonImages.count {
                 let button = UIButton()
@@ -84,7 +85,6 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
                 cell.containerView.addSubview(button)
                 
-                // 根據索引決定按鈕的位置
                 button.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
                     button.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 50),
@@ -100,6 +100,19 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
             
             cell.moodLabel.text = "Sleep Time"
+        
+        //datePicker
+            let datePicker = UIDatePicker()
+            datePicker.datePickerMode = .dateAndTime
+            cell.containerView.addSubview(datePicker)
+            
+            datePicker.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                datePicker.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 50),
+                datePicker.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
+                datePicker.heightAnchor.constraint(equalToConstant: 38)
+            ])
+            
             
             return cell
         } else if indexPath.row == 2 {
