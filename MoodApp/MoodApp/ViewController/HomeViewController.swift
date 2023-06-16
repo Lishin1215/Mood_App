@@ -38,18 +38,42 @@ class HomeViewController: UIViewController {
         calendarView.selectionBehavior = singleDateSelection
         
     }
+    
+    //傳資料到newPage
+    override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
+        //確認傳遞要項無誤
+        if segue.identifier == "newPageSegue" {
+            if let dateComponents = sender as? DateComponents,
+               let segueVC = segue.destination as? NewPageViewController {
+                //將任意點到的product資料，傳給newPageVC
+                segueVC.dateComponents = dateComponents
+            }
+        }
+    }
 
 }
 
 //MARK: Extension
 extension HomeViewController: UICalendarViewDelegate {
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-        
-        //示範2
         let font = UIFont.systemFont(ofSize: 10)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        let image = UIImage(systemName: "star.fill", withConfiguration: configuration)?.withRenderingMode(.alwaysOriginal)
-        return .image(image)
+        if let originalImage = UIImage(named: "Ellipse 4")?.withRenderingMode(.alwaysOriginal){
+            let scaledSize = CGSize(width: 18, height: originalImage.size.height * 18 / originalImage.size.width)
+            let renderer = UIGraphicsImageRenderer(size: scaledSize)
+            let scaledImage = renderer.image { _ in
+                originalImage.draw(in: CGRect(origin: .zero, size: scaledSize))
+            }
+            return .image(scaledImage)
+        }else {
+            return nil
+        }
+        
+        //示範2
+//        let font = UIFont.systemFont(ofSize: 10)
+//        let configuration = UIImage.SymbolConfiguration(font: font)
+//        let image = UIImage(systemName: "star.fill", withConfiguration: configuration)?.withRenderingMode(.alwaysOriginal)
+//        return .image(image)
         
 //        //示範1
 //        if (dateComponents.day == selectDate?.day) && (dateComponents.year == selectDate?.year), (dateComponents.month == selectDate?.month) {
@@ -73,6 +97,9 @@ extension HomeViewController: UICalendarSelectionSingleDateDelegate {
             self.selectDate = date
         }
         print(self.selectDate)
+        
+        //perform segue
+        performSegue(withIdentifier: "newPageSegue", sender: dateComponents)
     }
 }
 

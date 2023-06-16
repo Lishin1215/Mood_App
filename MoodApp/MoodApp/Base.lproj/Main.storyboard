@@ -34,11 +34,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="FzI-ZM-ls3"/>
+                    <navigationItem key="navigationItem" style="editor" id="FzI-ZM-ls3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1365.6488549618321" y="345.77464788732397"/>
+            <point key="canvasLocation" x="2828" y="-530"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="WCe-bo-4UF">
@@ -67,6 +67,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="HxM-cM-2dC"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="newPageSegue" id="2GB-Ec-5mB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xe3-Oy-pHJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -210,6 +213,9 @@
             <point key="canvasLocation" x="383.96946564885496" y="2131.6901408450703"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="2GB-Ec-5mB"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="book" catalog="system" width="128" height="99"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
