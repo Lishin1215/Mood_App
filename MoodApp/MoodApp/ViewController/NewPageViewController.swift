@@ -46,6 +46,9 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.register(NewPageCell.self, forCellReuseIdentifier: NewPageCell.reuseIdentifier)
         tableView.register(NewPagePhotoCell.self, forCellReuseIdentifier: NewPagePhotoCell.reuseIdentifier)
         
+        //UIImagePicker
+//        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         view.addSubview(tableView)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -117,9 +120,21 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         print("hello")
     }
     
+    
+    @objc func imageButtonTapped(_ sender: UIButton) {
+        
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    
     @objc func addDayTapped(_ sender: UIButton) {
         
-        print("meow")
+        navigationController?.popViewController(animated: false)
+        tabBarController?.selectedIndex = 0
     }
     
     
@@ -156,7 +171,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                     button.heightAnchor.constraint(equalTo: button.widthAnchor),
                     button.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: CGFloat(40 + (50 * index))),
                 ])
-    }
+            }
             
             
             return cell
@@ -185,7 +200,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             
         //textField
             let textField = UITextField()
-            textField.backgroundColor = .lightGray
+            textField.backgroundColor = .lightLightGray
             textField.layer.cornerRadius = 10
             cell.addSubview(textField)
             
@@ -202,10 +217,30 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPagePhotoCell.reuseIdentifier, for: indexPath) as? NewPagePhotoCell else { fatalError("Could not create Cell") }
             
             cell.titleLabel.text = "Today's Photo"
-            
+       
+            cell.imageButton.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
             
             return cell
         }
     }
        
+}
+
+extension NewPageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            let indexPath = IndexPath(row: 3, section: 0)
+            if let cell = tableView.cellForRow(at: indexPath) as? NewPagePhotoCell {
+                cell.imageButton.setImage(image, for: .normal)
+                cell.photoImageView.isHidden = true
+            }
+            
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
