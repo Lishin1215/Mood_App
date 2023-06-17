@@ -14,11 +14,6 @@ class NewPageCell: UITableViewCell {
     let containerView = UIView()
     let moodLabel = UILabel()
     
-//    let moodButtonOne = UIButton()
-//    let moodButtonTwo = UIButton()
-//    let moodButtonThree = UIButton()
-//    let moodButtonFour = UIButton()
-//    let moodButtonFive = UIButton()
     
 //    required init?(coder aDecoder: NSCoder) {
 //        super.init(coder: aDecoder)
@@ -50,10 +45,10 @@ class NewPageCell: UITableViewCell {
         moodLabel.font =  UIFont.boldSystemFont(ofSize: 15)
         moodLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            moodLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            moodLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 15),
             moodLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)])
         
-    //button
+    
         
         
     }

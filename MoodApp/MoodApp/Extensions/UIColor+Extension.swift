@@ -37,17 +37,25 @@ extension UIColor {
     
     
     //漸層橘
-    static func gradientColor(with colors: [UIColor]) -> UIColor {
+    static func gradientColor(with colors: [UIColor]) -> UIColor? {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = colors.map { $0.cgColor }
-        
+
         UIGraphicsBeginImageContext(gradientLayer.bounds.size)
-        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
-        let gradientImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return UIColor(patternImage: gradientImage!)
+
+        if let context = UIGraphicsGetCurrentContext() {
+            gradientLayer.render(in: context)
+            let gradientImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+
+            if let image = gradientImage {
+                return UIColor(patternImage: image)
+            }
+        }
+
+        return nil
     }
+    
     
     
     //沒“驚嘆號”寫法
@@ -71,11 +79,19 @@ extension UIColor {
 //    }
     
     
+//    static func gradientColor(with colors: [UIColor]) -> UIColor {
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.colors = colors.map { $0.cgColor }
+//
+//        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+//        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+//        let gradientImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        return UIColor(patternImage: gradientImage!)
+//    }
     
     
-    
-    
-
 }
 
 

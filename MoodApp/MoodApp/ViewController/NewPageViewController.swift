@@ -16,6 +16,10 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     
     let tableView = UITableView()
     
+    //footer
+    let footerView = UIView(frame: .zero)
+    let addDayButton = UIButton(frame: .zero)
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -40,6 +44,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         
         //register
         tableView.register(NewPageCell.self, forCellReuseIdentifier: NewPageCell.reuseIdentifier)
+        tableView.register(NewPagePhotoCell.self, forCellReuseIdentifier: NewPagePhotoCell.reuseIdentifier)
         
         view.addSubview(tableView)
         tableView.separatorStyle = .none
@@ -48,14 +53,73 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+    //設定自定義“返回鍵”
+        let systemImage = UIImage(systemName: "chevron.backward")?.withTintColor(.black).withRenderingMode(.alwaysOriginal)
+        let backButton = UIBarButtonItem(title: nil, image: systemImage, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    //footer
+        footerView.backgroundColor = .white
+        //設footer上方的線
+
+        tableView.tableFooterView = footerView
+
+        
+        // Add constraints
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            footerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            footerView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        //“加入購物車”按鈕
+        addDayButton.setTitle("+  Add Day", for: .normal)
+        //漸層色
+        let gradientColors = [
+            UIColor(red: 0.837, green: 0.556, blue: 0.332, alpha: 1),
+            UIColor(red: 0.942, green: 0.539, blue: 0.451, alpha: 0.9)
+        ]
+        let gradientColor = UIColor.gradientColor(with: gradientColors)
+        addDayButton.setTitleColor(.white, for: .normal)
+        addDayButton.layer.cornerRadius = 10
+        addDayButton.backgroundColor = .pinkOrange
+        addDayButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        addDayButton.titleLabel?.textAlignment = .center
+        footerView.addSubview(addDayButton)
+        
+        //相當於拉＠IBAction （function 也在外面）
+        addDayButton.addTarget(self, action: #selector(addDayTapped), for: .touchUpInside)
+
+        // Add constraints
+        addDayButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            addDayButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20), addDayButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            addDayButton.bottomAnchor.constraint(equalTo: footerView.bottomAnchor, constant: -16), addDayButton.heightAnchor.constraint(equalToConstant: 48)
+        ])
         
         
     }
     
-    @objc func buttonTapped(_ sender: UIButton) {
+    @objc func backButtonTapped(_ sender: UIButton) { //兩條路都需執行，“系統會記住”我們點選哪條路過來
+        // 按日期到newPage的時候是要pop出來
+        navigationController?.popViewController(animated: false)
+        // 按tabbar到newPage的時候因為不是segue，直接指定回到tabController的第0頁(homePage)即可
+        tabBarController?.selectedIndex = 0
+    }
+    
+    
+    @objc func moodButtonTapped(_ sender: UIButton) {
         
         print("hello")
+    }
+    
+    @objc func addDayTapped(_ sender: UIButton) {
+        
+        print("meow")
     }
     
     
@@ -68,7 +132,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     
 //MARK: UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,7 +146,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             for index in 0 ..< buttonImages.count {
                 let button = UIButton()
                 button.setImage(UIImage(named: buttonImages[index]), for: .normal)
-                button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+                button.addTarget(self, action: #selector(moodButtonTapped), for: .touchUpInside)
                 cell.addSubview(button)
                 
                 button.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +199,10 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPagePhotoCell.reuseIdentifier, for: indexPath) as? NewPagePhotoCell else { fatalError("Could not create Cell") }
+            
+            cell.titleLabel.text = "Today's Photo"
+            
             
             return cell
         }
