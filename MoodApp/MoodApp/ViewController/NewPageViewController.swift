@@ -23,10 +23,26 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //替換自己的返回鍵（黑）
-        
         //hide tabBar
         tabBarController?.tabBar.isHidden = true
+        
+        // 顯示自己的 navigationBar
+       navigationController?.setNavigationBarHidden(false, animated: false)
+
+       // 設置自定義的 navigationBar 外觀和高度
+       if let navigationBar = navigationController?.navigationBar {
+           let appearance = UINavigationBarAppearance()
+           appearance.configureWithOpaqueBackground()
+           appearance.backgroundColor = .yellow
+           appearance.titleTextAttributes = [.foregroundColor: UIColor.white] // 設定標題文字顏色
+           appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white] // 設定大標題文字顏色
+
+           navigationBar.standardAppearance = appearance
+           navigationBar.scrollEdgeAppearance = appearance
+
+           navigationItem.largeTitleDisplayMode = .always // 啟用大標題模式
+           navigationController?.navigationBar.prefersLargeTitles = true
+       }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -46,9 +62,21 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.register(NewPageCell.self, forCellReuseIdentifier: NewPageCell.reuseIdentifier)
         tableView.register(NewPagePhotoCell.self, forCellReuseIdentifier: NewPagePhotoCell.reuseIdentifier)
         
-        //UIImagePicker
-//        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        //custom navigationBar
+//        if let navigationBar = navigationController?.navigationBar {
+//           let appearance = UINavigationBarAppearance()
+//           appearance.configureWithOpaqueBackground()
+//            appearance.backgroundColor = .white
+//           appearance.titleTextAttributes = [.foregroundColor: UIColor.white] // 設定標題文字顏色
+//           appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white] // 設定大標題文字顏色
+//
+//           navigationBar.standardAppearance = appearance
+//           navigationBar.scrollEdgeAppearance = appearance
+//
+//           navigationItem.largeTitleDisplayMode = .always // 啟用大標題模式
+//           navigationController?.navigationBar.prefersLargeTitles = true
+//       }
+//        
         view.addSubview(tableView)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -218,6 +246,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             
             cell.titleLabel.text = "Today's Photo"
        
+        //button(UIImagePicker)
             cell.imageButton.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
             
             return cell
