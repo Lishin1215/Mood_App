@@ -7,11 +7,14 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, NewPageDelegate {
+    
    
     let calendarView = UICalendarView()
     let gregorianCalendar = Calendar(identifier: .gregorian)
     var selectDate: DateComponents?
+    
+    private var moodTag = ""
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -60,9 +63,17 @@ class HomeViewController: UIViewController {
                let segueVC = segue.destination as? NewPageViewController {
                 //將任意點到的product資料，傳給newPageVC
                 segueVC.dateComponents = dateComponents
+                //建立delegate
+                segueVC.delegate = self
 
             }
         }
+    }
+    
+    //conform to protocol
+    func newPage(_ newPage: NewPageViewController, didGet moodTag: String) {
+        self.moodTag = moodTag
+        print("tag成功傳過來啦")
     }
 
 }

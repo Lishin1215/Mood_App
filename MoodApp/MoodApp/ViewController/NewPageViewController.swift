@@ -9,8 +9,15 @@ import UIKit
 import SwiftUI
 import Combine
 
+protocol NewPageDelegate: AnyObject {
+    func newPage(_ newPage: NewPageViewController, didGet moodTag: String)
+}
+
+
 class NewPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
    
+    weak var delegate: NewPageDelegate?
+    
     //sleep circular slider
     private var sleepCancellable: AnyCancellable?
     private var wakeUpCancellable: AnyCancellable?
@@ -59,6 +66,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         
         textField.delegate = self
+
         
         
         //register
@@ -275,26 +283,16 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                         text: self.textField.text ?? "",
                         photo: url.absoluteString)
                     }
+                //delegate傳回上一頁
+                self.delegate?.newPage(self, didGet: self.moodIndex)
+                //else 編輯過去的某一天
+        //        FireStoreManager.shared.updateData()
                 case .failure(let error):
                    print(error)
                 }
             
         }
         
-//        var date: Date?
-//        if let dateComponents = dateComponents,
-//           let convertedDate = Calendar.current.date(from: dateComponents) {
-//                date = convertedDate
-//        } else {
-//            print ("Cannot convert to date!")
-//        }
-//        //if 新的一天
-//        if let date = date {
-//            FireStoreManager.shared.setData(date: date, mood: moodIndex, sleepStart: self.sleepTime, sleepEnd: self.wakeUpTime, text: textField.text ?? "" , photo: "")
-//        }
-        
-        //else 編輯過去的某一天
-//        FireStoreManager.shared.updateData()
     }
     
     
