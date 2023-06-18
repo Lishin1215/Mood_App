@@ -16,9 +16,10 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     private var wakeUpCancellable: AnyCancellable?
     
     //把值傳出來
-    var sleepTime = ""
-    var wakeUpTime = ""
-    var moodIndex = ""
+    private var sleepTime = ""
+    private var wakeUpTime = ""
+    private var moodIndex = ""
+    private var selectedImage = UIImage()
     
     //cell裡的物件
     let textField = UITextField()
@@ -255,17 +256,42 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.popViewController(animated: false)
         tabBarController?.selectedIndex = 0
         
-        var date: Date?
-        if let dateComponents = dateComponents,
-           let convertedDate = Calendar.current.date(from: dateComponents) {
-                date = convertedDate
-        } else {
-            print ("Cannot convert to date!")
+        //上傳image到fireStorage
+        FireBaseStorageManager.shared.uploadPhoto(image: selectedImage) { result in
+            switch result {
+                case .success(let url):
+                    var date: Date?
+                    if let dateComponents = self.dateComponents,
+                       let convertedDate = Calendar.current.date(from: dateComponents) {
+                            date = convertedDate
+                    } else {
+                        print ("Cannot convert to date!")
+                    }
+                    //if 新的一天
+                    if let date = date {
+                        FireStoreManager.shared.setData(date: date, mood: self.moodIndex,
+                        sleepStart: self.sleepTime,
+                        sleepEnd: self.wakeUpTime,
+                        text: self.textField.text ?? "",
+                        photo: url.absoluteString)
+                    }
+                case .failure(let error):
+                   print(error)
+                }
+            
         }
-        //if 新的一天
-        if let date = date {
-            FireStoreManager.shared.setData(date: date, mood: moodIndex, sleepStart: self.sleepTime, sleepEnd: self.wakeUpTime, text: textField.text ?? "" , photo: "")
-        }
+        
+//        var date: Date?
+//        if let dateComponents = dateComponents,
+//           let convertedDate = Calendar.current.date(from: dateComponents) {
+//                date = convertedDate
+//        } else {
+//            print ("Cannot convert to date!")
+//        }
+//        //if 新的一天
+//        if let date = date {
+//            FireStoreManager.shared.setData(date: date, mood: moodIndex, sleepStart: self.sleepTime, sleepEnd: self.wakeUpTime, text: textField.text ?? "" , photo: "")
+//        }
         
         //else 編輯過去的某一天
 //        FireStoreManager.shared.updateData()
@@ -377,7 +403,7 @@ extension NewPageViewController: UIImagePickerControllerDelegate, UINavigationCo
                 cell.imageButton.setImage(image, for: .normal)
                 cell.photoImageView.isHidden = true
             }
-            
+            self.selectedImage = image
         }
         picker.dismiss(animated: true, completion: nil)
     }
