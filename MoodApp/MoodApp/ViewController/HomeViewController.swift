@@ -13,6 +13,19 @@ class HomeViewController: UIViewController {
     let gregorianCalendar = Calendar(identifier: .gregorian)
     var selectDate: DateComponents?
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // 隱藏 navigationBar
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // 顯示 navigationBar
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

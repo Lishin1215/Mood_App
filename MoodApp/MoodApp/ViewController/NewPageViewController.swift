@@ -26,23 +26,6 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         //hide tabBar
         tabBarController?.tabBar.isHidden = true
         
-        // 顯示自己的 navigationBar
-       navigationController?.setNavigationBarHidden(false, animated: false)
-
-       // 設置自定義的 navigationBar 外觀和高度
-       if let navigationBar = navigationController?.navigationBar {
-           let appearance = UINavigationBarAppearance()
-           appearance.configureWithOpaqueBackground()
-           appearance.backgroundColor = .yellow
-           appearance.titleTextAttributes = [.foregroundColor: UIColor.white] // 設定標題文字顏色
-           appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white] // 設定大標題文字顏色
-
-           navigationBar.standardAppearance = appearance
-           navigationBar.scrollEdgeAppearance = appearance
-
-           navigationItem.largeTitleDisplayMode = .always // 啟用大標題模式
-           navigationController?.navigationBar.prefersLargeTitles = true
-       }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,20 +46,58 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.register(NewPagePhotoCell.self, forCellReuseIdentifier: NewPagePhotoCell.reuseIdentifier)
         
         //custom navigationBar
-//        if let navigationBar = navigationController?.navigationBar {
-//           let appearance = UINavigationBarAppearance()
-//           appearance.configureWithOpaqueBackground()
-//            appearance.backgroundColor = .white
-//           appearance.titleTextAttributes = [.foregroundColor: UIColor.white] // 設定標題文字顏色
-//           appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white] // 設定大標題文字顏色
-//
-//           navigationBar.standardAppearance = appearance
-//           navigationBar.scrollEdgeAppearance = appearance
-//
-//           navigationItem.largeTitleDisplayMode = .always // 啟用大標題模式
-//           navigationController?.navigationBar.prefersLargeTitles = true
-//       }
-//        
+        if let navigationBar = navigationController?.navigationBar {
+           let appearance = UINavigationBarAppearance()
+           appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .white
+           appearance.titleTextAttributes = [.foregroundColor: UIColor.white] // 設定標題文字顏色
+           appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white] // 設定大標題文字顏色
+            
+           navigationBar.standardAppearance = appearance
+           navigationBar.scrollEdgeAppearance = appearance
+
+           navigationItem.largeTitleDisplayMode = .always // 啟用大標題模式
+           navigationController?.navigationBar.prefersLargeTitles = true
+           
+           
+            
+            let dateLabel = UILabel()
+            dateLabel.text = "24"
+            dateLabel.textColor = .black
+            dateLabel.font = UIFont.boldSystemFont(ofSize: 40)
+            navigationBar.addSubview(dateLabel)
+            
+            dateLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                dateLabel.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: 20),
+                dateLabel.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: 52)
+            ])
+            
+            let weekdayLabel = UILabel()
+            weekdayLabel.text = "Fri"
+            weekdayLabel.textColor = .lightGray
+            weekdayLabel.font = UIFont.systemFont(ofSize: 14)
+            navigationBar.addSubview(weekdayLabel)
+            
+            weekdayLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                weekdayLabel.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: 24),
+                weekdayLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10)
+            ])
+            
+            let monthLabel = UILabel()
+            monthLabel.text = "Sep 2021"
+            monthLabel.textColor = .lightGray
+            monthLabel.font = UIFont.systemFont(ofSize: 14)
+            navigationBar.addSubview(monthLabel)
+            
+            monthLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                monthLabel.topAnchor.constraint(equalTo: weekdayLabel.bottomAnchor, constant: 4),
+                monthLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10)
+            ])
+       }
+
         view.addSubview(tableView)
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -86,11 +107,16 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        let footerHeight = footerView.frame.height
+        let bottomInset = footerHeight + 20 // 加上額外的間距，調整數字以符合您的需求
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+
         
     //設定自定義“返回鍵”
         let systemImage = UIImage(systemName: "chevron.backward")?.withTintColor(.black).withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem(title: nil, image: systemImage, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
+        
     //footer
         footerView.backgroundColor = .white
         //設footer上方的線
