@@ -60,6 +60,7 @@ class HomeViewController: UIViewController {
                let segueVC = segue.destination as? NewPageViewController {
                 //將任意點到的product資料，傳給newPageVC
                 segueVC.dateComponents = dateComponents
+
             }
         }
     }

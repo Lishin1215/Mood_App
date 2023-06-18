@@ -59,10 +59,19 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
            navigationItem.largeTitleDisplayMode = .always // 啟用大標題模式
            navigationController?.navigationBar.prefersLargeTitles = true
            
-           
-            
+          //Date
             let dateLabel = UILabel()
-            dateLabel.text = "24"
+
+            if let dateComponents = dateComponents,
+                let date = Calendar.current.date(from: dateComponents) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd" // 自定義你想要的日期格式，這裡只包含日期
+                let dateString = dateFormatter.string(from: date)
+                dateLabel.text = dateString
+            } else {
+                dateLabel.text = ""
+            }
+            
             dateLabel.textColor = .black
             dateLabel.font = UIFont.boldSystemFont(ofSize: 40)
             navigationBar.addSubview(dateLabel)
@@ -73,8 +82,25 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 dateLabel.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: 52)
             ])
             
+        //Week
             let weekdayLabel = UILabel()
-            weekdayLabel.text = "Fri"
+            weekdayLabel.text = "Week"
+            
+//            if let dateComponents = dateComponents, let weekday = dateComponents.weekday {
+//                let calendar = Calendar.current
+//                let weekdaySymbols = calendar.weekdaySymbols
+//                let weekdayIndex = weekday - calendar.firstWeekday
+//
+//                if weekdayIndex >= 0 && weekdayIndex < weekdaySymbols.count {
+//                    let weekdayText = weekdaySymbols[weekdayIndex]
+//                    weekdayLabel.text = weekdayText
+//                } else {
+//                    weekdayLabel.text = ""
+//                }
+//            } else {
+//                weekdayLabel.text = ""
+//            }
+            
             weekdayLabel.textColor = .lightGray
             weekdayLabel.font = UIFont.systemFont(ofSize: 14)
             navigationBar.addSubview(weekdayLabel)
@@ -85,8 +111,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 weekdayLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10)
             ])
             
+        //Month
             let monthLabel = UILabel()
-            monthLabel.text = "Sep 2021"
+            monthLabel.text = "Month"
+            
+
             monthLabel.textColor = .lightGray
             monthLabel.font = UIFont.systemFont(ofSize: 14)
             navigationBar.addSubview(monthLabel)
@@ -107,10 +136,6 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        let footerHeight = footerView.frame.height
-        let bottomInset = footerHeight + 20 // 加上額外的間距，調整數字以符合您的需求
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
-
         
     //設定自定義“返回鍵”
         let systemImage = UIImage(systemName: "chevron.backward")?.withTintColor(.black).withRenderingMode(.alwaysOriginal)
@@ -122,7 +147,6 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         //設footer上方的線
 
         tableView.tableFooterView = footerView
-
         
         // Add constraints
         footerView.translatesAutoresizingMaskIntoConstraints = false
@@ -132,15 +156,9 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             footerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             footerView.heightAnchor.constraint(equalToConstant: 80)
         ])
-        
         //“加入購物車”按鈕
         addDayButton.setTitle("+  Add Day", for: .normal)
-        //漸層色
-        let gradientColors = [
-            UIColor(red: 0.837, green: 0.556, blue: 0.332, alpha: 1),
-            UIColor(red: 0.942, green: 0.539, blue: 0.451, alpha: 0.9)
-        ]
-        let gradientColor = UIColor.gradientColor(with: gradientColors)
+        
         addDayButton.setTitleColor(.white, for: .normal)
         addDayButton.layer.cornerRadius = 10
         addDayButton.backgroundColor = .pinkOrange
@@ -148,7 +166,6 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         addDayButton.titleLabel?.textAlignment = .center
         footerView.addSubview(addDayButton)
         
-        //相當於拉＠IBAction （function 也在外面）
         addDayButton.addTarget(self, action: #selector(addDayTapped), for: .touchUpInside)
 
         // Add constraints
@@ -158,8 +175,9 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             addDayButton.bottomAnchor.constraint(equalTo: footerView.bottomAnchor, constant: -16), addDayButton.heightAnchor.constraint(equalToConstant: 48)
         ])
         
-        
     }
+    
+   
     
     @objc func backButtonTapped(_ sender: UIButton) { //兩條路都需執行，“系統會記住”我們點選哪條路過來
         // 按日期到newPage的時候是要pop出來
@@ -297,5 +315,11 @@ extension NewPageViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }
