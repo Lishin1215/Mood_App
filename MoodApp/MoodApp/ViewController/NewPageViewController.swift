@@ -58,6 +58,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.dataSource = self
         tableView.delegate = self
         
+        
         //register
         tableView.register(NewPageCell.self, forCellReuseIdentifier: NewPageCell.reuseIdentifier)
         tableView.register(NewPagePhotoCell.self, forCellReuseIdentifier: NewPagePhotoCell.reuseIdentifier)
@@ -163,6 +164,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         
         navigationController?.popViewController(animated: false)
         tabBarController?.selectedIndex = 0
+        
+        //if 新的一天
+//        FireStoreManager.shared.setData()
+        //else 編輯過去的某一天
+        FireStoreManager.shared.updateData()
     }
     
     
