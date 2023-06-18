@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class NewPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
@@ -40,6 +41,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
 
         tableView.dataSource = self
         tableView.delegate = self
+        
         
         //register
         tableView.register(NewPageCell.self, forCellReuseIdentifier: NewPageCell.reuseIdentifier)
@@ -192,6 +194,13 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         print("hello")
     }
     
+    @objc func sleepButtonTapped(_ sender: UIButton) {
+        
+        //swiftUI提供結合UIKit(hostController
+        let sleepVC = UIHostingController(rootView: SleepContentView())
+        present(sleepVC, animated: true)
+    }
+    
     
     @objc func imageButtonTapped(_ sender: UIButton) {
         
@@ -207,6 +216,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         
         navigationController?.popViewController(animated: false)
         tabBarController?.selectedIndex = 0
+        
+        //if 新的一天
+//        FireStoreManager.shared.setData()
+        //else 編輯過去的某一天
+        FireStoreManager.shared.updateData()
     }
     
     
@@ -252,16 +266,19 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             
             cell.moodLabel.text = "Sleep Time"
         
-        //datePicker
-            let datePicker = UIDatePicker()
-            datePicker.datePickerMode = .dateAndTime
-            cell.addSubview(datePicker)
+        //button(sleep circular slider)
+            let sleepButton = UIButton()
+            sleepButton.backgroundColor = .lightLightGray
+            sleepButton.layer.cornerRadius = 10
+            sleepButton.addTarget(self, action: #selector(sleepButtonTapped), for: .touchUpInside)
+            cell.addSubview(sleepButton)
             
-            datePicker.translatesAutoresizingMaskIntoConstraints = false
+            sleepButton.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                datePicker.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 50),
-                datePicker.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
-                datePicker.heightAnchor.constraint(equalToConstant: 38)
+                sleepButton.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 50),
+                sleepButton.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 30),
+                sleepButton.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -30),
+                sleepButton.heightAnchor.constraint(equalToConstant: 38)
             ])
             
             return cell

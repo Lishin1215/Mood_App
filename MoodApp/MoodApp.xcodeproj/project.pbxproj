@@ -21,6 +21,10 @@
 		5B07425C2A3C1E12008F4C3D /* NewPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07425B2A3C1E12008F4C3D /* NewPageCell.swift */; };
 		5B07425E2A3C69C9008F4C3D /* NewPagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07425D2A3C69C9008F4C3D /* NewPagePhotoCell.swift */; };
 		5B0742602A3E1804008F4C3D /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07425F2A3E1804008F4C3D /* CustomNavigationBar.swift */; };
+		5B0742662A3EBD62008F4C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */; };
+		5B0742692A3EC348008F4C3D /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742682A3EC348008F4C3D /* Articles.swift */; };
+		5B07426C2A3EC5AF008F4C3D /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07426B2A3EC5AF008F4C3D /* FireStoreManager.swift */; };
+		5B07426F2A3EFD72008F4C3D /* SleepContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07426E2A3EFD72008F4C3D /* SleepContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,10 @@
 		5B07425B2A3C1E12008F4C3D /* NewPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPageCell.swift; sourceTree = "<group>"; };
 		5B07425D2A3C69C9008F4C3D /* NewPagePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPagePhotoCell.swift; sourceTree = "<group>"; };
 		5B07425F2A3E1804008F4C3D /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5B0742682A3EC348008F4C3D /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
+		5B07426B2A3EC5AF008F4C3D /* FireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreManager.swift; sourceTree = "<group>"; };
+		5B07426E2A3EFD72008F4C3D /* SleepContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepContentView.swift; sourceTree = "<group>"; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0A45F6B523BC2A73B48C0E /* Pods-MoodApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.release.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +93,8 @@
 		5B0742392A39AC71008F4C3D /* MoodApp */ = {
 			isa = PBXGroup;
 			children = (
+				5B07426A2A3EC554008F4C3D /* Manager */,
+				5B0742672A3EC32D008F4C3D /* Model */,
 				5B0742532A3AACFD008F4C3D /* Extensions */,
 				5B0742522A3AA885008F4C3D /* ViewController */,
 				5B07423A2A39AC71008F4C3D /* AppDelegate.swift */,
@@ -92,6 +102,7 @@
 				5B0742402A39AC71008F4C3D /* Main.storyboard */,
 				5B0742432A39AC72008F4C3D /* Assets.xcassets */,
 				5B0742452A39AC72008F4C3D /* LaunchScreen.storyboard */,
+				5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */,
 				5B0742482A39AC72008F4C3D /* Info.plist */,
 			);
 			path = MoodApp;
@@ -100,6 +111,7 @@
 		5B0742522A3AA885008F4C3D /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5B07426D2A3EFD66008F4C3D /* View */,
 				5B07425A2A3C1DFE008F4C3D /* Cell */,
 				5B0742502A3AA87E008F4C3D /* TabBarViewController.swift */,
 				5B07423E2A39AC71008F4C3D /* HomeViewController.swift */,
@@ -125,6 +137,30 @@
 				5B07425F2A3E1804008F4C3D /* CustomNavigationBar.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		5B0742672A3EC32D008F4C3D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5B0742682A3EC348008F4C3D /* Articles.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5B07426A2A3EC554008F4C3D /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				5B07426B2A3EC5AF008F4C3D /* FireStoreManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		5B07426D2A3EFD66008F4C3D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5B07426E2A3EFD72008F4C3D /* SleepContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D94C7DEF15C338EDC4255E4F /* Pods */ = {
@@ -199,6 +235,7 @@
 			files = (
 				5B0742472A39AC72008F4C3D /* LaunchScreen.storyboard in Resources */,
 				5B0742442A39AC72008F4C3D /* Assets.xcassets in Resources */,
+				5B0742662A3EBD62008F4C3D /* GoogleService-Info.plist in Resources */,
 				5B0742422A39AC71008F4C3D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,12 +309,15 @@
 				5B0742592A3C0ED8008F4C3D /* NewPageViewController.swift in Sources */,
 				5B0742572A3AAD44008F4C3D /* UIFont+Extension.swift in Sources */,
 				5B0742512A3AA87E008F4C3D /* TabBarViewController.swift in Sources */,
+				5B07426C2A3EC5AF008F4C3D /* FireStoreManager.swift in Sources */,
 				5B07425C2A3C1E12008F4C3D /* NewPageCell.swift in Sources */,
 				5B0742602A3E1804008F4C3D /* CustomNavigationBar.swift in Sources */,
 				5B07423F2A39AC71008F4C3D /* HomeViewController.swift in Sources */,
 				5B07423B2A39AC71008F4C3D /* AppDelegate.swift in Sources */,
 				5B07425E2A3C69C9008F4C3D /* NewPagePhotoCell.swift in Sources */,
 				5B07423D2A39AC71008F4C3D /* SceneDelegate.swift in Sources */,
+				5B07426F2A3EFD72008F4C3D /* SleepContentView.swift in Sources */,
+				5B0742692A3EC348008F4C3D /* Articles.swift in Sources */,
 				5B0742552A3AAD2A008F4C3D /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
