@@ -33,6 +33,9 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     let footerView = UIView(frame: .zero)
     let addDayButton = UIButton(frame: .zero)
     
+    //moodButtonArray 
+    var moodButtonArray: [UIButton] = []
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -204,7 +207,15 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     @objc func moodButtonTapped(_ sender: UIButton) {
-        
+
+        //先 default
+        for moodButton in moodButtonArray{
+            moodButton.backgroundColor = .white
+        }
+        //點選後要變顏色
+        let selectedColor = UIColor.lightLightGray
+        sender.layer.cornerRadius = 22
+        sender.backgroundColor = selectedColor
         //得到選擇的"心情編號“
         self.moodIndex = String(sender.tag)
     }
@@ -281,6 +292,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             
         //button
             let buttonImages = ["image 8", "image 13", "image 25", "image 7", "image 22"] //#imageLiteral(
+            
+            moodButtonArray = [] //淨空，以防table reload，會重複加入buttonArray
             for index in 0 ..< buttonImages.count {
                 let button = UIButton()
                 button.tag = index
@@ -295,6 +308,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                     button.heightAnchor.constraint(equalTo: button.widthAnchor),
                     button.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: CGFloat(40 + (50 * index))),
                 ])
+                moodButtonArray.append(button)
             }
             
             
