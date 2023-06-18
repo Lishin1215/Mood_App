@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+class SleepContentViewDelegate: ObservableObject {
+    @Published var sleepTime: String = "" //如果值被改變，會publish一個事件
+    @Published var wakeUpTime: String = ""
+}
+
 struct Config {
     let radius: CGFloat
     let knobRadius: CGFloat
@@ -35,6 +40,9 @@ struct SleepContentView: View {
     
     @State var rotationSleep = 0.0
     @State var rotationWakeup = 90.0
+    
+    //傳值
+    @StateObject var delegate: SleepContentViewDelegate
     
     var totalSleepDuration: Double {
         let mappedSleep = mapRotationToTime(degrees: rotationSleep)
@@ -184,8 +192,11 @@ struct SleepContentView: View {
                         .foregroundColor(.white)
                         .font(.system(size: 22))
                     Button(action: {
-                        print(getSleepTime())
-                        print(getWakeUpTime())
+                        //delegate值被改變
+                        delegate.sleepTime = getSleepTime()
+                        delegate.wakeUpTime = getWakeUpTime()
+                        
+                        //closure (把自己收起來）
                     }){
                         Text("Done")
                             .foregroundColor(.white) //tint color
@@ -349,6 +360,6 @@ struct SleepContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        SleepContentView()
+        SleepContentView(delegate: SleepContentViewDelegate())
     }
 }

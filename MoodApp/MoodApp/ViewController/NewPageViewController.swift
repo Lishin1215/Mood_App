@@ -7,10 +7,22 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
-class NewPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NewPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
    
-
+    //sleep circular slider
+    private var sleepCancellable: AnyCancellable?
+    private var wakeUpCancellable: AnyCancellable?
+    
+    //把值傳出來
+    var sleepTime = ""
+    var wakeUpTime = ""
+    var moodIndex = ""
+    
+    //cell裡的物件
+    let textField = UITextField()
+    
     
     //傳過來的日期
     var dateComponents: DateComponents?
@@ -41,6 +53,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
 
         tableView.dataSource = self
         tableView.delegate = self
+        
+        textField.delegate = self
         
         
         //register
@@ -191,13 +205,26 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @objc func moodButtonTapped(_ sender: UIButton) {
         
-        print("hello")
+        //得到選擇的"心情編號“
+        self.moodIndex = String(sender.tag)
     }
     
     @objc func sleepButtonTapped(_ sender: UIButton) {
         
+        let delegate = SleepContentViewDelegate()
+        //設定監聽sleepTime/ wakeUpTime，如果"值有被assign value"才會傳值回來
+        self.sleepCancellable = delegate.$sleepTime.sink{ sleepTime in
+            print(sleepTime)
+            self.sleepTime = sleepTime
+            
+        }
+        self.wakeUpCancellable = delegate.$wakeUpTime.sink{ wakeUpTime in
+            print(wakeUpTime)
+            self.wakeUpTime = wakeUpTime
+        }
+        
         //swiftUI提供結合UIKit(hostController
-        let sleepVC = UIHostingController(rootView: SleepContentView())
+        let sleepVC = UIHostingController(rootView: SleepContentView(delegate: delegate))
         present(sleepVC, animated: true)
     }
     
@@ -217,10 +244,20 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.popViewController(animated: false)
         tabBarController?.selectedIndex = 0
         
+        var date: Date?
+        if let dateComponents = dateComponents,
+           let convertedDate = Calendar.current.date(from: dateComponents) {
+                date = convertedDate
+        } else {
+            print ("Cannot convert to date!")
+        }
         //if 新的一天
-//        FireStoreManager.shared.setData()
+        if let date = date {
+            FireStoreManager.shared.setData(date: date, mood: moodIndex, sleepStart: self.sleepTime, sleepEnd: self.wakeUpTime, text: textField.text ?? "" , photo: "")
+        }
+        
         //else 編輯過去的某一天
-        FireStoreManager.shared.updateData()
+//        FireStoreManager.shared.updateData()
     }
     
     
@@ -246,6 +283,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             let buttonImages = ["image 8", "image 13", "image 25", "image 7", "image 22"] //#imageLiteral(
             for index in 0 ..< buttonImages.count {
                 let button = UIButton()
+                button.tag = index
                 button.setImage(UIImage(named: buttonImages[index]), for: .normal)
                 button.addTarget(self, action: #selector(moodButtonTapped), for: .touchUpInside)
                 cell.addSubview(button)
@@ -288,7 +326,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.moodLabel.text = "Write About Today"
             
         //textField
-            let textField = UITextField()
+//            let textField = UITextField()
             textField.backgroundColor = .lightLightGray
             textField.layer.cornerRadius = 10
             cell.addSubview(textField)

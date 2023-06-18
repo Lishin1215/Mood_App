@@ -14,18 +14,22 @@ class FireStoreManager {
     //singleton
     static let shared = FireStoreManager()
     
-    func setData() {
+    func setData(date: Date, mood: String, sleepStart: String, sleepEnd: String, text: String, photo: String) {
         let db = Firestore.firestore()
         let ref = db.collection("articles").document()
-        let id = ref.documentID
+//        let id = ref.documentID
         
-        let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
+//        let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: date)
         
         //date ->日曆點選的那一天
-        let articles = Articles(date: date, mood: "A", sleepStart: "B", sleepEnd: "C", text: "D", photo: "E")
+        let articles = Articles(date: date, mood: mood, sleepStart: sleepStart, sleepEnd: sleepEnd, text: text, photo: photo)
         
         do {
-            try db.collection("articles").document(id).setData(from: articles)
+            try db.collection("articles").document(dateString).setData(from: articles)
             
         } catch let error {
             print("Error writing article to FireStore: \(error)")
