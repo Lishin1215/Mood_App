@@ -9,10 +9,18 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
+protocol FireStoreManagerDelegate: AnyObject {
+    func manager(_ manager: FireStoreManager, didGet articles: [String: Any])
+}
+
+
 class FireStoreManager {
     
     //singleton
     static let shared = FireStoreManager()
+    
+    //delegate
+    var delegate: FireStoreManagerDelegate?
     
     func setData(date: Date, mood: String, sleepStart: String, sleepEnd: String, text: String, photo: String) {
         let db = Firestore.firestore()
@@ -72,17 +80,23 @@ class FireStoreManager {
                         let data = document.data()
                         print("-------------------------")
                         print(data)
+                        
+                        //delegate
+                        self.delegate?.manager(self, didGet: data)
+                        
                         // 在此處處理每個文件的資料
                         // 例如，從 data 字典中擷取所需的欄位值
                         if let date = data["date"] as? Timestamp {
                             let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            dateFormatter.dateFormat = "yyyy-MM-dd"
                             let dateString = dateFormatter.string(from: date.dateValue())
                             print("Date: \(dateString)")
+                            //delegate
                         }
                        
                         if let mood = data["mood"] as? String {
                             print("Mood: \(mood)")
+                            //delegate
                         }
                         if let photo = data["photo"] as? String {
                             print("Photo: \(photo)")
