@@ -68,6 +68,12 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
         singleDateSelection.selectedDate = selectDate
         calendarView.selectionBehavior = singleDateSelection
         
+        
+        //delegate
+        FireStoreManager.shared.delegate = self
+        
+        //先fetchdata，更新編輯過的date
+        FireStoreManager.shared.fetchData()
     }
     
     //傳資料到newPage
@@ -99,24 +105,32 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
         calendarView.reloadDecorations(forDateComponents: dateArray, animated: true) //next step: 改變decorationFor
     }
     
-    func manager(_ manager: FireStoreManager, didGet articles: [String: Any]) {
-        
-        //拿date
-        if let timeStamp = articles["date"] as? Timestamp {
-            let date = timeStamp.dateValue()
-            
-            let calendar = Calendar.current
-            let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
-            dateArray.append(dateComponents)
-            
-            //拿mood
-            if let mood = articles["mood"] as? String {
-                dateMoodDict[dateComponents] = moodImages[Int(mood) ?? 0]
+    func manager(_ manager: FireStoreManager, didGet articles: [[String: Any]]) {
+        // empty array
+        var emptyArray:[DateComponents] = []
+        // convert each data into date
+        for article in articles {
+            //拿date
+            if let timeStamp = article["date"] as? Timestamp {
+                let date = timeStamp.dateValue()
+                
+                let calendar = Calendar.current
+                let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+                emptyArray.append(dateComponents)
+                
+                //拿mood
+                if let mood = article["mood"] as? String {
+                    dateMoodDict[dateComponents] = moodImages[Int(mood) ?? 0]
+                }
+                
             }
-            
         }
-        print(dateArray)
-        print(dateMoodDict)
+    
+        self.dateArray = emptyArray
+//      
+//        print(dateArray)
+//        print(dateMoodDict)
+        print("******")
         calendarView.reloadDecorations(forDateComponents: dateArray, animated: true)
     }
 

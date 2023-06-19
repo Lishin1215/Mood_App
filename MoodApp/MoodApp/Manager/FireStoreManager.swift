@@ -10,7 +10,8 @@ import FirebaseCore
 import FirebaseFirestore
 
 protocol FireStoreManagerDelegate: AnyObject {
-    func manager(_ manager: FireStoreManager, didGet articles: [String: Any])
+
+    func manager(_ manager: FireStoreManager, didGet articles: [[String: Any]])
 }
 
 
@@ -76,13 +77,17 @@ class FireStoreManager {
                 print("Error getting documents: \(error)")
             } else {
                 if let documents = querySnapshot?.documents {
+                    
+                    var emptyArray: [[String:Any]] = []
+                    
+                    
+                    
                     for document in documents {
                         let data = document.data()
                         print("-------------------------")
                         print(data)
                         
-                        //delegate
-                        self.delegate?.manager(self, didGet: data)
+                
                         
                         // 在此處處理每個文件的資料
                         // 例如，從 data 字典中擷取所需的欄位值
@@ -107,8 +112,10 @@ class FireStoreManager {
                         if let sleepEnd = data["sleepEnd"] as? String {
                             print("SleepEnd: \(sleepEnd)")
                         }
-                        
+                        emptyArray.append(data)
                     }
+                    //delegate //資料全部拿到後再傳
+                    self.delegate?.manager(self, didGet: emptyArray)
                 }
             }
         }
