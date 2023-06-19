@@ -30,6 +30,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //cell裡的物件
     let textField = UITextField()
+    let sleepButton = UIButton()
     
     
     //傳過來的日期
@@ -230,9 +231,10 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func sleepButtonTapped(_ sender: UIButton) {
-        
+       
+    //delegate
         let delegate = SleepContentViewDelegate()
-        //設定監聽sleepTime/ wakeUpTime，如果"值有被assign value"才會傳值回來
+        //先設定監聽sleepTime/ wakeUpTime，如果"值有被assign value"才會傳值回來
         self.sleepCancellable = delegate.$sleepTime.sink{ sleepTime in
             print(sleepTime)
             self.sleepTime = sleepTime
@@ -243,10 +245,27 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             self.wakeUpTime = wakeUpTime
         }
         
+    //closure觸發執行 (把自己收起來）(更新 sleepButton title)
+        let onDoneTapped: () -> Void = { [weak self] in
+            //dismiss
+            self?.dismiss(animated: true, completion: nil)
+            //更新button title
+            if let sleepTime = self?.sleepTime,
+               let wakeUpTime = self?.wakeUpTime {
+                self?.sleepButton.setTitle("Sleep: \(sleepTime) ~ Wake: \(wakeUpTime)", for: .normal)
+            } else {
+                self?.sleepButton.setTitle("Sleep: - Wake: -", for: .normal)
+            }
+            self?.sleepButton.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
+            self?.sleepButton.setTitleColor(.lightBlack, for: .normal)
+        }
+        
         //swiftUI提供結合UIKit(hostController
-        let sleepVC = UIHostingController(rootView: SleepContentView(delegate: delegate))
+        let sleepVC = UIHostingController(rootView: SleepContentView(delegate: delegate, onDoneTapped: onDoneTapped))
         present(sleepVC, animated: true)
     }
+    
+   
     
     
     @objc func imageButtonTapped(_ sender: UIButton) {
@@ -277,6 +296,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                     }
                     //if 新的一天
                     if let date = date {
+                        //資料寫入fireStore
                         FireStoreManager.shared.setData(date: date, mood: self.moodIndex,
                         sleepStart: self.sleepTime,
                         sleepEnd: self.wakeUpTime,
@@ -343,7 +363,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.moodLabel.text = "Sleep Time"
         
         //button(sleep circular slider)
-            let sleepButton = UIButton()
+//            let sleepButton = UIButton()
             sleepButton.backgroundColor = .lightLightGray
             sleepButton.layer.cornerRadius = 10
             sleepButton.addTarget(self, action: #selector(sleepButtonTapped), for: .touchUpInside)

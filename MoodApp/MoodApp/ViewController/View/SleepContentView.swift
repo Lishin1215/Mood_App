@@ -44,6 +44,10 @@ struct SleepContentView: View {
     //傳值
     @StateObject var delegate: SleepContentViewDelegate
     
+    //closure接收來自newPageVC命令
+    var onDoneTapped: (() -> Void)?
+   
+    
     var totalSleepDuration: Double {
         let mappedSleep = mapRotationToTime(degrees: rotationSleep)
         var mappedWakeup = mapRotationToTime(degrees: rotationWakeup)
@@ -192,11 +196,13 @@ struct SleepContentView: View {
                         .foregroundColor(.white)
                         .font(.system(size: 22))
                     Button(action: {
+                        
                         //delegate值被改變
                         delegate.sleepTime = getSleepTime()
                         delegate.wakeUpTime = getWakeUpTime()
                         
-                        //closure (把自己收起來）
+                        //closure (把自己收起來）(更新newPageVC sleepButton title)
+                        onDoneTapped?()
                     }){
                         Text("Done")
                             .foregroundColor(.white) //tint color
