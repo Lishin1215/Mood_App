@@ -320,8 +320,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 text: self.textField.text ?? "",
                 photo: "")
             }
-            //delegate傳回上一頁
-            self.delegate?.newPage(self, didGet: self.moodIndex ?? 0)
+//            self.delegate?.newPage(self, didGet: self.moodIndex ?? 0)
             //else 編輯過去的某一天
     //        FireStoreManager.shared.updateData()
         } else { //有圖片

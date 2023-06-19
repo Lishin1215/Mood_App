@@ -70,6 +70,8 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
         calendarView.selectionBehavior = singleDateSelection
         
         
+        
+        
         //delegate
         FireStoreManager.shared.delegate = self
         
@@ -96,7 +98,8 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
     func newPage(_ newPage: NewPageViewController, didGet moodTag: Int) {
         print("moodTag: \(moodTag)!!!")
         
-        if let selectDate = selectDate {
+        //判斷加入新的一天是從"按calendar"or"按tabBar"來的
+        if let selectDate = selectDate { //calendar
             //將需要update的日期，記錄在dateArray裡
             dateArray.append(selectDate)
             //把“對應的心情”放入日期
