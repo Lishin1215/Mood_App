@@ -30,11 +30,6 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
         // 隱藏 navigationBar
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
-        //delegate
-        FireStoreManager.shared.delegate = self
-        
-        //先fetchdata，更新編輯過的date
-        FireStoreManager.shared.fetchData()
     }
         
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,8 +42,14 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        calendarView.delegate = self
+        //delegate
+        FireStoreManager.shared.delegate = self
         
+        //先fetchdata，更新編輯過的date
+        FireStoreManager.shared.fetchData()
+        
+        
+        calendarView.delegate = self
         
         calendarView.calendar = gregorianCalendar
         view.addSubview(calendarView)
