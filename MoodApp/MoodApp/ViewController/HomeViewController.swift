@@ -128,10 +128,7 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
         }
     
         self.dateArray = emptyArray
-//      
-//        print(dateArray)
-//        print(dateMoodDict)
-        print("******")
+
         calendarView.reloadDecorations(forDateComponents: dateArray, animated: true)
     }
 
