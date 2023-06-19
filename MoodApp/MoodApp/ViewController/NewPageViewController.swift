@@ -32,7 +32,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     let textField = UITextField()
     let sleepButton = UIButton()
     
-    
+    //選擇的日期
+    var date: Date?
     //傳過來的日期
     var dateComponents: DateComponents?
     
@@ -90,15 +91,27 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
            
           //Date
             let dateLabel = UILabel()
-
-            if let dateComponents = dateComponents,
-                let date = Calendar.current.date(from: dateComponents) {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd" // 自定義你想要的日期格式，這裡只包含日期
+        
+            //判斷入口
+            if let dateComponents = dateComponents{ //按日期
+                date = Calendar.current.date(from: dateComponents)
+            } else { //按tabBar "+"
+                date = Date() //當日
+                
+                //I. date寫成dateComponent形式，以便後續setData上傳fireStore
+                let calendar = Calendar.current
+                if let date = date {
+                    let DC = calendar.dateComponents([.calendar, .era, .year, .month, .day], from: date)
+                    self.dateComponents = DC
+                }
+            }
+            
+            //II. 日期(date)寫成String，用來更新label text
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd" // 自定義你想要的日期格式，這裡只包含日期
+            if let date = date{
                 let dateString = dateFormatter.string(from: date)
                 dateLabel.text = dateString
-            } else {
-                dateLabel.text = ""
             }
             
             dateLabel.textColor = .black
