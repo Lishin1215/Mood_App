@@ -190,11 +190,12 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         
         addDayButton.setTitleColor(.white, for: .normal)
         addDayButton.layer.cornerRadius = 10
-        addDayButton.backgroundColor = .pinkOrange
+        addDayButton.backgroundColor = .lightLightGray //default
         addDayButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         addDayButton.titleLabel?.textAlignment = .center
         footerView.addSubview(addDayButton)
         
+        addDayButton.isEnabled = false
         addDayButton.addTarget(self, action: #selector(addDayTapped), for: .touchUpInside)
 
         // Add constraints
@@ -228,6 +229,9 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         sender.backgroundColor = selectedColor
         //得到選擇的"心情編號“
         self.moodIndex = sender.tag
+        //addDayButton啟用（至少要選moodButton，才可加一天）
+        addDayButton.isEnabled = true
+        addDayButton.backgroundColor = .pinkOrange
     }
     
     @objc func sleepButtonTapped(_ sender: UIButton) {
@@ -283,36 +287,62 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.popViewController(animated: false)
         tabBarController?.selectedIndex = 0
         
-        //上傳image到fireStorage
-        FireBaseStorageManager.shared.uploadPhoto(image: selectedImage) { result in
-            switch result {
-                case .success(let url):
-                    var date: Date?
-                    if let dateComponents = self.dateComponents,
-                       let convertedDate = Calendar.current.date(from: dateComponents) {
-                            date = convertedDate
-                    } else {
-                        print ("Cannot convert to date!")
+        //判斷“是否有圖片”上傳
+        if selectedImage == UIImage() { //無圖片上傳
+            var date: Date?
+            if let dateComponents = self.dateComponents,
+               let convertedDate = Calendar.current.date(from: dateComponents) {
+                    date = convertedDate
+            } else {
+                print ("Cannot convert to date!")
+            }
+            //if 新的一天
+            if let date = date {
+                //資料寫入fireStore
+                FireStoreManager.shared.setData(
+                date: date,
+                mood: String(self.moodIndex ?? 0),
+                sleepStart: self.sleepTime,
+                sleepEnd: self.wakeUpTime,
+                text: self.textField.text ?? "",
+                photo: "")
+            }
+            //delegate傳回上一頁
+            self.delegate?.newPage(self, didGet: self.moodIndex ?? 0)
+            //else 編輯過去的某一天
+    //        FireStoreManager.shared.updateData()
+        } else { //有圖片
+            //上傳image到fireStorage
+            FireBaseStorageManager.shared.uploadPhoto(image: selectedImage) { result in
+                switch result {
+                    case .success(let url):
+                        var date: Date?
+                        if let dateComponents = self.dateComponents,
+                           let convertedDate = Calendar.current.date(from: dateComponents) {
+                                date = convertedDate
+                        } else {
+                            print ("Cannot convert to date!")
+                        }
+                        //if 新的一天
+                        if let date = date {
+                            //資料寫入fireStore
+                            FireStoreManager.shared.setData(
+                            date: date,
+                            mood: String(self.moodIndex ?? 0),
+                            sleepStart: self.sleepTime,
+                            sleepEnd: self.wakeUpTime,
+                            text: self.textField.text ?? "",
+                            photo: url.absoluteString)
+                        }
+                        //delegate傳回上一頁
+                        self.delegate?.newPage(self, didGet: self.moodIndex ?? 0)
+                        //else 編輯過去的某一天
+                //        FireStoreManager.shared.updateData()
+                    case .failure(let error):
+                       print(error)
                     }
-                    //if 新的一天
-                    if let date = date {
-                        //資料寫入fireStore
-                        FireStoreManager.shared.setData(date: date, mood: String(self.moodIndex ?? 0),
-                        sleepStart: self.sleepTime,
-                        sleepEnd: self.wakeUpTime,
-                        text: self.textField.text ?? "",
-                        photo: url.absoluteString)
-                    }
-                //delegate傳回上一頁
-                self.delegate?.newPage(self, didGet: self.moodIndex ?? 0)
-                //else 編輯過去的某一天
-        //        FireStoreManager.shared.updateData()
-                case .failure(let error):
-                   print(error)
-                }
-            
+            }
         }
-        
     }
     
     
