@@ -14,8 +14,13 @@ class HomeViewController: UIViewController, NewPageDelegate {
     let gregorianCalendar = Calendar(identifier: .gregorian)
     var selectDate: DateComponents?
     
-    private var moodTag = ""
-
+    
+    //改變calendar icon
+    let moodImages = ["image 8", "image 13", "image 25", "image 7", "image 22"]
+    private var dateArray: [DateComponents] = []
+    private var dateMoodDict: [DateComponents: String] = [:]
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -71,9 +76,17 @@ class HomeViewController: UIViewController, NewPageDelegate {
     }
     
     //conform to protocol
-    func newPage(_ newPage: NewPageViewController, didGet moodTag: String) {
-        self.moodTag = moodTag
-        print("tag成功傳過來啦")
+    func newPage(_ newPage: NewPageViewController, didGet moodTag: Int) {
+        print("moodTag: \(moodTag)!!!")
+        
+        if let selectDate = selectDate {
+            //將需要update的日期，記錄在dateArray裡
+            dateArray.append(selectDate)
+            //把“對應的心情”放入日期
+            dateMoodDict[selectDate] = moodImages[moodTag]
+        }
+        //呼叫reload function，針對需要更新的日期（dateArray)，進行decoration的更新
+        calendarView.reloadDecorations(forDateComponents: dateArray, animated: true) //next step: 改變decorationFor
     }
 
 }
@@ -81,38 +94,41 @@ class HomeViewController: UIViewController, NewPageDelegate {
 //MARK: Extension
 extension HomeViewController: UICalendarViewDelegate {
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
+        
         let font = UIFont.systemFont(ofSize: 10)
         let configuration = UIImage.SymbolConfiguration(font: font)
-        if let originalImage = UIImage(named: "Ellipse 4")?.withRenderingMode(.alwaysOriginal){
-            let scaledSize = CGSize(width: 18, height: originalImage.size.height * 18 / originalImage.size.width)
-            let renderer = UIGraphicsImageRenderer(size: scaledSize)
-            let scaledImage = renderer.image { _ in
-                originalImage.draw(in: CGRect(origin: .zero, size: scaledSize))
+        
+        //假如dateComponents出現在dateArray中，代表dateComponents這個日期是需要放心情圖片
+        //若dateComponents"沒有"出現在dateArray，代表使用者還沒在這個日期上紀錄過心情，因此跳到下面的else
+        if dateArray.contains(dateComponents){
+            
+            //藉由日期去dict中拿到對應心情圖案的string
+            let correspondMoodString = dateMoodDict[dateComponents] ?? ""
+            if let changedImage = UIImage(named: correspondMoodString)?.withRenderingMode(.alwaysOriginal){
+                let scaledSize = CGSize(width: 18, height: changedImage.size.height * 18 / changedImage.size.width)
+                let renderer = UIGraphicsImageRenderer(size: scaledSize)
+                let scaledImage = renderer.image { _ in
+                    changedImage.draw(in: CGRect(origin: .zero, size: scaledSize))
+                }
+                return .image(scaledImage)
+            } else {
+                return nil
             }
-            return .image(scaledImage)
-        }else {
-            return nil
+        } else {
+            //全部放灰色
+            if let originalImage = UIImage(named: "Ellipse 4")?.withRenderingMode(.alwaysOriginal){
+                let scaledSize = CGSize(width: 18, height: originalImage.size.height * 18 / originalImage.size.width)
+                let renderer = UIGraphicsImageRenderer(size: scaledSize)
+                let scaledImage = renderer.image { _ in
+                    originalImage.draw(in: CGRect(origin: .zero, size: scaledSize))
+                }
+                return .image(scaledImage)
+            }else {
+                return nil
+            }
         }
         
-        //示範2
-//        let font = UIFont.systemFont(ofSize: 10)
-//        let configuration = UIImage.SymbolConfiguration(font: font)
-//        let image = UIImage(systemName: "star.fill", withConfiguration: configuration)?.withRenderingMode(.alwaysOriginal)
-//        return .image(image)
         
-//        //示範1
-//        if (dateComponents.day == selectDate?.day) && (dateComponents.year == selectDate?.year), (dateComponents.month == selectDate?.month) {
-//            return UICalendarView.Decoration.customView {
-//                //以下為他人示範
-//                let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 30.0))
-//                label.textColor = .red
-//                label.font = UIFont.systemFont(ofSize: 10.0)
-//                label.text = "今"
-//                return label
-//            }
-//        } else {
-//            return .none
-//        }
     }
 }
 

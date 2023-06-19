@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 protocol NewPageDelegate: AnyObject {
-    func newPage(_ newPage: NewPageViewController, didGet moodTag: String)
+    func newPage(_ newPage: NewPageViewController, didGet moodTag: Int)
 }
 
 
@@ -25,7 +25,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     //把值傳出來
     private var sleepTime = ""
     private var wakeUpTime = ""
-    private var moodIndex = ""
+    private var moodIndex: Int?
     private var selectedImage = UIImage()
     
     //cell裡的物件
@@ -227,7 +227,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         sender.layer.cornerRadius = 22
         sender.backgroundColor = selectedColor
         //得到選擇的"心情編號“
-        self.moodIndex = String(sender.tag)
+        self.moodIndex = sender.tag
     }
     
     @objc func sleepButtonTapped(_ sender: UIButton) {
@@ -297,14 +297,14 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                     //if 新的一天
                     if let date = date {
                         //資料寫入fireStore
-                        FireStoreManager.shared.setData(date: date, mood: self.moodIndex,
+                        FireStoreManager.shared.setData(date: date, mood: String(self.moodIndex ?? 0),
                         sleepStart: self.sleepTime,
                         sleepEnd: self.wakeUpTime,
                         text: self.textField.text ?? "",
                         photo: url.absoluteString)
                     }
                 //delegate傳回上一頁
-                self.delegate?.newPage(self, didGet: self.moodIndex)
+                self.delegate?.newPage(self, didGet: self.moodIndex ?? 0)
                 //else 編輯過去的某一天
         //        FireStoreManager.shared.updateData()
                 case .failure(let error):
