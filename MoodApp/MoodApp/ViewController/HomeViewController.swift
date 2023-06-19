@@ -116,7 +116,7 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
                 let date = timeStamp.dateValue()
                 
                 let calendar = Calendar.current
-                let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+                let dateComponents = calendar.dateComponents([.calendar, .era, .year, .month, .day], from: date)
                 emptyArray.append(dateComponents)
                 
                 //拿mood
