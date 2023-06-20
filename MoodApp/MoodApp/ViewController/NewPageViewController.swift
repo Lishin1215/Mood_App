@@ -66,10 +66,15 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         self.weekdayLabel.removeFromSuperview()
         self.monthLabel.removeFromSuperview()
         
+        //清空點選的moodButton(先default)
+        for moodButton in moodButtonArray{
+            moodButton.backgroundColor = .white
+        }
+        
     }
     
     
-    override func viewDidLoad() {
+    override func viewDidLoad() { 
         super.viewDidLoad()
 
         tableView.dataSource = self
