@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseFirestore
 
-class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDelegate {
+class HomeViewController: UIViewController, FireStoreManagerDelegate {
     
     
    
@@ -19,7 +19,11 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
     
     //改變calendar icon
     let moodImages = ["image 8", "image 13", "image 25", "image 7", "image 22"]
-    private var dateArray: [DateComponents] = []
+    private var dateArray: [DateComponents] = [] {
+        didSet {
+            print("******", dateArray.map { ($0.month!, $0.day!) })
+        }
+    }
     private var dateMoodDict: [DateComponents: String] = [:]
     
     
@@ -68,15 +72,7 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
         let singleDateSelection = UICalendarSelectionSingleDate(delegate: self)
         singleDateSelection.selectedDate = selectDate
         calendarView.selectionBehavior = singleDateSelection
-        
-        
-        
-        
-        //delegate
-        FireStoreManager.shared.delegate = self
-        
-        //先fetchdata，更新編輯過的date
-        FireStoreManager.shared.fetchData()
+    
     }
     
     //傳資料到newPage
@@ -87,27 +83,12 @@ class HomeViewController: UIViewController, NewPageDelegate, FireStoreManagerDel
                let segueVC = segue.destination as? NewPageViewController {
                 //將任意點到的product資料，傳給newPageVC
                 segueVC.dateComponents = dateComponents
-                //建立delegate
-                segueVC.delegate = self
 
             }
         }
     }
     
-    //conform to protocol
-    func newPage(_ newPage: NewPageViewController, didGet moodTag: Int) {
-        print("moodTag: \(moodTag)!!!")
-        
-        //判斷加入新的一天是從"按calendar"or"按tabBar"來的
-        if let selectDate = selectDate { //calendar
-            //將需要update的日期，記錄在dateArray裡
-            dateArray.append(selectDate)
-            //把“對應的心情”放入日期
-            dateMoodDict[selectDate] = moodImages[moodTag]
-        }
-        //呼叫reload function，針對需要更新的日期（dateArray)，進行decoration的更新
-        calendarView.reloadDecorations(forDateComponents: dateArray, animated: true) //next step: 改變decorationFor
-    }
+   
     
     func manager(_ manager: FireStoreManager, didGet articles: [[String: Any]]) {
         // empty array

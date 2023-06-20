@@ -23,7 +23,9 @@ class FireStoreManager {
     //delegate
     var delegate: FireStoreManagerDelegate?
     
-    func setData(date: Date, mood: String, sleepStart: String, sleepEnd: String, text: String, photo: String) {
+    
+    //確定資料有上傳，才會觸發 handler closure
+    func setData(date: Date, mood: String, sleepStart: String, sleepEnd: String, text: String, photo: String, handler: @escaping () -> Void) {
         let db = Firestore.firestore()
         let ref = db.collection("articles").document()
 //        let id = ref.documentID
@@ -38,12 +40,16 @@ class FireStoreManager {
         let articles = Articles(date: date, mood: mood, sleepStart: sleepStart, sleepEnd: sleepEnd, text: text, photo: photo)
         
         do {
-            try db.collection("articles").document(dateString).setData(from: articles)
+            try db.collection("articles").document(dateString).setData(from: articles, completion: { _ in
+                
+                handler() //fetchData(才會確定有拿到上傳的資料）(會觸發delegate把資料傳回homeVC)
+            })
             
         } catch let error {
             print("Error writing article to FireStore: \(error)")
         }
     }
+    
     
     func updateData() {
         let db = Firestore.firestore()
@@ -66,6 +72,7 @@ class FireStoreManager {
             }
         }
     }
+    
     
     func fetchData() {
         let db = Firestore.firestore()
@@ -119,4 +126,6 @@ class FireStoreManager {
         }
     }
 
+    //listener監聽
+    
 }

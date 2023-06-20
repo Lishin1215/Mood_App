@@ -9,14 +9,9 @@ import UIKit
 import SwiftUI
 import Combine
 
-protocol NewPageDelegate: AnyObject {
-    func newPage(_ newPage: NewPageViewController, didGet moodTag: Int)
-}
-
 
 class NewPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
    
-    weak var delegate: NewPageDelegate?
     
     //sleep circular slider
     private var sleepCancellable: AnyCancellable?
@@ -318,9 +313,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 sleepStart: self.sleepTime,
                 sleepEnd: self.wakeUpTime,
                 text: self.textField.text ?? "",
-                photo: "")
+                photo: "",
+                handler: {
+                    FireStoreManager.shared.fetchData()
+                })
             }
-//            self.delegate?.newPage(self, didGet: self.moodIndex ?? 0)
             //else 編輯過去的某一天
     //        FireStoreManager.shared.updateData()
         } else { //有圖片
@@ -344,10 +341,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                             sleepStart: self.sleepTime,
                             sleepEnd: self.wakeUpTime,
                             text: self.textField.text ?? "",
-                            photo: url.absoluteString)
+                            photo: url.absoluteString, //url轉成String
+                            handler: {
+                                FireStoreManager.shared.fetchData()
+                            })
                         }
-                        //delegate傳回上一頁
-                        self.delegate?.newPage(self, didGet: self.moodIndex ?? 0)
                         //else 編輯過去的某一天
                 //        FireStoreManager.shared.updateData()
                     case .failure(let error):
@@ -355,8 +353,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                     }
             }
         }
-        //fetchData(才會確定有拿到上傳的資料）(會觸發delegate把資料傳回homeVC)
-        FireStoreManager.shared.fetchData()
+        
     }
     
     
