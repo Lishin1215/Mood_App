@@ -382,7 +382,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     
 //height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        150
+        if indexPath.row == 3 {
+            return 330
+        } else {
+            return 150
+        }
     }
     
     
