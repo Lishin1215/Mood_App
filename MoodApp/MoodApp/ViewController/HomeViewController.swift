@@ -65,7 +65,7 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
             calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            calendarView.heightAnchor.constraint(equalToConstant: 420)
+            calendarView.heightAnchor.constraint(equalToConstant: 450)
         ])
         
         //單選模式
