@@ -54,6 +54,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         //hide tabBar
         tabBarController?.tabBar.isHidden = true
         
+        //addDayButton default (灰色，不能點選）（放這裡從tabBar進入才會一直走過）
+        addDayButton.backgroundColor = .lightLightGray
+        addDayButton.isEnabled = false
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,7 +79,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    override func viewDidLoad() { 
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.dataSource = self
