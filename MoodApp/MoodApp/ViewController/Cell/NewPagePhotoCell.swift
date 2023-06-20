@@ -40,7 +40,7 @@ class NewPagePhotoCell: UITableViewCell {
             containerView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            containerView.heightAnchor.constraint(equalToConstant: 230)])
+            containerView.heightAnchor.constraint(equalToConstant: 325)])
         
     //label
         containerView.addSubview(titleLabel)
