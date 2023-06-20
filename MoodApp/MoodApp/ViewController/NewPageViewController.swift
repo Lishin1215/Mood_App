@@ -36,7 +36,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //選擇的日期
     var date: Date?
-    //傳過來的日期
+    //傳過來的日期 (segue/ prepare)
     var dateComponents: DateComponents?
     
     let tableView = UITableView()
@@ -111,22 +111,13 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             
         //Week
 //            let weekdayLabel = UILabel()
-            weekdayLabel.text = "Week"
             
-//            if let dateComponents = dateComponents, let weekday = dateComponents.weekday {
-//                let calendar = Calendar.current
-//                let weekdaySymbols = calendar.weekdaySymbols
-//                let weekdayIndex = weekday - calendar.firstWeekday
-//
-//                if weekdayIndex >= 0 && weekdayIndex < weekdaySymbols.count {
-//                    let weekdayText = weekdaySymbols[weekdayIndex]
-//                    weekdayLabel.text = weekdayText
-//                } else {
-//                    weekdayLabel.text = ""
-//                }
-//            } else {
-//                weekdayLabel.text = ""
-//            }
+            //日期(date)寫成String，用來更新label text
+            dateFormatter.dateFormat = "E" // 自定義你想要的日期格式(ex.Fri)
+            if let date = date{
+                let dateString = dateFormatter.string(from: date)
+                weekdayLabel.text = dateString
+            }
             
             weekdayLabel.textColor = .lightGray
             weekdayLabel.font = UIFont.systemFont(ofSize: 14)
@@ -140,7 +131,13 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             
         //Month
 //            let monthLabel = UILabel()
-            monthLabel.text = "Month"
+            
+            //日期(date)寫成String，用來更新label text
+            dateFormatter.dateFormat = "MMMM yyyy" // 自定義你想要的日期格式(ex.June 2023)
+            if let date = date{
+                let dateString = dateFormatter.string(from: date)
+                monthLabel.text = dateString
+            }
             
 
             monthLabel.textColor = .lightGray
