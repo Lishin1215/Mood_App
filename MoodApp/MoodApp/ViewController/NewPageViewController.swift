@@ -13,6 +13,7 @@ import Combine
 class NewPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
    
     
+    
     //sleep circular slider
     private var sleepCancellable: AnyCancellable?
     private var wakeUpCancellable: AnyCancellable?
@@ -26,6 +27,12 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     //cell裡的物件
     let textField = UITextField()
     let sleepButton = UIButton()
+    
+    //navigation bar上的日期
+    let dateLabel = UILabel()
+    let weekdayLabel = UILabel()
+    let monthLabel = UILabel()
+    
     
     //選擇的日期
     var date: Date?
@@ -53,6 +60,12 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillDisappear(animated)
         //tabBar appear again
         tabBarController?.tabBar.isHidden = false
+        
+        //移除navigation bar上的日期，避免下一次進viewDidLoad會重複疊加(addSubview)
+        self.dateLabel.removeFromSuperview()
+        self.weekdayLabel.removeFromSuperview()
+        self.monthLabel.removeFromSuperview()
+        
     }
     
     
@@ -85,7 +98,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
            navigationController?.navigationBar.prefersLargeTitles = true
            
           //Date
-            let dateLabel = UILabel()
+//            let dateLabel = UILabel()
         
             //判斷入口
             if let dateComponents = dateComponents{ //按日期
@@ -120,7 +133,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             ])
             
         //Week
-            let weekdayLabel = UILabel()
+//            let weekdayLabel = UILabel()
             weekdayLabel.text = "Week"
             
 //            if let dateComponents = dateComponents, let weekday = dateComponents.weekday {
@@ -149,7 +162,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             ])
             
         //Month
-            let monthLabel = UILabel()
+//            let monthLabel = UILabel()
             monthLabel.text = "Month"
             
 
