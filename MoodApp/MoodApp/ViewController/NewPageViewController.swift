@@ -355,6 +355,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                     }
             }
         }
+        //fetchData(才會確定有拿到上傳的資料）(會觸發delegate把資料傳回homeVC)
+        FireStoreManager.shared.fetchData()
     }
     
     

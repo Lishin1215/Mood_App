@@ -96,22 +96,20 @@ class FireStoreManager {
                             dateFormatter.dateFormat = "yyyy-MM-dd"
                             let dateString = dateFormatter.string(from: date.dateValue())
                             print("Date: \(dateString)")
-                            //delegate
                         }
                        
-                        if let mood = data["mood"] as? String {
-                            print("Mood: \(mood)")
-                            //delegate
-                        }
-                        if let photo = data["photo"] as? String {
-                            print("Photo: \(photo)")
-                        }
-                        if let sleepStart = data["sleepStart"] as? String {
-                            print("SleepStart: \(sleepStart)")
-                        }
-                        if let sleepEnd = data["sleepEnd"] as? String {
-                            print("SleepEnd: \(sleepEnd)")
-                        }
+//                        if let mood = data["mood"] as? String {
+//                            print("Mood: \(mood)")
+//                        }
+//                        if let photo = data["photo"] as? String {
+//                            print("Photo: \(photo)")
+//                        }
+//                        if let sleepStart = data["sleepStart"] as? String {
+//                            print("SleepStart: \(sleepStart)")
+//                        }
+//                        if let sleepEnd = data["sleepEnd"] as? String {
+//                            print("SleepEnd: \(sleepEnd)")
+//                        }
                         emptyArray.append(data)
                     }
                     //delegate //資料全部拿到後再傳
