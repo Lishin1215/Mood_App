@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="2826.7175572519081" y="-530.28169014084506"/>
         </scene>
-        <!--View Controller-->
+        <!--Statistics View Controller-->
         <scene sceneID="WCe-bo-4UF">
             <objects>
-                <viewController id="zBW-W1-IZ3" sceneMemberID="viewController">
+                <viewController id="zBW-W1-IZ3" customClass="StatisticsViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cqG-8o-UUi">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
