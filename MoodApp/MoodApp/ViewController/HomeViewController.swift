@@ -89,7 +89,7 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
     }
     
    
-    
+//conform to protocol
     func manager(_ manager: FireStoreManager, didGet articles: [[String: Any]]) {
         // empty array
         var emptyArray:[DateComponents] = []
