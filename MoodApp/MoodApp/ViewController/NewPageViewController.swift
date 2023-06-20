@@ -48,6 +48,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     //moodButtonArray 
     var moodButtonArray: [UIButton] = []
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -58,42 +60,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         addDayButton.backgroundColor = .lightLightGray
         addDayButton.isEnabled = false
         
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //tabBar appear again
-        tabBarController?.tabBar.isHidden = false
-        
-        //移除navigation bar上的日期，避免下一次進viewDidLoad會重複疊加(addSubview)
-        self.dateLabel.removeFromSuperview()
-        self.weekdayLabel.removeFromSuperview()
-        self.monthLabel.removeFromSuperview()
-        
-        //清空點選的moodButton(先default)
-        for moodButton in moodButtonArray{
-            moodButton.backgroundColor = .white
-        }
-        
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        textField.delegate = self
-
-        
-        
-        //register
-        tableView.register(NewPageCell.self, forCellReuseIdentifier: NewPageCell.reuseIdentifier)
-        tableView.register(NewPagePhotoCell.self, forCellReuseIdentifier: NewPagePhotoCell.reuseIdentifier)
-        
-        //custom navigationBar
+        //custom navigationBar （放這裡從tabBar進入才會一直走過）
         if let navigationBar = navigationController?.navigationBar {
            let appearance = UINavigationBarAppearance()
            appearance.configureWithOpaqueBackground()
@@ -186,6 +153,42 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 monthLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10)
             ])
        }
+        
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //tabBar appear again
+        tabBarController?.tabBar.isHidden = false
+        
+        //移除navigation bar上的日期，避免下一次進viewDidLoad會重複疊加(addSubview)
+        self.dateLabel.removeFromSuperview()
+        self.weekdayLabel.removeFromSuperview()
+        self.monthLabel.removeFromSuperview()
+        
+        //清空點選的moodButton(先default)
+        for moodButton in moodButtonArray{
+            moodButton.backgroundColor = .white
+        }
+        
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        textField.delegate = self
+
+        
+        
+        //register
+        tableView.register(NewPageCell.self, forCellReuseIdentifier: NewPageCell.reuseIdentifier)
+        tableView.register(NewPagePhotoCell.self, forCellReuseIdentifier: NewPagePhotoCell.reuseIdentifier)
+        
 
         view.addSubview(tableView)
         tableView.separatorStyle = .none
