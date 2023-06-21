@@ -27,7 +27,7 @@ class FireStoreManager {
     //確定資料有上傳，才會觸發 handler closure
     func setData(date: Date, mood: String, sleepStart: String, sleepEnd: String, text: String, photo: String, handler: @escaping () -> Void) {
         let db = Firestore.firestore()
-        let ref = db.collection("articles").document()
+        let ref = db.collection("users").document("123").collection("articles")  //id會隨user改變
 //        let id = ref.documentID
         
 //        let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
@@ -40,7 +40,7 @@ class FireStoreManager {
         let articles = Articles(date: date, mood: mood, sleepStart: sleepStart, sleepEnd: sleepEnd, text: text, photo: photo)
         
         do {
-            try db.collection("articles").document(dateString).setData(from: articles, completion: { _ in
+            try ref.document(dateString).setData(from: articles, completion: { _ in
                 
                 handler() //fetchData(才會確定有拿到上傳的資料）(會觸發delegate把資料傳回homeVC)
             })
@@ -53,7 +53,7 @@ class FireStoreManager {
     
     func updateData() {
         let db = Firestore.firestore()
-        let updateRef = db.collection("articles").document("09ahXKQg5JKLzku5WyPn")
+        let updateRef = db.collection("users").document("123").collection("articles").document("09ahXKQg5JKLzku5WyPn")
         let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
 
         updateRef.updateData([
@@ -76,7 +76,7 @@ class FireStoreManager {
     
     func fetchData() {
         let db = Firestore.firestore()
-        let collectionRef = db.collection("articles") //db.collection("users").document("123").collection("articles")
+        let collectionRef = db.collection("users").document("123").collection("articles")  //db.collection("articles")
 
         // 使用 collectionRef 讀取集合中的所有文件
         collectionRef.getDocuments { (querySnapshot, error) in
