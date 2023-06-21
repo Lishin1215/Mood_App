@@ -91,8 +91,8 @@ class FireStoreManager {
                     
                     for document in documents {
                         let data = document.data()
-                        print("-------------------------")
-                        print(data)
+//                        print("-------------------------")
+//                        print(data)
                         
                 
                         
@@ -124,6 +124,45 @@ class FireStoreManager {
                 }
             }
         }
+    }
+    
+//statisticPage & lookBackPage要用到
+    func fetchMonthlyData() {
+        let db = Firestore.firestore()
+        let collectionRef = db.collection("users").document("123").collection("articles")
+        
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        guard let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: calendar.startOfDay(for: currentDate))),
+            let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)
+        else {
+            print("Failed to calculate start and end of month")
+            return
+        }
+        
+        let query = collectionRef.whereField("date", isGreaterThanOrEqualTo: startOfMonth).whereField("date", isLessThanOrEqualTo: endOfMonth)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                if let documents = querySnapshot?.documents {
+                    var emptyArray:[[String:Any]] = []
+                    
+                    for document in documents {
+                        let data = document.data()
+                        print("-------------------")
+                        print(data)
+                        
+                        emptyArray.append(data)
+                    }
+                    //delegate//資料全部拿到後再傳
+                    self.delegate?.manager(self, didGet: emptyArray)
+                }
+            }
+        }
+        
     }
 
     //listener監聽

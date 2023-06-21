@@ -7,7 +7,8 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class StatisticsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FireStoreManagerDelegate {
+   
     
 
     //header
@@ -15,12 +16,22 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     let dateLabel = UILabel()
     let historyButton = UIButton()
     
+    //接收傳來的資料 (delegate)
+    private var moodArray:[String] = []
+    private var sleepStartArray:[String] = []
+    private var sleepEndArray:[String] = []
+    
+    
     
     let tableView = UITableView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //delegate
+        FireStoreManager.shared.delegate = self
+        FireStoreManager.shared.fetchMonthlyData()
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -87,6 +98,44 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
          print("hihi tapped")
     }
 
+    
+//conform to protocol
+    func manager(_ manager: FireStoreManager, didGet articles: [[String : Any]]) {
+        //empty array
+        var moodEmptyArray:[String] = []
+        var startEmptyArray:[String] = []
+        var endEmptyArray:[String] = []
+        
+        for article in articles {
+            //拿mood
+            if let mood = article["mood"] as? String {
+//                print("Mood: \(mood)")
+                
+                moodEmptyArray.append(mood)
+            }
+            //拿sleepStart
+            if let sleepStart = article["sleepStart"] as? String {
+//                print("SleepStart: \(sleepStart)")
+                
+                startEmptyArray.append(sleepStart)
+            }
+            //拿sleepEnd
+            if let sleepEnd = article["sleepEnd"] as? String {
+//                print("SleepEnd: \(sleepEnd)")
+                
+                endEmptyArray.append(sleepEnd)
+            }
+        }
+        
+        self.moodArray = moodEmptyArray
+        self.sleepStartArray = startEmptyArray
+        self.sleepEndArray = endEmptyArray
+        
+        print(self.moodArray)
+        print(self.sleepEndArray)
+        print(self.sleepStartArray)
+    }
+    
     
 //height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
