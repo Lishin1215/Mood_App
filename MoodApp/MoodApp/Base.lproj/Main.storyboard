@@ -120,10 +120,10 @@
             </objects>
             <point key="canvasLocation" x="384" y="-1382"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="kUw-NY-yEB">
             <objects>
-                <viewController id="0Cm-IK-bu3" sceneMemberID="viewController">
+                <viewController id="0Cm-IK-bu3" customClass="SettingsViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QAB-vr-9fb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

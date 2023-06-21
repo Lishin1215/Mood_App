@@ -51,7 +51,7 @@ class LookBackViewController: UIViewController {
         
         dateLabel.textColor = .darkGray
         dateLabel.font = UIFont.systemFont(ofSize: 14)
-        headerView.addSubview(dateLabel)
+        view.addSubview(dateLabel)
         
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

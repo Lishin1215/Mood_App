@@ -76,7 +76,7 @@ class FireStoreManager {
     
     func fetchData() {
         let db = Firestore.firestore()
-        let collectionRef = db.collection("articles")
+        let collectionRef = db.collection("articles") //db.collection("users").document("123").collection("articles")
 
         // 使用 collectionRef 讀取集合中的所有文件
         collectionRef.getDocuments { (querySnapshot, error) in

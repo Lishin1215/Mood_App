@@ -38,11 +38,13 @@ class NewPageCell: UITableViewCell {
             containerView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            containerView.heightAnchor.constraint(equalToConstant: 110)])
+            containerView.heightAnchor.constraint(equalToConstant: 110)
+        ])
         
     //label
         containerView.addSubview(moodLabel)
         moodLabel.font =  UIFont.boldSystemFont(ofSize: 15)
+        
         moodLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             moodLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 15),

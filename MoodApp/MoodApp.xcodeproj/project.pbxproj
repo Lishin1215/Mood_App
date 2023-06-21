@@ -30,6 +30,8 @@
 		5B0742752A419C6E008F4C3D /* MoodFlowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742742A419C6E008F4C3D /* MoodFlowCell.swift */; };
 		5B0742772A419CAD008F4C3D /* SleepAnalysisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742762A419CAD008F4C3D /* SleepAnalysisCell.swift */; };
 		5B0742792A42A944008F4C3D /* LookBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742782A42A943008F4C3D /* LookBackViewController.swift */; };
+		5B07427B2A42B79C008F4C3D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07427A2A42B79C008F4C3D /* SettingsViewController.swift */; };
+		5B07427D2A42D6D6008F4C3D /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07427C2A42D6D6008F4C3D /* SettingsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		5B0742742A419C6E008F4C3D /* MoodFlowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodFlowCell.swift; sourceTree = "<group>"; };
 		5B0742762A419CAD008F4C3D /* SleepAnalysisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepAnalysisCell.swift; sourceTree = "<group>"; };
 		5B0742782A42A943008F4C3D /* LookBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackViewController.swift; sourceTree = "<group>"; };
+		5B07427A2A42B79C008F4C3D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5B07427C2A42D6D6008F4C3D /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0A45F6B523BC2A73B48C0E /* Pods-MoodApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.release.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 				5B0742722A41876C008F4C3D /* StatisticsViewController.swift */,
 				5B0742582A3C0ED8008F4C3D /* NewPageViewController.swift */,
 				5B0742782A42A943008F4C3D /* LookBackViewController.swift */,
+				5B07427A2A42B79C008F4C3D /* SettingsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -146,9 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				5B07425B2A3C1E12008F4C3D /* NewPageCell.swift */,
+				5B07425D2A3C69C9008F4C3D /* NewPagePhotoCell.swift */,
 				5B0742742A419C6E008F4C3D /* MoodFlowCell.swift */,
 				5B0742762A419CAD008F4C3D /* SleepAnalysisCell.swift */,
-				5B07425D2A3C69C9008F4C3D /* NewPagePhotoCell.swift */,
+				5B07427C2A42D6D6008F4C3D /* SettingsCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -326,6 +332,7 @@
 				5B0742792A42A944008F4C3D /* LookBackViewController.swift in Sources */,
 				5B0742512A3AA87E008F4C3D /* TabBarViewController.swift in Sources */,
 				5B07426C2A3EC5AF008F4C3D /* FireStoreManager.swift in Sources */,
+				5B07427B2A42B79C008F4C3D /* SettingsViewController.swift in Sources */,
 				5B0742752A419C6E008F4C3D /* MoodFlowCell.swift in Sources */,
 				5B07425C2A3C1E12008F4C3D /* NewPageCell.swift in Sources */,
 				5B0742602A3E1804008F4C3D /* CustomNavigationBar.swift in Sources */,
@@ -334,6 +341,7 @@
 				5B07423B2A39AC71008F4C3D /* AppDelegate.swift in Sources */,
 				5B0742772A419CAD008F4C3D /* SleepAnalysisCell.swift in Sources */,
 				5B07425E2A3C69C9008F4C3D /* NewPagePhotoCell.swift in Sources */,
+				5B07427D2A42D6D6008F4C3D /* SettingsCell.swift in Sources */,
 				5B07423D2A39AC71008F4C3D /* SceneDelegate.swift in Sources */,
 				5B0742712A3F4259008F4C3D /* FireBaseStorageManager.swift in Sources */,
 				5B07426F2A3EFD72008F4C3D /* SleepContentView.swift in Sources */,
