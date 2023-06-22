@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import FirebaseFirestore
 
 class StatisticsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FireStoreManagerDelegate {
@@ -147,6 +148,28 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         print(self.moodArray)
 //        print(self.sleepEndArray)
 //        print(self.sleepStartArray)
+        
+        //處理完資料後，call "moodContent swiftUI"，把畫圖資料傳過來
+        let moodFlowSwiftUI = MoodContentView(moodArray: self.moodArray)
+        //swiftUI提供結合UIKit(hostController
+        let host = UIHostingController(rootView: moodFlowSwiftUI)
+        //找到要放swiftUI的cell的indexPath
+        let indexPath = IndexPath(row: 0, section: 0)
+        //**取得UIHostingController的view，再把他addSubview到對應的cell上
+        if let hostView = host.view,
+           let cell = tableView.cellForRow(at: indexPath) as? MoodFlowCell {
+            cell.addSubview(hostView)
+            
+            //設定swiftUI constraints
+            hostView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                hostView.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 16),
+                hostView.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 16),
+                hostView.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -16),
+                hostView.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -5)
+            ])
+            
+        }
     }
     
     

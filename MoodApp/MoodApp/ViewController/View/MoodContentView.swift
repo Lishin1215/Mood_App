@@ -1,5 +1,5 @@
 //
-//  moodContentView.swift
+//  MoodContentView.swift
 //  MoodApp
 //
 //  Created by 簡莉芯 on 2023/6/22.
@@ -17,7 +17,7 @@ struct MoodFlow {
 
 
 
-struct moodContentView: View {
+struct MoodContentView: View {
     
     //畫圖需要的資料，moodFlow的array
     var moodFlowArray: [MoodFlow] = []
@@ -35,11 +35,12 @@ struct moodContentView: View {
     var body: some View {
         Chart {
           //for 過moodFlowArray，把日期和mood分別作為一個點的x值與y值
+            //id -> 識別和區分的“資料點” （要放入不會重複的東西(ex.date))
             ForEach(moodFlowArray, id: \.date) { item in
                 LineMark(
                     x: .value("Date", item.date),
                     //mood要轉換成Int，系統才會幫忙排序心情
-                    y: .value("Mood", Int(item.mood))
+                    y: .value("Mood", Int(item.mood) ?? 0)
                 )
                 .symbol(.circle) //點的圖案類型
             }
