@@ -7,7 +7,8 @@
 
 import UIKit
 
-class LookBackViewController: UIViewController {
+class LookBackViewController: UIViewController, FireStoreManagerDelegate {
+   
 
     //header
     let headerView = UIView()
@@ -16,10 +17,24 @@ class LookBackViewController: UIViewController {
     let dateLabel = UILabel()
     let historyButton = UIButton()
     let containerView = UIView()
+    let keepRecordLabel = UILabel()
+    
+    //接收傳來的資料（delegate)
+    private var photoArray: [String] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //fetchData （放這裡從tabBar進入才會一直走過）
+        FireStoreManager.shared.fetchMonthlyData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+     //delegate
+        FireStoreManager.shared.delegate = self
+        
     //header
         headerView.backgroundColor = .pinkOrange
         view.addSubview(headerView)
@@ -84,25 +99,56 @@ class LookBackViewController: UIViewController {
             containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
         ])
         
+    //keepRecord
+        keepRecordLabel.text = "Keep recording to unlock more features!"
+        keepRecordLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        keepRecordLabel.textColor = .darkGray
+        containerView.addSubview(keepRecordLabel)
+        
+        keepRecordLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            keepRecordLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor), keepRecordLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+        ])
+        
 //        checkPhotoAmount()
         
     }
     
     
-    func checkPhotoAmount() {
-        /* if photoArray.count > 10 {
-         scrollView
-         keepRecordLabel.isHidden = true
-         } else {
-         keepRecordLabel
-         scrollView.isHidden = true
-         */
+    func checkPhotoAmount() { //使用時機：fetch完data，才做判斷
+//         if photoArray.count > 10 {
+//             scrollView
+//             keepRecordLabel.isHidden = true
+//         } else {
+//             keepRecordLabel
+//            scrollView.isHidden = true
+//         }
     }
     
     @objc func historyButtonTapped(_ sender: UIButton) {
         print("oh yeah oh my god!")
     }
 
-   
+    
+//conform to protocol
+    func manager(_ manager: FireStoreManager, didGet articles: [[String : Any]]) {
+        //empty array
+        var emptyArray:[String] = []
+        
+        for article in articles {
+            //拿photo
+            if let photo = article["photo"] as? String {
+//                print("Photo: \(photo)")
+                emptyArray.append(photo)
+            }
+        }
+        print(emptyArray)
+        
+        //filter出空的string
+        let filterArray = emptyArray.filter { !$0.isEmpty }
+        print(filterArray)
+        
+        self.photoArray = filterArray
+    }
 
 }
