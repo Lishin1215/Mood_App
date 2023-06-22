@@ -153,7 +153,7 @@ class FireStoreManager {
                     for document in documents {
                         let data = document.data()
                         print("-------------------")
-                        print(data)
+//                        print(data)
                         
                         emptyArray.append(data)
                     }

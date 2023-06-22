@@ -22,12 +22,16 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate {
     //接收傳來的資料（delegate)
     private var photoArray: [String] = []
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //fetchData （放這裡從tabBar進入才會一直走過）
         FireStoreManager.shared.fetchMonthlyData()
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

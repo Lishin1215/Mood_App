@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class StatisticsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FireStoreManagerDelegate {
    
@@ -17,7 +18,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     let historyButton = UIButton()
     
     //接收傳來的資料 (delegate)
-    private var moodArray:[String] = []
+    private var moodArray:[MoodFlow] = []
     private var sleepStartArray:[String] = []
     private var sleepEndArray:[String] = []
     
@@ -26,12 +27,19 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     let tableView = UITableView()
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //fetchData （放這裡從tabBar進入才會一直走過）
+        FireStoreManager.shared.fetchMonthlyData()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //delegate
         FireStoreManager.shared.delegate = self
-        FireStoreManager.shared.fetchMonthlyData()
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -102,16 +110,21 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
 //conform to protocol
     func manager(_ manager: FireStoreManager, didGet articles: [[String : Any]]) {
         //empty array
-        var moodEmptyArray:[String] = []
+        var moodFlowEmptyArray:[MoodFlow] = []
         var startEmptyArray:[String] = []
         var endEmptyArray:[String] = []
         
         for article in articles {
-            //拿mood
-            if let mood = article["mood"] as? String {
-//                print("Mood: \(mood)")
+            //拿date & mood --> moodFlow
+            if let timeStamp = article["date"] as? Timestamp {
+                let date = timeStamp.dateValue() //型別:Date
                 
-                moodEmptyArray.append(mood)
+                if let mood = article["mood"] as? String {
+    
+                    //以moodflow的資料結構，放入empty array中
+                    let moodflow = MoodFlow(date: date, mood: mood)
+                    moodFlowEmptyArray.append(moodflow)
+                }
             }
             //拿sleepStart
             if let sleepStart = article["sleepStart"] as? String {
@@ -127,13 +140,13 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
         
-        self.moodArray = moodEmptyArray
+        self.moodArray = moodFlowEmptyArray
         self.sleepStartArray = startEmptyArray
         self.sleepEndArray = endEmptyArray
         
         print(self.moodArray)
-        print(self.sleepEndArray)
-        print(self.sleepStartArray)
+//        print(self.sleepEndArray)
+//        print(self.sleepStartArray)
     }
     
     
