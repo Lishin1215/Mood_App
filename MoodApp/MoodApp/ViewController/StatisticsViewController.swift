@@ -134,6 +134,29 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         return averageTimeString
     }
     
+    func calculateSleepTime(startArray: [String], endArray: [String]) -> [String] {
+        // 檢查兩個陣列的元素數量是否相同
+        guard startArray.count == endArray.count else {
+            print("Start array and end array must have the same number of elements")
+            return []
+        }
+        //把時間string轉換成Date，才能做計算
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        var sleepTimeArray: [String] = []
+        
+        for index in 0..<startArray.count {
+            if let startDate = dateFormatter.date(from: startArray[index]),
+               let endDate = dateFormatter.date(from: endArray[index]) {
+                let sleepTime = endDate.timeIntervalSince(startDate) //endDate - startDate
+                let sleepTimeString = String(format: "%.2f", sleepTime)
+                sleepTimeArray.append(sleepTimeString)
+            }
+        }
+        return sleepTimeArray
+    }
+    
     
     
 //conform to protocol
@@ -202,7 +225,9 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         // 計算平均時間
         averageBedTime = calculateAverageTime(timeStrings: sleepStartArray)
         averageWakeTime = calculateAverageTime(timeStrings: sleepEndArray)
-        averageSleepTime = "00:00"
+        
+        let sleepTimeArray = calculateSleepTime(startArray: sleepStartArray, endArray: sleepEndArray)
+        averageSleepTime = calculateAverageTime(timeStrings: sleepTimeArray)
         
         //處理完資料後 reload tableView，更新label
         DispatchQueue.main.async {
