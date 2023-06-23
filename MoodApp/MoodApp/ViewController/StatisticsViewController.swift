@@ -107,6 +107,28 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
          print("hihi tapped")
     }
 
+    func calculateAverageTime(timeStrings:[String]) -> String {
+        
+        //把時間string轉換成Date，才能做計算
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        var totalTimeInterval: TimeInterval = 0
+        
+        for timeString in timeStrings {
+            if let date = dateFormatter.date(from: timeString) {
+                totalTimeInterval += date.timeIntervalSinceReferenceDate
+            }
+        }
+        
+        let averageTimeInterval = totalTimeInterval/Double(timeStrings.count)
+        let averageDate = Date(timeIntervalSinceReferenceDate: averageTimeInterval)
+        let averageTimeString = dateFormatter.string(from: averageDate)
+        print(averageTimeString)
+        
+        return averageTimeString
+    }
+    
     
 //conform to protocol
     func manager(_ manager: FireStoreManager, didGet articles: [[String : Any]]) {
@@ -146,7 +168,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         self.sleepEndArray = endEmptyArray
         
         print(self.moodArray)
-//        print(self.sleepEndArray)
+        print(self.sleepEndArray)
 //        print(self.sleepStartArray)
         
         //處理完資料後，call "moodContent swiftUI"，把畫圖資料傳過來
@@ -194,6 +216,94 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MoodFlowCell.reuseIdentifier, for: indexPath) as?
                     MoodFlowCell
             else {fatalError("Could not create Cell")}
+            
+            
+            return cell
+        } else if indexPath.row == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SleepAnalysisCell.reuseIdentifier, for: indexPath) as? SleepAnalysisCell
+            else {fatalError("Could not create Cell")}
+            
+            //Average label
+            let bedTimeLabel = UILabel()
+            let wakeTimeLabel = UILabel()
+            let sleepTimelabel = UILabel()
+            
+            bedTimeLabel.text = "Average\nBedtime"
+            bedTimeLabel.numberOfLines = 2
+            bedTimeLabel.textAlignment = .center
+            wakeTimeLabel.text = "Average\nWaking Time"
+            wakeTimeLabel.numberOfLines = 2
+            wakeTimeLabel.textAlignment = .center
+            sleepTimelabel.text = "Average\nSleep"
+            sleepTimelabel.numberOfLines = 2
+            sleepTimelabel.textAlignment = .center
+            bedTimeLabel.font = UIFont.systemFont(ofSize: 13)
+            wakeTimeLabel.font = UIFont.systemFont(ofSize: 13)
+            sleepTimelabel.font = UIFont.systemFont(ofSize: 13)
+            bedTimeLabel.textColor = .lightGray
+            wakeTimeLabel.textColor = .lightGray
+            sleepTimelabel.textColor = .lightGray
+            cell.containerView.addSubview(bedTimeLabel)
+            cell.containerView.addSubview(wakeTimeLabel)
+            cell.containerView.addSubview(sleepTimelabel)
+            
+            bedTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+            wakeTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+            sleepTimelabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                bedTimeLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 35),
+                bedTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30),
+            ])
+            NSLayoutConstraint.activate([
+                wakeTimeLabel.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
+                wakeTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
+            ])
+            NSLayoutConstraint.activate([
+                sleepTimelabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -35),
+                sleepTimelabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
+            ])
+            
+            //TimeLabel
+            let bedTime = UILabel()
+            let wakeTime = UILabel()
+            let sleepTime = UILabel()
+            
+            //計算average
+            let averageBedTime: String = calculateAverageTime(timeStrings: sleepStartArray)
+            let averageWakeTime: String = calculateAverageTime(timeStrings: sleepEndArray)
+            
+            
+            bedTime.text = averageBedTime
+            wakeTime.text = averageWakeTime
+            sleepTime.text = "00:00"
+            bedTime.font = UIFont.boldSystemFont(ofSize: 18)
+            wakeTime.font = UIFont.boldSystemFont(ofSize: 18)
+            sleepTime.font = UIFont.boldSystemFont(ofSize: 18)
+            bedTime.textColor = .darkGray
+            wakeTime.textColor = .darkGray
+            sleepTime.textColor = .darkGray
+            cell.containerView.addSubview(bedTime)
+            cell.containerView.addSubview(wakeTime)
+            cell.containerView.addSubview(sleepTime)
+            
+            bedTime.translatesAutoresizingMaskIntoConstraints = false
+            wakeTime.translatesAutoresizingMaskIntoConstraints = false
+            sleepTime.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                bedTime.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 35),
+                bedTime.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
+            ])
+            NSLayoutConstraint.activate([
+                wakeTime.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
+                wakeTime.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
+            ])
+            NSLayoutConstraint.activate([
+                sleepTime.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -35),
+                sleepTime.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
+            ])
+            
             
             
             return cell
