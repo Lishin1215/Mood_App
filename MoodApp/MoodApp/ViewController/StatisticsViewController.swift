@@ -150,7 +150,11 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             if let startDate = dateFormatter.date(from: startArray[index]),
                let endDate = dateFormatter.date(from: endArray[index]) {
                 let sleepTime = endDate.timeIntervalSince(startDate) //endDate - startDate
-                let sleepTimeString = String(format: "%.2f", sleepTime)
+//                let sleepTimeDate = Date(timeIntervalSinceReferenceDate: sleepTime)
+//                let sleepTimeString = dateFormatter.string(from: sleepTimeDate)
+                let sleepTimeString = String(format: "%.2f", sleepTime) //換成string 放到array
+                print("&&& +\(sleepTimeString)")
+                
                 sleepTimeArray.append(sleepTimeString)
             }
         }
