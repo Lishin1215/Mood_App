@@ -122,19 +122,24 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
 
     func calculateAverageTime(timeStrings:[String]) -> String {
         
+        //把00:00換成最接近24:00來計算
+        var modifiedTimeStrings = timeStrings
+        while let index = modifiedTimeStrings.firstIndex(of: "00:00") {
+            modifiedTimeStrings[index] = "23:59"
+        }
         //把時間string轉換成Date，才能做計算
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         
         var totalTimeInterval: TimeInterval = 0
         
-        for timeString in timeStrings {
+        for timeString in modifiedTimeStrings {
             if let date = dateFormatter.date(from: timeString) {
                 totalTimeInterval += date.timeIntervalSinceReferenceDate
             }
         }
         
-        let averageTimeInterval = totalTimeInterval/Double(timeStrings.count)
+        let averageTimeInterval = totalTimeInterval/Double(modifiedTimeStrings.count)
         let averageDate = Date(timeIntervalSinceReferenceDate: averageTimeInterval)
         let averageTimeString = dateFormatter.string(from: averageDate)
         print("$$$ +\(averageTimeString)")
