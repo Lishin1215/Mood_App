@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
     
     
     //改變calendar icon
-    let moodImages = ["image 8", "image 13", "image 25", "image 7", "image 22"]
+    let moodImages = ["image 22", "image 7", "image 25", "image 13", "image 8"]
     private var dateArray: [DateComponents] = [] {
         didSet {
             print("******", dateArray.map { ($0.month!, $0.day!) })
@@ -34,6 +34,8 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
         // 隱藏 navigationBar
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
+        //先fetchdata（放這裡從tabBar進入才會一直走過）
+        FireStoreManager.shared.fetchData()
     }
         
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,8 +51,8 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
         //delegate
         FireStoreManager.shared.delegate = self
         
-        //先fetchdata，更新編輯過的date
-        FireStoreManager.shared.fetchData()
+//        //先fetchdata，更新編輯過的date
+//        FireStoreManager.shared.fetchData()
         
         
         calendarView.delegate = self

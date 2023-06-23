@@ -404,7 +404,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.moodLabel.text = "How's Your Day"
             
         //button
-            let buttonImages = ["image 8", "image 13", "image 25", "image 7", "image 22"] //#imageLiteral(
+            let buttonImages = ["image 22", "image 7", "image 25", "image 13", "image 8"] //#imageLiteral(
             
             moodButtonArray = [] //淨空，以防table reload，會重複加入buttonArray
             for index in 0 ..< buttonImages.count {
