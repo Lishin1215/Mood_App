@@ -23,6 +23,11 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     private var sleepStartArray:[String] = []
     private var sleepEndArray:[String] = []
     
+    //計算結果
+    private var averageBedTime: String?
+    private var averageWakeTime: String?
+    private var averageSleepTime: String?
+    
     
     
     let tableView = UITableView()
@@ -124,10 +129,11 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         let averageTimeInterval = totalTimeInterval/Double(timeStrings.count)
         let averageDate = Date(timeIntervalSinceReferenceDate: averageTimeInterval)
         let averageTimeString = dateFormatter.string(from: averageDate)
-        print(averageTimeString)
+        print("$$$ +\(averageTimeString)")
         
         return averageTimeString
     }
+    
     
     
 //conform to protocol
@@ -191,6 +197,16 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                 hostView.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -5)
             ])
             
+        }
+        
+        // 計算平均時間
+        averageBedTime = calculateAverageTime(timeStrings: sleepStartArray)
+        averageWakeTime = calculateAverageTime(timeStrings: sleepEndArray)
+        averageSleepTime = "00:00"
+        
+        //處理完資料後 reload tableView，更新label
+        DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)//讓處理好的資料被放進去
         }
     }
     
@@ -269,14 +285,14 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             let wakeTime = UILabel()
             let sleepTime = UILabel()
             
-            //計算average
-            let averageBedTime: String = calculateAverageTime(timeStrings: sleepStartArray)
-            let averageWakeTime: String = calculateAverageTime(timeStrings: sleepEndArray)
+//            //計算average
+//            let averageBedTime: String = calculateAverageTime(timeStrings: sleepStartArray)
+//            let averageWakeTime: String = calculateAverageTime(timeStrings: sleepEndArray)
             
             
-            bedTime.text = averageBedTime
-            wakeTime.text = averageWakeTime
-            sleepTime.text = "00:00"
+            bedTime.text = averageBedTime ?? "00:00"
+            wakeTime.text = averageWakeTime ?? "00:00"
+            sleepTime.text = averageSleepTime ?? "00:00"
             bedTime.font = UIFont.boldSystemFont(ofSize: 18)
             wakeTime.font = UIFont.boldSystemFont(ofSize: 18)
             sleepTime.font = UIFont.boldSystemFont(ofSize: 18)
