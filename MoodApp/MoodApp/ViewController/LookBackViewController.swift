@@ -32,6 +32,8 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //delegate
+        FireStoreManager.shared.delegate = self
         //fetchData （放這裡從tabBar進入才會一直走過）
         FireStoreManager.shared.fetchMonthlyData()
     }
@@ -41,8 +43,8 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     override func viewDidLoad() {
         super.viewDidLoad()
 
-     //delegate
-        FireStoreManager.shared.delegate = self
+//     //delegate
+//        FireStoreManager.shared.delegate = self
         
     //header
         headerView.backgroundColor = .pinkOrange

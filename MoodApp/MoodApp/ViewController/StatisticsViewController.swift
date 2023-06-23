@@ -36,6 +36,8 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //delegate
+        FireStoreManager.shared.delegate = self
         //fetchData （放這裡從tabBar進入才會一直走過）
         FireStoreManager.shared.fetchMonthlyData()
     }
@@ -45,7 +47,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         
         //delegate
-        FireStoreManager.shared.delegate = self
+//        FireStoreManager.shared.delegate = self
 
         tableView.dataSource = self
         tableView.delegate = self

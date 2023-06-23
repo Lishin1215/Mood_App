@@ -34,6 +34,8 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
         // 隱藏 navigationBar
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
+        //delegate
+        FireStoreManager.shared.delegate = self
         //先fetchdata（放這裡從tabBar進入才會一直走過）
         FireStoreManager.shared.fetchData()
     }
@@ -49,7 +51,7 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
         super.viewDidLoad()
        
         //delegate
-        FireStoreManager.shared.delegate = self
+//        FireStoreManager.shared.delegate = self
         
 //        //先fetchdata，更新編輯過的date
 //        FireStoreManager.shared.fetchData()
