@@ -28,7 +28,13 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     private var averageWakeTime: String?
     private var averageSleepTime: String?
     
+    //為避免加入swiftUI圖後重疊，先設置來default
+    private var hostView: UIView = UIView()
     
+    //cell裡面的，放外面是避免reload data時重複新的label(我只要一個就好）
+    let bedTime = UILabel()
+    let wakeTime = UILabel()
+    let sleepTime = UILabel()
     
     let tableView = UITableView()
     
@@ -206,15 +212,21 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         print(self.sleepEndArray)
 //        print(self.sleepStartArray)
         
+    
         //處理完資料後，call "moodContent swiftUI"，把畫圖資料傳過來
         let moodFlowSwiftUI = MoodContentView(moodArray: self.moodArray)
         //swiftUI提供結合UIKit(hostController
         let host = UIHostingController(rootView: moodFlowSwiftUI)
         //找到要放swiftUI的cell的indexPath
         let indexPath = IndexPath(row: 0, section: 0)
+        
+        //在外面設一個空的hostView, 在addSubview前先default，避免重疊
+        self.hostView.removeFromSuperview()
+        
         //**取得UIHostingController的view，再把他addSubview到對應的cell上
         if let hostView = host.view,
            let cell = tableView.cellForRow(at: indexPath) as? MoodFlowCell {
+            self.hostView = hostView //給外面的hostView值
             cell.addSubview(hostView)
             
             //設定swiftUI constraints
@@ -311,15 +323,15 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                 sleepTimelabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
             ])
             
-            //TimeLabel
-            let bedTime = UILabel()
-            let wakeTime = UILabel()
-            let sleepTime = UILabel()
+//            //TimeLabel
+//            let bedTime = UILabel()
+//            let wakeTime = UILabel()
+//            let sleepTime = UILabel()
             
-//            //計算average
-//            let averageBedTime: String = calculateAverageTime(timeStrings: sleepStartArray)
-//            let averageWakeTime: String = calculateAverageTime(timeStrings: sleepEndArray)
-            
+            //預設先拿掉TimeLabel，以免拿到資料後，更新會重複add (default)
+            bedTime.removeFromSuperview()
+            wakeTime.removeFromSuperview()
+            sleepTime.removeFromSuperview()
             
             bedTime.text = averageBedTime ?? "00:00"
             wakeTime.text = averageWakeTime ?? "00:00"
