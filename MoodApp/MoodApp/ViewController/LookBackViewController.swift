@@ -126,6 +126,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         scrollView.showsVerticalScrollIndicator = false
         //        scrollView.backgroundColor = .gray
         containerView.addSubview(scrollView)
+        scrollView.isHidden = true //default先隱藏
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -140,6 +141,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         keepRecordLabel.font = UIFont.boldSystemFont(ofSize: 15)
         keepRecordLabel.textColor = .darkGray
         containerView.addSubview(keepRecordLabel)
+        keepRecordLabel.isHidden = true //default先隱藏
         
         keepRecordLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -150,13 +152,15 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     }
     
     
-    func checkPhotoAmount() { //使用時機：fetch完data，才做判斷
-        if photoArray.count < 10 {
-            //             scrollView
+    func isOverTenPhoto() -> Bool { //使用時機：fetch完data，才做判斷
+        if photoArray.count >= 10 {
+            scrollView.isHidden = false
             keepRecordLabel.isHidden = true
+            return true
         } else {
-            //             keepRecordLabel
-            //            scrollView.isHidden = true
+            keepRecordLabel.isHidden = false
+            scrollView.isHidden = true
+            return false
         }
     }
     
@@ -199,37 +203,40 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         
         self.photoArray = filterArray
         
+        
         //判斷photoArray數量
-        checkPhotoAmount()
-        
-        //所有圖片加總"寬"度
-        scrollView.contentSize = CGSize(width: scrollView.frame.width * CGFloat(photoArray.count), height: scrollView.frame.height) //設了autoConstriant可以拿到frame (scrollView.frame.width)
-        //加入ImageView以顯示圖片
-        for index in 0 ..< photoArray.count {
-            let scrollImageView = UIImageView()
+        if isOverTenPhoto() == true {
             
-            scrollImageView.contentMode = .scaleAspectFill
-            scrollImageView.clipsToBounds = true
-            scrollView.addSubview(scrollImageView)
+            //所有圖片加總"寬"度
+            scrollView.contentSize = CGSize(width: scrollView.frame.width * CGFloat(photoArray.count), height: scrollView.frame.height) //設了autoConstriant可以拿到frame (scrollView.frame.width)
+            //加入ImageView以顯示圖片
+            for index in 0 ..< photoArray.count {
+                let scrollImageView = UIImageView()
+                
+                scrollImageView.contentMode = .scaleAspectFill
+                scrollImageView.clipsToBounds = true
+                scrollView.addSubview(scrollImageView)
+                
+                scrollImageView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    scrollImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+                    //for迴圈分別設每一張圖的leading，接起來會是一大張圖的總寬度(contentSize)
+                    scrollImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: scrollView.frame.width * CGFloat(index)),
+                    scrollImageView.widthAnchor.constraint(equalToConstant: scrollView.frame.width),
+                    scrollImageView.heightAnchor.constraint(equalToConstant: scrollView.frame.height)
+                ])
+                // 獲取圖片的 URL
+                let scrollImage = URL(string: photoArray[index])
+                // 設置圖片到 imageView 中
+                scrollImageView.addImage(with: scrollImage)
+            }
             
-            scrollImageView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                scrollImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-                //for迴圈分別設每一張圖的leading，接起來會是一大張圖的總寬度(contentSize)
-                scrollImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: scrollView.frame.width * CGFloat(index)),
-                scrollImageView.widthAnchor.constraint(equalToConstant: scrollView.frame.width),
-                scrollImageView.heightAnchor.constraint(equalToConstant: scrollView.frame.height)
-            ])
-            // 獲取圖片的 URL
-            let scrollImage = URL(string: photoArray[index])
-            // 設置圖片到 imageView 中
-            scrollImageView.addImage(with: scrollImage)
-            
+            //建立完scrollview / contentView/ imageView，可以開始"計時"
+            startTimer()
+        } else {
+            print("Less than Ten Photos, no need timer!")
         }
-        
-        //建立完scrollview / contentView/ imageView，可以開始計時
-        startTimer()
-        
+       
     }
 
 }
