@@ -185,6 +185,18 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         return sleepTimeArray
     }
     
+    func sleepTimeAverage(timeStrings: [String]) -> String {
+        let totalSeconds = timeStrings.compactMap { Double($0)}.reduce(0, +) //string換成double(因為double是optional，所以用compactMap)，在累加
+        let averageSeconds = totalSeconds / Double(timeStrings.count)
+        
+        let hours = Int(averageSeconds / 3600) //先拿到“小時”，暫時不管小數點
+        let minutes = Int((averageSeconds/60).truncatingRemainder(dividingBy: 60)) //先除以60變分鐘，再除以60變小時，然後去拿最後除以小時剩下的餘數（ex.1 --> 1分鐘）
+        
+        //變成2為整數(ex. Int 5 --> "05" )
+        let formattedTime = String(format: "%02d:%02d", hours, minutes)
+        return formattedTime
+    }
+    
     
     
 //conform to protocol
@@ -271,7 +283,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         self.sleepTimeArray = sleepTimeArray
         print("??? \(sleepTimeArray)")
         
-        averageSleepTime = calculateAverageTime(timeStrings: sleepTimeArray)
+        averageSleepTime = sleepTimeAverage(timeStrings: sleepTimeArray)
         
         //處理完資料後 reload tableView，更新label
         DispatchQueue.main.async {
