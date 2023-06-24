@@ -22,6 +22,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     private var moodArray:[MoodFlow] = []
     private var sleepStartArray:[String] = []
     private var sleepEndArray:[String] = []
+    private var sleepTimeArray: [String] = []
     
     //計算結果
     private var averageBedTime: String?
@@ -208,15 +209,21 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                 endEmptyArray.append(sleepEnd)
             }
         }
+        print(startEmptyArray)
+        print(endEmptyArray)
+        
+        //filter出空的string
+        let filterStartArray = startEmptyArray.filter { !$0.isEmpty }
+        print(filterStartArray)
+        let filterEndArray = endEmptyArray.filter { !$0.isEmpty }
+        print(filterEndArray)
         
         self.moodArray = moodFlowEmptyArray
-        self.sleepStartArray = startEmptyArray
-        self.sleepEndArray = endEmptyArray
+        self.sleepStartArray = filterStartArray
+        self.sleepEndArray = filterEndArray
         
         print(self.moodArray)
-        print(self.sleepEndArray)
-//        print(self.sleepStartArray)
-        
+ 
     
         //處理完資料後，call "moodContent swiftUI"，把畫圖資料傳過來
         let moodFlowSwiftUI = MoodContentView(moodArray: self.moodArray)
@@ -250,6 +257,8 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         averageWakeTime = calculateAverageTime(timeStrings: sleepEndArray)
         
         let sleepTimeArray = calculateSleepTime(startArray: sleepStartArray, endArray: sleepEndArray)
+        self.sleepTimeArray = sleepTimeArray
+        
         averageSleepTime = calculateAverageTime(timeStrings: sleepTimeArray)
         
         //處理完資料後 reload tableView，更新label
