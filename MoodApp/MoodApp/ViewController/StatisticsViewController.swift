@@ -348,6 +348,34 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SleepAnalysisCell.reuseIdentifier, for: indexPath) as? SleepAnalysisCell
             else {fatalError("Could not create Cell")}
             
+            //sleepLabel
+            let sleepLabel = UILabel()
+            sleepLabel.removeFromSuperview()
+            sleepLabel.text = "Sleep"
+            sleepLabel.textColor = .orangeBrown
+            sleepLabel.font = UIFont.systemFont(ofSize: 16)
+            cell.containerView.addSubview(sleepLabel)
+            
+            sleepLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                sleepLabel.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 22),
+                sleepLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 22)
+            ])
+            
+            //hrs
+            let hrsLabel = UILabel()
+            hrsLabel.removeFromSuperview()
+            hrsLabel.text = "hrs"
+            hrsLabel.textColor = .lightGray
+            hrsLabel.font = UIFont.systemFont(ofSize: 13)
+            cell.containerView.addSubview(hrsLabel)
+            
+            hrsLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                hrsLabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -50),
+                hrsLabel.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 45)
+            ])
+            
             //Average label
             let bedTimeLabel = UILabel()
             let wakeTimeLabel = UILabel()
