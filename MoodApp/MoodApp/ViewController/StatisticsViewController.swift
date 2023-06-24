@@ -34,6 +34,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     
     //為避免加入swiftUI圖後重疊，先設置來default
     private var hostView: UIView = UIView()
+    private var sleepHostView: UIView = UIView()
     
     //cell裡面的，放外面是避免reload data時重複新的label(我只要一個就好）
     let bedTime = UILabel()
@@ -269,15 +270,35 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         //處理完資料後 reload tableView，更新label
         DispatchQueue.main.async {
             self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)//讓處理好的資料被放進去
+        
+        
+            //III. 把sleepDateArray和sleepTimeArray結合
+            let sleepTimeFlowArray = zip(sleepDateArray, sleepTimeArray).map { SleepTimeFlow(date: $0, sleepTime: $1)
+            }
+            print("@@ + \(sleepTimeFlowArray)")
+            self.sleepTimeFlowArray = sleepTimeFlowArray
+            
+            //處理完資料後，call "sleepBarChart swiftUI"，把畫圖資料傳過來
+            let sleepBarSwiftUI = SleepBarChartView(sleepTimeFlowArray: self.sleepTimeFlowArray)
+            let sleepHost = UIHostingController(rootView: sleepBarSwiftUI)
+            
+            let sleepIndexPath = IndexPath(row: 1, section: 0)
+            self.sleepHostView.removeFromSuperview()
+            
+            if let sleepHostView = sleepHost.view,
+               let sleepCell = self.tableView.cellForRow(at: sleepIndexPath) as? SleepAnalysisCell {
+                self.sleepHostView = sleepHostView
+                sleepCell.addSubview(sleepHostView)
+                
+                sleepHostView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    sleepHostView.topAnchor.constraint(equalTo: sleepCell.containerView2.topAnchor, constant: 16),
+                    sleepHostView.leadingAnchor.constraint(equalTo: sleepCell.containerView2.leadingAnchor, constant: 16),
+                    sleepHostView.trailingAnchor.constraint(equalTo: sleepCell.containerView2.trailingAnchor, constant: -16),
+                    sleepHostView.bottomAnchor.constraint(equalTo: sleepCell.containerView2.bottomAnchor, constant: -5)
+                ])
+            }
         }
-        
-        //III. 把sleepDateArray和sleepTimeArray結合
-        let sleepTimeFlowArray = zip(sleepDateArray, sleepTimeArray).map { SleepTimeFlow(date: $0, sleepTime: $1)
-        }
-        print("@@ + \(sleepTimeFlowArray)")
-        self.sleepTimeFlowArray = sleepTimeFlowArray
-        
-        
     }
     
     
@@ -305,7 +326,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             
             
             return cell
-        } else if indexPath.row == 1 {
+        } else  {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SleepAnalysisCell.reuseIdentifier, for: indexPath) as? SleepAnalysisCell
             else {fatalError("Could not create Cell")}
             
@@ -389,14 +410,6 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                 sleepTime.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -35),
                 sleepTime.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
             ])
-            
-            
-            
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: SleepAnalysisCell.reuseIdentifier, for: indexPath) as? SleepAnalysisCell
-            else {fatalError("Could not create Cell")}
-            
             
             return cell
         }

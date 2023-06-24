@@ -22,7 +22,7 @@ struct MoodContentView: View {
     //畫圖需要的資料，moodFlow的array
     var moodFlowArray: [MoodFlow] = []
 
-    //把statisticsVC拿到的moodArray傳過來
+    //***把statisticsVC拿到的moodArray傳過來
     init(moodArray: [MoodFlow]) {
         moodFlowArray = moodArray
         
