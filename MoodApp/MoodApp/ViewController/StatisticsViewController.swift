@@ -166,11 +166,17 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         
         for index in 0..<startArray.count {
             if let startDate = dateFormatter.date(from: startArray[index]),
-               let endDate = dateFormatter.date(from: endArray[index]) {
+               var endDate = dateFormatter.date(from: endArray[index]) {
+                
+                //因為Date會自動幫時間加上一個預設的日期（ex.2001/02/08)，所以直接相減會是“負的” or (startTime晚於endTime)
+                //所以增加判斷，如果startTime > EndTime --> EndTime要加上一天
+                if endDate < startDate {
+                    endDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate) ?? Date() //unwrapped
+                }
+                //時間相減前要確認好date
                 let sleepTime = endDate.timeIntervalSince(startDate) //endDate - startDate
-//                let sleepTimeDate = Date(timeIntervalSinceReferenceDate: sleepTime)
-//                let sleepTimeString = dateFormatter.string(from: sleepTimeDate)
-                let sleepTimeString = String(format: "%.2f", sleepTime) //換成string 放到array
+
+                let sleepTimeString = String(sleepTime) //換成string 放到array
                 print("&&& +\(sleepTimeString)")
                 
                 sleepTimeArray.append(sleepTimeString)

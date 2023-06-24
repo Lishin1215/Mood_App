@@ -29,18 +29,12 @@ struct SleepBarChartView: View {
     
     
     var body: some View {
-        VStack {
-            // 繪製 Bar Chart
-            VStack {
-                ForEach(sleepTimeFlowArray, id: \.date) { item in
-                    VStack {
-                        Text(String(format: "%.1f", item.sleepTime)) // 顯示睡眠時間
-                        Rectangle()
-                            .fill(Color.blue)
-                            .frame(height: CGFloat((Int(item.sleepTime) ?? 0) * 10)) // 設定柱狀圖高度
-                            .cornerRadius(5)
-                    }
-                }
+        Chart {
+            ForEach(sleepTimeFlowArray, id: \.date) { item in
+                BarMark(
+                    x: .value("Date", item.date),
+                    y: .value("Sleep Time", (Double(item.sleepTime) ?? 0 )/3600) //把原本的秒換成“小時”
+                )
             }
         }
     }
