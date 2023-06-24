@@ -183,6 +183,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         var moodFlowEmptyArray:[MoodFlow] = []
         var startEmptyArray:[String] = []
         var endEmptyArray:[String] = []
+        var dateArray: [Date] = []
         
         for article in articles {
             //拿date & mood --> moodFlow
@@ -196,14 +197,19 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                     moodFlowEmptyArray.append(moodflow)
                 }
             }
-            //拿sleepStart
-            if let sleepStart = article["sleepStart"] as? String {
-//                print("SleepStart: \(sleepStart)")
-                
+            //拿sleepStart，且直接"filter"出空的string
+            if let sleepStart = article["sleepStart"] as? String, !sleepStart.isEmpty {
+
                 startEmptyArray.append(sleepStart)
+                
+                //只有真正有紀錄sleepStart的"date"
+                if let timeStamp = article["date"] as? Timestamp {
+                    let date = timeStamp.dateValue()
+                    dateArray.append(date)
+                }
             }
             //拿sleepEnd
-            if let sleepEnd = article["sleepEnd"] as? String {
+            if let sleepEnd = article["sleepEnd"] as? String, !sleepEnd.isEmpty {
 //                print("SleepEnd: \(sleepEnd)")
                 
                 endEmptyArray.append(sleepEnd)
@@ -211,16 +217,11 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         }
         print(startEmptyArray)
         print(endEmptyArray)
-        
-        //filter出空的string
-        let filterStartArray = startEmptyArray.filter { !$0.isEmpty }
-        print(filterStartArray)
-        let filterEndArray = endEmptyArray.filter { !$0.isEmpty }
-        print(filterEndArray)
+        print(dateArray)
         
         self.moodArray = moodFlowEmptyArray
-        self.sleepStartArray = filterStartArray
-        self.sleepEndArray = filterEndArray
+        self.sleepStartArray = startEmptyArray
+        self.sleepEndArray = endEmptyArray
         
         print(self.moodArray)
  
