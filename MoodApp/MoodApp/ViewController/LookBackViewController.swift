@@ -24,9 +24,6 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     
     //scrollview
     let scrollView = UIScrollView()
-    //scrollView 長寬
-    var scrollContentWidth: CGFloat = 0
-    var scrollContentHeight: CGFloat = 0
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,14 +111,11 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         scrollView.delegate = self
         // 以一頁為單位滑動
         scrollView.isPagingEnabled = true
-        // 所有圖片加總"寬"度
-        scrollContentWidth = containerView.bounds.width-32
-        scrollContentHeight = containerView.bounds.height-40
-//        scrollView.contentSize = CGSize(width: scrollContentWidth * CGFloat(photoArray.count), height: scrollContentHeight)
+       
         // 是否顯示滑動條
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.backgroundColor = .gray
+//        scrollView.backgroundColor = .gray
         containerView.addSubview(scrollView)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -210,7 +204,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         checkPhotoAmount()
         
         //所有圖片加總"寬"度
-        scrollView.contentSize = CGSize(width: scrollContentWidth * CGFloat(photoArray.count), height: scrollContentHeight)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width * CGFloat(photoArray.count), height: scrollView.frame.height) //設了autoConstriant可以拿到frame (scrollView.frame.width)
         //加入ImageView以顯示圖片
         for index in 0 ..< photoArray.count {
             let scrollImageView = UIImageView()
@@ -223,9 +217,9 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
             NSLayoutConstraint.activate([
                 scrollImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
                 //for迴圈分別設每一張圖的leading，接起來會是一大張圖的總寬度(contentSize)
-                scrollImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: scrollContentWidth * CGFloat(index)),
-                scrollImageView.widthAnchor.constraint(equalToConstant: scrollContentWidth),
-                scrollImageView.heightAnchor.constraint(equalToConstant: scrollContentHeight)
+                scrollImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: scrollView.frame.width * CGFloat(index)),
+                scrollImageView.widthAnchor.constraint(equalToConstant: scrollView.frame.width),
+                scrollImageView.heightAnchor.constraint(equalToConstant: scrollView.frame.height)
             ])
             // 獲取圖片的 URL
             let scrollImage = URL(string: photoArray[index])
