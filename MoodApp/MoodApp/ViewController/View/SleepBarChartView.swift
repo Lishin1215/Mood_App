@@ -10,10 +10,10 @@ import Charts
 
 
 //畫圖需要的data structure，資料需要存成這樣
-//struct SleepTimeFlow {
-//    var date: Date //x軸
-//    var SleepTime: String //y軸
-//}
+struct SleepTimeFlow {
+    var date: Date //x軸
+    var sleepTime: String //y軸
+}
 
 
 

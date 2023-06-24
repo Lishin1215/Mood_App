@@ -29,6 +29,9 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     private var averageWakeTime: String?
     private var averageSleepTime: String?
     
+    //swiftUI struct
+    private var sleepTimeFlowArray: [SleepTimeFlow] = []
+    
     //為避免加入swiftUI圖後重疊，先設置來default
     private var hostView: UIView = UIView()
     
@@ -183,7 +186,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         var moodFlowEmptyArray:[MoodFlow] = []
         var startEmptyArray:[String] = []
         var endEmptyArray:[String] = []
-        var dateArray: [Date] = []
+        var sleepDateArray: [Date] = []
         
         for article in articles {
             //拿date & mood --> moodFlow
@@ -205,7 +208,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                 //只有真正有紀錄sleepStart的"date"
                 if let timeStamp = article["date"] as? Timestamp {
                     let date = timeStamp.dateValue()
-                    dateArray.append(date)
+                    sleepDateArray.append(date)
                 }
             }
             //拿sleepEnd
@@ -217,7 +220,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         }
         print(startEmptyArray)
         print(endEmptyArray)
-        print(dateArray)
+        print(sleepDateArray)
         
         self.moodArray = moodFlowEmptyArray
         self.sleepStartArray = startEmptyArray
@@ -226,7 +229,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         print(self.moodArray)
  
     
-        //處理完資料後，call "moodContent swiftUI"，把畫圖資料傳過來
+        //I. 處理完資料後，call "moodContent swiftUI"，把畫圖資料傳過來
         let moodFlowSwiftUI = MoodContentView(moodArray: self.moodArray)
         //swiftUI提供結合UIKit(hostController
         let host = UIHostingController(rootView: moodFlowSwiftUI)
@@ -253,12 +256,13 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             
         }
         
-        // 計算平均時間
+        // II. 計算平均時間
         averageBedTime = calculateAverageTime(timeStrings: sleepStartArray)
         averageWakeTime = calculateAverageTime(timeStrings: sleepEndArray)
         
         let sleepTimeArray = calculateSleepTime(startArray: sleepStartArray, endArray: sleepEndArray)
         self.sleepTimeArray = sleepTimeArray
+        print("??? \(sleepTimeArray)")
         
         averageSleepTime = calculateAverageTime(timeStrings: sleepTimeArray)
         
@@ -266,6 +270,14 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         DispatchQueue.main.async {
             self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)//讓處理好的資料被放進去
         }
+        
+        //III. 把sleepDateArray和sleepTimeArray結合
+        let sleepTimeFlowArray = zip(sleepDateArray, sleepTimeArray).map { SleepTimeFlow(date: $0, sleepTime: $1)
+        }
+        print("@@ + \(sleepTimeFlowArray)")
+        self.sleepTimeFlowArray = sleepTimeFlowArray
+        
+        
     }
     
     
