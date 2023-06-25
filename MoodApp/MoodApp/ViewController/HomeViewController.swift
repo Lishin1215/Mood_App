@@ -164,6 +164,8 @@ extension HomeViewController: UICalendarViewDelegate {
 }
 
 extension HomeViewController: UICalendarSelectionSingleDateDelegate {
+    
+    //點擊日期進入newPage
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         if let date = dateComponents {
             self.selectDate = date
@@ -173,7 +175,28 @@ extension HomeViewController: UICalendarSelectionSingleDateDelegate {
         //perform segue
         performSegue(withIdentifier: "newPageSegue", sender: dateComponents)
     }
+    
+    //不能點選未來時間
+    func dateSelection(_ selection: UICalendarSelectionSingleDate, canSelectDate dateComponents: DateComponents?) -> Bool {
+        
+        guard let date = dateComponents?.date else {
+                return false
+            }
+            
+            let now = Date()
+            let calendar = Calendar.current
+            
+            // 檢查日期是否在當前日期之後
+            if calendar.compare(date, to: now, toGranularity: .day) == .orderedDescending { //orderedDescending -->當前之後
+                // 日期在當前日期之後，禁止選擇
+                return false
+            }
+            
+            // 允許選擇其他日期
+            return true
+    }
 }
+
 
 
 
