@@ -18,7 +18,7 @@
 	<array>
 		<dict>
 			<key>INIntentCategory</key>
-			<string>create</string>
+			<string>generic</string>
 			<key>INIntentConfigurable</key>
 			<true/>
 			<key>INIntentDescription</key>
@@ -164,6 +164,10 @@
 						<true/>
 					</dict>
 					<dict>
+						<key>INIntentResponseCodeFormatString</key>
+						<string>Your mood is created ${result}</string>
+						<key>INIntentResponseCodeFormatStringID</key>
+						<string>sLNhZh</string>
 						<key>INIntentResponseCodeName</key>
 						<string>failure</string>
 					</dict>
@@ -197,7 +201,7 @@
 			<key>INIntentUserConfirmationRequired</key>
 			<true/>
 			<key>INIntentVerb</key>
-			<string>Create</string>
+			<string>Do</string>
 		</dict>
 	</array>
 	<key>INTypes</key>

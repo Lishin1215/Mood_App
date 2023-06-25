@@ -6,12 +6,30 @@
 //
 
 import UIKit
+import Intents
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
+    //建立捷徑讓siri可以呼叫app
+    private func donateIntent() {
+        let intent = RecordMoodIntent() //系統自動會有
+        intent.suggestedInvocationPhrase = "Record Mood"  //呼叫捷徑“要說的話” //siri要調成英文版
+        
+        let interaction = INInteraction(intent: intent, response: nil) //建立互動
+        interaction.donate { (error) in //在iphone上建立捷徑
+            if error != nil {
+                if let error = error as? NSError {
+                    print("Donate failed")
+                } else {
+                    print("Successfullt donated interation")
+                }
+            }
+        }
+        
+    }
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.

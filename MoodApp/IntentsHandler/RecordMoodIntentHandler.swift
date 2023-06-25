@@ -9,22 +9,23 @@ import Foundation
 import Intents
 
 class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
+    
+    //正確接收到intent後執行
     func handle(intent: RecordMoodIntent, completion: @escaping (RecordMoodIntentResponse) -> Void) {
-        print(intent.moodScore)
+        print(intent.MoodScore)
+        completion(RecordMoodIntentResponse.success(result: "Successfully"))
     }
     
-    func handle(intent: RecordMoodIntent) async -> RecordMoodIntentResponse {
-        <#code#>
-    }
-    
+  
     func resolveMoodScore(for intent: RecordMoodIntent, with completion: @escaping (RecordMoodMoodScoreResolutionResult) -> Void) {
-        <#code#>
+        let moodScore = Int(intent.MoodScore ?? 5)
+        if(0...4).contains(moodScore) {
+            completion(RecordMoodMoodScoreResolutionResult.success(with: moodScore))
+        } else {
+            completion(RecordMoodMoodScoreResolutionResult.needsValue()) //要求users再輸入
+        }
     }
     
-    func resolveMoodScore(for intent: RecordMoodIntent) async -> RecordMoodMoodScoreResolutionResult {
-        <#code#>
-    }
-    
-    
+   
 }
 
