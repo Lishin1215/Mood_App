@@ -43,7 +43,11 @@ struct MoodContentView: View {
                     y: .value("Mood", Int(item.mood) ?? 0)
                 )
                 .symbol(.circle) //點的圖案類型
+                .foregroundStyle(Color(uiColor: .orangeBrown))
             }
+        }
+        .chartYAxis {
+            AxisMarks(position: .leading)
         }
     }
 }

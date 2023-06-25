@@ -29,13 +29,22 @@ struct SleepBarChartView: View {
     
     
     var body: some View {
-        Chart {
-            ForEach(sleepTimeFlowArray, id: \.date) { item in
-                BarMark(
-                    x: .value("Date", item.date),
-                    y: .value("Sleep Time", (Double(item.sleepTime) ?? 0 )/3600) //把原本的秒換成“小時”
-                )
+            Chart {
+                ForEach(sleepTimeFlowArray, id: \.date) { item in
+                    BarMark(
+                        x: .value("Date", item.date),
+                        y: .value("Sleep Time", (Double(item.sleepTime) ?? 0 )/3600) //把原本的秒換成“小時”
+                    )
+                    .foregroundStyle(Color(uiColor: .orangeBrown))
+                }
             }
-        }
+            .chartYAxis {
+                AxisMarks(position: .leading)
+            }
+//            .chartXAxis {
+//                AxisMarks(values: .stride(by: .day)) { value in
+//                    AxisValueLabel(format: .dateTime.month(), centered: true)
+//                }
+//            }
     }
 }
