@@ -12,10 +12,15 @@ target 'MoodApp' do
   pod 'FirebaseStorage'
   pod 'FirebaseDatabase'
   pod 'FirebaseFunctions'
+end
 
 
+target 'IntentsHandler' do
+  pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift'
+end
 
-
-  
-
+target 'IntentsHandlerUI' do
+  pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift'
 end

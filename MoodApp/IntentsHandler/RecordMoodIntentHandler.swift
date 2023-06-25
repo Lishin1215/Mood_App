@@ -7,6 +7,8 @@
 
 import Foundation
 import Intents
+import FirebaseFirestore
+import FirebaseCore
 
 class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
     
@@ -14,11 +16,15 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
     func handle(intent: RecordMoodIntent, completion: @escaping (RecordMoodIntentResponse) -> Void) {
         print(intent.MoodScore)
         completion(RecordMoodIntentResponse.success(result: "Successfully"))
+        
+        FirebaseApp.configure()
+        FireStoreManager.shared.setData(date: Date(), mood: String(Int(intent.MoodScore ?? 5)), sleepStart: "", sleepEnd: "", text: "", photo: "", handler: {})
     }
     
   
     func resolveMoodScore(for intent: RecordMoodIntent, with completion: @escaping (RecordMoodMoodScoreResolutionResult) -> Void) {
         let moodScore = Int(intent.MoodScore ?? 5)
+        print(moodScore)
         if(0...4).contains(moodScore) {
             completion(RecordMoodMoodScoreResolutionResult.success(with: moodScore))
         } else {

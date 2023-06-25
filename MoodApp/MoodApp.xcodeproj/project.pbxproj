@@ -48,6 +48,20 @@
 		5B0742AF2A4824E6008F4C3D /* SiriIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742AA2A481822008F4C3D /* SiriIntents.intentdefinition */; };
 		5B0742B02A4825C3008F4C3D /* RecordMoodIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742AC2A481E6F008F4C3D /* RecordMoodIntentHandler.swift */; };
 		5B0742B12A4825C3008F4C3D /* RecordMoodIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742AC2A481E6F008F4C3D /* RecordMoodIntentHandler.swift */; };
+		5B0742D12A487611008F4C3D /* IntentsFireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742D02A487611008F4C3D /* IntentsFireStoreManager.swift */; };
+		5B0742D32A4876C3008F4C3D /* IntentsUIFireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742D22A4876C3008F4C3D /* IntentsUIFireStoreManager.swift */; };
+		5B0742D52A4876E0008F4C3D /* IntentsArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742D42A4876E0008F4C3D /* IntentsArticles.swift */; };
+		5B0742D72A4876FD008F4C3D /* IntentsUIArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742D62A4876FD008F4C3D /* IntentsUIArticles.swift */; };
+		5B0742DB2A4878DA008F4C3D /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B0742DA2A4878DA008F4C3D /* FirebaseFirestore.framework */; };
+		5B0742DD2A4878E9008F4C3D /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B0742DC2A4878E9008F4C3D /* FirebaseFirestore.framework */; };
+		5B0742DE2A487B61008F4C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */; };
+		5B0742DF2A487B61008F4C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */; };
+		5B0742E22A487C7F008F4C3D /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07426B2A3EC5AF008F4C3D /* FireStoreManager.swift */; };
+		5B0742E32A487C80008F4C3D /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07426B2A3EC5AF008F4C3D /* FireStoreManager.swift */; };
+		5B0742E42A487C8D008F4C3D /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742682A3EC348008F4C3D /* Articles.swift */; };
+		5B0742E52A487C8E008F4C3D /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742682A3EC348008F4C3D /* Articles.swift */; };
+		ABDA7EE79C834A0F9A58A805 /* Pods_IntentsHandlerUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28760191C60BCCE33663AF9D /* Pods_IntentsHandlerUI.framework */; };
+		F2BF18FFFFFB557E610637D7 /* Pods_IntentsHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A13CE12175C2FDB027BA56 /* Pods_IntentsHandler.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +97,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		074EFFC73DDBEAA4F8CAE989 /* Pods-IntentsHandlerUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntentsHandlerUI.release.xcconfig"; path = "Target Support Files/Pods-IntentsHandlerUI/Pods-IntentsHandlerUI.release.xcconfig"; sourceTree = "<group>"; };
+		28760191C60BCCE33663AF9D /* Pods_IntentsHandlerUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntentsHandlerUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FB99FA6B73753DC3DD34465 /* Pods-IntentsHandler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntentsHandler.release.xcconfig"; path = "Target Support Files/Pods-IntentsHandler/Pods-IntentsHandler.release.xcconfig"; sourceTree = "<group>"; };
 		5B0742372A39AC71008F4C3D /* MoodApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoodApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B07423A2A39AC71008F4C3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B07423C2A39AC71008F4C3D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,9 +140,19 @@
 		5B07429C2A4811BB008F4C3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B0742AA2A481822008F4C3D /* SiriIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = SiriIntents.intentdefinition; sourceTree = "<group>"; };
 		5B0742AC2A481E6F008F4C3D /* RecordMoodIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMoodIntentHandler.swift; sourceTree = "<group>"; };
+		5B0742D02A487611008F4C3D /* IntentsFireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsFireStoreManager.swift; sourceTree = "<group>"; };
+		5B0742D22A4876C3008F4C3D /* IntentsUIFireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsUIFireStoreManager.swift; sourceTree = "<group>"; };
+		5B0742D42A4876E0008F4C3D /* IntentsArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsArticles.swift; sourceTree = "<group>"; };
+		5B0742D62A4876FD008F4C3D /* IntentsUIArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsUIArticles.swift; sourceTree = "<group>"; };
+		5B0742D82A4878C9008F4C3D /* FirebaseStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B0742DA2A4878DA008F4C3D /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B0742DC2A4878E9008F4C3D /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
+		99C541F7E4586F3CCEA0A91B /* Pods-IntentsHandler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntentsHandler.debug.xcconfig"; path = "Target Support Files/Pods-IntentsHandler/Pods-IntentsHandler.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0A45F6B523BC2A73B48C0E /* Pods-MoodApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.release.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.release.xcconfig"; sourceTree = "<group>"; };
+		DF34C052038DBFAF323EBE9D /* Pods-IntentsHandlerUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntentsHandlerUI.debug.xcconfig"; path = "Target Support Files/Pods-IntentsHandlerUI/Pods-IntentsHandlerUI.debug.xcconfig"; sourceTree = "<group>"; };
+		E7A13CE12175C2FDB027BA56 /* Pods_IntentsHandler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntentsHandler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +168,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0742DB2A4878DA008F4C3D /* FirebaseFirestore.framework in Frameworks */,
 				5B07428A2A4811BB008F4C3D /* Intents.framework in Frameworks */,
+				F2BF18FFFFFB557E610637D7 /* Pods_IntentsHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +178,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0742DD2A4878E9008F4C3D /* FirebaseFirestore.framework in Frameworks */,
 				5B0742952A4811BB008F4C3D /* IntentsUI.framework in Frameworks */,
+				ABDA7EE79C834A0F9A58A805 /* Pods_IntentsHandlerUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,9 +190,14 @@
 		38D8090ABE8BE34934B58152 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B0742DC2A4878E9008F4C3D /* FirebaseFirestore.framework */,
+				5B0742DA2A4878DA008F4C3D /* FirebaseFirestore.framework */,
+				5B0742D82A4878C9008F4C3D /* FirebaseStorage.framework */,
 				9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */,
 				5B0742892A4811BB008F4C3D /* Intents.framework */,
 				5B0742942A4811BB008F4C3D /* IntentsUI.framework */,
+				E7A13CE12175C2FDB027BA56 /* Pods_IntentsHandler.framework */,
+				28760191C60BCCE33663AF9D /* Pods_IntentsHandlerUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -278,6 +314,8 @@
 				5B07428C2A4811BB008F4C3D /* IntentHandler.swift */,
 				5B0742AC2A481E6F008F4C3D /* RecordMoodIntentHandler.swift */,
 				5B07428E2A4811BB008F4C3D /* Info.plist */,
+				5B0742D02A487611008F4C3D /* IntentsFireStoreManager.swift */,
+				5B0742D42A4876E0008F4C3D /* IntentsArticles.swift */,
 			);
 			path = IntentsHandler;
 			sourceTree = "<group>";
@@ -288,6 +326,8 @@
 				5B0742972A4811BB008F4C3D /* IntentViewController.swift */,
 				5B0742992A4811BB008F4C3D /* MainInterface.storyboard */,
 				5B07429C2A4811BB008F4C3D /* Info.plist */,
+				5B0742D22A4876C3008F4C3D /* IntentsUIFireStoreManager.swift */,
+				5B0742D62A4876FD008F4C3D /* IntentsUIArticles.swift */,
 			);
 			path = IntentsHandlerUI;
 			sourceTree = "<group>";
@@ -297,6 +337,10 @@
 			children = (
 				71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */,
 				CA0A45F6B523BC2A73B48C0E /* Pods-MoodApp.release.xcconfig */,
+				99C541F7E4586F3CCEA0A91B /* Pods-IntentsHandler.debug.xcconfig */,
+				3FB99FA6B73753DC3DD34465 /* Pods-IntentsHandler.release.xcconfig */,
+				DF34C052038DBFAF323EBE9D /* Pods-IntentsHandlerUI.debug.xcconfig */,
+				074EFFC73DDBEAA4F8CAE989 /* Pods-IntentsHandlerUI.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -331,6 +375,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5B0742A92A4811BB008F4C3D /* Build configuration list for PBXNativeTarget "IntentsHandler" */;
 			buildPhases = (
+				BACFA167A8BDFEF48EE20156 /* [CP] Check Pods Manifest.lock */,
 				5B0742842A4811BA008F4C3D /* Sources */,
 				5B0742852A4811BA008F4C3D /* Frameworks */,
 				5B0742862A4811BA008F4C3D /* Resources */,
@@ -348,6 +393,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5B0742A82A4811BB008F4C3D /* Build configuration list for PBXNativeTarget "IntentsHandlerUI" */;
 			buildPhases = (
+				5696FC75F4221374E1F54C39 /* [CP] Check Pods Manifest.lock */,
 				5B07428F2A4811BB008F4C3D /* Sources */,
 				5B0742902A4811BB008F4C3D /* Frameworks */,
 				5B0742912A4811BB008F4C3D /* Resources */,
@@ -418,6 +464,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0742DE2A487B61008F4C3D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,12 +473,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B07429B2A4811BB008F4C3D /* MainInterface.storyboard in Resources */,
+				5B0742DF2A487B61008F4C3D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5696FC75F4221374E1F54C39 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IntentsHandlerUI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5B07424F2A39F6C9008F4C3D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -488,6 +558,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BACFA167A8BDFEF48EE20156 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IntentsHandler-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -527,9 +619,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0742E42A487C8D008F4C3D /* Articles.swift in Sources */,
+				5B0742E22A487C7F008F4C3D /* FireStoreManager.swift in Sources */,
 				5B07428D2A4811BB008F4C3D /* IntentHandler.swift in Sources */,
 				5B0742B02A4825C3008F4C3D /* RecordMoodIntentHandler.swift in Sources */,
+				5B0742D52A4876E0008F4C3D /* IntentsArticles.swift in Sources */,
 				5B0742AE2A4824E6008F4C3D /* SiriIntents.intentdefinition in Sources */,
+				5B0742D12A487611008F4C3D /* IntentsFireStoreManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,9 +633,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0742E52A487C8E008F4C3D /* Articles.swift in Sources */,
+				5B0742E32A487C80008F4C3D /* FireStoreManager.swift in Sources */,
 				5B0742982A4811BB008F4C3D /* IntentViewController.swift in Sources */,
 				5B0742B12A4825C3008F4C3D /* RecordMoodIntentHandler.swift in Sources */,
 				5B0742AF2A4824E6008F4C3D /* SiriIntents.intentdefinition in Sources */,
+				5B0742D32A4876C3008F4C3D /* IntentsUIFireStoreManager.swift in Sources */,
+				5B0742D72A4876FD008F4C3D /* IntentsUIArticles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +866,7 @@
 		};
 		5B0742A42A4811BB008F4C3D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99C541F7E4586F3CCEA0A91B /* Pods-IntentsHandler.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -791,6 +892,7 @@
 		};
 		5B0742A52A4811BB008F4C3D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FB99FA6B73753DC3DD34465 /* Pods-IntentsHandler.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -817,6 +919,7 @@
 		};
 		5B0742A62A4811BB008F4C3D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF34C052038DBFAF323EBE9D /* Pods-IntentsHandlerUI.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -842,6 +945,7 @@
 		};
 		5B0742A72A4811BB008F4C3D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 074EFFC73DDBEAA4F8CAE989 /* Pods-IntentsHandlerUI.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
