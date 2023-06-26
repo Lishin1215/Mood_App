@@ -8,11 +8,11 @@
 import UIKit
 import SwiftUI
 import Combine
+import FirebaseFirestore
 
 
-class NewPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class NewPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, FireStoreManagerDelegate {
    
-    
     
     //sleep circular slider
     private var sleepCancellable: AnyCancellable?
@@ -55,6 +55,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         
         //hide tabBar
         tabBarController?.tabBar.isHidden = true
+        
+        //delegate
+        FireStoreManager.shared.delegate = self
+        //先fetchdata（放這裡從tabBar進入才會一直走過）
+        FireStoreManager.shared.fetchData()
         
         //addDayButton default (灰色，不能點選）（放這裡從tabBar進入才會一直走過）
         addDayButton.backgroundColor = .lightLightGray
@@ -377,6 +382,79 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             }
         }
         
+    }
+    
+// conform to protocol (有紀錄過的日子，要可以點選mood，帶出“原資料”）
+    func manager(_ manager: FireStoreManager, didGet articles: [[String : Any]]) {
+        
+        //***用所有已記錄的日期去“比對是否有selectedDate”
+        var emptyArray: [Date] = []
+        
+        for article in articles {
+            if let timeStamp = article["date"] as? Timestamp {
+                let articleDate = timeStamp.dateValue() //換成Date
+//                emptyArray.append(articleDate)
+                
+                //檢查日期是否匹配（換成string)
+                let dateFormatter = DateFormatter()
+                //只比年月日（不管分鐘/秒）
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let selectedDateString = dateFormatter.string(from: self.date ?? Date())
+                let articleDateString = dateFormatter.string(from: articleDate)
+                
+                if articleDateString == selectedDateString {
+                    //拿其他數據 (mood)
+                    if let mood = article["mood"] as? String {
+                        moodButtonArray[Int(mood) ?? 0].backgroundColor = .lightLightGray
+                        moodButtonArray[Int(mood) ?? 0].layer.cornerRadius = 22
+                        self.addDayButton.isEnabled = true
+                        self.addDayButton.backgroundColor = .pinkOrange
+                        //*** assign到外面的變數存起來，這樣setData時才有資料
+                        self.moodIndex = Int(mood)
+                    }
+                    //拿text
+                    if let text = article["text"] as? String {
+                        //assign到外面的變數存起來
+                        self.textField.text = text
+                    }
+                    //拿sleepTime
+                    if let sleepStart = article["sleepStart"] as? String {
+                        if let sleepEnd = article["sleepEnd"] as? String {
+                            //確定有東西，才要放到button上
+                            if (sleepStart != "") && (sleepEnd != "") {
+                                self.sleepButton.setTitle("Sleep: \(sleepStart) ~ Wake: \(sleepEnd)", for: .normal)
+                                self.sleepButton.titleLabel?.font = UIFont.systemFont(ofSize: 16.0)
+                                self.sleepButton.setTitleColor(.lightBlack, for: .normal)
+                                //assign到外面的變數存起來
+                                self.sleepTime = sleepStart
+                                self.wakeUpTime = sleepEnd
+                            }
+                        }
+                    }
+                    //拿photo
+                    if let photo = article["photo"] as? String {
+                        //確定有東西，才要放到button上
+                        if photo != "" {
+                            let indexPath = IndexPath(row: 3, section: 0)
+                            if let cell = tableView.cellForRow(at: indexPath) as? NewPagePhotoCell {
+                                print(photo)
+                                
+                                //把photo放到button上
+                                let photoURL = URL(string: photo)
+                                cell.imageButton.addImage(with: photoURL)
+                                
+                                cell.photoImageView.isHidden = true
+                                //assign到外面的變數存起來 (拿到現在button上的UIImage)
+                                self.selectedImage = cell.imageButton.currentImage ?? UIImage()
+                                
+                            }
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
     }
     
     
