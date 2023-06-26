@@ -13,10 +13,18 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     //header
     let headerView = UIView()
     let titleLabel = UILabel()
- 
+    
+    //reminder
+    let remindSwitchButton = UISwitch()
+    private var selectedTime: Date?
+    
+    //cell裡的物件
+    let datePicker = UIDatePicker()
+    
+    
     let tableView = UITableView()
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -70,12 +78,45 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    @objc func remindSituation(_ sender: UISwitch) {
-//        if sender.isOn {
-//
-//        } else {
-//
-//        }
+    @objc func remindCondition(_ sender: UISwitch) {
+        if sender.isOn {
+            //default（先清空，再設定）
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["notification"])
+            //開啟datePicker
+            datePicker.isHidden = false
+            
+            //設定通知內容
+            let content = UNMutableNotificationContent()
+            content.title = "MoodApp"
+            content.body = "Don't forget to record your day ☺️"
+            content.badge = 1
+            content.sound = UNNotificationSound.default
+            
+            //設定通知時間 (把date轉成DateComponents)
+            print(self.selectedTime)
+            let calendar = Calendar.current
+            let selectedDateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: selectedTime ?? Date())
+            print(selectedDateComponents)
+            //設定通知引信
+            let trigger = UNCalendarNotificationTrigger(dateMatching: selectedDateComponents, repeats: false)
+            //設定通知要求
+            let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
+            //向裝置發送要求
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+                if let error = error {
+                    print("發送通知失敗： \(error)")
+                } else {
+                    print("成功建立通知")
+                }
+            })
+            
+        } else {
+            print("Close Reminder")
+            //關閉通知
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["notification"])
+            //關datePicker
+            datePicker.isHidden = true
+        }
 
     }
     
@@ -84,6 +125,14 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         print("datePick!")
         // 在這裡處理選擇的時間
         // 可以進行相關邏輯處理或將選擇的時間儲存起來
+        self.selectedTime = selectedTime
+        
+        // datePicker一改變，且在switchButton是打開的狀況，就要“再發一次通知”
+        if remindSwitchButton.isOn{
+            remindCondition(remindSwitchButton)
+        }else{
+            print("not on yet")
+        }
     }
     
     @objc func languageButtonTapped(_ sender: UIButton) {
@@ -181,10 +230,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             ])
             
             //右側按鈕(switch)
-            let remindSwitchButton = UISwitch()
+//            let remindSwitchButton = UISwitch()
             remindSwitchButton.isOn = false
             cell.addSubview(remindSwitchButton)
-            remindSwitchButton.addTarget(self, action: #selector(remindSituation), for: .valueChanged)
+            remindSwitchButton.addTarget(self, action: #selector(remindCondition), for: .valueChanged)
             
             remindSwitchButton.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
@@ -193,9 +242,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             ])
             
         //下方button(datePicker?)
-            let datePicker = UIDatePicker()
+//            let datePicker = UIDatePicker()
             datePicker.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             datePicker.datePickerMode = .time
+            datePicker.isHidden = true //default關
             //最大時間
             let calendar = Calendar.current
             let maxTime = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: Date())// 最大時間為當天的 23:59:59

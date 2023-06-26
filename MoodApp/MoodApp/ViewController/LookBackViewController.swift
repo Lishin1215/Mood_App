@@ -137,7 +137,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         ])
         
         //keepRecord
-        keepRecordLabel.text = "Keep recording to unlock more features!"
+        keepRecordLabel.text = "Add 10 photos to unlock more features!"
         keepRecordLabel.font = UIFont.boldSystemFont(ofSize: 15)
         keepRecordLabel.textColor = .darkGray
         containerView.addSubview(keepRecordLabel)
@@ -153,7 +153,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     
     
     func isOverTenPhoto() -> Bool { //使用時機：fetch完data，才做判斷
-        if photoArray.count >= 10 {
+        if photoArray.count >= 5 {
             scrollView.isHidden = false
             keepRecordLabel.isHidden = true
             return true
