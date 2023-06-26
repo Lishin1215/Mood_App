@@ -466,7 +466,15 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             return 150
         }
     }
-    
+  
+
+    //Button從中間對齊，再往兩邊設定
+    func leadingDistanceByIndex(index: Int, imageWidth: CGFloat, space: CGFloat) -> CGFloat {
+        let viewWidth = view.frame.width
+        let distanceRelativeToCenter = CGFloat(index-2)*(imageWidth + space) - imageWidth/2
+        let leadingDistance = (viewWidth/2) + distanceRelativeToCenter
+        return CGFloat(leadingDistance)
+    }
     
     
 //MARK: UITableView DataSource
@@ -497,7 +505,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                     button.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 50),
                     button.widthAnchor.constraint(equalToConstant: 38),
                     button.heightAnchor.constraint(equalTo: button.widthAnchor),
-                    button.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: CGFloat(40 + (50 * index))),
+                    //呼叫leadingDistanceByIndex，算出leading距離
+                    button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingDistanceByIndex(index: index, imageWidth: 38, space: 18))
                 ])
                 moodButtonArray.append(button)
             }
