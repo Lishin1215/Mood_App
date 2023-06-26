@@ -174,6 +174,70 @@
             </objects>
             <point key="canvasLocation" x="438.93129770992363" y="345.77464788732397"/>
         </scene>
+        <!--Login Page View Controller-->
+        <scene sceneID="p0X-OS-Yya">
+            <objects>
+                <viewController id="ebP-UZ-3B1" customClass="LoginPageViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h0F-Sa-Onz">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image 8" translatesAutoresizingMaskIntoConstraints="NO" id="CB9-Ba-MkT">
+                                <rect key="frame" x="161.66666666666666" y="169" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="OUu-ff-3gd"/>
+                                    <constraint firstAttribute="width" constant="70" id="UoA-ct-O66"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image 25" translatesAutoresizingMaskIntoConstraints="NO" id="q2X-tQ-dsP">
+                                <rect key="frame" x="83" y="443" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="Tvg-9c-4W8"/>
+                                    <constraint firstAttribute="height" constant="70" id="hgJ-E7-fXn"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image 13" translatesAutoresizingMaskIntoConstraints="NO" id="OD6-wc-EXJ">
+                                <rect key="frame" x="288" y="293" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="ZII-0k-mFT"/>
+                                    <constraint firstAttribute="height" constant="70" id="rI4-p7-o8r"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image 7" translatesAutoresizingMaskIntoConstraints="NO" id="wpS-MJ-zWf">
+                                <rect key="frame" x="35" y="293" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="1qD-Hg-yhk"/>
+                                    <constraint firstAttribute="height" constant="70" id="BQO-ws-8Oh"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image 22" translatesAutoresizingMaskIntoConstraints="NO" id="Qaa-a9-cbn">
+                                <rect key="frame" x="240" y="443" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="95X-dU-irp"/>
+                                    <constraint firstAttribute="width" constant="70" id="VPO-lC-nrW"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sWz-Wx-pFd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CB9-Ba-MkT" firstAttribute="top" secondItem="sWz-Wx-pFd" secondAttribute="top" constant="110" id="1bw-mv-FNf"/>
+                            <constraint firstItem="wpS-MJ-zWf" firstAttribute="top" secondItem="sWz-Wx-pFd" secondAttribute="top" constant="234" id="674-ii-biC"/>
+                            <constraint firstItem="wpS-MJ-zWf" firstAttribute="leading" secondItem="sWz-Wx-pFd" secondAttribute="leading" constant="35" id="6DG-tI-UfM"/>
+                            <constraint firstItem="CB9-Ba-MkT" firstAttribute="centerX" secondItem="h0F-Sa-Onz" secondAttribute="centerX" id="HRO-rB-hD5"/>
+                            <constraint firstItem="sWz-Wx-pFd" firstAttribute="trailing" secondItem="OD6-wc-EXJ" secondAttribute="trailing" constant="35" id="I5g-cI-fEe"/>
+                            <constraint firstItem="q2X-tQ-dsP" firstAttribute="top" secondItem="wpS-MJ-zWf" secondAttribute="bottom" constant="80" id="b8G-5z-oed"/>
+                            <constraint firstItem="sWz-Wx-pFd" firstAttribute="trailing" secondItem="Qaa-a9-cbn" secondAttribute="trailing" constant="83" id="eKA-h5-CXv"/>
+                            <constraint firstItem="OD6-wc-EXJ" firstAttribute="top" secondItem="sWz-Wx-pFd" secondAttribute="top" constant="234" id="sme-lC-LiR"/>
+                            <constraint firstItem="Qaa-a9-cbn" firstAttribute="top" secondItem="OD6-wc-EXJ" secondAttribute="bottom" constant="80" id="t7o-hq-ErV"/>
+                            <constraint firstItem="q2X-tQ-dsP" firstAttribute="leading" secondItem="sWz-Wx-pFd" secondAttribute="leading" constant="83" id="y3d-vA-0zQ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5rR-ng-NZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1944" y="1233"/>
+        </scene>
         <!--Look Back-->
         <scene sceneID="x2F-g8-04r">
             <objects>
@@ -220,6 +284,11 @@
         <image name="book" catalog="system" width="128" height="99"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="house" catalog="system" width="128" height="104"/>
+        <image name="image 13" width="100" height="100"/>
+        <image name="image 22" width="100" height="100"/>
+        <image name="image 25" width="100" height="100"/>
+        <image name="image 7" width="108" height="108"/>
+        <image name="image 8" width="108" height="100"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
