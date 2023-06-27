@@ -54,9 +54,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
 
+    
+    //＊＊＊設定打開時需要輸入密碼
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+        
+//        if StorageManager.shared.fetchPassword() != nil {
+//
+//            //先拿畫面的storyboard
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            if let passwordVC = storyboard.instantiateViewController(withIdentifier: "PasswordVC") as? PasswordViewController {
+//                self.window?.rootViewController = passwordVC
+//                self.window?.makeKeyAndVisible()
+//            }
+//
+//        }
+            
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

@@ -73,14 +73,17 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @objc func passwordCondition(_ sender: UISwitch) {
         if sender.isOn {
-            print("oh yeah")
-            //segue到password VC
-            //segueVC.titleLabel = "Enter your new PIN"
-            //進入app時，“會”跳出passwordVC
-        } else {
-            print("oh no")
-            //delete Password，進入app時，“不會”跳出passwordVC
             
+            //default清空原密碼
+            StorageManager.shared.deletePassword()
+            //push到password VC
+            if let passwordVC = storyboard?.instantiateViewController(withIdentifier: "PasswordVC") as? PasswordViewController {
+                navigationController?.pushViewController(passwordVC, animated: true)
+            }
+        } else {
+            
+            //delete Password，進入app時，“不會”跳出passwordVC
+            StorageManager.shared.deletePassword()
         }
     }
     

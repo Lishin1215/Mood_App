@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nPs-9N-e9M">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qgO-YG-Jjy">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -59,7 +59,7 @@
         <!--Home View Controller-->
         <scene sceneID="wkj-Ct-Swp">
             <objects>
-                <viewController id="mj1-xZ-Vc8" customClass="HomeViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeVC" id="mj1-xZ-Vc8" customClass="HomeViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E2s-0A-T1k">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -241,7 +241,7 @@
         <!--Password View Controller-->
         <scene sceneID="DaK-la-qX5">
             <objects>
-                <viewController id="nPs-9N-e9M" customClass="PasswordViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PasswordVC" id="nPs-9N-e9M" customClass="PasswordViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vyR-xL-gER">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -257,11 +257,10 @@
                                     <constraint firstAttribute="width" constant="60" id="Pjw-ME-Xjd"/>
                                     <constraint firstAttribute="height" constant="50" id="ede-KP-23j"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="0">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="0"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="gwv-4E-fNO"/>
                                 </connections>
@@ -273,11 +272,10 @@
                                     <constraint firstAttribute="height" constant="50" id="5YX-Ne-mgh"/>
                                     <constraint firstAttribute="width" constant="60" id="mUu-C2-18p"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="1">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="1"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="En1-MK-cn8"/>
                                 </connections>
@@ -289,11 +287,10 @@
                                     <constraint firstAttribute="width" constant="60" id="Nvw-5O-YUE"/>
                                     <constraint firstAttribute="height" constant="50" id="bZY-ab-1au"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="2">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="2"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="iQu-ZX-wsq"/>
                                 </connections>
@@ -305,11 +302,10 @@
                                     <constraint firstAttribute="width" constant="60" id="OGd-DU-GQ5"/>
                                     <constraint firstAttribute="height" constant="50" id="YkL-b6-JF8"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="3">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="3"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="2Jn-aK-wNx"/>
                                 </connections>
@@ -321,11 +317,10 @@
                                     <constraint firstAttribute="height" constant="50" id="8pp-kg-Bdy"/>
                                     <constraint firstAttribute="width" constant="60" id="lAp-GV-EQl"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="4">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="4"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="wdy-2i-PkP"/>
                                 </connections>
@@ -337,11 +332,10 @@
                                     <constraint firstAttribute="width" constant="60" id="0R5-eD-Dee"/>
                                     <constraint firstAttribute="height" constant="50" id="a2A-tu-54h"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="5">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="5"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="J9F-d0-Rir"/>
                                 </connections>
@@ -353,11 +347,10 @@
                                     <constraint firstAttribute="height" constant="50" id="bJc-mC-YFg"/>
                                     <constraint firstAttribute="width" constant="60" id="u27-yv-cyQ"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="6">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="6"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="O4O-ae-wHl"/>
                                 </connections>
@@ -369,11 +362,10 @@
                                     <constraint firstAttribute="height" constant="50" id="naS-PF-Phi"/>
                                     <constraint firstAttribute="width" constant="60" id="r7g-t9-Xy2"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="7">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="7"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="xwV-Yh-eof"/>
                                 </connections>
@@ -385,11 +377,10 @@
                                     <constraint firstAttribute="width" constant="60" id="KTH-zl-kJd"/>
                                     <constraint firstAttribute="height" constant="50" id="MSz-96-u3R"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="8">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="8"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="Q5u-DW-t24"/>
                                 </connections>
@@ -401,11 +392,10 @@
                                     <constraint firstAttribute="width" constant="60" id="SF6-G6-5TX"/>
                                     <constraint firstAttribute="height" constant="50" id="u4e-4a-Sk9"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="9">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="32"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="9"/>
                                 <connections>
                                     <action selector="enterPassword:" destination="nPs-9N-e9M" eventType="touchUpInside" id="gZo-R7-NmA"/>
                                 </connections>
@@ -418,8 +408,11 @@
                                     <constraint firstAttribute="height" constant="50" id="fWs-z4-rdu"/>
                                 </constraints>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.backward" catalog="system" title=""/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="" image="arrowshape.backward" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteTapped:" destination="nPs-9N-e9M" eventType="touchUpInside" id="GLL-2m-jrd"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owe-oI-CWQ">
                                 <rect key="frame" x="96.666666666666686" y="236" width="200" height="21"/>
@@ -570,7 +563,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLi-ql-IsU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3280.1526717557249" y="1209.8591549295775"/>
+            <point key="canvasLocation" x="-2491" y="368"/>
         </scene>
         <!--Look Back-->
         <scene sceneID="x2F-g8-04r">

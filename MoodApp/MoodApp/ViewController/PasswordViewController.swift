@@ -10,7 +10,8 @@ import UIKit
 class PasswordViewController: UIViewController {
 
     private var enter: String = ""
-//    private var newPassword: String = ""
+    private var newPassword: String = ""
+    private var confirmPassword: String = ""
     
     @IBOutlet var numButtonArray: [UIButton]!
     @IBOutlet var titleLabel: UILabel!
@@ -22,11 +23,35 @@ class PasswordViewController: UIViewController {
     @IBOutlet weak var colorImageView: UIImageView!
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //hide tabBar
+        tabBarController?.tabBar.isHidden = true
+        
+        // Hide the back button in the navigation bar
+        navigationItem.hidesBackButton = true
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // make tab bar appear again
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        titleLabel.text = "Enter PIN"
+        
+        if StorageManager.shared.fetchPassword() == nil {
+            //沒有密碼 --> 設定密碼
+            titleLabel.text = "Enter your new PIN"
+        } else  {
+            titleLabel.text = "Enter PIN"
+        }
+        
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         
@@ -44,7 +69,7 @@ class PasswordViewController: UIViewController {
             colorImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5)
         ])
         
-    // 计算标签之间的水平间距
+        // 计算标签之间的水平间距
         let spacing: CGFloat = view.frame.width / 7
         
         // 遍历数组中的每个标签
@@ -74,47 +99,66 @@ class PasswordViewController: UIViewController {
 
     //輸入的字串相加
     @IBAction func enterPassword(_ sender: UIButton) {
-        //if（未設密碼）StorageManager.shared.fetchPassword == nil
-        // 按完四個字，先存到某個變數裡 newPassword.append(enter)/imageShow()
-        if enter.count != 4 {
-            if let inputNumber = sender.currentTitle {
-                //字串相加
-//                newPassword.append(inputNumber)
+        //三種情況
+        if StorageManager.shared.fetchPassword() == nil {
+            //沒有密碼 --> 設定密碼
+            if newPassword.count != 4 { //設新密碼
+                if let inputNumber = sender.currentTitle {
+                    //字串相加
+                    newPassword.append(inputNumber)
+                }
+                imageShow(currentPassword: newPassword)
+                
+            } else if newPassword.count == 4 { //進入confirmPassword階段
+                if let inputNumber = sender.currentTitle {
+                    //字串相加
+                    confirmPassword.append(inputNumber)
+                }
+                imageShow(currentPassword: confirmPassword)
+            }
+                
+        } else { // 一般狀況進入(已設密碼）
+            //密碼長度等於4，就不能再進入if
+            if enter.count != 4 {
+                if let inputNumber = sender.currentTitle {
+                    //字串相加
+                    enter.append(inputNumber)
+                }
+                imageShow(currentPassword: enter)
             }
         }
-        imageShow()
-        
-        // 按完四個字，confirmNewPassword()
-        // 第一次不用，第二次才需要
-        
-        
-        //else 一般狀況進入(已設密碼）（跳出app後再進來）
-        //密碼長度不等於4
-        if enter.count != 4 {
-            if let inputNumber = sender.currentTitle {
-                //字串相加
-                enter.append(inputNumber)
-            }
-        }
-        imageShow()
     }
     
+    
     @IBAction func deleteTapped(_ sender: UIButton) {
-        //有東西就可以delete
-        if enter.count != 0 {
-            enter.removeLast()
+        //三種情況
+        if StorageManager.shared.fetchPassword() == nil { //沒有密碼
+            if (1...3).contains(newPassword.count) { //設密碼（1-3個數字可以按刪除鍵）
+                newPassword.removeLast()
+                //改變上方點點狀態
+                imageShow(currentPassword: newPassword)
+                
+            } else if confirmPassword.count != 0 { //confirmPassword階段
+                confirmPassword.removeLast()
+                //改變上方點點狀態
+                imageShow(currentPassword: confirmPassword)
+            }
+        } else {
+            if enter.count != 0 {
+                enter.removeLast()
+                //改變上方點點狀態
+                imageShow(currentPassword: enter)
+            }
         }
-        //改變上方點點狀態
-        imageShow()
     }
     
     
    //判斷密碼輸入到第幾個並顯示圖片
-    func imageShow() {
-        switch enter.count {
+    func imageShow(currentPassword: String) {
+        switch currentPassword.count {
         case 1:
             fillImageView[0].isHidden = false
-            badgeImageView[0].isHidden = true
+
             for index in 1...3 {
                 fillImageView[index].isHidden = true
             }
@@ -124,13 +168,13 @@ class PasswordViewController: UIViewController {
                     fillImageView[index].isHidden = true
                 } else {
                     fillImageView[index].isHidden = false
-                    badgeImageView[index].isHidden = true
+
                 }
             }
         case 3:
             for index in 0...2 {
                 fillImageView[index].isHidden = false
-                badgeImageView[index].isHidden = true
+
             }
                 fillImageView[3].isHidden = true
         case 4:
@@ -138,12 +182,26 @@ class PasswordViewController: UIViewController {
                 fillImageView[index].isHidden = false
             }
             
-            //if (已設密碼）StorageManager.shared.fetchPassword != nil
-            //檢查密碼是否正確
-//            checkPassword()
             
-            //else reset()
-            //titleLabel.text = "Confirm your PIN"
+            // 已設密碼
+            if StorageManager.shared.fetchPassword() != nil {
+                
+                //檢查密碼是否正確
+                checkPassword()
+                
+            } else { //未有密碼
+                
+                if confirmPassword.count == 4 { //去判斷是否等於newPassword
+                    confirmNewPassword()
+                } else { //要進入confirmPassword的階段
+                    reset()
+                    titleLabel.text = "Confirm your PIN"
+                    titleLabel.textAlignment = .center
+                    titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+                    
+                }
+            }
+            
         default:
             reset()
         }
@@ -151,61 +209,93 @@ class PasswordViewController: UIViewController {
     
     
     
-//    func checkPassword () {
-//        if enter == password {
-//            //perform segue到homePage
+    func checkPassword () {
+        if enter == StorageManager.shared.fetchPassword() {
+            
+            //reset畫面
+            print("success")
+            self.reset()
+//            //push(切換）到homePage
+
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            if let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeVC") as? HomeViewController {
+//                navigationController?.pushViewController(homeVC, animated: true)
 //
-//            //reset畫面
-//            self.reset()
-//        } else {
-//            subtitleLabel.text = "PIN does not match"
-//    subtitleLabel.textAlignment = .center
-//            subtitleLabel.font = UIFont.systemFont(ofSize: 15)
-//
-//            //reset畫面
-//            self.reset()
-//            subtitleLabel.isHidden = false
-//            subtitleLabel.text = "PIN does not match"
-//        }
-//    }
-//
+//            }
+            
+        } else {
+            subtitleLabel.text = "PIN does not match"
+            subtitleLabel.textAlignment = .center
+            subtitleLabel.font = UIFont.systemFont(ofSize: 15)
+            subtitleLabel.textColor = .brown
+
+            //reset畫面
+            self.reset()
+            subtitleLabel.isHidden = false
+            subtitleLabel.text = "PIN does not match"
+            subtitleLabel.textColor = .brown
+        }
+    }
+
     
-//    func confirmNewPassword() {
-//        if enter == newPassword {
-//            //設定完成跳alert ("PIN has been set")
-//
-//              //寫入coreData
-//                StorageManager.shared.setPassword
-//
-//            //newPassword = "" (變回default)
-//
-//            //reset畫面
-//            self.reset()
-//
-            //跳回settingPage
-//
-//
-//        } else {
-//            subtitleLabel.text = "PIN does not match"
-//            subtitleLabel.font = UIFont.systemFont(ofSize: 15)
-//
-//            //reset畫面
-//            self.reset()
-//            //但還是要有錯誤訊息
-//            subtitleLabel.isHidden = false
-//            subtitleLabel.text = "PIN does not match"
-//        }
-//    }
+    func confirmNewPassword() {
+        if confirmPassword == newPassword {
+            
+            //設定完成跳alert ("PIN has been set")
+            let controller = UIAlertController(title: "😺👍🥳", message: "PIN has been set", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default) { (_) in
+                //寫入coreData
+                StorageManager.shared.setPassword(newPasscode: self.newPassword)
+
+                // 變回default
+                self.newPassword = ""
+                self.confirmPassword = ""
+
+                //reset畫面
+                self.reset()
+
+                //跳回settingPage
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+            controller.addAction(action)
+            present(controller, animated: true, completion: nil)
+            
+
+        } else {
+            subtitleLabel.text = "PIN does not match"
+            subtitleLabel.textAlignment = .center
+            subtitleLabel.font = UIFont.systemFont(ofSize: 15)
+            subtitleLabel.textColor = .brown
+            
+            // 變回default
+            newPassword = ""
+            confirmPassword = ""
+            
+            //reset畫面
+            self.reset()
+            
+            //回到newPassword page （因為newPassword有清空，系統會知道現在要input newPassword)
+            titleLabel.text = "Enter your new PIN"
+            
+            //但還是要有錯誤訊息
+            subtitleLabel.isHidden = false
+            subtitleLabel.textAlignment = .center
+            subtitleLabel.text = "PIN does not match"
+            subtitleLabel.textColor = .brown
+        }
+    }
     
     
     //密碼輸入完畢＆載入時，畫面會重置
     func reset() {
-        //有圖案先關掉
+        //有圖案先關掉，放回原本圖案
         for index in 0...3 {
             fillImageView[index].isHidden = true
+            badgeImageView[index].isHidden = false
         }
         enter = ""
-        titleLabel.text = "Enter PIN"
+
         subtitleLabel.isHidden = true
     }
     

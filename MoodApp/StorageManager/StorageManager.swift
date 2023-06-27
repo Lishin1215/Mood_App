@@ -35,7 +35,7 @@ class StorageManager {
 
  //-----------------------------------
     
-    // Get personalInfo from the database
+    
     // 取得密碼
     func fetchPassword() -> String? {
         
@@ -54,7 +54,7 @@ class StorageManager {
     }
     
     
-    //  Save password to the database
+    
     func setPassword(newPasscode: String) {
         
         let context = persistentContainer.viewContext
@@ -68,6 +68,7 @@ class StorageManager {
             let personalInfo = try context.fetch(fetchRequest).first ?? PersonalInfo(context: context)
             
             personalInfo.passcode = newPasscode
+            print(newPasscode)
             
             //最後存到coreData
             try context.save()
@@ -76,5 +77,25 @@ class StorageManager {
             print("Error setting passcode: \(error.localizedDescription)")
         }
     }
+    
+    
+    func deletePassword() {
+
+            let context = persistentContainer.viewContext
+
+            let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest()
+
+            do {
+                let personalInfo = try context.fetch(fetchRequest).first ?? PersonalInfo(context: context)
+
+                context.delete(personalInfo)
+
+                //最後保存變更
+                try context.save()
+
+            } catch {
+                print("Error setting passcode: (error.localizedDescription)")
+            }
+        }
     
 }
