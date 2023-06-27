@@ -19,6 +19,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     private var selectedTime: Date?
     
     //cell裡的物件
+    let passwordSwitchButton = UISwitch()
     let datePicker = UIDatePicker()
     
     
@@ -70,11 +71,16 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    @objc func passwordSituation(_ sender: UISwitch) {
+    @objc func passwordCondition(_ sender: UISwitch) {
         if sender.isOn {
             print("oh yeah")
+            //segue到password VC
+            //segueVC.titleLabel = "Enter your new PIN"
+            //進入app時，“會”跳出passwordVC
         } else {
             print("oh no")
+            //delete Password，進入app時，“不會”跳出passwordVC
+            
         }
     }
     
@@ -187,7 +193,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             ])
             
             //右側按鈕(switch)
-            let passwordSwitchButton = UISwitch()
+//            let passwordSwitchButton = UISwitch()
             passwordSwitchButton.isOn = false
             cell.addSubview(passwordSwitchButton)
             passwordSwitchButton.addTarget(self, action: #selector(passwordSituation), for: .valueChanged)

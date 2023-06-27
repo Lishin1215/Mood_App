@@ -9,7 +9,8 @@ import UIKit
 
 class PasswordViewController: UIViewController {
 
-    var enter: String = ""
+    private var enter: String = ""
+//    private var newPassword: String = ""
     
     @IBOutlet var numButtonArray: [UIButton]!
     @IBOutlet var titleLabel: UILabel!
@@ -32,6 +33,21 @@ class PasswordViewController: UIViewController {
 
     //輸入的字串相加
     @IBAction func enterPassword(_ sender: UIButton) {
+        //if（未設密碼）StorageManager.shared.fetchPassword == nil
+        // 按完四個字，先存到某個變數裡 newPassword.append(enter)/imageShow()
+        if enter.count != 4 {
+            if let inputNumber = sender.currentTitle {
+                //字串相加
+                newPassword.append(inputNumber)
+            }
+        }
+        imageShow()
+        
+        // 按完四個字，confirmNewPassword()
+        // 第一次不用，第二次才需要
+        
+        
+        //else 一般狀況進入(已設密碼）（跳出app後再進來）
         //密碼長度不等於4
         if enter.count != 4 {
             if let inputNumber = sender.currentTitle {
@@ -80,12 +96,18 @@ class PasswordViewController: UIViewController {
             for index in 0...3 {
                 fillImageView[index].isHidden = false
             }
+            
+            //if (已設密碼）StorageManager.shared.fetchPassword != nil
             //檢查密碼是否正確
             checkPassword()
+            
+            //else reset()
+            //titleLabel.text = "Confirm your PIN"
         default:
             reset()
         }
     }
+    
     
     
     func checkPassword () {
@@ -105,6 +127,35 @@ class PasswordViewController: UIViewController {
         }
     }
     
+    
+//    func confirmNewPassword() {
+//        if enter == newPassword {
+//            //設定完成跳alert ("PIN has been set")
+//
+//              //寫入coreData
+//                StorageManager.shared.setPassword
+//
+//            //newPassword = "" (變回default)
+//
+//            //reset畫面
+//            self.reset()
+//
+            //跳回settingPage
+//
+//
+//        } else {
+//            subtitleLabel.text = "PIN does not match"
+//            subtitleLabel.font = UIFont.systemFont(ofSize: 15)
+//
+//            //reset畫面
+//            self.reset()
+//            //但還是要有錯誤訊息
+//            subtitleLabel.isHidden = false
+//            subtitleLabel.text = "PIN does not match"
+//        }
+//    }
+    
+    
     //密碼輸入完畢＆載入時，畫面會重置
     func reset() {
         //有圖案先關掉
@@ -116,5 +167,9 @@ class PasswordViewController: UIViewController {
         subtitleLabel.isHidden = true
     }
     
+    
+    //第一次設定PIN密碼("Enter your new PIN" / "Confirm your PIN") (左下加上exit鍵）
+    //enter -> 打什麼都可以 / confirm -> 要跟enter的一模一樣 （錯的話要 subtitleLabel.text = "PIN does not match")
+    //設定完成跳alert ("PIN has been set")
 
 }
