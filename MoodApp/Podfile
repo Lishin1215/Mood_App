@@ -12,6 +12,7 @@ target 'MoodApp' do
   pod 'FirebaseStorage'
   pod 'FirebaseDatabase'
   pod 'FirebaseFunctions'
+  
 end
 
 
