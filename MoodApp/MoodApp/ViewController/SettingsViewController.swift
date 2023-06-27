@@ -196,7 +196,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 //            let passwordSwitchButton = UISwitch()
             passwordSwitchButton.isOn = false
             cell.addSubview(passwordSwitchButton)
-            passwordSwitchButton.addTarget(self, action: #selector(passwordSituation), for: .valueChanged)
+            passwordSwitchButton.addTarget(self, action: #selector(passwordCondition), for: .valueChanged)
             
             passwordSwitchButton.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([

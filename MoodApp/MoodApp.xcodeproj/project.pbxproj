@@ -63,8 +63,9 @@
 		5B0742E72A49D19A008F4C3D /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742E62A49D19A008F4C3D /* LoginPageViewController.swift */; };
 		5B0742E92A49E493008F4C3D /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742E82A49E493008F4C3D /* PasswordViewController.swift */; };
 		5B0742FA2A4AAFFA008F4C3D /* PesonalInfoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742F82A4AAFFA008F4C3D /* PesonalInfoModel.xcdatamodeld */; };
-		5B0742FE2A4AB0BA008F4C3D /* PersonalInfo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742FD2A4AB0BA008F4C3D /* PersonalInfo+CoreDataProperties copy.swift */; };
 		5B0743002A4AB0D7008F4C3D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742FF2A4AB0D7008F4C3D /* StorageManager.swift */; };
+		5B0743032A4AFF00008F4C3D /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0743012A4AFF00008F4C3D /* PersonalInfo+CoreDataClass.swift */; };
+		5B0743042A4AFF00008F4C3D /* PersonalInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0743022A4AFF00008F4C3D /* PersonalInfo+CoreDataProperties.swift */; };
 		ABDA7EE79C834A0F9A58A805 /* Pods_IntentsHandlerUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28760191C60BCCE33663AF9D /* Pods_IntentsHandlerUI.framework */; };
 		F2BF18FFFFFB557E610637D7 /* Pods_IntentsHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A13CE12175C2FDB027BA56 /* Pods_IntentsHandler.framework */; };
 /* End PBXBuildFile section */
@@ -155,8 +156,9 @@
 		5B0742E62A49D19A008F4C3D /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
 		5B0742E82A49E493008F4C3D /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		5B0742F92A4AAFFA008F4C3D /* PesonalInfoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PesonalInfoModel.xcdatamodel; sourceTree = "<group>"; };
-		5B0742FD2A4AB0BA008F4C3D /* PersonalInfo+CoreDataProperties copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataProperties copy.swift"; sourceTree = "<group>"; };
 		5B0742FF2A4AB0D7008F4C3D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		5B0743012A4AFF00008F4C3D /* PersonalInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		5B0743022A4AFF00008F4C3D /* PersonalInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		99C541F7E4586F3CCEA0A91B /* Pods-IntentsHandler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntentsHandler.debug.xcconfig"; path = "Target Support Files/Pods-IntentsHandler/Pods-IntentsHandler.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -349,7 +351,8 @@
 		5B0742ED2A4AADED008F4C3D /* StorageManager */ = {
 			isa = PBXGroup;
 			children = (
-				5B0742FD2A4AB0BA008F4C3D /* PersonalInfo+CoreDataProperties copy.swift */,
+				5B0743012A4AFF00008F4C3D /* PersonalInfo+CoreDataClass.swift */,
+				5B0743022A4AFF00008F4C3D /* PersonalInfo+CoreDataProperties.swift */,
 				5B0742FF2A4AB0D7008F4C3D /* StorageManager.swift */,
 			);
 			name = StorageManager;
@@ -613,10 +616,10 @@
 			files = (
 				5B0742592A3C0ED8008F4C3D /* NewPageViewController.swift in Sources */,
 				5B0742AB2A481823008F4C3D /* SiriIntents.intentdefinition in Sources */,
-				5B0742FE2A4AB0BA008F4C3D /* PersonalInfo+CoreDataProperties copy.swift in Sources */,
 				5B0742812A4455F8008F4C3D /* MoodContentView.swift in Sources */,
 				5B0742572A3AAD44008F4C3D /* UIFont+Extension.swift in Sources */,
 				5B0742792A42A944008F4C3D /* LookBackViewController.swift in Sources */,
+				5B0743042A4AFF00008F4C3D /* PersonalInfo+CoreDataProperties.swift in Sources */,
 				5B0742AD2A481E6F008F4C3D /* RecordMoodIntentHandler.swift in Sources */,
 				5B0742512A3AA87E008F4C3D /* TabBarViewController.swift in Sources */,
 				5B07426C2A3EC5AF008F4C3D /* FireStoreManager.swift in Sources */,
@@ -626,6 +629,7 @@
 				5B07425C2A3C1E12008F4C3D /* NewPageCell.swift in Sources */,
 				5B0742602A3E1804008F4C3D /* CustomNavigationBar.swift in Sources */,
 				5B0742832A45EE7E008F4C3D /* SleepBarChartView.swift in Sources */,
+				5B0743032A4AFF00008F4C3D /* PersonalInfo+CoreDataClass.swift in Sources */,
 				5B0742732A41876C008F4C3D /* StatisticsViewController.swift in Sources */,
 				5B07423F2A39AC71008F4C3D /* HomeViewController.swift in Sources */,
 				5B07423B2A39AC71008F4C3D /* AppDelegate.swift in Sources */,

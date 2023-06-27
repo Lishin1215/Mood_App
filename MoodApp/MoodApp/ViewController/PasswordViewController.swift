@@ -19,14 +19,55 @@ class PasswordViewController: UIViewController {
     @IBOutlet var fillImageView: [UIImageView]!
     @IBOutlet var deleteButton: UIButton!
     
+    @IBOutlet weak var colorImageView: UIImageView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         titleLabel.text = "Enter PIN"
+        titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         
         subtitleLabel.isHidden = true
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.textColor = .brown
+        subtitleLabel.font = UIFont.systemFont(ofSize: 18)
+        
+        
+        colorImageView.backgroundColor = .orangeBrown
+        NSLayoutConstraint.activate([
+            colorImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            colorImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            colorImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            colorImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5)
+        ])
+        
+    // 计算标签之间的水平间距
+        let spacing: CGFloat = view.frame.width / 7
+        
+        // 遍历数组中的每个标签
+        for (index, label) in badgeImageView.enumerated() {
+            // 设置标签的约束
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: spacing * CGFloat(index + 2)).isActive = true
+        }
+        
+        
+        for (index, label) in fillImageView.enumerated() {
+            // 设置标签的约束
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: spacing * CGFloat(index + 2)).isActive = true
+        }
+    
+        for button in numButtonArray {
+            button.layer.cornerRadius = 5
+            button.clipsToBounds = true // 设置为 true，以确保按钮内容在圆角区域内显示
+        }
+        
+        deleteButton.layer.cornerRadius = 5
+        
        
     }
     
@@ -38,7 +79,7 @@ class PasswordViewController: UIViewController {
         if enter.count != 4 {
             if let inputNumber = sender.currentTitle {
                 //字串相加
-                newPassword.append(inputNumber)
+//                newPassword.append(inputNumber)
             }
         }
         imageShow()
@@ -99,7 +140,7 @@ class PasswordViewController: UIViewController {
             
             //if (已設密碼）StorageManager.shared.fetchPassword != nil
             //檢查密碼是否正確
-            checkPassword()
+//            checkPassword()
             
             //else reset()
             //titleLabel.text = "Confirm your PIN"
@@ -110,23 +151,24 @@ class PasswordViewController: UIViewController {
     
     
     
-    func checkPassword () {
-        if enter == password {
-            //perform segue到homePage
-
-            //reset畫面
-            self.reset()
-        } else {
-            subtitleLabel.text = "PIN does not match"
-            subtitleLabel.font = UIFont.systemFont(ofSize: 15)
-
-            //reset畫面
-            self.reset()
-            subtitleLabel.isHidden = false
-            subtitleLabel.text = "PIN does not match"
-        }
-    }
-    
+//    func checkPassword () {
+//        if enter == password {
+//            //perform segue到homePage
+//
+//            //reset畫面
+//            self.reset()
+//        } else {
+//            subtitleLabel.text = "PIN does not match"
+//    subtitleLabel.textAlignment = .center
+//            subtitleLabel.font = UIFont.systemFont(ofSize: 15)
+//
+//            //reset畫面
+//            self.reset()
+//            subtitleLabel.isHidden = false
+//            subtitleLabel.text = "PIN does not match"
+//        }
+//    }
+//
     
 //    func confirmNewPassword() {
 //        if enter == newPassword {

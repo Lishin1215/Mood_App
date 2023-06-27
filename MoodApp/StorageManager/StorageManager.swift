@@ -46,10 +46,10 @@ class StorageManager {
         
         do {
             let personalInfo = try context.fetch(fetchRequest) // [PersonalInfo]
-            return personalInfo.first.passcode // personalInfo.first --> [PersonalInfo]的first(第0項） --> PesonalInfo
+            return personalInfo.first?.passcode // personalInfo.first --> [PersonalInfo]的first(第0項） --> PesonalInfo
         } catch {
             print("Error fetching passcode: \(error.localizedDescription)")
-            return []
+            return nil
         }
     }
     
