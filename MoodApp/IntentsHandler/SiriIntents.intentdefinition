@@ -22,7 +22,7 @@
 			<key>INIntentConfigurable</key>
 			<true/>
 			<key>INIntentDescription</key>
-			<string>Help users to write down their moods by siri</string>
+			<string>Help users to write down their moods</string>
 			<key>INIntentDescriptionID</key>
 			<string>MbVox0</string>
 			<key>INIntentLastParameterTag</key>
