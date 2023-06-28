@@ -157,6 +157,10 @@
 		5B0743062A4B2404008F4C3D /* PersonalInfoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersonalInfoModel.xcdatamodel; sourceTree = "<group>"; };
 		5B0743082A4B245C008F4C3D /* PersonalInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		5B0743092A4B245C008F4C3D /* PersonalInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		5B0743102A4C0256008F4C3D /* MoodAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoodAppRelease.entitlements; sourceTree = "<group>"; };
+		5B0743112A4C19AE008F4C3D /* MoodAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoodAppDebug.entitlements; sourceTree = "<group>"; };
+		5B0743122A4C19BE008F4C3D /* IntentsHandler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntentsHandler.entitlements; sourceTree = "<group>"; };
+		5B0743132A4C19C3008F4C3D /* IntentsHandlerUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntentsHandlerUI.entitlements; sourceTree = "<group>"; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		99C541F7E4586F3CCEA0A91B /* Pods-IntentsHandler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntentsHandler.debug.xcconfig"; path = "Target Support Files/Pods-IntentsHandler/Pods-IntentsHandler.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +239,8 @@
 		5B0742392A39AC71008F4C3D /* MoodApp */ = {
 			isa = PBXGroup;
 			children = (
+				5B0743112A4C19AE008F4C3D /* MoodAppDebug.entitlements */,
+				5B0743102A4C0256008F4C3D /* MoodAppRelease.entitlements */,
 				5B0742ED2A4AADED008F4C3D /* StorageManager */,
 				5B07426A2A3EC554008F4C3D /* Manager */,
 				5B0742672A3EC32D008F4C3D /* Model */,
@@ -322,6 +328,7 @@
 		5B07428B2A4811BB008F4C3D /* IntentsHandler */ = {
 			isa = PBXGroup;
 			children = (
+				5B0743122A4C19BE008F4C3D /* IntentsHandler.entitlements */,
 				5B0742AA2A481822008F4C3D /* SiriIntents.intentdefinition */,
 				5B07428C2A4811BB008F4C3D /* IntentHandler.swift */,
 				5B0742AC2A481E6F008F4C3D /* RecordMoodIntentHandler.swift */,
@@ -335,6 +342,7 @@
 		5B0742962A4811BB008F4C3D /* IntentsHandlerUI */ = {
 			isa = PBXGroup;
 			children = (
+				5B0743132A4C19C3008F4C3D /* IntentsHandlerUI.entitlements */,
 				5B0742972A4811BB008F4C3D /* IntentViewController.swift */,
 				5B0742992A4811BB008F4C3D /* MainInterface.storyboard */,
 				5B07429C2A4811BB008F4C3D /* Info.plist */,
@@ -836,6 +844,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MoodApp/MoodAppDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 86Q9XSU8XB;
@@ -869,6 +878,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MoodApp/MoodAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -901,6 +911,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 99C541F7E4586F3CCEA0A91B /* Pods-IntentsHandler.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IntentsHandler/IntentsHandler.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 86Q9XSU8XB;
@@ -927,6 +938,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FB99FA6B73753DC3DD34465 /* Pods-IntentsHandler.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IntentsHandler/IntentsHandler.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -954,6 +966,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DF34C052038DBFAF323EBE9D /* Pods-IntentsHandlerUI.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IntentsHandlerUI/IntentsHandlerUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 86Q9XSU8XB;
@@ -980,6 +993,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 074EFFC73DDBEAA4F8CAE989 /* Pods-IntentsHandlerUI.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IntentsHandlerUI/IntentsHandlerUI.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
