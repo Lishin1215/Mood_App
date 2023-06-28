@@ -161,7 +161,19 @@ extension LoginPageViewController: ASAuthorizationControllerDelegate {
                 return
             }
             
-            print("@@@ +\(appleIDCredential.user)")
+            
+            
+            guard let appleAuthCode = appleIDCredential.authorizationCode else {
+                print("Unable to fetch authorization code")
+                return
+              }
+            // authCodeString是revoke帳號需要的憑證（跟uid不同），在SettingViewController刪除帳號時用到
+            guard let authCodeString = String(data: appleAuthCode, encoding: .utf8) else {
+                print("Unable to serialize auth code string from data: \(appleAuthCode.debugDescription)")
+                return
+              }
+            
+            print("@@@ +\(authCodeString)")
             //Initialize a "Firebase credential", including the user's full name.
             let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
             

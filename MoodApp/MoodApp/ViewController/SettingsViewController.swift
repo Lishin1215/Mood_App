@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import AuthenticationServices // Sign in with Apple 的主體框架
-import CryptoKit // 用來產生隨機字串 (Nonce) 的
+//import AuthenticationServices // Sign in with Apple 的主體框架
+//import CryptoKit // 用來產生隨機字串 (Nonce) 的
 import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -70,7 +70,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -30)
         ])
-
+        
+        //firebase auth
+        deleteUser()
     }
     
     
@@ -150,6 +152,28 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     @objc func languageButtonTapped(_ sender: UIButton) {
         print("I want Mandarin!")
         //present 一個view (可以選中英文）
+    }
+    
+    
+    func deleteUser() {// 先revoke憑證再delete帳號
+        
+        // 在刪除前我們要先撤銷apple的憑證，這個憑證可以從LoginPageViewController.swift的didCompleteWithAuthorization() function拿到（authCodeString）
+        // 到時候可能會需要一個變數存起來
+        Auth.auth().revokeToken(withAuthorizationCode: "c4ea07403617d49408eb05fa114b75851.0.rrwu.pyiCPxy3l6G0sMXqV40hSA")
+        
+        // 在revoke撤銷憑證好才能delete帳號
+        if let user = Auth.auth().currentUser{
+            user.delete { error in
+              if let error = error {
+                  print("error: didn't delete user")
+                // An error happened.
+              } else {
+                // Account deleted.
+                  print("delete succesfully")
+              }
+            }
+        }
+        
     }
     
 
