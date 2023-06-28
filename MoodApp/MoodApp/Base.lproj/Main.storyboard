@@ -107,6 +107,7 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="PAC-VW-1z7"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3SR-Vc-961">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -174,7 +175,7 @@
             </objects>
             <point key="canvasLocation" x="438.93129770992363" y="345.77464788732397"/>
         </scene>
-        <!--Login Page View Controller-->
+        <!--Item-->
         <scene sceneID="p0X-OS-Yya">
             <objects>
                 <viewController id="ebP-UZ-3B1" customClass="LoginPageViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -233,10 +234,11 @@
                             <constraint firstItem="q2X-tQ-dsP" firstAttribute="leading" secondItem="sWz-Wx-pFd" secondAttribute="leading" constant="83" id="y3d-vA-0zQ"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="fYs-ui-ZER"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rR-ng-NZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2182" y="1114"/>
+            <point key="canvasLocation" x="-2532" y="902"/>
         </scene>
         <!--Password View Controller-->
         <scene sceneID="DaK-la-qX5">
@@ -563,7 +565,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLi-ql-IsU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2491" y="368"/>
+            <point key="canvasLocation" x="-2531" y="118"/>
         </scene>
         <!--Look Back-->
         <scene sceneID="x2F-g8-04r">

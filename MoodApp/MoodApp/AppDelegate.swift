@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseAuth
 import IQKeyboardManagerSwift
 import UserNotifications
 
@@ -34,7 +35,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         })
         //代理UNUserNotificationCenterDelegate，這麼做可讓 App 在“前景”狀態下收到通知
         UNUserNotificationCenter.current().delegate = self
-                                                                
+                      
+        // signin with apple
+        // 目前有user（已登入） -> HomeVC
+        if let currentUser = Auth.auth().currentUser{
+            print("already log in")
+            let uid = currentUser.uid
+            print(uid)
+            FireStoreManager.shared.setUserId(userId: uid)
+            
+        // user == nil (未登入） -> LoginVC
+        } else{
+            print("not log in yet")
+            // 跳login Page
+            
+        }
         
         return true
     }

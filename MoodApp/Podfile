@@ -8,7 +8,7 @@ target 'MoodApp' do
   pod 'SwiftLint'
   pod 'FirebaseFirestore'
   pod 'FirebaseFirestoreSwift'
-  pod ‘FirebaseAuth’
+  pod 'FirebaseAuth'
   pod 'FirebaseStorage'
   pod 'FirebaseDatabase'
   pod 'FirebaseFunctions'

@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import AuthenticationServices // Sign in with Apple 的主體框架
+import CryptoKit // 用來產生隨機字串 (Nonce) 的
+import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-   
+    
     
     //header
     let headerView = UIView()
@@ -148,6 +151,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         print("I want Mandarin!")
         //present 一個view (可以選中英文）
     }
+    
+
     
     
 //height

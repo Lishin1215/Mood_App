@@ -23,11 +23,20 @@ class FireStoreManager {
     //delegate
     var delegate: FireStoreManagerDelegate?
     
+    //apple login
+    var userId: String = ""
+    
+    
+    
+    func setUserId(userId: String) {
+        self.userId = userId //把登入後的credential放入userId
+    }
+    
     
     //確定資料有上傳，才會觸發 handler closure
     func setData(date: Date, mood: String, sleepStart: String, sleepEnd: String, text: String, photo: String, handler: @escaping () -> Void) {
         let db = Firestore.firestore()
-        let ref = db.collection("users").document("123").collection("articles")  //id會隨user改變
+        let ref = db.collection("users").document(userId).collection("articles")  //id會隨user改變
 //        let id = ref.documentID
         
 //        let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
@@ -53,7 +62,7 @@ class FireStoreManager {
     
     func updateData() {
         let db = Firestore.firestore()
-        let updateRef = db.collection("users").document("123").collection("articles").document("09ahXKQg5JKLzku5WyPn")
+        let updateRef = db.collection("users").document(userId).collection("articles").document("09ahXKQg5JKLzku5WyPn")
         let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
 
         updateRef.updateData([
@@ -76,7 +85,7 @@ class FireStoreManager {
     
     func fetchData() {
         let db = Firestore.firestore()
-        let collectionRef = db.collection("users").document("123").collection("articles")  //db.collection("articles")
+        let collectionRef = db.collection("users").document(userId).collection("articles")  //db.collection("articles")
 
         // 使用 collectionRef 讀取集合中的所有文件
         collectionRef.getDocuments { (querySnapshot, error) in
@@ -129,7 +138,7 @@ class FireStoreManager {
 //statisticPage & lookBackPage要用到
     func fetchMonthlyData() {
         let db = Firestore.firestore()
-        let collectionRef = db.collection("users").document("123").collection("articles")
+        let collectionRef = db.collection("users").document(userId).collection("articles")
         
         let calendar = Calendar.current
         let currentDate = Date()

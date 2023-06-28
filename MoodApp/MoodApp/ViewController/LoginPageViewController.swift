@@ -126,6 +126,19 @@ class LoginPageViewController: UIViewController {
 //        }
 //    }
 
+    
+    //傳資料到newPage
+//    override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
+//        //確認傳遞要項無誤
+//        if segue.identifier == "newPageSegue" {
+////            if let dateComponents = sender as? DateComponents,
+//              if let segueVC = segue.destination as? HomeViewController {
+//                //將任意點到的product資料，傳給newPageVC
+//                segueVC.dateComponents = dateComponents
+//
+//            }
+//        }
+//    }
 }
 
 
@@ -147,8 +160,11 @@ extension LoginPageViewController: ASAuthorizationControllerDelegate {
                 print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
                 return
             }
+            
+            print("@@@ +\(appleIDCredential.user)")
             //Initialize a "Firebase credential", including the user's full name.
             let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
+            
             
             //Sign in with Firebase
             firebaseSignInWithApple(credential: credential)
@@ -197,14 +213,22 @@ extension LoginPageViewController {
                 print(error?.localizedDescription)
                 return
             }
-            // User is signed in to Firebase with Apple.
             
+            // User is signed in to Firebase with Apple.
+            // fireStore setData
+            if let user = authResult?.user {
+                let uid = user.uid
+                print("用戶的UID: \(uid)")
+                FireStoreManager.shared.setUserId(userId: uid)
+            }
+            
+            // 到homePage
+//            performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
+//            if let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeViewController {
+//                self.navigationController?.pushViewController(homeVC, animated: true)
+//            }
+            print("success")
         }
-    }
-    
-// get data
-    func getFirebaseUserInfo() {
-        
     }
     
 }
