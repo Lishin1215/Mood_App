@@ -7,10 +7,12 @@
 
 import UIKit
 import AuthenticationServices // Sign in with Apple 的主體框架
+import CryptoKit // 用來產生隨機字串 (Nonce) 的
+import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
 
 class LoginPageViewController: UIViewController {
 
-    
+    fileprivate var currentNonce: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,9 @@ class LoginPageViewController: UIViewController {
         authorizationAppleIDButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             authorizationAppleIDButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            authorizationAppleIDButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
+            authorizationAppleIDButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
+            authorizationAppleIDButton.heightAnchor.constraint(equalToConstant: 45),
+            authorizationAppleIDButton.widthAnchor.constraint(equalToConstant: 310)
         ])
     }
     
@@ -36,10 +40,20 @@ class LoginPageViewController: UIViewController {
     
     // 點擊 Sign In with Apple 按鈕後，請求授權
     @objc func pressSignInWithAppleButton() {
-        let authorizationAppleIDRequest: ASAuthorizationAppleIDRequest = ASAuthorizationAppleIDProvider().createRequest()
-        authorizationAppleIDRequest.requestedScopes = [.fullName, .email]
         
-        let controller = ASAuthorizationController(authorizationRequests: [authorizationAppleIDRequest])
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        
+        // ***Generate nonce for validation after authentication successful
+        self.currentNonce = randomNonceString()
+        
+        //*** Set the SHA256 hashed nonce to ASAuthorizationAppleIDRequest
+        request.nonce = sha256(currentNonce!)
+        
+        
+        let controller = ASAuthorizationController(authorizationRequests: [request])
         
         controller.delegate = self
         controller.presentationContextProvider = self //告知 ASAuthorizationController 該呈現在哪個 Window 上
@@ -47,31 +61,101 @@ class LoginPageViewController: UIViewController {
         controller.performRequests()
     }
     
+    
+    private func randomNonceString(length: Int = 32) -> String {
+        precondition(length > 0)
+        let charset: Array<Character> =
+            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remainingLength = length
+        
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+                }
+                return random
+            }
+            
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+                
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
+        }
+        
+        return result
+    }
+
+    
+    private func sha256(_ input: String) -> String {
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            return String(format: "%02x", $0)
+        }.joined()
+        
+        return hashString
+    }
+    
+    
+    //Token revocation
+//    private func deleteCurrentUser() {
+//        do {
+//            let nonce = try CryptoUtils.randomNonceString()
+//            currentNonce = nonce
+//            let appleIDProvider = ASAuthorizationAppleIDProvider()
+//            let request = appleIDProvider.createRequest()
+//            request.requestedScopes = [.fullName, .email]
+//            request.nonce = CryptoUtils.sha256(nonce)
+//
+//            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+//            authorizationController.delegate = self
+//            authorizationController.presentationContextProvider = self
+//            authorizationController.performRequests()
+//        } catch {
+//            // In the unlikely case that nonce generation fails, show error view.
+//            displayError(error)
+//        }
+//    }
 
 }
+
 
 extension LoginPageViewController: ASAuthorizationControllerDelegate {
     
     // 授權成功
-    // - Parameters:
-    //   - controller: _
-    //   - authorization: _
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            print("user: \(appleIDCredential.user)") // Apple 唯一識別碼，該值在同一個開發者帳號下所有的 App 都會是一樣的
-            print("fullName: \(String(describing: appleIDCredential.fullName))")
-            print("Email: \(String(describing: appleIDCredential.email))")
-            print("realUserStatus: \(String(describing: appleIDCredential.realUserStatus))")
-            print("Authorization Code: \(String(describing: appleIDCredential.authorizationCode))")
-            print("Identity Token: \(String(describing: appleIDCredential.identityToken))")
+            
+            guard let nonce = currentNonce else {
+                fatalError("Invalid state: A login callback was received, but no login request was sent.")
+            }
+            guard let appleIDToken = appleIDCredential.identityToken else {
+                print("Unable to fetch identity token")
+                return
+            }
+            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                return
+            }
+            //Initialize a "Firebase credential", including the user's full name.
+            let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
+            
+            //Sign in with Firebase
+            firebaseSignInWithApple(credential: credential)
         }
     }
     
     // 授權失敗
-    // - Parameters:
-    //   - controller: _
-    //   - error: _
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         
         switch (error) {
@@ -99,6 +183,28 @@ extension LoginPageViewController: ASAuthorizationControllerPresentationContextP
     // - Parameter controller: _
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return (self.view?.window)!
+    }
+    
+}
+
+//透過Credential與Firebase Auth進行串接
+extension LoginPageViewController {
+
+//sign in
+    func firebaseSignInWithApple(credential: AuthCredential) {
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if (error != nil) { //有錯誤
+                print(error?.localizedDescription)
+                return
+            }
+            // User is signed in to Firebase with Apple.
+            
+        }
+    }
+    
+// get data
+    func getFirebaseUserInfo() {
+        
     }
     
 }

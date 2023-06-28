@@ -236,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rR-ng-NZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1944" y="1233"/>
+            <point key="canvasLocation" x="-2182" y="1114"/>
         </scene>
         <!--Password View Controller-->
         <scene sceneID="DaK-la-qX5">
