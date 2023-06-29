@@ -254,8 +254,9 @@ class PasswordViewController: UIViewController {
                 //reset畫面
                 self.reset()
 
-                //跳回settingPage
-                self.navigationController?.popViewController(animated: true)
+                //跳回settingPage (用present的，所以要dismiss)
+//                self.navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true)
             }
             
             controller.addAction(action)

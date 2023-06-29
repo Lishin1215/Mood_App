@@ -45,7 +45,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 //把登入後的credential(uid)放入userId
                 FireStoreManager.shared.setUserId(userId: uid)
                 
-                
         // user == nil (未登入） -> LoginVC
             } else{
                 print("not log in yet")
@@ -56,7 +55,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         self.window?.rootViewController = loginVC
                         self.window?.makeKeyAndVisible()
                     }
-        
             }
         
         guard let _ = (scene as? UIWindowScene) else { return }

@@ -114,26 +114,6 @@ class LoginPageViewController: UIViewController {
         return hashString
     }
     
-    
-    //Token revocation
-//    private func deleteCurrentUser() {
-//        do {
-//            let nonce = try CryptoUtils.randomNonceString()
-//            currentNonce = nonce
-//            let appleIDProvider = ASAuthorizationAppleIDProvider()
-//            let request = appleIDProvider.createRequest()
-//            request.requestedScopes = [.fullName, .email]
-//            request.nonce = CryptoUtils.sha256(nonce)
-//
-//            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-//            authorizationController.delegate = self
-//            authorizationController.presentationContextProvider = self
-//            authorizationController.performRequests()
-//        } catch {
-//            // In the unlikely case that nonce generation fails, show error view.
-//            displayError(error)
-//        }
-//    }
 
     
     //傳資料到homePage
@@ -252,8 +232,6 @@ extension LoginPageViewController {
                 self?.performSegue(withIdentifier: "LoginSegue", sender: nil)
             }
             
-            
-
 //            let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //            if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "tabBarVC") as? TabBarViewController {
 //                self.navigationController?.pushViewController(tabBarVC, animated: true)

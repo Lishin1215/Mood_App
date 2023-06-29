@@ -92,7 +92,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             StorageManager.shared.deletePassword()
             //push到password VC
             if let passwordVC = storyboard?.instantiateViewController(withIdentifier: "PasswordVC") as? PasswordViewController {
-                navigationController?.pushViewController(passwordVC, animated: true)
+                //沒有navigation controller -> 不能push
+                passwordVC.modalPresentationStyle = .fullScreen
+                self.present(passwordVC, animated: true, completion: nil)
             }
         } else {
             
@@ -230,7 +232,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         } else if indexPath.row == 2 {
             return 150
         } else {
-            return 100
+            return 115
         }
     }
 
