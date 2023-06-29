@@ -200,42 +200,42 @@ class FireStoreManager {
     
     
     
-    //delete "document" & "subcollections
-    func deleteDocumentAndSubcollections(completion: @escaping (Error?) -> Void) {
-        let db = Firestore.firestore()
-        let documentRef = db.collection("users").document(userId)
-        
-        // 刪除文件本身
-        documentRef.delete { error in
-            if let error = error {
-                completion(error)
-                return
-            }
-            
-            // 遞迴刪除子集合
-            self.deleteSubcollections(collectionPath: "articles", documentRef: documentRef) { subcollectionError in
-                completion(subcollectionError)
-            }
-        }
-    }
-    
-    func deleteSubcollections(collectionPath: String, documentRef: DocumentReference, completion: @escaping (Error?) -> Void) {
-        documentRef.collection(collectionPath).getDocuments { querySnapshot, error in
-            guard let querySnapshot = querySnapshot else {
-                completion(error)
-                return
-            }
-            
-            let batch = documentRef.firestore.batch()
-            
-            for document in querySnapshot.documents {
-                let documentRef = documentRef.collection(collectionPath).document(document.documentID)
-                batch.deleteDocument(documentRef)
-            }
-            
-            batch.commit { batchError in
-                completion(batchError)
-            }
-        }
-    }
+//    //delete "document" & "subcollections
+//    func deleteDocumentAndSubcollections(completion: @escaping (Error?) -> Void) {
+//        let db = Firestore.firestore()
+//        let documentRef = db.collection("users").document(userId)
+//
+//        // 刪除文件本身
+//        documentRef.delete { error in
+//            if let error = error {
+//                completion(error)
+//                return
+//            }
+//
+//            // 遞迴刪除子集合
+//            self.deleteSubcollections(collectionPath: "articles", documentRef: documentRef) { subcollectionError in
+//                completion(subcollectionError)
+//            }
+//        }
+//    }
+//
+//    func deleteSubcollections(collectionPath: String, documentRef: DocumentReference, completion: @escaping (Error?) -> Void) {
+//        documentRef.collection(collectionPath).getDocuments { querySnapshot, error in
+//            guard let querySnapshot = querySnapshot else {
+//                completion(error)
+//                return
+//            }
+//
+//            let batch = documentRef.firestore.batch()
+//
+//            for document in querySnapshot.documents {
+//                let documentRef = documentRef.collection(collectionPath).document(document.documentID)
+//                batch.deleteDocument(documentRef)
+//            }
+//
+//            batch.commit { batchError in
+//                completion(batchError)
+//            }
+//        }
+//    }
 }

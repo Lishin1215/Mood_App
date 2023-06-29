@@ -7,6 +7,7 @@
 
 import UIKit
 import Intents
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -34,6 +35,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+    // signin with apple
+        // 目前有user（已登入） -> HomeVC
+            if let currentUser = Auth.auth().currentUser{
+                print("already log in")
+                let uid = currentUser.uid
+                print(uid)
+                //把登入後的credential(uid)放入userId
+                FireStoreManager.shared.setUserId(userId: uid)
+                
+                
+        // user == nil (未登入） -> LoginVC
+            } else{
+                print("not log in yet")
+                // 跳login Page
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
+                        
+                        self.window?.rootViewController = loginVC
+                        self.window?.makeKeyAndVisible()
+                    }
+        
+            }
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

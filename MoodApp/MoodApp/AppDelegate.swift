@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+//        //自己產生一個window
+//        window = UIWindow(frame: UIScreen.main.bounds)
+        
     //IQKeyboard
         IQKeyboardManager.shared.enable = true
         
@@ -37,42 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UNUserNotificationCenter.current().delegate = self
                      
         
-    // signin with apple
-        // 目前有user（已登入） -> HomeVC
-        if let currentUser = Auth.auth().currentUser{
-            print("already log in")
-            let uid = currentUser.uid
-            print(uid)
-            FireStoreManager.shared.setUserId(userId: uid)
-            
-            //跳Home page (tabBar)
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as? TabBarViewController {
-//                //執行segue
-//                let navigationController = self.window?.rootViewController as? UINavigationController
-//                navigationController?.pushViewController(tabBarVC, animated: true)
-//                self.window?.rootViewController = tabBarVC
-//                self.window?.makeKeyAndVisible()
-//            }
-            
-        // user == nil (未登入） -> LoginVC
-        } else{
-            print("not log in yet")
-            // 跳login Page
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
-                    
-                    //自己產生一個window
-                    
-                    self.window?.rootViewController = loginVC
-                    self.window?.makeKeyAndVisible()
-                }
-    
-        }
         
         return true
     }
-                                  
+      
+    
 //local notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping(UNNotificationPresentationOptions) -> Void) {
             
