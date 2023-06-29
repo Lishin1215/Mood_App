@@ -82,8 +82,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -30)
         ])
         
-        //firebase auth
-//        deleteUser()
     }
     
     
@@ -189,28 +187,37 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func deleteUser() {// ***先revoke憑證再delete帳號
         
-        // I. 在刪除前要先撤銷apple的憑證，這個憑證可以從LoginPageViewController.swift的didCompleteWithAuthorization() function拿到（authCodeString）
-        // 到時候可能會需要一個變數存起來
-        Auth.auth().revokeToken(withAuthorizationCode: self.authCode)
-        
-        
-        // II. 在revoke撤銷憑證好才能delete帳號
-        if let user = Auth.auth().currentUser{
-            user.delete { error in
-              if let error = error {
-                  print("error: didn't delete user")
-                // An error happened.
-              } else {
-                // Account deleted.
-                  print("delete succesfully")
-              }
+        //I. delete fireStore (其實應該沒有先後順序問題）
+        FireStoreManager.shared.deleteData {
+            
+            // II. 在刪除前要先撤銷apple的憑證，這個憑證可以從LoginPageViewController.swift的didCompleteWithAuthorization() function拿到（authCodeString）
+            // 到時候可能會需要一個變數存起來
+            Auth.auth().revokeToken(withAuthorizationCode: self.authCode)
+
+
+            // III. 在revoke撤銷憑證好才能delete帳號
+            if let user = Auth.auth().currentUser{
+                user.delete { error in
+                  if let error = error {
+                      print("error: didn't delete user")
+                    // An error happened.
+                  } else {
+                    // Account deleted.
+                      print("delete succesfully")
+                  }
+                }
+            }
+
+
+            //IV. 跳回login Page
+            if let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
+                loginVC.modalPresentationStyle = .fullScreen
+                self.present(loginVC, animated: true, completion: nil)
             }
         }
         
-        //III. delete fireStore
         
-        //IV. 跳回login Page
-        
+       
     }
     
 
