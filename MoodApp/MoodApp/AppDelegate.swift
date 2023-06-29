@@ -45,11 +45,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print(uid)
             FireStoreManager.shared.setUserId(userId: uid)
             
+            //跳Home page (tabBar)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as? TabBarViewController {
+                //執行segue
+                let navigationController = self.window?.rootViewController as? UINavigationController
+                navigationController?.pushViewController(tabBarVC, animated: true)
+//                self.window?.rootViewController = tabBarVC
+//                self.window?.makeKeyAndVisible()
+            }
+            
         // user == nil (未登入） -> LoginVC
         } else{
             print("not log in yet")
             // 跳login Page
-            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
+                    let navigationController = self.window?.rootViewController as? UINavigationController
+                    navigationController?.pushViewController(loginVC, animated: true)
+//                    self.window?.rootViewController = loginVC
+//                    self.window?.makeKeyAndVisible()
+                }
+    
         }
         
         return true

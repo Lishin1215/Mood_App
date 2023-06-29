@@ -136,18 +136,18 @@ class LoginPageViewController: UIViewController {
 //    }
 
     
-    //傳資料到newPage
-//    override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
-//        //確認傳遞要項無誤
-//        if segue.identifier == "newPageSegue" {
-////            if let dateComponents = sender as? DateComponents,
-//              if let segueVC = segue.destination as? HomeViewController {
-//                //將任意點到的product資料，傳給newPageVC
+    //傳資料到homePage
+    override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
+        //確認傳遞要項無誤
+        if segue.identifier == "loginSegue" {
+//            if let dateComponents = sender as? DateComponents,
+              if let segueVC = segue.destination as? TabBarViewController {
+                //將任意點到的product資料，傳給newPageVC
 //                segueVC.dateComponents = dateComponents
-//
-//            }
-//        }
-//    }
+
+            }
+        }
+    }
 }
 
 
@@ -234,7 +234,7 @@ extension LoginPageViewController {
 
 //sign in
     func firebaseSignInWithApple(credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
             if (error != nil) { //有錯誤
                 print(error?.localizedDescription)
                 return
@@ -245,14 +245,21 @@ extension LoginPageViewController {
             if let user = authResult?.user {
                 let uid = user.uid
                 print("用戶的UID: \(uid)")
+                //*** uid直接存到fireStore manager裡
                 FireStoreManager.shared.setUserId(userId: uid)
+                
+                // 到homePage (tabBar入口）
+                self?.performSegue(withIdentifier: "LoginSegue", sender: nil)
             }
             
-            // 到homePage
-//            performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
-//            if let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? HomeViewController {
-//                self.navigationController?.pushViewController(homeVC, animated: true)
+            
+
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "tabBarVC") as? TabBarViewController {
+//                self.navigationController?.pushViewController(tabBarVC, animated: true)
 //            }
+
+
             print("success")
         }
     }
