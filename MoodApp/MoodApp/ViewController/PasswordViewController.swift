@@ -215,13 +215,14 @@ class PasswordViewController: UIViewController {
             //reset畫面
             print("success")
             self.reset()
-//            //push(切換）到homePage
+            //push(切換）到homePage
 
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            if let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeVC") as? HomeViewController {
-//                navigationController?.pushViewController(homeVC, animated: true)
-//
-//            }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarVC") as? TabBarViewController {
+                tabBarVC.modalPresentationStyle = .fullScreen
+                present(tabBarVC, animated: true)
+
+            }
             
         } else {
             subtitleLabel.text = "PIN does not match"

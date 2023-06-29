@@ -275,6 +275,11 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             
         }
         
+        //如果sleep沒有任何資料 (跳出 manager，不往下執行）
+        if sleepStartArray.count == 0 {
+            return
+        }
+        
         // II. 計算平均時間
         averageBedTime = calculateAverageTime(timeStrings: sleepStartArray)
         averageWakeTime = calculateAverageTime(timeStrings: sleepEndArray)

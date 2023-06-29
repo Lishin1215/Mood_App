@@ -31,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
     }
     
+//第一次打開app執行
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -81,16 +82,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     //＊＊＊設定打開時需要輸入密碼
     func sceneWillEnterForeground(_ scene: UIScene) {
         
-//        if StorageManager.shared.fetchPassword() != nil {
-//
-//            //先拿畫面的storyboard
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            if let passwordVC = storyboard.instantiateViewController(withIdentifier: "PasswordVC") as? PasswordViewController {
-//                self.window?.rootViewController = passwordVC
-//                self.window?.makeKeyAndVisible()
-//            }
-//
-//        }
+        if StorageManager.shared.fetchPassword() != nil {
+
+            //先拿畫面的storyboard
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let passwordVC = storyboard.instantiateViewController(withIdentifier: "PasswordVC") as? PasswordViewController {
+                self.window?.rootViewController = passwordVC
+                self.window?.makeKeyAndVisible()
+            }
+
+        }
             
     }
 
