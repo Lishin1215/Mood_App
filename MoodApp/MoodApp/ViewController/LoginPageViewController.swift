@@ -149,9 +149,12 @@ extension LoginPageViewController: ASAuthorizationControllerDelegate {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
+            //I
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
             }
+            
+            //II
             guard let appleIDToken = appleIDCredential.identityToken else {
                 print("Unable to fetch identity token")
                 return
@@ -161,8 +164,7 @@ extension LoginPageViewController: ASAuthorizationControllerDelegate {
                 return
             }
             
-            
-            
+            //III
             guard let appleAuthCode = appleIDCredential.authorizationCode else {
                 print("Unable to fetch authorization code")
                 return
@@ -172,8 +174,10 @@ extension LoginPageViewController: ASAuthorizationControllerDelegate {
                 print("Unable to serialize auth code string from data: \(appleAuthCode.debugDescription)")
                 return
               }
-            
+            //用closure傳到settingsVC，點選“刪帳號”時要使用
             print("@@@ +\(authCodeString)")
+            
+            
             //Initialize a "Firebase credential", including the user's full name.
             let credential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
             

@@ -19,13 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        //IQKeyboard
+    //IQKeyboard
         IQKeyboardManager.shared.enable = true
         
-        //firebase
+    //firebase
         FirebaseApp.configure()
         
-        //local notification
+    //local notification
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {(granted, error) in
             if granted {
                 print("允許")
@@ -35,8 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         })
         //代理UNUserNotificationCenterDelegate，這麼做可讓 App 在“前景”狀態下收到通知
         UNUserNotificationCenter.current().delegate = self
-                      
-        // signin with apple
+                     
+        
+    // signin with apple
         // 目前有user（已登入） -> HomeVC
         if let currentUser = Auth.auth().currentUser{
             print("already log in")
@@ -53,7 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return true
     }
-                                                                
+                                  
+//local notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping(UNNotificationPresentationOptions) -> Void) {
             
             print("在前景收到通知...")

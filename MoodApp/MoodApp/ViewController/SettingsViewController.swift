@@ -24,6 +24,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     //cell裡的物件
     let passwordSwitchButton = UISwitch()
     let datePicker = UIDatePicker()
+    let languageButton = UIButton()
+    let deleteButton = UIButton()
     
     
     let tableView = UITableView()
@@ -72,7 +74,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         ])
         
         //firebase auth
-        deleteUser()
+//        deleteUser()
     }
     
     
@@ -151,17 +153,39 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @objc func languageButtonTapped(_ sender: UIButton) {
         print("I want Mandarin!")
+        //被點擊感
+        languageButton.alpha = languageButton.isHighlighted ? 0.5 : 1
         //present 一個view (可以選中英文）
+        
+        //點擊感消失
+        
+    }
+    
+    @objc func deleteAccountTapped(_ sender: UIButton) {
+        print("要確定齁")
+        
+        //跳alert --> confirm
+        let controller = UIAlertController(title: "Delete Account", message: "Are you sure to delete account?\nThis will permanentely erase your account.", preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.deleteUser()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        controller.addAction(deleteAction)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
     }
     
     
     func deleteUser() {// 先revoke憑證再delete帳號
         
-        // 在刪除前我們要先撤銷apple的憑證，這個憑證可以從LoginPageViewController.swift的didCompleteWithAuthorization() function拿到（authCodeString）
+        // I. 在刪除前要先撤銷apple的憑證，這個憑證可以從LoginPageViewController.swift的didCompleteWithAuthorization() function拿到（authCodeString）
         // 到時候可能會需要一個變數存起來
-        Auth.auth().revokeToken(withAuthorizationCode: "c4ea07403617d49408eb05fa114b75851.0.rrwu.pyiCPxy3l6G0sMXqV40hSA")
+        Auth.auth().revokeToken(withAuthorizationCode: "c6a02095983b740f083b54ab698f29b36.0.srwu.4VkS1UYarr51K39qMnb6PA")
         
-        // 在revoke撤銷憑證好才能delete帳號
+        
+        // II. 在revoke撤銷憑證好才能delete帳號
         if let user = Auth.auth().currentUser{
             user.delete { error in
               if let error = error {
@@ -173,6 +197,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
               }
             }
         }
+        
+        //III. 跳回login Page
         
     }
     
@@ -193,7 +219,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
 //MARK: UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        5
     }
     
     
@@ -299,7 +325,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             ])
             
             return cell
-        } else {
+        } else if indexPath.row == 3 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as?
                     SettingsCell
             else {fatalError("Could not create Cell")}
@@ -312,7 +338,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             ])
             
             //右側點選語言(button)
-            let languageButton = UIButton()
+//            let languageButton = UIButton()
             languageButton.setTitle("English", for: .normal)
             languageButton.setTitleColor(UIColor.pinkOrange, for: .normal)
             languageButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -324,6 +350,31 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             NSLayoutConstraint.activate([
                 languageButton.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor),
                 languageButton.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -30)
+            ])
+            
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as? SettingsCell
+            else { fatalError("Could not create Cell")}
+            
+            cell.setContainerViewTopAnchor(30)
+            
+            cell.contentLabel.isHidden = true
+            
+            //button
+//            let deleteButton = UIButton()
+            deleteButton.setTitle("Delete Account", for: .normal)
+            deleteButton.setTitleColor(.systemRed, for: .normal)
+            deleteButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            cell.addSubview(deleteButton)
+            
+            deleteButton.addTarget(self, action: #selector(deleteAccountTapped), for: .touchUpInside)
+            
+            
+            deleteButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                deleteButton.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
+                deleteButton.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
             ])
             
             return cell

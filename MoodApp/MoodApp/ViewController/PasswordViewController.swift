@@ -242,7 +242,7 @@ class PasswordViewController: UIViewController {
         if confirmPassword == newPassword {
             
             //設定完成跳alert ("PIN has been set")
-            let controller = UIAlertController(title: "😺👍🥳", message: "PIN has been set", preferredStyle: .alert)
+            let controller = UIAlertController(title: "Success🥳", message: "PIN has been set", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default) { (_) in
                 //寫入coreData
                 StorageManager.shared.setPassword(newPasscode: self.newPassword)
