@@ -10,9 +10,18 @@ import AuthenticationServices // Sign in with Apple 的主體框架
 import CryptoKit // 用來產生隨機字串 (Nonce) 的
 import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
 
+protocol LoginVCDelegate: AnyObject {
+    func didReceiveAuthCode(authCode: String)
+}
+
+
 class LoginPageViewController: UIViewController {
 
+    
     fileprivate var currentNonce: String?
+    
+    //delegate
+    weak var delegate: LoginVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,8 +183,9 @@ extension LoginPageViewController: ASAuthorizationControllerDelegate {
                 print("Unable to serialize auth code string from data: \(appleAuthCode.debugDescription)")
                 return
               }
-            //用closure傳到settingsVC，點選“刪帳號”時要使用
+            //用delegate傳到settingsVC (點選“刪帳號”時要使用)
             print("@@@ +\(authCodeString)")
+            self.delegate?.didReceiveAuthCode(authCode: authCodeString)
             
             
             //Initialize a "Firebase credential", including the user's full name.

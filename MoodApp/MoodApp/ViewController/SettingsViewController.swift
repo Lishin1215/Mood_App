@@ -13,6 +13,12 @@ import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
+    //傳過來的值(“刪除帳號”要用到）
+    var authCode: String = ""
+    
+    //delegate
+    let loginVC = LoginPageViewController()
+    
     //header
     let headerView = UIView()
     let titleLabel = UILabel()
@@ -33,6 +39,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //delegate
+        loginVC.delegate = self
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -178,11 +187,11 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    func deleteUser() {// 先revoke憑證再delete帳號
+    func deleteUser() {// ***先revoke憑證再delete帳號
         
         // I. 在刪除前要先撤銷apple的憑證，這個憑證可以從LoginPageViewController.swift的didCompleteWithAuthorization() function拿到（authCodeString）
         // 到時候可能會需要一個變數存起來
-        Auth.auth().revokeToken(withAuthorizationCode: "c6a02095983b740f083b54ab698f29b36.0.srwu.4VkS1UYarr51K39qMnb6PA")
+        Auth.auth().revokeToken(withAuthorizationCode: self.authCode)
         
         
         // II. 在revoke撤銷憑證好才能delete帳號
@@ -198,7 +207,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
         
-        //III. 跳回login Page
+        //III. delete fireStore
+        
+        //IV. 跳回login Page
         
     }
     
@@ -381,4 +392,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+}
+
+extension SettingsViewController: LoginVCDelegate {
+    func didReceiveAuthCode(authCode: String) {
+        
+        print("Successfully pass authCode from loginVC")
+        
+        self.authCode = authCode
+    }
 }
