@@ -54,8 +54,10 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     }
     
     
-    @objc func monthButtonTapped () {
-        
+    @objc func monthButtonTapped (_ sender: UIButton) {
+        print("呵呵")
+        //跳回statisticVC
+        //取得點擊的月份年份
     }
     
     

@@ -89,7 +89,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         if sender.isOn {
             
             //default清空原密碼
-            StorageManager.shared.deletePassword()
+            StorageManager.shared.setPassword(newPasscode: nil)
             //push到password VC
             if let passwordVC = storyboard?.instantiateViewController(withIdentifier: "PasswordVC") as? PasswordViewController {
                 //沒有navigation controller -> 不能push
@@ -99,7 +99,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             
             //delete Password，進入app時，“不會”跳出passwordVC
-            StorageManager.shared.deletePassword()
+            StorageManager.shared.setPassword(newPasscode: nil)
         }
     }
     
@@ -109,6 +109,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["notification"])
             //開啟datePicker
             datePicker.isHidden = false
+            
+            //selectedTime存到coreData
+            //避免selectedTime是nil，為了下一次開啟時不會抓到nil，不然datapicker/ switch會無法顯示
+            if self.selectedTime == nil{ //第一次打開&&沒有調時間，就還不會有selectedTime
+                self.selectedTime = Date()
+            }
+            StorageManager.shared.setReminderTime(newReminderTime: selectedTime)
             
             //設定通知內容
             let content = UNMutableNotificationContent()
@@ -142,7 +149,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             //關datePicker
             datePicker.isHidden = true
             //select time 清空
-            self.selectedTime = nil
+            StorageManager.shared.setReminderTime(newReminderTime: nil)
         }
 
     }
@@ -353,21 +360,17 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 datePicker.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
             ])
             
-//            if self.selectedTime != nil { //有選擇時間且沒關閉
-//                remindSwitchButton.isOn = true
-//                datePicker.isHidden = false
-//            } else {
-//                remindSwitchButton.isOn = false
-//                datePicker.isHidden = true
-//            }
+            // 先去判斷現在是否有設reminderTime （有 -> 打開 /沒有 -> 關）
+            if StorageManager.shared.fetchReminderTime() != nil { //有
+                remindSwitchButton.isOn = true
+                datePicker.isHidden = false
+                //設回“原本reminderTime”的時間
+                datePicker.setDate(StorageManager.shared.fetchReminderTime() ?? Date(), animated: true)
+            } else {
+                remindSwitchButton.isOn = false
+                datePicker.isHidden = true
+            }
             
-//            if remindSwitchButton.isOn == true {
-//                remindSwitchButton.isOn = true
-//                datePicker.isHidden = false
-//            } else {
-//                remindSwitchButton.isOn = false
-//                datePicker.isHidden = true
-//            }
             
             return cell
         } else if indexPath.row == 3 {

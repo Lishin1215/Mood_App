@@ -55,7 +55,7 @@ class StorageManager {
     
     
     
-    func setPassword(newPasscode: String) {
+    func setPassword(newPasscode: String?) {
         
         let context = persistentContainer.viewContext
         
@@ -79,23 +79,66 @@ class StorageManager {
     }
     
     
-    func deletePassword() {
-
-            let context = persistentContainer.viewContext
-
-            let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest()
-
-            do {
-                let personalInfo = try context.fetch(fetchRequest).first ?? PersonalInfo(context: context)
-
-                context.delete(personalInfo)
-
-                //最後保存變更
-                try context.save()
-
-            } catch {
-                print("Error setting passcode: (error.localizedDescription)")
-            }
+    // 取得reminderTime
+    func fetchReminderTime() -> Date? {
+        
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest() //拿到的會是"整個[PersonalInfo]"
+        
+        
+        do {
+            let personalInfo = try context.fetch(fetchRequest) // [PersonalInfo]
+            return personalInfo.first?.reminderTime  // personalInfo.first --> [PersonalInfo]的first(第0項） --> PesonalInfo
+        } catch {
+            print("Error fetching reminderTime: \(error.localizedDescription)")
+            return nil
         }
+    }
+    
+    
+    
+    func setReminderTime(newReminderTime: Date?) {
+        
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest()
+        
+        //setPassword有兩種情況 (1. 已經有密碼（改密碼)  2. 還沒有密碼
+        //情況1. 把現有的passcode拿下來並取代 --> context.fetch(fetchRequest).first
+        //情況2. fetch不到東西（nil)（因為沒密碼），就"新增"一個 PersonalInfo 放資料 --> PersonalInfo(context: context)
+        do {
+            let personalInfo = try context.fetch(fetchRequest).first ?? PersonalInfo(context: context)
+            
+            personalInfo.reminderTime = newReminderTime
+            print(newReminderTime)
+            
+            //最後存到coreData
+            try context.save()
+            
+        } catch {
+            print("Error setting reminderTime: \(error.localizedDescription)")
+        }
+    }
+    
+    
+//    func deletePassword() {
+//
+//            let context = persistentContainer.viewContext
+//
+//            let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest()
+//
+//            do {
+//                let personalInfo = try context.fetch(fetchRequest).first ?? PersonalInfo(context: context)
+//
+//                context.delete(personalInfo)
+//
+//                //最後保存變更
+//                try context.save()
+//
+//            } catch {
+//                print("Error setting passcode: (error.localizedDescription)")
+//            }
+//        }
     
 }
