@@ -64,6 +64,9 @@
 		5B07430B2A4B245C008F4C3D /* PersonalInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0743092A4B245C008F4C3D /* PersonalInfo+CoreDataProperties.swift */; };
 		5B07430E2A4B6AA5008F4C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */; };
 		5B07430F2A4B6AAF008F4C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */; };
+		5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */; };
+		5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */; };
+		5BD4D7832A4ED567009E8E89 /* PopUpHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7822A4ED567009E8E89 /* PopUpHeaderView.swift */; };
 		ABDA7EE79C834A0F9A58A805 /* Pods_IntentsHandlerUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28760191C60BCCE33663AF9D /* Pods_IntentsHandlerUI.framework */; };
 		F2BF18FFFFFB557E610637D7 /* Pods_IntentsHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A13CE12175C2FDB027BA56 /* Pods_IntentsHandler.framework */; };
 /* End PBXBuildFile section */
@@ -161,6 +164,9 @@
 		5B0743112A4C19AE008F4C3D /* MoodAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoodAppDebug.entitlements; sourceTree = "<group>"; };
 		5B0743122A4C19BE008F4C3D /* IntentsHandler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntentsHandler.entitlements; sourceTree = "<group>"; };
 		5B0743132A4C19C3008F4C3D /* IntentsHandlerUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntentsHandlerUI.entitlements; sourceTree = "<group>"; };
+		5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMonthView.swift; sourceTree = "<group>"; };
+		5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCell.swift; sourceTree = "<group>"; };
+		5BD4D7822A4ED567009E8E89 /* PopUpHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpHeaderView.swift; sourceTree = "<group>"; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		99C541F7E4586F3CCEA0A91B /* Pods-IntentsHandler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntentsHandler.debug.xcconfig"; path = "Target Support Files/Pods-IntentsHandler/Pods-IntentsHandler.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +300,7 @@
 				5B0742742A419C6E008F4C3D /* MoodFlowCell.swift */,
 				5B0742762A419CAD008F4C3D /* SleepAnalysisCell.swift */,
 				5B07427C2A42D6D6008F4C3D /* SettingsCell.swift */,
+				5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -321,6 +328,8 @@
 				5B07426E2A3EFD72008F4C3D /* SleepContentView.swift */,
 				5B0742802A4455F8008F4C3D /* MoodContentView.swift */,
 				5B0742822A45EE7E008F4C3D /* SleepBarChartView.swift */,
+				5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */,
+				5BD4D7822A4ED567009E8E89 /* PopUpHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -622,6 +631,8 @@
 				5B0742AB2A481823008F4C3D /* SiriIntents.intentdefinition in Sources */,
 				5B0742812A4455F8008F4C3D /* MoodContentView.swift in Sources */,
 				5B0742572A3AAD44008F4C3D /* UIFont+Extension.swift in Sources */,
+				5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */,
+				5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */,
 				5B0742792A42A944008F4C3D /* LookBackViewController.swift in Sources */,
 				5B07430B2A4B245C008F4C3D /* PersonalInfo+CoreDataProperties.swift in Sources */,
 				5B0742AD2A481E6F008F4C3D /* RecordMoodIntentHandler.swift in Sources */,
@@ -636,6 +647,7 @@
 				5B07430A2A4B245C008F4C3D /* PersonalInfo+CoreDataClass.swift in Sources */,
 				5B0742732A41876C008F4C3D /* StatisticsViewController.swift in Sources */,
 				5B07423F2A39AC71008F4C3D /* HomeViewController.swift in Sources */,
+				5BD4D7832A4ED567009E8E89 /* PopUpHeaderView.swift in Sources */,
 				5B07423B2A39AC71008F4C3D /* AppDelegate.swift in Sources */,
 				5B0742E92A49E493008F4C3D /* PasswordViewController.swift in Sources */,
 				5B0742E72A49D19A008F4C3D /* LoginPageViewController.swift in Sources */,

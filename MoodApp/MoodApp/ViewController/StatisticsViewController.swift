@@ -12,7 +12,6 @@ import FirebaseFirestore
 class StatisticsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FireStoreManagerDelegate {
    
     
-
     //header
     let headerView = UIView()
     let dateLabel = UILabel()
@@ -36,10 +35,17 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     private var hostView: UIView = UIView()
     private var sleepHostView: UIView = UIView()
     
+    //創一個PopUp View加在上面
+    let popUpView = PopUpMonthView()
+    
     //cell裡面的，放外面是避免reload data時重複新的label(我只要一個就好）
     let bedTime = UILabel()
     let wakeTime = UILabel()
     let sleepTime = UILabel()
+    
+    //黑屏
+    let blackView = UIView(frame: UIScreen.main.bounds)
+    
     
     let tableView = UITableView()
     
@@ -77,7 +83,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
     //header
@@ -123,6 +129,36 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     
     @objc func historyButtonTapped(_ sender: UIButton) {
          print("hihi tapped")
+        
+        //跳出黑屏
+        blackView.backgroundColor = .black
+        blackView.alpha = 0 //淡入的動畫效果
+        view.addSubview(blackView)
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0) {
+            self.blackView.alpha = 0.5
+        }
+        //tabbar 收起來
+        tabBarController?.tabBar.isHidden = true
+        
+        //跳出畫面
+        showPopUpMonthView()
+    }
+    
+    func showPopUpMonthView() {
+        
+        blackView.addSubview(popUpView)
+        
+        popUpView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            popUpView.centerXAnchor.constraint(equalTo: blackView.centerXAnchor),
+            popUpView.centerYAnchor.constraint(equalTo: blackView.centerYAnchor),
+            popUpView.heightAnchor.constraint(equalToConstant: 200),
+            popUpView.leadingAnchor.constraint(equalTo: blackView.leadingAnchor, constant: 30),
+            popUpView.trailingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: -30)
+        ])
+        
     }
 
     func calculateAverageTime(timeStrings:[String]) -> String {
