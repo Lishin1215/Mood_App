@@ -141,6 +141,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["notification"])
             //關datePicker
             datePicker.isHidden = true
+            //select time 清空
+            self.selectedTime = nil
         }
 
     }
@@ -270,9 +272,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 cell.contentLabel.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
             ])
             
-            //右側按鈕(switch)
+        //右側按鈕(switch)
 //            let passwordSwitchButton = UISwitch()
-            passwordSwitchButton.isOn = false
+//            passwordSwitchButton.isOn = false
             cell.addSubview(passwordSwitchButton)
             passwordSwitchButton.addTarget(self, action: #selector(passwordCondition), for: .valueChanged)
             
@@ -281,6 +283,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 passwordSwitchButton.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor),
                 passwordSwitchButton.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -30)
             ])
+            
+            // 先去判斷現在是否有設password （有 -> 打開 /沒有 -> 關）
+            if StorageManager.shared.fetchPassword() != nil {
+                passwordSwitchButton.isOn = true
+            } else {
+                passwordSwitchButton.isOn = false
+            }
             
             
             return cell
@@ -343,6 +352,22 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 datePicker.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 50),
                 datePicker.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
             ])
+            
+//            if self.selectedTime != nil { //有選擇時間且沒關閉
+//                remindSwitchButton.isOn = true
+//                datePicker.isHidden = false
+//            } else {
+//                remindSwitchButton.isOn = false
+//                datePicker.isHidden = true
+//            }
+            
+//            if remindSwitchButton.isOn == true {
+//                remindSwitchButton.isOn = true
+//                datePicker.isHidden = false
+//            } else {
+//                remindSwitchButton.isOn = false
+//                datePicker.isHidden = true
+//            }
             
             return cell
         } else if indexPath.row == 3 {
