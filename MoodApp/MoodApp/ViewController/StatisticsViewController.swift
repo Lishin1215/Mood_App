@@ -147,7 +147,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     
     func showPopUpMonthView() {
         
-        blackView.addSubview(popUpView)
+        view.addSubview(popUpView)
         
         popUpView.translatesAutoresizingMaskIntoConstraints = false
         
