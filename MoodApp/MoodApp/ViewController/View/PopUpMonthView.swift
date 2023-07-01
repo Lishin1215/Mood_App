@@ -14,6 +14,10 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     
     let monthInput = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
+    //closure接收來自statisticsVC命令
+    var dismissClosure: (() -> Void)?
+
+    
     override init (frame: CGRect) {
         super.init(frame: frame)
         
@@ -56,7 +60,11 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     
     @objc func monthButtonTapped (_ sender: UIButton) {
         print("呵呵")
-        //跳回statisticVC
+        
+        // 執行closure （收掉popUpView 跟 黑屏）
+        self.dismissClosure?()
+        
+        
         //取得點擊的月份年份
     }
     

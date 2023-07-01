@@ -135,7 +135,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         blackView.alpha = 0 //淡入的動畫效果
         view.addSubview(blackView)
         
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0) {
             self.blackView.alpha = 0.5
         }
         //tabbar 收起來
@@ -143,6 +143,9 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         
         //跳出畫面
         showPopUpMonthView()
+        
+        //此時先把closure傳到popUpView
+        setDismissClosure(popView: popUpView)
     }
     
     func showPopUpMonthView() {
@@ -159,6 +162,20 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             popUpView.trailingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: -30)
         ])
         
+    }
+    
+    
+    //定義一個closure (關黑幕、popUpView) --> 跟view連結
+    @objc func setDismissClosure(popView: PopUpMonthView) {
+        
+        popView.dismissClosure = {
+            //關黑幕、popUpView
+            self.popUpView.removeFromSuperview()
+            self.blackView.removeFromSuperview()
+            
+            //tabBar 放回來
+            self.tabBarController?.tabBar.isHidden = false
+        }
     }
 
     func calculateAverageTime(timeStrings:[String]) -> String {
