@@ -9,7 +9,8 @@ import UIKit
 import SwiftUI
 import FirebaseFirestore
 
-class StatisticsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FireStoreManagerDelegate {
+class StatisticsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FireStoreManagerDelegate, PopUpViewDelegate
+{
    
     
     //header
@@ -35,7 +36,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     private var hostView: UIView = UIView()
     private var sleepHostView: UIView = UIView()
     
-    //創一個PopUp View加在上面
+    //創一個PopUp View加在上面 (delegate)
     let popUpView = PopUpMonthView()
     
     //cell裡面的，放外面是避免reload data時重複新的label(我只要一個就好）
@@ -55,8 +56,10 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         
         //delegate
         FireStoreManager.shared.delegate = self
+        popUpView.delegate = self
         //fetchData （放這裡從tabBar進入才會一直走過）
-        FireStoreManager.shared.fetchMonthlyData()
+        FireStoreManager.shared.fetchMonthlyData(dateString: dateLabel.text ?? "")
+        
     }
     
     
@@ -128,7 +131,6 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     
     
     @objc func historyButtonTapped(_ sender: UIButton) {
-         print("hihi tapped")
         
         //跳出黑屏
         blackView.backgroundColor = .black
@@ -147,6 +149,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         //此時先把closure傳到popUpView
         setDismissClosure(popView: popUpView)
     }
+    
     
     func showPopUpMonthView() {
         
@@ -204,6 +207,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         
         return averageTimeString
     }
+    
     
     func calculateSleepTime(startArray: [String], endArray: [String]) -> [String] {
         // 檢查兩個陣列的元素數量是否相同
@@ -374,6 +378,29 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                     sleepHostView.bottomAnchor.constraint(equalTo: sleepCell.containerView2.bottomAnchor, constant: -5)
                 ])
             }
+        }
+    }
+
+//Conform to Protocol
+    func didReceiveDate(year: String, month: String) {
+        
+    //II. 收到點擊時間後 -> 改header的label
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM, yyyy"
+        
+        //把拿到的year month組合，變成Date
+        if let date = dateFormatter.date(from: "\(month) \(year)") {
+            //換成string
+            let fullDateString = dateFormatter.string(from: date)
+            
+            //改header label
+            dateLabel.text = fullDateString
+            
+            //III. 依照header label去 fetchMonthData
+            FireStoreManager.shared.fetchMonthlyData(dateString: dateLabel.text ?? "")
+            
+        } else {
+            print("Invalid month or year string")
         }
     }
     

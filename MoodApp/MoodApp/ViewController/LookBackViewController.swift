@@ -34,7 +34,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         //delegate
         FireStoreManager.shared.delegate = self
         //fetchData （放這裡從tabBar進入才會一直走過）
-        FireStoreManager.shared.fetchMonthlyData()
+        FireStoreManager.shared.fetchMonthlyData(dateString: dateLabel.text ?? "")
         
 //        checkPhotoAmount()
 

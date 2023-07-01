@@ -114,18 +114,7 @@ class FireStoreManager {
                             print("Date: \(dateString)")
                         }
                        
-//                        if let mood = data["mood"] as? String {
-//                            print("Mood: \(mood)")
-//                        }
-//                        if let photo = data["photo"] as? String {
-//                            print("Photo: \(photo)")
-//                        }
-//                        if let sleepStart = data["sleepStart"] as? String {
-//                            print("SleepStart: \(sleepStart)")
-//                        }
-//                        if let sleepEnd = data["sleepEnd"] as? String {
-//                            print("SleepEnd: \(sleepEnd)")
-//                        }
+
                         emptyArray.append(data)
                     }
                     //delegate //資料全部拿到後再傳
@@ -136,14 +125,27 @@ class FireStoreManager {
     }
     
 //statisticPage & lookBackPage要用到
-    func fetchMonthlyData() {
+    func fetchMonthlyData(dateString: String) {
         let db = Firestore.firestore()
         let collectionRef = db.collection("users").document(userId).collection("articles")
         
         let calendar = Calendar.current
         let currentDate = Date()
+        var dateComponents = DateComponents()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM, yyyy"
         
-        guard let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: calendar.startOfDay(for: currentDate))),
+        //String轉成Date
+        if let date = dateFormatter.date(from: dateString) {
+            //再轉成dateComponents，去找“當月的1號”
+            dateComponents = calendar.dateComponents([.year, .month], from: date)
+            dateComponents.day = 1 //設置日期為1號
+        } else {
+            print("Invalid date string")
+        }
+        
+        //從dateComponent再轉成Date，去fireStore拿資料
+        guard let startOfMonth = calendar.date(from: dateComponents),
             let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)
         else {
             print("Failed to calculate start and end of month")

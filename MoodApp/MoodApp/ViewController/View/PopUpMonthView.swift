@@ -7,6 +7,13 @@
 
 import UIKit
 
+
+protocol PopUpViewDelegate: AnyObject {
+    
+    func didReceiveDate(year: String, month: String)
+}
+
+
 class PopUpMonthView: UIView, UICollectionViewDataSource {
     
     
@@ -16,8 +23,14 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     
     let monthInput = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
+    // 點擊後傳出
+    var selectedYearString: String = ""
+    
     //closure接收來自statisticsVC命令
     var dismissClosure: (() -> Void)?
+    
+    //delegate
+    var delegate: PopUpViewDelegate?
 
     
     override init (frame: CGRect) {
@@ -94,7 +107,6 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     
     
     @objc func monthButtonTapped (_ sender: UIButton) {
-        print("呵呵")
         
         //default all button color (一次default一個月）
         for monthIndex in 0...12{
@@ -105,7 +117,6 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
             }
         }
         
-        
         // 執行closure （收掉popUpView 跟 黑屏）
         self.dismissClosure?()
         
@@ -113,8 +124,8 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
         sender.backgroundColor = .grassGreen
         sender.setTitleColor(.white, for: .normal)
         
-        //取得點擊的月份年份
-        
+        //取得點擊的月份年份 (I. delegate傳到statisticVC)
+        self.delegate?.didReceiveDate(year: self.selectedYearString, month: sender.currentTitle ?? "")
     }
     
     
@@ -187,6 +198,9 @@ extension PopUpMonthView: UIPickerViewDelegate {
         let currentYear = Calendar.current.component(.year, from: Date())
         let year = currentYear - row
         
+        //year傳出去
+        self.selectedYearString = String(year)
+        
         return "\(year)"
     }
     
@@ -197,6 +211,9 @@ extension PopUpMonthView: UIPickerViewDelegate {
         
         let currentYear = Calendar.current.component(.year, from: Date())
         let selectedYear = currentYear - row
+        
+        //selectedYear傳出去
+        self.selectedYearString = String(selectedYear)
         
         yearButton.setTitle("\(selectedYear)", for: .normal)
         
