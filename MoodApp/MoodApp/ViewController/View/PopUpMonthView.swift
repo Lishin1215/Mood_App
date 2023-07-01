@@ -11,6 +11,8 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    let yearPicker = UIPickerView()
+    let yearButton = UIButton()
     
     let monthInput = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
@@ -29,25 +31,52 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
         //Create a layout for the collection view
         let layout = UICollectionViewFlowLayout()
         collectionView.collectionViewLayout = layout //把layout跟collection view 連結
-        layout.headerReferenceSize = CGSize(width: collectionView.frame.width, height: 60)
         
         //delegate
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        yearPicker.delegate = self
+        yearPicker.dataSource = self
+        
         //register
         collectionView.register(PopUpCell.self, forCellWithReuseIdentifier: PopUpCell.reuseIdentifier)
-        collectionView.register(PopUpHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "PopUpHeader")
-        
+
         
         collectionView.backgroundColor = .white
         addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 60),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
+        
+        //pickerView
+        yearPicker.backgroundColor = .white
+        addSubview(yearPicker)
+        
+        yearPicker.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            yearPicker.centerYAnchor.constraint(equalTo: centerYAnchor),
+            yearPicker.leadingAnchor.constraint(equalTo: leadingAnchor),
+            yearPicker.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
+        //yearButton
+        let currentYear = Calendar.current.component(.year, from: Date())
+        yearButton.setTitle("\(currentYear)", for: .normal)
+        yearButton.setTitleColor(.black, for: .normal)
+        yearButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        addSubview(yearButton)
+        yearButton.addTarget(self, action: #selector(yearButtonTapped), for: .touchUpInside)
+        
+        yearButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            yearButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            yearButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18)
         ])
        
         
@@ -55,6 +84,12 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    @objc func yearButtonTapped(_ sender: UIButton) {
+        yearPicker.isHidden = false
     }
     
     
@@ -100,28 +135,6 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
         return cell
     }
     
-    //add Header
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PopUpHeader", for: indexPath) as? PopUpHeaderView else { fatalError("Unable to dequeue header view")}
-            
-            //加在view上，才可在整個view上滑動，非只有headerView
-            addSubview(headerView.yearPicker)
-            headerView.yearPicker.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                headerView.yearPicker.centerYAnchor.constraint(equalTo: centerYAnchor),
-                headerView.yearPicker.leadingAnchor.constraint(equalTo: leadingAnchor),
-                headerView.yearPicker.trailingAnchor.constraint(equalTo: trailingAnchor)
-            ])
-            
-            
-            return headerView
-        } else {
-            fatalError("Cannot create popUpHeaderView")
-        }
-       
-    }
-    
 }
 
 
@@ -152,5 +165,41 @@ extension PopUpMonthView: UICollectionViewDelegateFlowLayout {
         let interItemSpacing:CGFloat = (maxWidth - totalItemWidth - 40)/3
         
         return interItemSpacing
+    }
+}
+
+
+
+extension PopUpMonthView: UIPickerViewDataSource {
+    // MARK: - UIPickerViewDataSource
+        func numberOfComponents(in pickerView: UIPickerView) -> Int {
+            1
+        }
+        
+        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+            10
+        }
+}
+
+extension PopUpMonthView: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        let currentYear = Calendar.current.component(.year, from: Date())
+        let year = currentYear - row
+        
+        return "\(year)"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        //default隱藏
+        yearPicker.isHidden = true
+        
+        let currentYear = Calendar.current.component(.year, from: Date())
+        let selectedYear = currentYear - row
+        
+        yearButton.setTitle("\(selectedYear)", for: .normal)
+        
+        print("Selected Year: \(selectedYear)")
     }
 }
