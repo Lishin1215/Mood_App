@@ -16,14 +16,13 @@ class PopUpHeaderView: UICollectionReusableView, UIPickerViewDelegate, UIPickerV
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        self.backgroundColor = .blue
         
         //delegate
         yearPicker.delegate = self
         yearPicker.dataSource = self
         
-        
-        addSubview(yearPicker)
+        yearPicker.backgroundColor = .white
+//        addSubview(yearPicker)
        
         
         let currentYear = Calendar.current.component(.year, from: Date())
@@ -31,6 +30,7 @@ class PopUpHeaderView: UICollectionReusableView, UIPickerViewDelegate, UIPickerV
         yearButton.setTitleColor(.black, for: .normal)
         yearButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         addSubview(yearButton)
+        yearButton.addTarget(self, action: #selector(yearButtonTapped), for: .touchUpInside)
         
         yearButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -41,6 +41,12 @@ class PopUpHeaderView: UICollectionReusableView, UIPickerViewDelegate, UIPickerV
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    @objc func yearButtonTapped(_ sender: UIButton) {
+        yearPicker.isHidden = false
     }
     
     
@@ -64,6 +70,9 @@ class PopUpHeaderView: UICollectionReusableView, UIPickerViewDelegate, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        //default隱藏
+        yearPicker.isHidden = true
         
         let currentYear = Calendar.current.component(.year, from: Date())
         let selectedYear = currentYear - row

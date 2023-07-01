@@ -35,6 +35,10 @@ extension UIColor {
         return UIColor(red: 0.946, green: 0.579, blue: 0.028, alpha: 0.09)
     }
     
+    static var grassGreen: UIColor {
+        return UIColor(red: 0.478, green: 0.741, blue: 0.545, alpha: 1)
+    }
+    
     
     //漸層橘
     static func gradientColor(with colors: [UIColor]) -> UIColor? {

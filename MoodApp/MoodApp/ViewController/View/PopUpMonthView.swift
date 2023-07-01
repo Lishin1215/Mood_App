@@ -61,11 +61,25 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     @objc func monthButtonTapped (_ sender: UIButton) {
         print("呵呵")
         
+        //default all button color (一次default一個月）
+        for monthIndex in 0...12{
+            let indexPath = IndexPath(row: monthIndex, section: 0)
+            if let cell = collectionView.cellForItem(at: indexPath) as? PopUpCell {
+                cell.monthButton.backgroundColor = .lightGray
+                cell.monthButton.setTitleColor(.black, for: .normal)
+            }
+        }
+        
+        
         // 執行closure （收掉popUpView 跟 黑屏）
         self.dismissClosure?()
         
+        //button變green
+        sender.backgroundColor = .grassGreen
+        sender.setTitleColor(.white, for: .normal)
         
         //取得點擊的月份年份
+        
     }
     
     
@@ -91,9 +105,11 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
         if kind == UICollectionView.elementKindSectionHeader {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "PopUpHeader", for: indexPath) as? PopUpHeaderView else { fatalError("Unable to dequeue header view")}
             
+            //加在view上，才可在整個view上滑動，非只有headerView
+            addSubview(headerView.yearPicker)
             headerView.yearPicker.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                headerView.yearPicker.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100),
+                headerView.yearPicker.centerYAnchor.constraint(equalTo: centerYAnchor),
                 headerView.yearPicker.leadingAnchor.constraint(equalTo: leadingAnchor),
                 headerView.yearPicker.trailingAnchor.constraint(equalTo: trailingAnchor)
             ])
