@@ -34,10 +34,9 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
         // 隱藏 navigationBar
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
-        //delegate
+        //delegate (不用特別寫fetch，因為newPage的addDayButton裡會fetch)(從其他tab進來時也不用fetch最新資料，維持跟上一次一樣就好）
         FireStoreManager.shared.delegate = self
-        //先fetchdata（放這裡從tabBar進入才會一直走過）
-        FireStoreManager.shared.fetchData()
+
     }
         
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,11 +49,10 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        //delegate
-//        FireStoreManager.shared.delegate = self
-        
-//        //先fetchdata，更新編輯過的date
-//        FireStoreManager.shared.fetchData()
+        //delegate (“第一次”進畫面走這邊，因為viewDidLoad先發生）
+        FireStoreManager.shared.delegate = self
+        //fetch (當下月份的資料）
+        FireStoreManager.shared.fetchMonthlyData(inputDate: Date())
         
         
         calendarView.delegate = self
@@ -158,8 +156,24 @@ extension HomeViewController: UICalendarViewDelegate {
                 return nil
             }
         }
+    }
+    
+    //抓“切換月份前的顯示月份” (”切換月份“時執行）
+    func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom previousDateComponents: DateComponents) {
         
         
+        //component換成Date
+        let calendar = Calendar.current
+        
+        //一次抓三個月，因為不知道使用者會“往前or往後”切換  --> 所以前後都抓
+        if let previousDate = calendar.date(from: previousDateComponents) {
+            if let beforeDate = calendar.date(byAdding: .month, value: -1, to: previousDate),
+               let afterDate = calendar.date(byAdding: .month, value: +1, to: previousDate) {
+                
+                FireStoreManager.shared.fetchMultipleMonth(fromDate: beforeDate, toDate: afterDate)
+            }
+                
+        }
     }
 }
 

@@ -64,7 +64,6 @@
 		5B07430F2A4B6AAF008F4C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */; };
 		5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */; };
 		5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */; };
-		5BD4D7832A4ED567009E8E89 /* PopUpHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7822A4ED567009E8E89 /* PopUpHeaderView.swift */; };
 		5BD4D7862A4F1FE4009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7842A4F1FE4009E8E89 /* PersonalInfo+CoreDataClass.swift */; };
 		5BD4D7872A4F1FE4009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7852A4F1FE4009E8E89 /* PersonalInfo+CoreDataProperties.swift */; };
 		ABDA7EE79C834A0F9A58A805 /* Pods_IntentsHandlerUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28760191C60BCCE33663AF9D /* Pods_IntentsHandlerUI.framework */; };
@@ -164,7 +163,6 @@
 		5B0743132A4C19C3008F4C3D /* IntentsHandlerUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntentsHandlerUI.entitlements; sourceTree = "<group>"; };
 		5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMonthView.swift; sourceTree = "<group>"; };
 		5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCell.swift; sourceTree = "<group>"; };
-		5BD4D7822A4ED567009E8E89 /* PopUpHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpHeaderView.swift; sourceTree = "<group>"; };
 		5BD4D7842A4F1FE4009E8E89 /* PersonalInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		5BD4D7852A4F1FE4009E8E89 /* PersonalInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -329,7 +327,6 @@
 				5B0742802A4455F8008F4C3D /* MoodContentView.swift */,
 				5B0742822A45EE7E008F4C3D /* SleepBarChartView.swift */,
 				5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */,
-				5BD4D7822A4ED567009E8E89 /* PopUpHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -645,7 +642,6 @@
 				5B0742832A45EE7E008F4C3D /* SleepBarChartView.swift in Sources */,
 				5B0742732A41876C008F4C3D /* StatisticsViewController.swift in Sources */,
 				5B07423F2A39AC71008F4C3D /* HomeViewController.swift in Sources */,
-				5BD4D7832A4ED567009E8E89 /* PopUpHeaderView.swift in Sources */,
 				5B07423B2A39AC71008F4C3D /* AppDelegate.swift in Sources */,
 				5B0742E92A49E493008F4C3D /* PasswordViewController.swift in Sources */,
 				5B0742E72A49D19A008F4C3D /* LoginPageViewController.swift in Sources */,

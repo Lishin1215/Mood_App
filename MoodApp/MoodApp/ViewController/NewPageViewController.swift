@@ -343,7 +343,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 text: self.textField.text ?? "",
                 photo: "",
                 handler: {
-                    FireStoreManager.shared.fetchData()
+                    //只更新加入的"當月calendar"，剩下的calendar 靠 didChangeVisibleDateComponentsFrom 來翻頁更新
+                    FireStoreManager.shared.fetchMonthlyData(inputDate: date)
                 })
             }
             //else 編輯過去的某一天
@@ -371,7 +372,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                             text: self.textField.text ?? "",
                             photo: url.absoluteString, //url轉成String
                             handler: {
-                                FireStoreManager.shared.fetchData()
+                                //只更新加入的"當月calendar"，剩下的calendar 靠 didChangeVisibleDateComponentsFrom 來翻頁更新
+                                FireStoreManager.shared.fetchMonthlyData(inputDate: date)
                             })
                         }
                         //else 編輯過去的某一天

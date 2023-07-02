@@ -37,9 +37,9 @@ class FireStoreManager {
     func setData(date: Date, mood: String, sleepStart: String, sleepEnd: String, text: String, photo: String, handler: @escaping () -> Void) {
         let db = Firestore.firestore()
         let ref = db.collection("users").document(userId).collection("articles")  //id會隨user改變
-//        let id = ref.documentID
+        //        let id = ref.documentID
         
-//        let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
+        //        let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -64,7 +64,7 @@ class FireStoreManager {
         let db = Firestore.firestore()
         let updateRef = db.collection("users").document(userId).collection("articles").document("09ahXKQg5JKLzku5WyPn")
         let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
-
+        
         updateRef.updateData([
             "date": date,
             "mood": "1",
@@ -86,7 +86,7 @@ class FireStoreManager {
     func fetchData() {
         let db = Firestore.firestore()
         let collectionRef = db.collection("users").document(userId).collection("articles")  //db.collection("articles")
-
+        
         // 使用 collectionRef 讀取集合中的所有文件
         collectionRef.getDocuments { (querySnapshot, error) in
             if let error = error {
@@ -100,10 +100,10 @@ class FireStoreManager {
                     
                     for document in documents {
                         let data = document.data()
-//                        print("-------------------------")
-//                        print(data)
+                        //                        print("-------------------------")
+                        //                        print(data)
                         
-                
+                        
                         
                         // 在此處處理每個文件的資料
                         // 例如，從 data 字典中擷取所需的欄位值
@@ -113,8 +113,8 @@ class FireStoreManager {
                             let dateString = dateFormatter.string(from: date.dateValue())
                             print("Date: \(dateString)")
                         }
-                       
-
+                        
+                        
                         emptyArray.append(data)
                     }
                     //delegate //資料全部拿到後再傳
@@ -124,7 +124,7 @@ class FireStoreManager {
         }
     }
     
-//statisticPage & lookBackPage要用到
+    //statisticPage & lookBackPage要用到
     func fetchMonthlyData(dateString: String) {
         let db = Firestore.firestore()
         let collectionRef = db.collection("users").document(userId).collection("articles")
@@ -146,7 +146,7 @@ class FireStoreManager {
         
         //從dateComponent再轉成Date，去fireStore拿資料
         guard let startOfMonth = calendar.date(from: dateComponents),
-            let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)
+              let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)
         else {
             print("Failed to calculate start and end of month")
             return
@@ -164,7 +164,7 @@ class FireStoreManager {
                     for document in documents {
                         let data = document.data()
                         print("-------------------")
-//                        print(data)
+                        //                        print(data)
                         
                         emptyArray.append(data)
                     }
@@ -175,7 +175,77 @@ class FireStoreManager {
         }
         
     }
-
+    
+    // newPage要用到
+    func fetchMonthlyData(inputDate: Date) {
+        let db = Firestore.firestore()
+        let collectionRef = db.collection("users").document(userId).collection("articles")
+        
+        let calendar = Calendar.current
+        
+        //用extension去抓
+        let startOfMonth = inputDate.startDateOfMonth
+        let endOfMonth = inputDate.endDateOfMonth
+        
+        let query = collectionRef.whereField("date", isGreaterThanOrEqualTo: startOfMonth).whereField("date", isLessThanOrEqualTo: endOfMonth)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                if let documents = querySnapshot?.documents {
+                    var emptyArray:[[String:Any]] = []
+                    
+                    for document in documents {
+                        let data = document.data()
+                        print("-------------------")
+                        //                        print(data)
+                        
+                        emptyArray.append(data)
+                    }
+                    //delegate//資料全部拿到後再傳
+                    self.delegate?.manager(self, didGet: emptyArray)
+                }
+            }
+        }
+    }
+    
+    
+    // homePage要用到
+    func fetchMultipleMonth(fromDate: Date, toDate: Date) {
+        let db = Firestore.firestore()
+        let collectionRef = db.collection("users").document(userId).collection("articles")
+        
+        let calendar = Calendar.current
+        
+        //用extension去抓
+        let startOfMonth = fromDate.startDateOfMonth
+        let endOfMonth = toDate.endDateOfMonth
+        
+        let query = collectionRef.whereField("date", isGreaterThanOrEqualTo: startOfMonth).whereField("date", isLessThanOrEqualTo: endOfMonth)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                if let documents = querySnapshot?.documents {
+                    var emptyArray:[[String:Any]] = []
+                    
+                    for document in documents {
+                        let data = document.data()
+                        print("-------------------")
+                        //                        print(data)
+                        
+                        emptyArray.append(data)
+                    }
+                    //delegate//資料全部拿到後再傳
+                    self.delegate?.manager(self, didGet: emptyArray)
+                }
+            }
+        }
+        
+    }
+    
     //listener監聽
     
     
@@ -200,8 +270,24 @@ class FireStoreManager {
         })
     }
     
+}
+
+extension Date {
     
-    
+    var startDateOfMonth: Date {
+        guard let date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: self)) else {
+            fatalError("Unable to get start date from date")
+        }
+        return date
+    }
+
+    var endDateOfMonth: Date {
+        guard let date = Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startDateOfMonth) else {
+            fatalError("Unable to get end date from date")
+        }
+        return date
+    }
+}
 //    //delete "document" & "subcollections
 //    func deleteDocumentAndSubcollections(completion: @escaping (Error?) -> Void) {
 //        let db = Firestore.firestore()
@@ -240,4 +326,4 @@ class FireStoreManager {
 //            }
 //        }
 //    }
-}
+
