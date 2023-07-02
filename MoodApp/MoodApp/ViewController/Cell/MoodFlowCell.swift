@@ -13,12 +13,14 @@ class MoodFlowCell: UITableViewCell {
     
     let containerView = UIView()
     let titleLabel = UILabel()
+    let noRecord = UILabel()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
+        
         
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 10
@@ -47,6 +49,20 @@ class MoodFlowCell: UITableViewCell {
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 36)
         ])
+        
+        //no record label
+//        let noRecord = UILabel()
+        noRecord.isHidden = true //default
+        noRecord.text = "No Record"
+        noRecord.font = UIFont.boldSystemFont(ofSize: 16)
+        containerView.addSubview(noRecord)
+        
+        noRecord.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            noRecord.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            noRecord.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+        ])
+    
     }
     
     required init?(coder: NSCoder) {

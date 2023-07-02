@@ -14,6 +14,8 @@ class SleepAnalysisCell: UITableViewCell {
     let containerView = UIView()
     let containerView2 = UIView()
     let titleLabel = UILabel()
+    let noRecord = UILabel()
+    let noRecord2 = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -63,6 +65,31 @@ class SleepAnalysisCell: UITableViewCell {
             containerView2.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             containerView2.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             containerView2.heightAnchor.constraint(equalToConstant: 220)
+        ])
+        
+        //no record label
+//        let noRecord = UILabel()
+        noRecord.isHidden = true //default
+        noRecord.text = "No Record"
+        noRecord.font = UIFont.boldSystemFont(ofSize: 16)
+        containerView.addSubview(noRecord)
+        
+        noRecord.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            noRecord.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            noRecord.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+        ])
+        
+        //no record 2
+        noRecord2.isHidden = true //default
+        noRecord2.text = "No Record"
+        noRecord2.font = UIFont.boldSystemFont(ofSize: 16)
+        containerView2.addSubview(noRecord2)
+        
+        noRecord2.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            noRecord2.centerXAnchor.constraint(equalTo: containerView2.centerXAnchor),
+            noRecord2.centerYAnchor.constraint(equalTo: containerView2.centerYAnchor)
         ])
         
     }

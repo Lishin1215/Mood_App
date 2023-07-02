@@ -303,82 +303,185 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         self.sleepEndArray = endEmptyArray
         
         print(self.moodArray)
- 
-    
-        //I. 處理完資料後，call "moodContent swiftUI"，把畫圖資料傳過來
-        let moodFlowSwiftUI = MoodContentView(moodArray: self.moodArray)
-        //swiftUI提供結合UIKit(hostController
-        let host = UIHostingController(rootView: moodFlowSwiftUI)
-        //找到要放swiftUI的cell的indexPath
-        let indexPath = IndexPath(row: 0, section: 0)
         
-        //在外面設一個空的hostView, 在addSubview前先default，避免重疊
-        self.hostView.removeFromSuperview()
-        
-        //**取得UIHostingController的view，再把他addSubview到對應的cell上
-        if let hostView = host.view,
-           let cell = tableView.cellForRow(at: indexPath) as? MoodFlowCell {
-            self.hostView = hostView //給外面的hostView值
-            cell.addSubview(hostView)
+    // 判斷array是否為空的 （空的 -> container要黑屏)
+        if self.moodArray.count == 0 {
             
-            //設定swiftUI constraints
-            hostView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                hostView.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 16),
-                hostView.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 16),
-                hostView.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -16),
-                hostView.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -5)
-            ])
+            //先default，避免重疊
+           self.hostView.removeFromSuperview()
             
-        }
-        
-        //如果sleep沒有任何資料 (跳出 manager，不往下執行）
-        if sleepStartArray.count == 0 {
-            return
-        }
-        
-        // II. 計算平均時間
-        averageBedTime = calculateAverageTime(timeStrings: sleepStartArray)
-        averageWakeTime = calculateAverageTime(timeStrings: sleepEndArray)
-        
-        let sleepTimeArray = calculateSleepTime(startArray: sleepStartArray, endArray: sleepEndArray)
-        self.sleepTimeArray = sleepTimeArray
-        print("??? \(sleepTimeArray)")
-        
-        averageSleepTime = sleepTimeAverage(timeStrings: sleepTimeArray)
-        
-        //處理完資料後 reload tableView，更新label
-        DispatchQueue.main.async {
-            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)//讓處理好的資料被放進去
-        
-        
-            //III. 把sleepDateArray和sleepTimeArray結合
-            let sleepTimeFlowArray = zip(sleepDateArray, sleepTimeArray).map { SleepTimeFlow(date: $0, sleepTime: $1)
-            }
-            print("@@ + \(sleepTimeFlowArray)")
-            self.sleepTimeFlowArray = sleepTimeFlowArray
+            let indexPath = IndexPath(row: 0, section: 0)
             
-            //處理完資料後，call "sleepBarChart swiftUI"，把畫圖資料傳過來
-            let sleepBarSwiftUI = SleepBarChartView(sleepTimeFlowArray: self.sleepTimeFlowArray)
-            let sleepHost = UIHostingController(rootView: sleepBarSwiftUI)
-            
-            let sleepIndexPath = IndexPath(row: 1, section: 0)
-            self.sleepHostView.removeFromSuperview()
-            
-            if let sleepHostView = sleepHost.view,
-               let sleepCell = self.tableView.cellForRow(at: sleepIndexPath) as? SleepAnalysisCell {
-                self.sleepHostView = sleepHostView
-                sleepCell.addSubview(sleepHostView)
+            if let cell = tableView.cellForRow(at: indexPath) as? MoodFlowCell {
                 
-                sleepHostView.translatesAutoresizingMaskIntoConstraints = false
+                cell.containerView.backgroundColor = .lightLightGray
+                cell.containerView.alpha = 0.5
+                //叫出no record label
+                cell.noRecord.isHidden = false
+            }
+
+        } else { //放入圖表
+            //I. 處理完資料後，call "moodContent swiftUI"，把畫圖資料傳過來
+            let moodFlowSwiftUI = MoodContentView(moodArray: self.moodArray)
+            //swiftUI提供結合UIKit(hostController
+            let host = UIHostingController(rootView: moodFlowSwiftUI)
+            //找到要放swiftUI的cell的indexPath
+            let indexPath = IndexPath(row: 0, section: 0)
+            
+            //在外面設一個空的hostView, 在addSubview前先default，避免重疊
+            self.hostView.removeFromSuperview()
+            
+            //**取得UIHostingController的view，再把他addSubview到對應的cell上
+            if let hostView = host.view,
+               let cell = tableView.cellForRow(at: indexPath) as? MoodFlowCell {
+                
+                //default 背景顏色
+                cell.containerView.backgroundColor = .white
+                cell.containerView.alpha = 1
+                //隱藏 no record
+                cell.noRecord.isHidden = true
+                
+                //給外面的hostView值
+                self.hostView = hostView
+                cell.addSubview(hostView)
+                
+                //設定swiftUI constraints
+                hostView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                    sleepHostView.topAnchor.constraint(equalTo: sleepCell.containerView2.topAnchor, constant: 16),
-                    sleepHostView.leadingAnchor.constraint(equalTo: sleepCell.containerView2.leadingAnchor, constant: 16),
-                    sleepHostView.trailingAnchor.constraint(equalTo: sleepCell.containerView2.trailingAnchor, constant: -16),
-                    sleepHostView.bottomAnchor.constraint(equalTo: sleepCell.containerView2.bottomAnchor, constant: -5)
+                    hostView.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 16),
+                    hostView.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 16),
+                    hostView.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -16),
+                    hostView.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -5)
                 ])
             }
         }
+ 
+        
+    //如果sleep沒有任何資料 （container要黑屏)
+        if self.sleepStartArray.count == 0 {
+            
+            //先default，避免重疊
+           self.sleepHostView.removeFromSuperview()
+            
+            let indexPath = IndexPath(row: 1, section: 0)
+            
+            if let cell = tableView.cellForRow(at: indexPath) as? SleepAnalysisCell {
+                
+            //I.
+                cell.containerView.backgroundColor = .lightLightGray
+                cell.containerView.alpha = 0.5
+                //叫出no record label
+                cell.noRecord.isHidden = false
+                
+                //清空sleepTimeLabel
+                bedTime.text = ""
+                wakeTime.text = ""
+                sleepTime.text = ""
+                
+            //II.
+                cell.containerView2.backgroundColor = .lightLightGray
+                cell.containerView2.alpha = 0.5
+                //叫出no record2
+                cell.noRecord2.isHidden = false
+            }
+        } else { //有資料
+        // II. 計算平均時間
+            averageBedTime = calculateAverageTime(timeStrings: sleepStartArray)
+            averageWakeTime = calculateAverageTime(timeStrings: sleepEndArray)
+            
+            let sleepTimeArray = calculateSleepTime(startArray: sleepStartArray, endArray: sleepEndArray)
+            self.sleepTimeArray = sleepTimeArray
+            print("??? \(sleepTimeArray)")
+            
+            averageSleepTime = sleepTimeAverage(timeStrings: sleepTimeArray)
+            
+            //處理完資料後 reload tableView，更新label
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)//讓處理好的資料被放進去
+            
+            
+                //III. 把sleepDateArray和sleepTimeArray結合
+                let sleepTimeFlowArray = zip(sleepDateArray, sleepTimeArray).map { SleepTimeFlow(date: $0, sleepTime: $1)
+                }
+                print("@@ + \(sleepTimeFlowArray)")
+                self.sleepTimeFlowArray = sleepTimeFlowArray
+                
+                //處理完資料後，call "sleepBarChart swiftUI"，把畫圖資料傳過來
+                let sleepBarSwiftUI = SleepBarChartView(sleepTimeFlowArray: self.sleepTimeFlowArray)
+                let sleepHost = UIHostingController(rootView: sleepBarSwiftUI)
+                
+                let sleepIndexPath = IndexPath(row: 1, section: 0)
+                self.sleepHostView.removeFromSuperview()
+                
+                if let sleepHostView = sleepHost.view,
+                   let sleepCell = self.tableView.cellForRow(at: sleepIndexPath) as? SleepAnalysisCell {
+                    
+                    //default 背景顏色
+                    sleepCell.containerView.backgroundColor = .white
+                    sleepCell.containerView.alpha = 1
+                    sleepCell.containerView2.backgroundColor = .white
+                    sleepCell.containerView2.alpha = 1
+                    //隱藏 no record
+                    sleepCell.noRecord.isHidden = true
+                    sleepCell.noRecord2.isHidden = true
+                    
+                    //給外面的sleepHostView值
+                    self.sleepHostView = sleepHostView
+                    sleepCell.addSubview(sleepHostView)
+                    
+                    sleepHostView.translatesAutoresizingMaskIntoConstraints = false
+                    NSLayoutConstraint.activate([
+                        sleepHostView.topAnchor.constraint(equalTo: sleepCell.containerView2.topAnchor, constant: 16),
+                        sleepHostView.leadingAnchor.constraint(equalTo: sleepCell.containerView2.leadingAnchor, constant: 16),
+                        sleepHostView.trailingAnchor.constraint(equalTo: sleepCell.containerView2.trailingAnchor, constant: -16),
+                        sleepHostView.bottomAnchor.constraint(equalTo: sleepCell.containerView2.bottomAnchor, constant: -5)
+                    ])
+                }
+            }
+        }
+        
+//        // II. 計算平均時間
+//        averageBedTime = calculateAverageTime(timeStrings: sleepStartArray)
+//        averageWakeTime = calculateAverageTime(timeStrings: sleepEndArray)
+//
+//        let sleepTimeArray = calculateSleepTime(startArray: sleepStartArray, endArray: sleepEndArray)
+//        self.sleepTimeArray = sleepTimeArray
+//        print("??? \(sleepTimeArray)")
+//
+//        averageSleepTime = sleepTimeAverage(timeStrings: sleepTimeArray)
+//
+//        //處理完資料後 reload tableView，更新label
+//        DispatchQueue.main.async {
+//            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)//讓處理好的資料被放進去
+//
+//
+//            //III. 把sleepDateArray和sleepTimeArray結合
+//            let sleepTimeFlowArray = zip(sleepDateArray, sleepTimeArray).map { SleepTimeFlow(date: $0, sleepTime: $1)
+//            }
+//            print("@@ + \(sleepTimeFlowArray)")
+//            self.sleepTimeFlowArray = sleepTimeFlowArray
+//
+//            //處理完資料後，call "sleepBarChart swiftUI"，把畫圖資料傳過來
+//            let sleepBarSwiftUI = SleepBarChartView(sleepTimeFlowArray: self.sleepTimeFlowArray)
+//            let sleepHost = UIHostingController(rootView: sleepBarSwiftUI)
+//
+//            let sleepIndexPath = IndexPath(row: 1, section: 0)
+//            self.sleepHostView.removeFromSuperview()
+//
+//            if let sleepHostView = sleepHost.view,
+//               let sleepCell = self.tableView.cellForRow(at: sleepIndexPath) as? SleepAnalysisCell {
+//                self.sleepHostView = sleepHostView
+//                sleepCell.addSubview(sleepHostView)
+//
+//                sleepHostView.translatesAutoresizingMaskIntoConstraints = false
+//                NSLayoutConstraint.activate([
+//                    sleepHostView.topAnchor.constraint(equalTo: sleepCell.containerView2.topAnchor, constant: 16),
+//                    sleepHostView.leadingAnchor.constraint(equalTo: sleepCell.containerView2.leadingAnchor, constant: 16),
+//                    sleepHostView.trailingAnchor.constraint(equalTo: sleepCell.containerView2.trailingAnchor, constant: -16),
+//                    sleepHostView.bottomAnchor.constraint(equalTo: sleepCell.containerView2.bottomAnchor, constant: -5)
+//                ])
+//            }
+//        }
     }
 
 //Conform to Protocol
