@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScrollViewDelegate {
+class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScrollViewDelegate, PopUpViewDelegate {
     
     
     //header
@@ -27,17 +27,22 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     private var timer = Timer()
     private var counter = 0
     
+    //黑屏
+    let blackView = UIView(frame: UIScreen.main.bounds)
+    
+    //創一個PopUp View加在上面 (delegate)
+    let popUpView = PopUpMonthView()
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //delegate
         FireStoreManager.shared.delegate = self
+        popUpView.delegate = self
         //fetchData （放這裡從tabBar進入才會一直走過）
         FireStoreManager.shared.fetchMonthlyData(dateString: dateLabel.text ?? "")
         
-//        checkPhotoAmount()
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -165,7 +170,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     }
     
     func startTimer() {
-        timer = Timer(timeInterval: 1.5, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+        timer = Timer(timeInterval: 1.75, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
         RunLoop.current.add(timer, forMode: .common) //要寫這行才能成功call到autoScroll
     }
     
@@ -179,7 +184,52 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     }
     
     @objc func historyButtonTapped(_ sender: UIButton) {
-        print("oh yeah oh my god!")
+        
+        //跳出黑屏
+        blackView.backgroundColor = .black
+        blackView.alpha = 0
+        view.addSubview(blackView)
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0) {
+            self.blackView.alpha = 0.5
+        }
+        //tabbar 收起來
+        tabBarController?.tabBar.isHidden = true
+        
+        //跳出畫面
+        showPopUpMonthView()
+        
+        //此時先把closure傳到popUpView
+        setDismissClosure(popView: popUpView)
+    }
+    
+    func showPopUpMonthView() {
+        
+        view.addSubview(popUpView)
+        
+        popUpView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            popUpView.centerXAnchor.constraint(equalTo: blackView.centerXAnchor),
+            popUpView.centerYAnchor.constraint(equalTo: blackView.centerYAnchor),
+            popUpView.heightAnchor.constraint(equalToConstant: 200),
+            popUpView.leadingAnchor.constraint(equalTo: blackView.leadingAnchor, constant: 30),
+            popUpView.trailingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: -30)
+        ])
+    }
+    
+    
+    //定義一個closure (關黑幕、popUpView) --> 跟view連結
+    @objc func setDismissClosure(popView: PopUpMonthView) {
+        
+        popView.dismissClosure = {
+            //關黑幕、popUpView
+            self.popUpView.removeFromSuperview()
+            self.blackView.removeFromSuperview()
+            
+            //tabBar 放回來
+            self.tabBarController?.tabBar.isHidden = false
+        }
     }
 
     
@@ -239,4 +289,28 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
        
     }
 
+    
+//Conform to Protocol
+    func didReceiveDate(year: String, month: String) {
+        
+        //II. 收到點擊時間後 -> 改header的label
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM, yyyy"
+        
+        //把拿到的year month組合，變成Date
+        if let date = dateFormatter.date(from: "\(month) \(year)") {
+            //換成string
+            let fullDateString = dateFormatter.string(from: date)
+            
+            //改header label
+            dateLabel.text = fullDateString
+            
+            //III. 依照header label去 fetchMonthData
+            FireStoreManager.shared.fetchMonthlyData(dateString: dateLabel.text ?? "")
+            
+        } else {
+            print("Invalid month or year string")
+        }
+    }
+    
 }

@@ -18,8 +18,10 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    
     let yearPicker = UIPickerView()
     let yearButton = UIButton()
+    let historyButton = UIButton()
     
     let monthInput = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
@@ -91,6 +93,17 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
             yearButton.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             yearButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18)
         ])
+        
+        //historyButton
+        historyButton.setImage(UIImage(named: "Icons_24px_DropDown"), for: .normal)
+        historyButton.addTarget(self, action: #selector(yearButtonTapped), for: .touchUpInside)
+        addSubview(historyButton)
+        
+        historyButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            historyButton.leadingAnchor.constraint(equalTo: yearButton.trailingAnchor, constant: 5),
+            historyButton.topAnchor.constraint(equalTo: topAnchor, constant: 20)
+        ])
        
         
     }
@@ -124,7 +137,7 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
         sender.backgroundColor = .grassGreen
         sender.setTitleColor(.white, for: .normal)
         
-        //取得點擊的月份年份 (I. delegate傳到statisticVC)
+        //取得點擊的月份年份 (I. delegate傳到statisticVC / lookBackVC)
         self.delegate?.didReceiveDate(year: self.selectedYearString, month: sender.currentTitle ?? "")
     }
     
