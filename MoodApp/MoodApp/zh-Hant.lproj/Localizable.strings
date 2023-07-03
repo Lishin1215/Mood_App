@@ -72,6 +72,8 @@
 "languageLabel" = "語言選擇";
 "language" = "繁體中文";
 "deleteAccountButton" = "刪除帳號";
+"Chinese" = "中文";
+"English" = "英文";
 
 
 //passwordPage

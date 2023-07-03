@@ -34,7 +34,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let deleteButton = UIButton()
     
     //language
-    let segmentedControl = UISegmentedControl(items: ["English", "Chinese"])
+    let segmentedControl = UISegmentedControl(items: [NSLocalizedString("English", comment: ""), NSLocalizedString("Chinese", comment: "")])
     
     
     let tableView = UITableView()
@@ -123,7 +123,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             //設定通知內容
             let content = UNMutableNotificationContent()
             content.title = "MoodApp"
-            content.body = NSLocalizedString("Reminderbody", comment: "")
+            content.body = NSLocalizedString("reminderBody", comment: "")
             content.badge = 1
             content.sound = UNNotificationSound.default
             
@@ -303,7 +303,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         //右側按鈕(switch)
 //            let passwordSwitchButton = UISwitch()
 //            passwordSwitchButton.isOn = false
-            passwordSwitchButton.onTintColor = .orangeBrown
+            passwordSwitchButton.onTintColor = .pinkOrange
             cell.addSubview(passwordSwitchButton)
             passwordSwitchButton.addTarget(self, action: #selector(passwordCondition), for: .valueChanged)
             
@@ -354,7 +354,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             //右側按鈕(switch)
 //            let remindSwitchButton = UISwitch()
             remindSwitchButton.isOn = false
-            remindSwitchButton.onTintColor = .orangeBrown
+            remindSwitchButton.onTintColor = .pinkOrange
             cell.addSubview(remindSwitchButton)
             remindSwitchButton.addTarget(self, action: #selector(remindCondition), for: .valueChanged)
             
@@ -415,7 +415,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             //右側點選語言(segmented)
             segmentedControl.selectedSegmentIndex = 0
 //            segmentedControl.tintColor = .orangeBrown
-            segmentedControl.backgroundColor = .pinkOrange
+//            segmentedControl.backgroundColor = .pinkOrange
             view.addSubview(segmentedControl)
             
             segmentedControl.addTarget(self, action: #selector(languageSelected), for: .valueChanged)

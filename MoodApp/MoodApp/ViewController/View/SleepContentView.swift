@@ -144,7 +144,7 @@ struct SleepContentView: View {
     
     var body: some View {
         ZStack {
-            grayColor.edgesIgnoringSafeArea(.all) //Color(.white)
+            Color(uiColor: .white).edgesIgnoringSafeArea(.all) //Color(.white)
             
             VStack {
                 
@@ -157,12 +157,12 @@ struct SleepContentView: View {
                             
                             Text(LocalizableStrings.sleepTime.uppercased())
                                 .bold()
-                                .foregroundColor(.white.opacity(0.3))
+                                .foregroundColor(Color(uiColor: .black).opacity(0.3))
                                 .font(.system(size: 14))
                         }
                         Text(getSleepTime())
                             .bold()
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(uiColor: .lightBlack))
                             .font(.system(size: 22))
                         
 //                        Text("Morgen")
@@ -174,17 +174,17 @@ struct SleepContentView: View {
                     VStack {
                         HStack {
                             Image(systemName: "alarm")
-                                .foregroundColor(.red)
+                                .foregroundColor(.yellow)
                                 .font(.system(size: 12))
                             
                             Text(LocalizableStrings.wakeTime.uppercased())
                                 .bold()
-                                .foregroundColor(.white.opacity(0.3))
+                                .foregroundColor(Color(uiColor: .black).opacity(0.3))
                                 .font(.system(size: 14))
                         }
                         Text(getWakeUpTime())
                             .bold()
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(uiColor: .lightBlack))
                             .font(.system(size: 22))
                         
 //                        Text("Morgen")
@@ -201,7 +201,7 @@ struct SleepContentView: View {
                 VStack { //vertical
                     Text(String(getFormattedSleepDuration()))
                         .bold()
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(uiColor: .lightBlack))
                         .font(.system(size: 22))
                     Button(action: {
                         
@@ -213,7 +213,7 @@ struct SleepContentView: View {
                         onDoneTapped?()
                     }){
                         Text(LocalizableStrings.done)
-                            .foregroundColor(.white) //tint color
+                            .foregroundColor(Color(uiColor: .lightBlack)) //tint color
                             .padding()
                             .background(Color(uiColor: .pinkOrange))
                             .cornerRadius(10)
@@ -224,12 +224,12 @@ struct SleepContentView: View {
             
             ZStack {
                 Circle()
-                    .stroke(.black.opacity(0.9), lineWidth: config.knobDiameter*1.32)
+                    .stroke(Color(uiColor: .lightPinkOrange).opacity(0.9), lineWidth: config.knobDiameter*1.32)
                     .frame(width: config.diameter, height: config.diameter)
                 
                 Circle()
                     .trim(from: 0, to: connectorLength)
-                    .stroke(grayColor, lineWidth: config.knobDiameter)
+                    .stroke(Color(uiColor: .pinkOrange), lineWidth: config.knobDiameter)
                     .frame(width: config.diameter, height: config.diameter)
                     .rotationEffect(Angle(degrees: rotationSleep-90))
                 //                .gesture(
@@ -239,7 +239,7 @@ struct SleepContentView: View {
                 ForEach((1...config.countSteps).reversed(), id: \.self) { index in
                     RoundedRectangle(cornerRadius: 5)
                         .frame(width: 3, height: config.knobRadius*0.9)
-                        .foregroundColor(.black.opacity(0.3))
+                        .foregroundColor(Color(uiColor: .orangeBrown).opacity(0.3))
                         .offset(y: config.radius)
                         .rotationEffect(
                             Angle(degrees: 360/Double(config.countSteps) * Double(index))
@@ -262,7 +262,7 @@ struct SleepContentView: View {
                         Text(String(getHourStringByInt(hour)))
                             .font(.system(size: 16))
                             .bold()
-                            .foregroundColor(hour % 3 == 0 ? .white : .white.opacity(0.5))
+                            .foregroundColor(hour % 3 == 0 ? Color(uiColor: .lightBlack) : Color(uiColor: .black).opacity(0.5))
                             .rotationEffect(Angle(degrees: -(360.0/24*Double(hour))))
                     }
                     .offset(y: -(config.radius - 65))
@@ -320,11 +320,11 @@ struct SleepContentView: View {
         return ZStack {
             Circle()
                 .trim(from: 0.25, to: 0.75)
-                .foregroundColor(grayColor)
+                .foregroundColor(Color(uiColor: .pinkOrange))
                 .rotationEffect(Angle(degrees: rotate ? 180 : 0))
             
             Circle()
-                .foregroundColor(isTapped ? knobHover : grayColor)
+                .foregroundColor(isTapped ? knobHover : Color(uiColor: .pinkOrange))
                 .padding(5)
             Image(systemName: icon)
                 .foregroundColor(labelColor)

@@ -68,7 +68,7 @@
 
 //settingPage
 "settings" = "Settings";
-"Reminderbody" = "Don't forget to record your day ☺️";
+"reminderBody" = "Don't forget to record your day ☺️";
 "deleteAccountAlert" = "Delete Account";
 "deleteMessage" = "Are you sure to delete account?\nThis will permanentely erase your account.";
 "delete" = "Delete";
@@ -79,6 +79,8 @@
 "languageLabel" = "Language";
 "language" = "English";
 "deleteAccountButton" = "Delete Account";
+"Chinese" = "Chinese";
+"English" = "English";
 
 
 //passwordPage
