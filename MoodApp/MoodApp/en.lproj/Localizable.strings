@@ -40,9 +40,11 @@
 "NoRecord" = "No Record";
 
 
-//Sleep Analysis
+//SleepAnalysisCell
 "Sleep" = "Sleep Analysis";
 "NoRecord" = "No Record";
+"moreLabel" = "more than 6 hrs";
+"lessLabel" = "less than 6 hrs";
 
 
 //StatisicsVC

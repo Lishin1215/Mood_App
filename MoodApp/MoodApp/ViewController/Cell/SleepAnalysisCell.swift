@@ -92,9 +92,100 @@ class SleepAnalysisCell: UITableViewCell {
             noRecord2.centerYAnchor.constraint(equalTo: containerView2.centerYAnchor)
         ])
         
+        
+        //unit label
+        let unitLabel = UILabel()
+        unitLabel.text = "(hrs)"
+        unitLabel.font = UIFont.systemFont(ofSize: 10)
+        unitLabel.textColor = .lightGray
+        
+        containerView2.addSubview(unitLabel)
+        
+        unitLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            unitLabel.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 34),
+            unitLabel.leadingAnchor.constraint(equalTo: containerView2.leadingAnchor, constant: 12)
+        ])
+        
+        
+        // label & imageView on top
+        let moreLabel = UILabel()
+        let lessLabel = UILabel()
+        let dot = UIImage(systemName: "circle.fill")
+        let greenDot = dot?.tinted(with: .grassGreen)
+        let orangeDot = dot?.tinted(with: .orangeBrown)
+        let greenDotView = UIImageView(image: greenDot)
+        let orangeDotView = UIImageView(image: orangeDot)
+        
+        moreLabel.text = NSLocalizedString("moreLabel", comment: "")
+        moreLabel.font = UIFont.systemFont(ofSize: 12)
+        moreLabel.textColor = .lightGray
+        
+        lessLabel.text = NSLocalizedString("lessLabel", comment: "")
+        lessLabel.font = UIFont.systemFont(ofSize: 12)
+        lessLabel.textColor = .lightGray
+        
+        containerView2.addSubview(moreLabel)
+        containerView2.addSubview(lessLabel)
+        containerView2.addSubview(greenDotView)
+        containerView2.addSubview(orangeDotView)
+        
+        moreLabel.translatesAutoresizingMaskIntoConstraints = false
+        lessLabel.translatesAutoresizingMaskIntoConstraints = false
+        greenDotView.translatesAutoresizingMaskIntoConstraints = false
+        orangeDotView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            greenDotView.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 20),
+            greenDotView.leadingAnchor.constraint(equalTo: containerView2.leadingAnchor, constant: 45),
+            greenDotView.heightAnchor.constraint(equalToConstant: 10),
+            greenDotView.widthAnchor.constraint(equalTo: greenDotView.heightAnchor)
+            
+        ])
+        
+        NSLayoutConstraint.activate([
+            moreLabel.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 17),
+            moreLabel.leadingAnchor.constraint(equalTo: greenDotView.trailingAnchor, constant: 6)
+        ])
+        
+        NSLayoutConstraint.activate([
+            orangeDotView.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 20),
+            orangeDotView.trailingAnchor.constraint(equalTo: lessLabel.leadingAnchor, constant: -6),
+            orangeDotView.heightAnchor.constraint(equalToConstant: 10),
+            orangeDotView.widthAnchor.constraint(equalTo: orangeDotView.heightAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            lessLabel.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 17),
+            lessLabel.trailingAnchor.constraint(equalTo: containerView2.trailingAnchor, constant: -45)
+        ])
+        
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//改變UIImage顏色
+extension UIImage {
+    func tinted(with color: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        color.setFill()
+        
+        context.translateBy(x: 0, y: size.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.setBlendMode(.normal)
+        
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        context.clip(to: rect, mask: cgImage!)
+        context.fill(rect)
+        
+        let tintedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return tintedImage
     }
 }

@@ -37,9 +37,12 @@
 "MoodFlow" = "心情趨勢圖";
 "NoRecord" = "沒有紀錄喔";
 
-//Sleep Analysis
+//SleepAnalysisCell
 "Sleep" = "睡眠分析";
 "NoRecord" = "沒有紀錄喔";
+"moreLabel" = "大於 6 小時";
+"lessLabel" = "小於 6 小時";
+
 
 //StatisicsVC
 "sleepLabel" = "睡眠";

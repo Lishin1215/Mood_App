@@ -62,6 +62,20 @@ class MoodFlowCell: UITableViewCell {
             noRecord.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             noRecord.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
+        
+        //unit label
+        let unitLabel = UILabel()
+        unitLabel.text = "(points)"
+        unitLabel.font = UIFont.systemFont(ofSize: 10)
+        unitLabel.textColor = .lightGray
+        
+        containerView.addSubview(unitLabel)
+        
+        unitLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            unitLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12),
+            unitLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10)
+        ])
     
     }
     

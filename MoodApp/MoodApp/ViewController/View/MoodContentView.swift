@@ -47,7 +47,9 @@ struct MoodContentView: View {
             }
         }
         .chartYAxis {
-            AxisMarks(position: .leading)
+            AxisMarks(position: .leading, values: [0,1,2,3,4]) //讓y軸固定5個值
         }
+        .chartYScale(domain: 0...4) //限制y軸範圍
+        
     }
 }

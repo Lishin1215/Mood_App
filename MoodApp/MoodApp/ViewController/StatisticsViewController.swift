@@ -348,7 +348,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                 //設定swiftUI constraints
                 hostView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                    hostView.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 16),
+                    hostView.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 35),
                     hostView.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 16),
                     hostView.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -16),
                     hostView.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -5)
@@ -431,7 +431,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                     
                     sleepHostView.translatesAutoresizingMaskIntoConstraints = false
                     NSLayoutConstraint.activate([
-                        sleepHostView.topAnchor.constraint(equalTo: sleepCell.containerView2.topAnchor, constant: 16),
+                        sleepHostView.topAnchor.constraint(equalTo: sleepCell.containerView2.topAnchor, constant: 55),
                         sleepHostView.leadingAnchor.constraint(equalTo: sleepCell.containerView2.leadingAnchor, constant: 16),
                         sleepHostView.trailingAnchor.constraint(equalTo: sleepCell.containerView2.trailingAnchor, constant: -16),
                         sleepHostView.bottomAnchor.constraint(equalTo: sleepCell.containerView2.bottomAnchor, constant: -5)
