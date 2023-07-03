@@ -172,16 +172,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    @objc func languageButtonTapped(_ sender: UIButton) {
-        print("I want Mandarin!")
-        //被點擊感
-        languageButton.alpha = languageButton.isHighlighted ? 0.5 : 1
-        //present 一個view (可以選中英文）
-        
-        //點擊感消失
-        
-    }
-    
     
     @objc func languageSelected(_ sender: UISegmentedControl) {
         
@@ -190,10 +180,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         switch selectedLanguage {
         case 0:
             print("英文")
-        
+            //換語言
+            UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
         case 1:
             print("中文")
-            self.titleLabel.text = LocalizeUtils.shared.localized(withKey: "settings", withLocalizationFileName: "zh-Hant")
+            
+            UserDefaults.standard.set(["zh-Hant"], forKey: "AppleLanguages")
         default:
             break
         }
