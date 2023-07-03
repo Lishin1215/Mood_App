@@ -25,7 +25,7 @@ class SettingsCell: UITableViewCell {
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 10
         containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 0.5
+        containerView.layer.shadowOpacity = 0.25
         containerView.layer.shadowOffset = CGSize(width: 0, height: 2)
         containerView.layer.shadowRadius = 4
         addSubview(containerView)

@@ -25,7 +25,7 @@ class SleepAnalysisCell: UITableViewCell {
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 10
         containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 0.5
+        containerView.layer.shadowOpacity = 0.25
         containerView.layer.shadowOffset = CGSize(width: 0, height: 2)
         containerView.layer.shadowRadius = 4
         addSubview(containerView)
@@ -54,7 +54,7 @@ class SleepAnalysisCell: UITableViewCell {
         containerView2.backgroundColor = .white
         containerView2.layer.cornerRadius = 10
         containerView2.layer.shadowColor = UIColor.black.cgColor
-        containerView2.layer.shadowOpacity = 0.5
+        containerView2.layer.shadowOpacity = 0.25
         containerView2.layer.shadowOffset = CGSize(width: 0, height: 2)
         containerView2.layer.shadowRadius = 4
         addSubview(containerView2)
