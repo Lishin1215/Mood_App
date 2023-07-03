@@ -21,7 +21,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //header
     let headerView = UIView()
-    let titleLabel = UILabel()
+    var titleLabel = UILabel()
     
     //reminder
     let remindSwitchButton = UISwitch()
@@ -32,6 +32,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let datePicker = UIDatePicker()
     let languageButton = UIButton()
     let deleteButton = UIButton()
+    
+    //language
+    let segmentedControl = UISegmentedControl(items: ["English", "Chinese"])
     
     
     let tableView = UITableView()
@@ -179,6 +182,24 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    
+    @objc func languageSelected(_ sender: UISegmentedControl) {
+        
+        let selectedLanguage = segmentedControl.selectedSegmentIndex
+        
+        switch selectedLanguage {
+        case 0:
+            print("英文")
+        
+        case 1:
+            print("中文")
+            self.titleLabel.text = LocalizeUtils.shared.localized(withKey: "settings", withLocalizationFileName: "zh-Hant")
+        default:
+            break
+        }
+    }
+    
+    
     @objc func deleteAccountTapped(_ sender: UIButton) {
         print("要確定齁")
         
@@ -282,6 +303,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         //右側按鈕(switch)
 //            let passwordSwitchButton = UISwitch()
 //            passwordSwitchButton.isOn = false
+            passwordSwitchButton.onTintColor = .orangeBrown
             cell.addSubview(passwordSwitchButton)
             passwordSwitchButton.addTarget(self, action: #selector(passwordCondition), for: .valueChanged)
             
@@ -332,6 +354,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             //右側按鈕(switch)
 //            let remindSwitchButton = UISwitch()
             remindSwitchButton.isOn = false
+            remindSwitchButton.onTintColor = .orangeBrown
             cell.addSubview(remindSwitchButton)
             remindSwitchButton.addTarget(self, action: #selector(remindCondition), for: .valueChanged)
             
@@ -378,27 +401,46 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                     SettingsCell
             else {fatalError("Could not create Cell")}
             
+            //custom containerView height
+            cell.setContainerViewHeight(80)
             cell.setContainerViewTopAnchor(30)
+            
             
             cell.contentLabel.text = NSLocalizedString("languageLabel", comment: "")
             NSLayoutConstraint.activate([
                 cell.contentLabel.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
             ])
             
+            
+            //右側點選語言(segmented)
+            segmentedControl.selectedSegmentIndex = 0
+//            segmentedControl.tintColor = .orangeBrown
+            segmentedControl.backgroundColor = .pinkOrange
+            view.addSubview(segmentedControl)
+            
+            segmentedControl.addTarget(self, action: #selector(languageSelected), for: .valueChanged)
+            
+            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                segmentedControl.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor),
+                segmentedControl.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -10),
+                segmentedControl.widthAnchor.constraint(equalToConstant: 120)
+            ])
+            
             //右側點選語言(button)
 //            let languageButton = UIButton()
-            languageButton.setTitle(NSLocalizedString("language", comment: ""), for: .normal)
-            languageButton.setTitleColor(UIColor.pinkOrange, for: .normal)
-            languageButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            cell.addSubview(languageButton)
-            
-            languageButton.addTarget(self, action: #selector(languageButtonTapped), for: .touchUpInside)
-            
-            languageButton.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                languageButton.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor),
-                languageButton.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -30)
-            ])
+//            languageButton.setTitle(NSLocalizedString("language", comment: ""), for: .normal)
+//            languageButton.setTitleColor(UIColor.pinkOrange, for: .normal)
+//            languageButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+//            cell.addSubview(languageButton)
+//
+//            languageButton.addTarget(self, action: #selector(languageButtonTapped), for: .touchUpInside)
+//
+//            languageButton.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint.activate([
+//                languageButton.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor),
+//                languageButton.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -30)
+//            ])
             
             return cell
         } else {
