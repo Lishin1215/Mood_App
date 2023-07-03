@@ -222,7 +222,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             footerView.heightAnchor.constraint(equalToConstant: 80)
         ])
         //“加入購物車”按鈕
-        addDayButton.setTitle("+  Add Day", for: .normal)
+        let addDay = NSLocalizedString("addDay", comment: "")
+        addDayButton.setTitle(addDay, for: .normal)
         
         addDayButton.setTitleColor(.white, for: .normal)
         addDayButton.layer.cornerRadius = 10
@@ -260,7 +261,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             moodButton.backgroundColor = .white
         }
         //點選後要變顏色
-        let selectedColor = UIColor.lightLightGray
+        let selectedColor = UIColor.lightPinkOrange
         sender.layer.cornerRadius = 22
         sender.backgroundColor = selectedColor
         //得到選擇的"心情編號“
@@ -407,7 +408,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                 if articleDateString == selectedDateString {
                     //拿其他數據 (mood)
                     if let mood = article["mood"] as? String {
-                        moodButtonArray[Int(mood) ?? 0].backgroundColor = .lightLightGray
+                        moodButtonArray[Int(mood) ?? 0].backgroundColor = .lightPinkOrange
                         moodButtonArray[Int(mood) ?? 0].layer.cornerRadius = 22
                         self.addDayButton.isEnabled = true
                         self.addDayButton.backgroundColor = .pinkOrange
@@ -489,7 +490,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell
             else { fatalError("Could not create Cell") }
         
-            cell.moodLabel.text = "How's Your Day"
+            cell.moodLabel.text = NSLocalizedString("dailyMood", comment: "")
             
         //button
             let buttonImages = ["image 22", "image 7", "image 25", "image 13", "image 8"] //#imageLiteral(
@@ -518,11 +519,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         } else if indexPath.row == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
             
-            cell.moodLabel.text = "Sleep Time"
+            cell.moodLabel.text = NSLocalizedString("sleepTimeLabel", comment: "")
         
         //button(sleep circular slider)
 //            let sleepButton = UIButton()
-            sleepButton.backgroundColor = .lightLightGray
+            sleepButton.backgroundColor = .lightPinkOrange
             sleepButton.layer.cornerRadius = 10
             sleepButton.addTarget(self, action: #selector(sleepButtonTapped), for: .touchUpInside)
             cell.addSubview(sleepButton)
@@ -539,11 +540,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         } else if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPageCell.reuseIdentifier, for: indexPath) as? NewPageCell else { fatalError("Could not create Cell") }
             
-            cell.moodLabel.text = "Write About Today"
+            cell.moodLabel.text = NSLocalizedString("writeToday", comment: "")
             
         //textField
 //            let textField = UITextField()
-            textField.backgroundColor = .lightLightGray
+            textField.backgroundColor = .lightPinkOrange
             textField.layer.cornerRadius = 10
             cell.addSubview(textField)
             
@@ -559,7 +560,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NewPagePhotoCell.reuseIdentifier, for: indexPath) as? NewPagePhotoCell else { fatalError("Could not create Cell") }
             
-            cell.titleLabel.text = "Today's Photo"
+            cell.titleLabel.text = NSLocalizedString("photoToday", comment: "")
        
         //button(UIImagePicker)
             cell.imageButton.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)

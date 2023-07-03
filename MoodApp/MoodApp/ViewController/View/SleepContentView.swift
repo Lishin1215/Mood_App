@@ -36,6 +36,13 @@ let config = Config(
     countSteps: 24*60/10
 )
 
+//多國語系
+struct LocalizableStrings {
+    static let sleepTime = NSLocalizedString("sleepTime", comment: "")
+    static let wakeTime  = NSLocalizedString("wakeTime", comment: "")
+    static let done = NSLocalizedString("DoneButton", comment: "")
+}
+
 struct SleepContentView: View {
     
     @State var rotationSleep = 0.0
@@ -74,10 +81,10 @@ struct SleepContentView: View {
         }
         
         if min == 0 {
-            return "\(hours) Std."
+            return "\(hours) hrs"
         }
         
-        return "\(hours) Std. \(min) Min."
+        return "\(hours) hrs  \(min) mins"
     }
     
     func mapRotationToTime(degrees: Double) -> Double {
@@ -140,6 +147,7 @@ struct SleepContentView: View {
             grayColor.edgesIgnoringSafeArea(.all) //Color(.white)
             
             VStack {
+                
                 HStack(spacing: 50) {
                     VStack {
                         HStack {
@@ -147,7 +155,7 @@ struct SleepContentView: View {
                                 .foregroundColor(.mint)
                                 .font(.system(size: 12))
                             
-                            Text("Schlafenszeit".uppercased())
+                            Text(LocalizableStrings.sleepTime.uppercased())
                                 .bold()
                                 .foregroundColor(.white.opacity(0.3))
                                 .font(.system(size: 14))
@@ -157,10 +165,10 @@ struct SleepContentView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 22))
                         
-                        Text("Morgen")
-                            .bold()
-                            .font(.system(size: 14))
-                            .foregroundColor(.white.opacity(0.5))
+//                        Text("Morgen")
+//                            .bold()
+//                            .font(.system(size: 14))
+//                            .foregroundColor(.white.opacity(0.5))
                     }
                     
                     VStack {
@@ -169,7 +177,7 @@ struct SleepContentView: View {
                                 .foregroundColor(.red)
                                 .font(.system(size: 12))
                             
-                            Text("Wecker".uppercased())
+                            Text(LocalizableStrings.wakeTime.uppercased())
                                 .bold()
                                 .foregroundColor(.white.opacity(0.3))
                                 .font(.system(size: 14))
@@ -179,10 +187,10 @@ struct SleepContentView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 22))
                         
-                        Text("Morgen")
-                            .bold()
-                            .font(.system(size: 14))
-                            .foregroundColor(.white.opacity(0.5))
+//                        Text("Morgen")
+//                            .bold()
+//                            .font(.system(size: 14))
+//                            .foregroundColor(.white.opacity(0.5))
                     }
                 }
                 .padding(.horizontal)
@@ -204,7 +212,7 @@ struct SleepContentView: View {
                         //closure (把自己收起來）(更新newPageVC sleepButton title)
                         onDoneTapped?()
                     }){
-                        Text("Done")
+                        Text(LocalizableStrings.done)
                             .foregroundColor(.white) //tint color
                             .padding()
                             .background(Color(uiColor: .pinkOrange))

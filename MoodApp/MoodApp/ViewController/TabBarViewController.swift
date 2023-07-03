@@ -11,19 +11,15 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        
+        self.tabBar.items?[0].title = NSLocalizedString("tab0", comment: "")
+        self.tabBar.items?[1].title = NSLocalizedString("tab1", comment: "")
+        self.tabBar.items?[3].title = NSLocalizedString("tab3", comment: "")
+        self.tabBar.items?[4].title = NSLocalizedString("tab4", comment: "")
+        
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

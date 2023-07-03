@@ -47,9 +47,9 @@ class PasswordViewController: UIViewController {
         
         if StorageManager.shared.fetchPassword() == nil {
             //沒有密碼 --> 設定密碼
-            titleLabel.text = "Enter your new PIN"
+            titleLabel.text = NSLocalizedString("passwordTitleNew", comment: "")
         } else  {
-            titleLabel.text = "Enter PIN"
+            titleLabel.text = NSLocalizedString("passwordTitleOld", comment: "")
         }
         
         titleLabel.textAlignment = .center
@@ -195,7 +195,7 @@ class PasswordViewController: UIViewController {
                     confirmNewPassword()
                 } else { //要進入confirmPassword的階段
                     reset()
-                    titleLabel.text = "Confirm your PIN"
+                    titleLabel.text = NSLocalizedString("confirmPassword", comment: "")
                     titleLabel.textAlignment = .center
                     titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
                     
@@ -225,7 +225,7 @@ class PasswordViewController: UIViewController {
             }
             
         } else {
-            subtitleLabel.text = "PIN does not match"
+            subtitleLabel.text = NSLocalizedString("passwordSubTitle", comment: "")
             subtitleLabel.textAlignment = .center
             subtitleLabel.font = UIFont.systemFont(ofSize: 15)
             subtitleLabel.textColor = .brown
@@ -233,7 +233,7 @@ class PasswordViewController: UIViewController {
             //reset畫面
             self.reset()
             subtitleLabel.isHidden = false
-            subtitleLabel.text = "PIN does not match"
+            subtitleLabel.text = NSLocalizedString("passwordSubTitle", comment: "")
             subtitleLabel.textColor = .brown
         }
     }
@@ -243,8 +243,8 @@ class PasswordViewController: UIViewController {
         if confirmPassword == newPassword {
             
             //設定完成跳alert ("PIN has been set")
-            let controller = UIAlertController(title: "Success🥳", message: "PIN has been set", preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default) { (_) in
+            let controller = UIAlertController(title: NSLocalizedString("settingAlert", comment: ""), message: NSLocalizedString("settingMessage", comment: ""), preferredStyle: .alert)
+            let action = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { (_) in
                 //寫入coreData
                 StorageManager.shared.setPassword(newPasscode: self.newPassword)
 
@@ -265,7 +265,7 @@ class PasswordViewController: UIViewController {
             
 
         } else {
-            subtitleLabel.text = "PIN does not match"
+            subtitleLabel.text = NSLocalizedString("passwordSubTitle", comment: "")
             subtitleLabel.textAlignment = .center
             subtitleLabel.font = UIFont.systemFont(ofSize: 15)
             subtitleLabel.textColor = .brown
@@ -278,12 +278,12 @@ class PasswordViewController: UIViewController {
             self.reset()
             
             //回到newPassword page （因為newPassword有清空，系統會知道現在要input newPassword)
-            titleLabel.text = "Enter your new PIN"
+            titleLabel.text = NSLocalizedString("passwordTitleNew", comment: "")
             
             //但還是要有錯誤訊息
             subtitleLabel.isHidden = false
             subtitleLabel.textAlignment = .center
-            subtitleLabel.text = "PIN does not match"
+            subtitleLabel.text = NSLocalizedString("passwordSubTitle", comment: "")
             subtitleLabel.textColor = .brown
         }
     }

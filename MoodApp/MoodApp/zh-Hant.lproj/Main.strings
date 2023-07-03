@@ -1,0 +1,51 @@
+
+/* Class = "UIButton"; normalTitle = "2"; ObjectID = "0hi-ih-Dgc"; */
+"0hi-ih-Dgc.normalTitle" = "2";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "8Qb-B2-KPx"; */
+"8Qb-B2-KPx.title" = "Settings";
+
+/* Class = "UIButton"; normalTitle = "5"; ObjectID = "CfI-hy-g3c"; */
+"CfI-hy-g3c.normalTitle" = "5";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "PFj-8v-UdR"; */
+"PFj-8v-UdR.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Tv0-0Y-BnV"; */
+"Tv0-0Y-BnV.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "3"; ObjectID = "YHJ-WU-eSO"; */
+"YHJ-WU-eSO.normalTitle" = "3";
+
+/* Class = "UIButton"; normalTitle = "8"; ObjectID = "ZJV-87-ggz"; */
+"ZJV-87-ggz.normalTitle" = "8";
+
+/* Class = "UIButton"; normalTitle = "7"; ObjectID = "af9-N0-F9g"; */
+"af9-N0-F9g.normalTitle" = "7";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "fYs-ui-ZER"; */
+"fYs-ui-ZER.title" = "Item";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "gJ7-R7-zGc"; */
+"gJ7-R7-zGc.title" = "Home";
+
+/* Class = "UIButton"; normalTitle = "6"; ObjectID = "kR7-hm-jua"; */
+"kR7-hm-jua.normalTitle" = "6";
+
+/* Class = "UIButton"; normalTitle = "0"; ObjectID = "lsX-bR-2sy"; */
+"lsX-bR-2sy.normalTitle" = "0";
+
+/* Class = "UITabBarItem"; title = "Look Back"; ObjectID = "nvS-XA-BLJ"; */
+"nvS-XA-BLJ.title" = "Look Back";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "owe-oI-CWQ"; */
+"owe-oI-CWQ.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "9"; ObjectID = "vds-Oz-KVF"; */
+"vds-Oz-KVF.normalTitle" = "9";
+
+/* Class = "UIButton"; normalTitle = "4"; ObjectID = "wiY-NM-WfP"; */
+"wiY-NM-WfP.normalTitle" = "4";
+
+/* Class = "UITabBarItem"; title = "Statistics"; ObjectID = "yyq-iP-KZE"; */
+"yyq-iP-KZE.title" = "Statistics";

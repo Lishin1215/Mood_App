@@ -1,0 +1,98 @@
+/* 
+  Localizable.strings
+  MoodApp
+
+  Created by 簡莉芯 on 2023/7/3.
+  
+*/
+
+//tabBarVC
+"tab0" = "Home";
+"tab1" = "Statistics";
+"tab3" = "Look Back";
+"tab4" = "Settings";
+
+
+
+//sleepContentView
+"sleepTime" = "Went to bed";
+"wakeTime" = "Woke Up";
+"DoneButton" = "Done";
+
+
+//popUpMonthView
+"1" = "Jan";
+"2" = "Feb";
+"3" = "Mar";
+"4" = "Apr";
+"5" = "May";
+"6" = "Jun";
+"7" = "Jul";
+"8" = "Aug";
+"9" = "Sep";
+"10" = "Oct";
+"11" = "Nov";
+"12" = "Dec";
+
+
+//MoodFlowCell
+"MoodFlow" = "Mood Flow";
+"NoRecord" = "No Record";
+
+
+//Sleep Analysis
+"Sleep" = "Sleep Analysis";
+"NoRecord" = "No Record";
+
+
+//StatisicsVC
+"sleepLabel" = "Sleep";
+"hrs" = "hrs";
+"averageBed" = "Average\nBedtime";
+"averageWake" = "Average\nWaking Time";
+"averageSleep" = "Average\nSleep";
+
+
+//newPageVC
+"addDay" = "+  Add Day";
+"dailyMood" = "How's Your Day";
+"sleepTimeLabel" = "Sleep Time";
+"writeToday" = "Write About Today";
+"photoToday" = "Today's Photo";
+
+
+//lookBackPage
+"memoir" = "Memoir";
+"keepRecord" = "Add 5 photos to unlock more features!";
+
+
+//settingPage
+"settings" = "Settings";
+"Reminderbody" = "Don't forget to record your day ☺️";
+"deleteAccountAlert" = "Delete Account";
+"deleteMessage" = "Are you sure to delete account?\nThis will permanentely erase your account.";
+"delete" = "Delete";
+"cancel" = "Cancel";
+"general" = "General";
+"passcode" = "Passcode";
+"remind" = "Reminder Time";
+"languageLabel" = "Language";
+"language" = "English";
+"deleteAccountButton" = "Delete Account";
+
+
+//passwordPage
+"passwordTitleNew" = "Enter your new PIN";
+"passwordTitleOld" = "Enter PIN";
+"confirmPassword" = "Confirm your PIN";
+"passwordSubTitle" = "PIN does not match";
+"settingAlert" = "Success🥳";
+"settingMessage" = "PIN has been set";
+"ok" = "OK";
+
+
+
+
+
+
+

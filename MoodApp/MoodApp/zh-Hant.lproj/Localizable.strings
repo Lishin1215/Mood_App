@@ -1,0 +1,85 @@
+/* 
+  Localizable.strings
+  MoodApp
+
+  Created by 簡莉芯 on 2023/7/3.
+  
+*/
+
+
+//tabBarVC
+"tab0" = "首頁";
+"tab1" = "數據";
+"tab3" = "回顧";
+"tab4" = "設定";
+
+
+//sleepContentView
+"sleepTime" = "就寢時間";
+"wakeTime" = "起床時間";
+"DoneButton" = "完成";
+
+//popUpMonthView
+"1" = "1月";
+"2" = "2月";
+"3" = "3月";
+"4" = "4月";
+"5" = "5月";
+"6" = "6月";
+"7" = "7月";
+"8" = "8月";
+"9" = "9月";
+"10" = "10月";
+"11" = "11月";
+"12" = "12月";
+
+//MoodFlowCell
+"MoodFlow" = "心情趨勢圖";
+"NoRecord" = "沒有紀錄喔";
+
+//Sleep Analysis
+"Sleep" = "睡眠分析";
+"NoRecord" = "沒有紀錄喔";
+
+//StatisicsVC
+"sleepLabel" = "睡眠";
+"hrs" = "小時";
+"averageBed" = "平均\n就寢時間";
+"averageWake" = "平均\n起床時間";
+"averageSleep" = "平均\n睡眠時間";
+
+//newPageVC
+"addDay" = "記錄完畢";
+"dailyMood" = "今天心情如何～";
+"sleepTimeLabel" = "睡眠時間";
+"writeToday" = "一行日記";
+"photoToday" = "今天的照片";
+
+//lookBackPage
+"memoir" = "回憶錄";
+"keepRecord" = "添加5張照片以上，以解鎖更多功能！";
+
+//settingPage
+"settings" = "設定";
+"reminderBody" = "不要忘記記錄今天喔 ☺️";
+"deleteAccountAlert" = "帳號刪除";
+"deleteMessage" = "確定要刪除帳號嗎?\n帳號會永遠消失喔";
+"delete" = "刪除";
+"cancel" = "取消";
+"general" = "一般";
+"passcode" = "密碼設置";
+"remind" = "提醒 ON/OFF";
+"languageLabel" = "語言選擇";
+"language" = "繁體中文";
+"deleteAccountButton" = "刪除帳號";
+
+
+//passwordPage
+"passwordTitleNew" = "請設定您的新密碼";
+"passwordTitleOld" = "請輸入密碼";
+"confirmPassword" = "請確認您的密碼";
+"passwordSubTitle" = "密碼輸入錯誤";
+"settingAlert" = "完成🥳";
+"settingMessage" = "密碼已成功設定";
+"ok" = "確定";
+

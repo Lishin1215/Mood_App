@@ -39,7 +39,7 @@ class MoodFlowCell: UITableViewCell {
         ])
         
         //label
-        titleLabel.text = "Mood Flow"
+        titleLabel.text = NSLocalizedString("MoodFlow", comment: "")
         titleLabel.textColor = .darkGray
         titleLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(titleLabel)
@@ -53,7 +53,7 @@ class MoodFlowCell: UITableViewCell {
         //no record label
 //        let noRecord = UILabel()
         noRecord.isHidden = true //default
-        noRecord.text = "No Record"
+        noRecord.text = NSLocalizedString("NoRecord", comment: "")
         noRecord.font = UIFont.boldSystemFont(ofSize: 16)
         containerView.addSubview(noRecord)
         

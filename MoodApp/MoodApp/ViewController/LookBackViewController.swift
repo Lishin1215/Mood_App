@@ -69,7 +69,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
             headerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.14)
         ])
         
-        titleLabel.text = "Memoir"
+        titleLabel.text = NSLocalizedString("memoir", comment: "")
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         headerView.addSubview(titleLabel)
         
@@ -142,7 +142,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         ])
         
         //keepRecord
-        keepRecordLabel.text = "Add 10 photos to unlock more features!"
+        keepRecordLabel.text = NSLocalizedString("keepRecord", comment: "")
         keepRecordLabel.font = UIFont.boldSystemFont(ofSize: 15)
         keepRecordLabel.textColor = .darkGray
         containerView.addSubview(keepRecordLabel)

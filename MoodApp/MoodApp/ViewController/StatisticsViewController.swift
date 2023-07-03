@@ -249,7 +249,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         let hours = Int(averageSeconds / 3600) //先拿到“小時”，暫時不管小數點
         let minutes = Int((averageSeconds/60).truncatingRemainder(dividingBy: 60)) //先除以60變分鐘，再除以60變小時，然後去拿最後除以小時剩下的餘數（ex.1 --> 1分鐘）
         
-        //變成2為整數(ex. Int 5 --> "05" )
+        //變成“2位數”整數(ex. Int 5 --> "05" )
         let formattedTime = String(format: "%02d:%02d", hours, minutes)
         return formattedTime
     }
@@ -439,49 +439,6 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
                 }
             }
         }
-        
-//        // II. 計算平均時間
-//        averageBedTime = calculateAverageTime(timeStrings: sleepStartArray)
-//        averageWakeTime = calculateAverageTime(timeStrings: sleepEndArray)
-//
-//        let sleepTimeArray = calculateSleepTime(startArray: sleepStartArray, endArray: sleepEndArray)
-//        self.sleepTimeArray = sleepTimeArray
-//        print("??? \(sleepTimeArray)")
-//
-//        averageSleepTime = sleepTimeAverage(timeStrings: sleepTimeArray)
-//
-//        //處理完資料後 reload tableView，更新label
-//        DispatchQueue.main.async {
-//            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)//讓處理好的資料被放進去
-//
-//
-//            //III. 把sleepDateArray和sleepTimeArray結合
-//            let sleepTimeFlowArray = zip(sleepDateArray, sleepTimeArray).map { SleepTimeFlow(date: $0, sleepTime: $1)
-//            }
-//            print("@@ + \(sleepTimeFlowArray)")
-//            self.sleepTimeFlowArray = sleepTimeFlowArray
-//
-//            //處理完資料後，call "sleepBarChart swiftUI"，把畫圖資料傳過來
-//            let sleepBarSwiftUI = SleepBarChartView(sleepTimeFlowArray: self.sleepTimeFlowArray)
-//            let sleepHost = UIHostingController(rootView: sleepBarSwiftUI)
-//
-//            let sleepIndexPath = IndexPath(row: 1, section: 0)
-//            self.sleepHostView.removeFromSuperview()
-//
-//            if let sleepHostView = sleepHost.view,
-//               let sleepCell = self.tableView.cellForRow(at: sleepIndexPath) as? SleepAnalysisCell {
-//                self.sleepHostView = sleepHostView
-//                sleepCell.addSubview(sleepHostView)
-//
-//                sleepHostView.translatesAutoresizingMaskIntoConstraints = false
-//                NSLayoutConstraint.activate([
-//                    sleepHostView.topAnchor.constraint(equalTo: sleepCell.containerView2.topAnchor, constant: 16),
-//                    sleepHostView.leadingAnchor.constraint(equalTo: sleepCell.containerView2.leadingAnchor, constant: 16),
-//                    sleepHostView.trailingAnchor.constraint(equalTo: sleepCell.containerView2.trailingAnchor, constant: -16),
-//                    sleepHostView.bottomAnchor.constraint(equalTo: sleepCell.containerView2.bottomAnchor, constant: -5)
-//                ])
-//            }
-//        }
     }
 
 //Conform to Protocol
@@ -539,7 +496,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             //sleepLabel
             let sleepLabel = UILabel()
             sleepLabel.removeFromSuperview()
-            sleepLabel.text = "Sleep"
+            sleepLabel.text = NSLocalizedString("sleepLabel", comment: "")
             sleepLabel.textColor = .orangeBrown
             sleepLabel.font = UIFont.systemFont(ofSize: 16)
             cell.containerView.addSubview(sleepLabel)
@@ -553,7 +510,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             //hrs
             let hrsLabel = UILabel()
             hrsLabel.removeFromSuperview()
-            hrsLabel.text = "hrs"
+            hrsLabel.text = NSLocalizedString("hrs", comment: "")
             hrsLabel.textColor = .lightGray
             hrsLabel.font = UIFont.systemFont(ofSize: 13)
             cell.containerView.addSubview(hrsLabel)
@@ -569,13 +526,13 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             let wakeTimeLabel = UILabel()
             let sleepTimelabel = UILabel()
             
-            bedTimeLabel.text = "Average\nBedtime"
+            bedTimeLabel.text = NSLocalizedString("averageBed", comment: "")
             bedTimeLabel.numberOfLines = 2
             bedTimeLabel.textAlignment = .center
-            wakeTimeLabel.text = "Average\nWaking Time"
+            wakeTimeLabel.text = NSLocalizedString("averageWake", comment: "")
             wakeTimeLabel.numberOfLines = 2
             wakeTimeLabel.textAlignment = .center
-            sleepTimelabel.text = "Average\nSleep"
+            sleepTimelabel.text = NSLocalizedString("averageSleep", comment: "")
             sleepTimelabel.numberOfLines = 2
             sleepTimelabel.textAlignment = .center
             bedTimeLabel.font = UIFont.systemFont(ofSize: 13)

@@ -72,7 +72,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             headerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.14)
         ])
         
-        titleLabel.text = "Settings"
+        titleLabel.text = NSLocalizedString("settings", comment: "")
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         headerView.addSubview(titleLabel)
         
@@ -120,7 +120,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             //設定通知內容
             let content = UNMutableNotificationContent()
             content.title = "MoodApp"
-            content.body = "Don't forget to record your day ☺️"
+            content.body = NSLocalizedString("Reminderbody", comment: "")
             content.badge = 1
             content.sound = UNNotificationSound.default
             
@@ -183,12 +183,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         print("要確定齁")
         
         //跳alert --> confirm
-        let controller = UIAlertController(title: "Delete Account", message: "Are you sure to delete account?\nThis will permanentely erase your account.", preferredStyle: .alert)
+        let controller = UIAlertController(title: NSLocalizedString("deleteAccountAlert", comment: ""), message: NSLocalizedString("deleteMessage", comment: ""), preferredStyle: .alert)
         
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+        let deleteAction = UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive) { _ in
             self.deleteUser()
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel)
         
         controller.addAction(deleteAction)
         controller.addAction(cancelAction)
@@ -238,7 +238,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 135
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 1 {
             return 150
         } else {
             return 115
@@ -248,7 +248,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
 //MARK: UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        4
     }
     
     
@@ -260,7 +260,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             
         //generalLabel
             let generalLabel = UILabel()
-            generalLabel.text = "General"
+            generalLabel.text = NSLocalizedString("general", comment: "")
             generalLabel.textColor = .darkGray
             generalLabel.font = UIFont.systemFont(ofSize: 15)
             cell.addSubview(generalLabel)
@@ -274,7 +274,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             //調整containerView topAnchor
             cell.setContainerViewTopAnchor(60)
 
-            cell.contentLabel.text = "Passcode"
+            cell.contentLabel.text = NSLocalizedString("passcode", comment: "")
             NSLayoutConstraint.activate([
                 cell.contentLabel.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
             ])
@@ -300,20 +300,20 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             
             return cell
-        } else if indexPath.row == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as?
-                    SettingsCell
-            else {fatalError("Could not create Cell")}
-            
-            cell.setContainerViewTopAnchor(30)
-            
-            cell.contentLabel.text = "Backup and Restore"
-            NSLayoutConstraint.activate([
-                cell.contentLabel.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
-            ])
+//        } else if indexPath.row == 1 {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as?
+//                    SettingsCell
+//            else {fatalError("Could not create Cell")}
+//
+//            cell.setContainerViewTopAnchor(30)
+//
+//            cell.contentLabel.text = "Backup and Restore"
+//            NSLayoutConstraint.activate([
+//                cell.contentLabel.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
+//            ])
             
             return cell
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as?
                     SettingsCell
             else {fatalError("Could not create Cell")}
@@ -322,7 +322,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.setContainerViewHeight(120)
             cell.setContainerViewTopAnchor(30)
             
-            cell.contentLabel.text = "Reminder Time"
+            cell.contentLabel.text = NSLocalizedString("remind", comment: "")
             
             //custom contentLabel height
             NSLayoutConstraint.activate([
@@ -373,21 +373,21 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             
             return cell
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as?
                     SettingsCell
             else {fatalError("Could not create Cell")}
             
             cell.setContainerViewTopAnchor(30)
             
-            cell.contentLabel.text = "Language"
+            cell.contentLabel.text = NSLocalizedString("languageLabel", comment: "")
             NSLayoutConstraint.activate([
                 cell.contentLabel.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
             ])
             
             //右側點選語言(button)
 //            let languageButton = UIButton()
-            languageButton.setTitle("English", for: .normal)
+            languageButton.setTitle(NSLocalizedString("language", comment: ""), for: .normal)
             languageButton.setTitleColor(UIColor.pinkOrange, for: .normal)
             languageButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             cell.addSubview(languageButton)
@@ -411,7 +411,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             //button
 //            let deleteButton = UIButton()
-            deleteButton.setTitle("Delete Account", for: .normal)
+            deleteButton.setTitle(NSLocalizedString("deleteAccountButton", comment: ""), for: .normal)
             deleteButton.setTitleColor(.systemRed, for: .normal)
             deleteButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             cell.addSubview(deleteButton)

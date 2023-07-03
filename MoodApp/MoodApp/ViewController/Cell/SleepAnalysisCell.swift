@@ -39,7 +39,7 @@ class SleepAnalysisCell: UITableViewCell {
         ])
         
         //label
-        titleLabel.text = "Sleep Analysis"
+        titleLabel.text = NSLocalizedString("Sleep", comment: "")
         titleLabel.textColor = .darkGray
         titleLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(titleLabel)
@@ -70,7 +70,7 @@ class SleepAnalysisCell: UITableViewCell {
         //no record label
 //        let noRecord = UILabel()
         noRecord.isHidden = true //default
-        noRecord.text = "No Record"
+        noRecord.text = NSLocalizedString("NoRecord", comment: "")
         noRecord.font = UIFont.boldSystemFont(ofSize: 16)
         containerView.addSubview(noRecord)
         
@@ -82,7 +82,7 @@ class SleepAnalysisCell: UITableViewCell {
         
         //no record 2
         noRecord2.isHidden = true //default
-        noRecord2.text = "No Record"
+        noRecord2.text = NSLocalizedString("NoRecord", comment: "")
         noRecord2.font = UIFont.boldSystemFont(ofSize: 16)
         containerView2.addSubview(noRecord2)
         

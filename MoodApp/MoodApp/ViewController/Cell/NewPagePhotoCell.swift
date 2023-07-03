@@ -51,7 +51,7 @@ class NewPagePhotoCell: UITableViewCell {
             titleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)])
         
     //button
-        imageButton.backgroundColor = .lightLightGray
+        imageButton.backgroundColor = .lightPinkOrange
         imageButton.layer.cornerRadius = 10
         contentView.addSubview(imageButton) //要點擊，所以要加在contentView上
         imageButton.addSubview(photoImageView)

@@ -23,7 +23,18 @@ class PopUpMonthView: UIView, UICollectionViewDataSource {
     let yearButton = UIButton()
     let historyButton = UIButton()
     
-    let monthInput = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    let monthInput = [NSLocalizedString("1", comment: ""),
+                      NSLocalizedString("2", comment: ""),
+                      NSLocalizedString("3", comment: ""),
+                      NSLocalizedString("4", comment: ""),
+                      NSLocalizedString("5", comment: ""),
+                      NSLocalizedString("6", comment: ""),
+                      NSLocalizedString("7", comment: ""),
+                      NSLocalizedString("8", comment: ""),
+                      NSLocalizedString("9", comment: ""),
+                      NSLocalizedString("10", comment: ""),
+                      NSLocalizedString("11", comment: ""),
+                      NSLocalizedString("12", comment: "")]
     
     // 點擊後傳出
     var selectedYearString: String = ""
