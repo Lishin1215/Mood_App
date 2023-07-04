@@ -289,6 +289,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
        
     }
 
+
     
 //Conform to Protocol
     func didReceiveDate(year: String, month: String) {

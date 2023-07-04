@@ -39,24 +39,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
     // signin with apple
         // 目前有user（已登入） -> HomeVC
-            if let currentUser = Auth.auth().currentUser{
-                print("already log in")
-                let uid = currentUser.uid
-                print(uid)
-                //把登入後的credential(uid)放入userId
-                FireStoreManager.shared.setUserId(userId: uid)
-                
-        // user == nil (未登入） -> LoginVC
-            } else{
-                print("not log in yet")
-                // 跳login Page
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
-                        
-                        self.window?.rootViewController = loginVC
-                        self.window?.makeKeyAndVisible()
-                    }
+        
+        
+        if let currentUser = Auth.auth().currentUser{
+            print("already log in")
+            
+//            do {
+//                try Auth.auth().useUserAccessGroup("Janet.MoodApp.auth")
+//            } catch let error as NSError {
+//                print("Error changing user access group: %@", error)
+//            }
+            
+            let uid = currentUser.uid
+            print(uid)
+            //把登入後的credential(uid)放入userId
+            FireStoreManager.shared.setUserId(userId: uid)
+            
+    // user == nil (未登入） -> LoginVC
+        } else{
+            print("not log in yet")
+            do {
+                try Auth.auth().useUserAccessGroup("Janet.MoodApp.auth")
+            } catch let error as NSError {
+                print("Error changing user access group: %@", error)
             }
+            // 跳login Page
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
+                    
+                    self.window?.rootViewController = loginVC
+                    self.window?.makeKeyAndVisible()
+                }
+        }
+        
+        
         
         guard let _ = (scene as? UIWindowScene) else { return }
     }

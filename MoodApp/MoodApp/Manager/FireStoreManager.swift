@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseAuth
 
 protocol FireStoreManagerDelegate: AnyObject {
 
@@ -30,11 +31,14 @@ class FireStoreManager {
     
     func setUserId(userId: String) {
         self.userId = userId //把登入後的credential放入userId
+        
     }
     
     
     //確定資料有上傳，才會觸發 handler closure
     func setData(date: Date, mood: String, sleepStart: String, sleepEnd: String, text: String, photo: String, handler: @escaping () -> Void) {
+        
+        
         let db = Firestore.firestore()
         let ref = db.collection("users").document(userId).collection("articles")  //id會隨user改變
         //        let id = ref.documentID
@@ -60,18 +64,17 @@ class FireStoreManager {
     }
     
     
-    func updateData() {
+    func updateData(mood: String) {
         let db = Firestore.firestore()
-        let updateRef = db.collection("users").document(userId).collection("articles").document("09ahXKQg5JKLzku5WyPn")
-        let date = Date(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970))
+        let updateRef = db.collection("users").document(userId).collection("articles")
         
-        updateRef.updateData([
-            "date": date,
-            "mood": "1",
-            "sleepStart": "2",
-            "sleepEnd": "3",
-            "text": "4",
-            "photo": "5"
+        let date = Date() //因為只有siri會用到這個function，而siri只能寫入“當日”心情（寫死ok)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: date)
+        
+        updateRef.document(dateString).updateData([
+            "mood": mood
             
         ]) { err in
             if let err = err {

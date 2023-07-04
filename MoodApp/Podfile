@@ -20,11 +20,13 @@ end
 target 'IntentsHandler' do
   pod 'FirebaseFirestore'
   pod 'FirebaseFirestoreSwift'
+  pod 'FirebaseAuth'
   pod 'GoogleUtilities', '~> 7.11.1'
 end
 
 target 'IntentsHandlerUI' do
   pod 'FirebaseFirestore'
   pod 'FirebaseFirestoreSwift'
+  pod 'FirebaseAuth'
   pod 'GoogleUtilities', '~> 7.11.1'
 end

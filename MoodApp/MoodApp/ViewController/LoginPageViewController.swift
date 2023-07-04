@@ -214,6 +214,8 @@ extension LoginPageViewController {
 
 //sign in
     func firebaseSignInWithApple(credential: AuthCredential) {
+        
+        
         Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
             if (error != nil) { //有錯誤
                 print(error?.localizedDescription)

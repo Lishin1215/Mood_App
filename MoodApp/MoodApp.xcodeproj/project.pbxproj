@@ -68,6 +68,14 @@
 		5BD4D79D2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79B2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift */; };
 		5BD4D79E2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79C2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift */; };
 		5BD4D7A02A540289009E8E89 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79F2A540289009E8E89 /* ContainerView.swift */; };
+		5BD4D7A92A546BB5009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79B2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift */; };
+		5BD4D7AA2A546BB5009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79B2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift */; };
+		5BD4D7AB2A546BB8009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79C2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift */; };
+		5BD4D7AC2A546BB8009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79C2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift */; };
+		5BD4D7AD2A546BBB009E8E89 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742FF2A4AB0D7008F4C3D /* StorageManager.swift */; };
+		5BD4D7AE2A546BBC009E8E89 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742FF2A4AB0D7008F4C3D /* StorageManager.swift */; };
+		5BD4D7AF2A546C6E009E8E89 /* PersonalInfoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B0743052A4B2404008F4C3D /* PersonalInfoModel.xcdatamodeld */; };
+		5BD4D7B02A546C6E009E8E89 /* PersonalInfoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B0743052A4B2404008F4C3D /* PersonalInfoModel.xcdatamodeld */; };
 		ABDA7EE79C834A0F9A58A805 /* Pods_IntentsHandlerUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28760191C60BCCE33663AF9D /* Pods_IntentsHandlerUI.framework */; };
 		F2BF18FFFFFB557E610637D7 /* Pods_IntentsHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A13CE12175C2FDB027BA56 /* Pods_IntentsHandler.framework */; };
 /* End PBXBuildFile section */
@@ -677,12 +685,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BD4D7AB2A546BB8009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */,
 				5B0742E42A487C8D008F4C3D /* Articles.swift in Sources */,
 				5B0742E22A487C7F008F4C3D /* FireStoreManager.swift in Sources */,
 				5B07428D2A4811BB008F4C3D /* IntentHandler.swift in Sources */,
 				5B0742B02A4825C3008F4C3D /* RecordMoodIntentHandler.swift in Sources */,
+				5BD4D7AF2A546C6E009E8E89 /* PersonalInfoModel.xcdatamodeld in Sources */,
 				5B0742D52A4876E0008F4C3D /* IntentsArticles.swift in Sources */,
 				5B0742AE2A4824E6008F4C3D /* SiriIntents.intentdefinition in Sources */,
+				5BD4D7AD2A546BBB009E8E89 /* StorageManager.swift in Sources */,
+				5BD4D7A92A546BB5009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */,
 				5B0742D12A487611008F4C3D /* IntentsFireStoreManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -691,12 +703,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BD4D7AC2A546BB8009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */,
 				5B0742E52A487C8E008F4C3D /* Articles.swift in Sources */,
 				5B0742E32A487C80008F4C3D /* FireStoreManager.swift in Sources */,
 				5B0742982A4811BB008F4C3D /* IntentViewController.swift in Sources */,
 				5B0742B12A4825C3008F4C3D /* RecordMoodIntentHandler.swift in Sources */,
+				5BD4D7B02A546C6E009E8E89 /* PersonalInfoModel.xcdatamodeld in Sources */,
 				5B0742AF2A4824E6008F4C3D /* SiriIntents.intentdefinition in Sources */,
 				5B0742D32A4876C3008F4C3D /* IntentsUIFireStoreManager.swift in Sources */,
+				5BD4D7AE2A546BBC009E8E89 /* StorageManager.swift in Sources */,
+				5BD4D7AA2A546BB5009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */,
 				5B0742D72A4876FD008F4C3D /* IntentsUIArticles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

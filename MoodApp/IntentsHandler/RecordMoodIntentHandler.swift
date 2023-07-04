@@ -9,16 +9,44 @@ import Foundation
 import Intents
 import FirebaseFirestore
 import FirebaseCore
+import FirebaseAuth
 
 class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
+    
+    override init() {
+        super.init()
+        FirebaseApp.configure()
+        
+        
+    }
+    
+    
+    
     
     //正確接收到intent後執行
     func handle(intent: RecordMoodIntent, completion: @escaping (RecordMoodIntentResponse) -> Void) {
         print(intent.MoodScore)
         completion(RecordMoodIntentResponse.success(result: "Successfully"))
         
-        FirebaseApp.configure()
-        FireStoreManager.shared.setData(date: Date(), mood: String(Int(intent.MoodScore ?? 5)), sleepStart: "", sleepEnd: "", text: "", photo: "", handler: {})
+        do {
+            try Auth.auth().useUserAccessGroup("Janet.MoodApp.auth")
+        } catch let error as NSError {
+            print("Error changing user access group: %@", error)
+        }
+        
+        
+        if let currentUser = Auth.auth().currentUser{
+            print("already log in")
+            let uid = currentUser.uid
+            print(uid)
+            //把登入後的credential(uid)放入userId
+            FireStoreManager.shared.setUserId(userId: uid)
+        }
+        
+//        FireStoreManager.shared.setData(date: Date(), mood: String(Int(intent.MoodScore ?? 5)), sleepStart: "", sleepEnd: "", text: "", photo: "", handler: {})
+        
+        //update data (只改mood)
+        FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 0)))
     }
     
   

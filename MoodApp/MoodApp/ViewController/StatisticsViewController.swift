@@ -440,6 +440,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
     }
+    
 
 //Conform to Protocol
     func didReceiveDate(year: String, month: String) {
