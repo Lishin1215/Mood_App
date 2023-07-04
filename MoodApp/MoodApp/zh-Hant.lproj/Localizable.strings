@@ -65,7 +65,7 @@
 //settingPage
 "settings" = "設定";
 "reminderBody" = "不要忘記記錄今天喔 ☺️";
-"deleteAccountAlert" = "帳號刪除";
+"deleteAccountAlert" = "帳號刪除 🛑";
 "deleteMessage" = "確定要刪除帳號嗎?\n帳號會永遠消失喔";
 "delete" = "刪除";
 "cancel" = "取消";
@@ -77,6 +77,8 @@
 "deleteAccountButton" = "刪除帳號";
 "Chinese" = "中文";
 "English" = "英文";
+"languageAlert" = "提醒 🔔";
+"languageMessage" = "要關閉app再重新開啟後，才會更換語言喔！";
 
 
 //passwordPage

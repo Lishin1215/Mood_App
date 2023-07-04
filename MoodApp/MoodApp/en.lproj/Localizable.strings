@@ -71,7 +71,7 @@
 //settingPage
 "settings" = "Settings";
 "reminderBody" = "Don't forget to record your day ☺️";
-"deleteAccountAlert" = "Delete Account";
+"deleteAccountAlert" = "Delete Account 🛑";
 "deleteMessage" = "Are you sure to delete account?\nThis will permanentely erase your account.";
 "delete" = "Delete";
 "cancel" = "Cancel";
@@ -83,6 +83,8 @@
 "deleteAccountButton" = "Delete Account";
 "Chinese" = "Chinese";
 "English" = "English";
+"languageAlert" = "Notice 🔔";
+"languageMessage" = "Please close your app and reopen it to change language.";
 
 
 //passwordPage

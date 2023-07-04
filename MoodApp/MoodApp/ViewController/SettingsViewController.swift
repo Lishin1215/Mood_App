@@ -182,13 +182,27 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             print("英文")
             //換語言
             UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+            //跳alert
+            languageChangeAlert()
         case 1:
             print("中文")
             
             UserDefaults.standard.set(["zh-Hant"], forKey: "AppleLanguages")
+            //跳alert
+            languageChangeAlert()
         default:
             break
         }
+    }
+    
+    func languageChangeAlert() {
+        //跳alert
+        let controller = UIAlertController(title: NSLocalizedString("languageAlert", comment: ""), message: NSLocalizedString("languageMessage", comment: ""), preferredStyle: .alert)
+        let action = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { _ in
+            //關閉alert的執行動作
+        }
+        controller.addAction(action)
+        present(controller, animated: true)
     }
     
     
