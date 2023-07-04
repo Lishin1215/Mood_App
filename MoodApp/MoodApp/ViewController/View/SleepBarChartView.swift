@@ -31,20 +31,22 @@ struct SleepBarChartView: View {
     var body: some View {
             Chart {
                 ForEach(sleepTimeFlowArray, id: \.date) { item in
+                    
+                    //把sleepTime換成“小時”計算
+                    let sleepTimeHours = (Double(item.sleepTime) ?? 0)/3600
+                    //大、小於6小時判斷
+                    let barColor: Color = sleepTimeHours > 6 ? Color(uiColor: .grassGreen): Color(uiColor: .orangeBrown)
+                    
                     BarMark(
                         x: .value("Date", item.date),
-                        y: .value("Sleep Time", (Double(item.sleepTime) ?? 0 )/3600) //把原本的秒換成“小時”
+                        y: .value("Sleep Time", sleepTimeHours) //把原本的秒換成“小時”
                     )
-                    .foregroundStyle(Color(uiColor: .orangeBrown))
+                    .foregroundStyle(barColor)
                 }
             }
             .chartYAxis {
                 AxisMarks(position: .leading)
             }
-//            .chartXAxis {
-//                AxisMarks(values: .stride(by: .day)) { value in
-//                    AxisValueLabel(format: .dateTime.month(), centered: true)
-//                }
-//            }
+
     }
 }
