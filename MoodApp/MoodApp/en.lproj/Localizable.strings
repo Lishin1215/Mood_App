@@ -12,6 +12,9 @@
 "tab3" = "Look Back";
 "tab4" = "Settings";
 
+//homeVC
+"title" = "Hint🌻:";
+"subtitle" = "You can also record mood by calling 'Siri'.";
 
 
 //sleepContentView

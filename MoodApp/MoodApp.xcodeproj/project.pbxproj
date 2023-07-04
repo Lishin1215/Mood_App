@@ -67,6 +67,7 @@
 		5BD4D7942A52BE03009E8E89 /* LocalizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7932A52BE03009E8E89 /* LocalizeUtils.swift */; };
 		5BD4D79D2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79B2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift */; };
 		5BD4D79E2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79C2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift */; };
+		5BD4D7A02A540289009E8E89 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79F2A540289009E8E89 /* ContainerView.swift */; };
 		ABDA7EE79C834A0F9A58A805 /* Pods_IntentsHandlerUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28760191C60BCCE33663AF9D /* Pods_IntentsHandlerUI.framework */; };
 		F2BF18FFFFFB557E610637D7 /* Pods_IntentsHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A13CE12175C2FDB027BA56 /* Pods_IntentsHandler.framework */; };
 /* End PBXBuildFile section */
@@ -171,6 +172,7 @@
 		5BD4D7932A52BE03009E8E89 /* LocalizeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizeUtils.swift; sourceTree = "<group>"; };
 		5BD4D79B2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		5BD4D79C2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		5BD4D79F2A540289009E8E89 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		99C541F7E4586F3CCEA0A91B /* Pods-IntentsHandler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntentsHandler.debug.xcconfig"; path = "Target Support Files/Pods-IntentsHandler/Pods-IntentsHandler.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -334,6 +336,7 @@
 				5B0742802A4455F8008F4C3D /* MoodContentView.swift */,
 				5B0742822A45EE7E008F4C3D /* SleepBarChartView.swift */,
 				5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */,
+				5BD4D79F2A540289009E8E89 /* ContainerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				5B07425E2A3C69C9008F4C3D /* NewPagePhotoCell.swift in Sources */,
 				5B07427D2A42D6D6008F4C3D /* SettingsCell.swift in Sources */,
 				5B07423D2A39AC71008F4C3D /* SceneDelegate.swift in Sources */,
+				5BD4D7A02A540289009E8E89 /* ContainerView.swift in Sources */,
 				5B0742712A3F4259008F4C3D /* FireBaseStorageManager.swift in Sources */,
 				5B07426F2A3EFD72008F4C3D /* SleepContentView.swift in Sources */,
 				5B0743072A4B2404008F4C3D /* PersonalInfoModel.xcdatamodeld in Sources */,

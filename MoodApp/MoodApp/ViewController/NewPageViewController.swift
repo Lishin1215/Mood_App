@@ -546,6 +546,10 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
 //            let textField = UITextField()
             textField.backgroundColor = .lightPinkOrange
             textField.layer.cornerRadius = 10
+            
+            //游標右移
+            textField.setValue(NSNumber(value:12), forKey: "paddingLeft")
+            
             cell.addSubview(textField)
             
             textField.translatesAutoresizingMaskIntoConstraints = false

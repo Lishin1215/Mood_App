@@ -15,6 +15,8 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
     let calendarView = UICalendarView()
     let gregorianCalendar = Calendar(identifier: .gregorian)
     var selectDate: DateComponents?
+    let containerView = ContainerView()
+    
     
     
     //改變calendar icon
@@ -74,6 +76,46 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
         let singleDateSelection = UICalendarSelectionSingleDate(delegate: self)
         singleDateSelection.selectedDate = selectDate
         calendarView.selectionBehavior = singleDateSelection
+        
+        //containerView
+        view.addSubview(containerView)
+        containerView.backgroundColor = .lightPinkOrange
+        
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+        
+        //title
+        let titleLabel = UILabel()
+        titleLabel.text = NSLocalizedString("title", comment: "")
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        titleLabel.textColor = .lightBlack
+        containerView.addSubview(titleLabel)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20)
+        ])
+        
+        
+        //subtitle
+        let subtitleLabel = UILabel()
+        subtitleLabel.text = NSLocalizedString("subtitle", comment: "")
+        subtitleLabel.font = UIFont.systemFont(ofSize: 14)
+        subtitleLabel.textColor = .darkGray
+        subtitleLabel.textAlignment = .center
+        containerView.addSubview(subtitleLabel)
+        
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            subtitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 55),
+            subtitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 30),
+            subtitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -30)
+        ])
     
     }
     

@@ -13,6 +13,9 @@
 "tab3" = "回顧";
 "tab4" = "設定";
 
+//homeVC
+"title" = "溫馨提示🌻:";
+"subtitle" = "也可以使用 'Siri' 紀錄心情喔～";
 
 //sleepContentView
 "sleepTime" = "就寢時間";
