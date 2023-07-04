@@ -136,7 +136,7 @@ class SleepAnalysisCell: UITableViewCell {
         orangeDotView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            greenDotView.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 20),
+            greenDotView.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 21),
             greenDotView.leadingAnchor.constraint(equalTo: containerView2.leadingAnchor, constant: 45),
             greenDotView.heightAnchor.constraint(equalToConstant: 10),
             greenDotView.widthAnchor.constraint(equalTo: greenDotView.heightAnchor)
@@ -144,19 +144,19 @@ class SleepAnalysisCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            moreLabel.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 17),
+            moreLabel.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 18),
             moreLabel.leadingAnchor.constraint(equalTo: greenDotView.trailingAnchor, constant: 6)
         ])
         
         NSLayoutConstraint.activate([
-            orangeDotView.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 20),
+            orangeDotView.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 21),
             orangeDotView.trailingAnchor.constraint(equalTo: lessLabel.leadingAnchor, constant: -6),
             orangeDotView.heightAnchor.constraint(equalToConstant: 10),
             orangeDotView.widthAnchor.constraint(equalTo: orangeDotView.heightAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            lessLabel.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 17),
+            lessLabel.topAnchor.constraint(equalTo: containerView2.topAnchor, constant: 18),
             lessLabel.trailingAnchor.constraint(equalTo: containerView2.trailingAnchor, constant: -45)
         ])
         

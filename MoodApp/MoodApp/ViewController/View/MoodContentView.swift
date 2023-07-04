@@ -19,13 +19,14 @@ struct MoodFlow {
 
 struct MoodContentView: View {
     
-    //畫圖需要的資料，moodFlow的array
+//畫圖需要的資料，moodFlow的array
     var moodFlowArray: [MoodFlow] = []
+    //x軸日期標點
     var startOfMonth: Date = Date() //月的第一天，作為x軸的頭
     var endOfMonth: Date = Date() //月的最後一天
     var monthLabelArray: [Date] = []
     
-    //用來將date轉換成"xx/xx"的形式
+//用來將date轉換成"xx/xx"的形式
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"
@@ -33,7 +34,7 @@ struct MoodContentView: View {
     }()
     
 
-    //***把statisticsVC拿到的moodArray傳過來
+//***把statisticsVC拿到的moodArray傳過來
     init(moodArray: [MoodFlow]) {
         moodFlowArray = moodArray
         
