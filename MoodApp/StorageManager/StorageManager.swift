@@ -122,6 +122,45 @@ class StorageManager {
     }
     
     
+    // 取得language
+    func fetchLanguage() -> Int16? {
+        
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest()
+        
+        do {
+            let personalInfo = try context.fetch(fetchRequest)
+            
+            return personalInfo.first?.languageSelect
+        } catch {
+            print("Error fetching language: \(error.localizedDescription)")
+
+            return nil
+        }
+    }
+    
+    
+    func setLanguage(newLanguage: Int16?) {
+        
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest()
+        
+        do {
+            let personalInfo = try context.fetch(fetchRequest).first ?? PersonalInfo(context: context)
+            
+            personalInfo.languageSelect = newLanguage ?? Int16()
+            print(newLanguage)
+            
+            //最後存到coreData
+            try context.save()
+            
+        } catch {
+            print("Error setting languageSelect: \(error.localizedDescription)")
+        }
+    }
+    
 //    func deletePassword() {
 //
 //            let context = persistentContainer.viewContext

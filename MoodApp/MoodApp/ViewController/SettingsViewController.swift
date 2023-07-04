@@ -85,6 +85,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -30)
         ])
         
+        
     }
     
     
@@ -184,12 +185,16 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
             //跳alert
             languageChangeAlert()
+            //存資料到coreData
+            StorageManager.shared.setLanguage(newLanguage: 0)
         case 1:
             print("中文")
             
             UserDefaults.standard.set(["zh-Hant"], forKey: "AppleLanguages")
             //跳alert
             languageChangeAlert()
+            //存資料到coreData
+            StorageManager.shared.setLanguage(newLanguage: 1)
         default:
             break
         }
@@ -419,7 +424,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             
             //右側點選語言(segmented)
-            segmentedControl.selectedSegmentIndex = 0
 //            segmentedControl.tintColor = .orangeBrown
 //            segmentedControl.backgroundColor = .pinkOrange
             view.addSubview(segmentedControl)
@@ -433,21 +437,18 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 segmentedControl.widthAnchor.constraint(equalToConstant: 120)
             ])
             
-            //右側點選語言(button)
-//            let languageButton = UIButton()
-//            languageButton.setTitle(NSLocalizedString("language", comment: ""), for: .normal)
-//            languageButton.setTitleColor(UIColor.pinkOrange, for: .normal)
-//            languageButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-//            cell.addSubview(languageButton)
-//
-//            languageButton.addTarget(self, action: #selector(languageButtonTapped), for: .touchUpInside)
-//
-//            languageButton.translatesAutoresizingMaskIntoConstraints = false
-//            NSLayoutConstraint.activate([
-//                languageButton.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor),
-//                languageButton.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -30)
-//            ])
-            
+            // 先判斷現在的語言 （0 -> 英 /1 -> 中）
+            if StorageManager.shared.fetchLanguage() == nil { //第一次進入
+                
+                segmentedControl.selectedSegmentIndex = 0
+                StorageManager.shared.setLanguage(newLanguage: 0)
+            } else if StorageManager.shared.fetchLanguage() == 0 {
+                
+                segmentedControl.selectedSegmentIndex = 0
+            } else {
+                segmentedControl.selectedSegmentIndex = 1
+            }
+        
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as? SettingsCell

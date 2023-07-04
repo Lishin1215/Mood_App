@@ -2,7 +2,7 @@
 //  PersonalInfo+CoreDataProperties.swift
 //  MoodApp
 //
-//  Created by 簡莉芯 on 2023/6/30.
+//  Created by 簡莉芯 on 2023/7/4.
 //
 //
 
@@ -18,6 +18,7 @@ extension PersonalInfo {
 
     @NSManaged public var passcode: String?
     @NSManaged public var reminderTime: Date?
+    @NSManaged public var languageSelect: Int16
 
 }
 

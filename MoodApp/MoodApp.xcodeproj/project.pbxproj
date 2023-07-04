@@ -63,10 +63,10 @@
 		5B07430F2A4B6AAF008F4C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */; };
 		5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */; };
 		5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */; };
-		5BD4D7862A4F1FE4009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7842A4F1FE4009E8E89 /* PersonalInfo+CoreDataClass.swift */; };
-		5BD4D7872A4F1FE4009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7852A4F1FE4009E8E89 /* PersonalInfo+CoreDataProperties.swift */; };
 		5BD4D78F2A526891009E8E89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BD4D7912A526891009E8E89 /* Localizable.strings */; };
 		5BD4D7942A52BE03009E8E89 /* LocalizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7932A52BE03009E8E89 /* LocalizeUtils.swift */; };
+		5BD4D79D2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79B2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift */; };
+		5BD4D79E2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D79C2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift */; };
 		ABDA7EE79C834A0F9A58A805 /* Pods_IntentsHandlerUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28760191C60BCCE33663AF9D /* Pods_IntentsHandlerUI.framework */; };
 		F2BF18FFFFFB557E610637D7 /* Pods_IntentsHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A13CE12175C2FDB027BA56 /* Pods_IntentsHandler.framework */; };
 /* End PBXBuildFile section */
@@ -163,14 +163,14 @@
 		5B0743132A4C19C3008F4C3D /* IntentsHandlerUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntentsHandlerUI.entitlements; sourceTree = "<group>"; };
 		5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMonthView.swift; sourceTree = "<group>"; };
 		5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCell.swift; sourceTree = "<group>"; };
-		5BD4D7842A4F1FE4009E8E89 /* PersonalInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		5BD4D7852A4F1FE4009E8E89 /* PersonalInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5BD4D78A2A526773009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		5BD4D78B2A526774009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		5BD4D78C2A526774009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainInterface.strings"; sourceTree = "<group>"; };
 		5BD4D7902A526891009E8E89 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5BD4D7922A5268AE009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5BD4D7932A52BE03009E8E89 /* LocalizeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizeUtils.swift; sourceTree = "<group>"; };
+		5BD4D79B2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		5BD4D79C2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		71D0CDE8FC8EAF1A3D7DE044 /* Pods-MoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoodApp.debug.xcconfig"; path = "Target Support Files/Pods-MoodApp/Pods-MoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		99C541F7E4586F3CCEA0A91B /* Pods-IntentsHandler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntentsHandler.debug.xcconfig"; path = "Target Support Files/Pods-IntentsHandler/Pods-IntentsHandler.debug.xcconfig"; sourceTree = "<group>"; };
 		9B4F6E2D7AB1713D2F9253EE /* Pods_MoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -368,8 +368,8 @@
 		5B0742ED2A4AADED008F4C3D /* StorageManager */ = {
 			isa = PBXGroup;
 			children = (
-				5BD4D7842A4F1FE4009E8E89 /* PersonalInfo+CoreDataClass.swift */,
-				5BD4D7852A4F1FE4009E8E89 /* PersonalInfo+CoreDataProperties.swift */,
+				5BD4D79B2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift */,
+				5BD4D79C2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift */,
 				5B0742FF2A4AB0D7008F4C3D /* StorageManager.swift */,
 			);
 			name = StorageManager;
@@ -645,6 +645,7 @@
 				5B0742512A3AA87E008F4C3D /* TabBarViewController.swift in Sources */,
 				5B07426C2A3EC5AF008F4C3D /* FireStoreManager.swift in Sources */,
 				5B07427B2A42B79C008F4C3D /* SettingsViewController.swift in Sources */,
+				5BD4D79E2A53BD81009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */,
 				5B07427F2A440715008F4C3D /* KingFisherWrapper.swift in Sources */,
 				5B0742752A419C6E008F4C3D /* MoodFlowCell.swift in Sources */,
 				5B07425C2A3C1E12008F4C3D /* NewPageCell.swift in Sources */,
@@ -655,7 +656,6 @@
 				5B0742E92A49E493008F4C3D /* PasswordViewController.swift in Sources */,
 				5B0742E72A49D19A008F4C3D /* LoginPageViewController.swift in Sources */,
 				5B0742772A419CAD008F4C3D /* SleepAnalysisCell.swift in Sources */,
-				5BD4D7872A4F1FE4009E8E89 /* PersonalInfo+CoreDataProperties.swift in Sources */,
 				5B07425E2A3C69C9008F4C3D /* NewPagePhotoCell.swift in Sources */,
 				5B07427D2A42D6D6008F4C3D /* SettingsCell.swift in Sources */,
 				5B07423D2A39AC71008F4C3D /* SceneDelegate.swift in Sources */,
@@ -664,8 +664,8 @@
 				5B0743072A4B2404008F4C3D /* PersonalInfoModel.xcdatamodeld in Sources */,
 				5B0743002A4AB0D7008F4C3D /* StorageManager.swift in Sources */,
 				5B0742692A3EC348008F4C3D /* Articles.swift in Sources */,
+				5BD4D79D2A53BD81009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */,
 				5B0742552A3AAD2A008F4C3D /* UIColor+Extension.swift in Sources */,
-				5BD4D7862A4F1FE4009E8E89 /* PersonalInfo+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
