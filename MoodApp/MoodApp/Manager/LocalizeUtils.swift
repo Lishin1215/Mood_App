@@ -26,9 +26,13 @@ class LocalizeUtils: NSObject {
     func settingUserLanguageCode() {
         
         //取得使用者iOS設定的語系
-        let preferredLanguages: String = Locale.preferredLanguages.first ?? "" // 繁體=zh-Hant-TW、簡體=zh-Hans-TW
-        let currentLanguageCode = preferredLanguages.split(separator: "-")[1] // Hant、Hans
-        
+        let preferredLanguages: String = Locale.preferredLanguages.first ?? "" // 繁體=zh-Hant-TW
+        var currentLanguageCode = "en"  //預設是英文
+        if preferredLanguages != "en"{
+            // serparate when not "en"
+            currentLanguageCode = String(preferredLanguages.split(separator: "-")[1]) // Hant、Hans
+        }
+
         //設定要取得的Bundle的多國語系檔名
         var bundleLocalizeFileName: String?
         if currentLanguageCode == "Hant" { //繁體

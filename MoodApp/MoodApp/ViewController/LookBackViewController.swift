@@ -263,7 +263,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
             for index in 0 ..< photoArray.count {
                 let scrollImageView = UIImageView()
                 
-                scrollImageView.contentMode = .scaleAspectFill
+                scrollImageView.contentMode = .scaleAspectFit
                 scrollImageView.clipsToBounds = true
                 scrollView.addSubview(scrollImageView)
                 
