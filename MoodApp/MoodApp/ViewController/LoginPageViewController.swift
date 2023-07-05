@@ -221,7 +221,8 @@ extension LoginPageViewController {
                 print(error?.localizedDescription)
                 return
             }
-            
+            // 在登入同時，偵測系統預設語言，存到CoreData
+            LocalizeUtils.shared.settingUserLanguageCode()
             // User is signed in to Firebase with Apple.
             // fireStore setData
             if let user = authResult?.user {

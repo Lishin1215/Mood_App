@@ -58,11 +58,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // user == nil (未登入） -> LoginVC
         } else{
             print("not log in yet")
-            do {
-                try Auth.auth().useUserAccessGroup("Janet.MoodApp.auth")
-            } catch let error as NSError {
-                print("Error changing user access group: %@", error)
-            }
+//            do {
+//                try Auth.auth().useUserAccessGroup("Janet.MoodApp.auth")
+//            } catch let error as NSError {
+//                print("Error changing user access group: %@", error)
+//            }
             // 跳login Page
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {

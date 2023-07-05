@@ -437,12 +437,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 segmentedControl.widthAnchor.constraint(equalToConstant: 120)
             ])
             
+            // 已經在登入時去抓手機的預設語言 to CoreData
             // 先判斷現在的語言 （0 -> 英 /1 -> 中）
-            if StorageManager.shared.fetchLanguage() == nil { //第一次進入
-                
-                segmentedControl.selectedSegmentIndex = 0
-                StorageManager.shared.setLanguage(newLanguage: 0)
-            } else if StorageManager.shared.fetchLanguage() == 0 {
+            if StorageManager.shared.fetchLanguage() == 0 {
                 
                 segmentedControl.selectedSegmentIndex = 0
             } else {

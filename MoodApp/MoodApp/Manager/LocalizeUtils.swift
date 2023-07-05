@@ -33,8 +33,11 @@ class LocalizeUtils: NSObject {
         var bundleLocalizeFileName: String?
         if currentLanguageCode == "Hant" { //繁體
             bundleLocalizeFileName = "zh-Hant"
+
+            StorageManager.shared.setLanguage(newLanguage: 1)
         } else { //英文
             bundleLocalizeFileName = "en"
+            StorageManager.shared.setLanguage(newLanguage: 0)
         }
         
         //設定多國語系檔檔名
