@@ -13,6 +13,8 @@ target 'MoodApp' do
   pod 'FirebaseDatabase'
   pod 'FirebaseFunctions'
   pod 'GoogleUtilities', '~> 7.11.1'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
   
 end
 

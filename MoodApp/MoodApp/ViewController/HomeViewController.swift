@@ -117,7 +117,19 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
             subtitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -30)
         ])
     
-    }
+        
+//        let button = UIButton(type: .roundedRect)
+//             button.frame = CGRect(x: 20, y: 50, width: 100, height: 30)
+//             button.setTitle("Test Crash", for: [])
+//             button.addTarget(self, action: #selector(self.crashButtonTapped(_:)), for: .touchUpInside)
+//             view.addSubview(button)
+         }
+
+    //crash test
+//    @objc func crashButtonTapped(_ sender: AnyObject) {
+//        let numbers = [0]
+//        let _ = numbers[1]
+//    }
     
     //傳資料到newPage
     override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
