@@ -26,6 +26,7 @@ extension UIButton {
     func addImage(with url: URL?) {
         // 使用 Kingfisher 提供的方法來下載圖片
         self.kf.setImage(with: url, for: .normal)
+        self.imageView?.contentMode = .scaleAspectFit
     }
     
 }

@@ -583,6 +583,7 @@ extension NewPageViewController: UIImagePickerControllerDelegate, UINavigationCo
             let indexPath = IndexPath(row: 3, section: 0)
             if let cell = tableView.cellForRow(at: indexPath) as? NewPagePhotoCell {
                 cell.imageButton.setImage(image, for: .normal)
+                cell.imageButton.imageView?.contentMode = .scaleAspectFit
                 cell.photoImageView.isHidden = true
             }
             self.selectedImage = image
