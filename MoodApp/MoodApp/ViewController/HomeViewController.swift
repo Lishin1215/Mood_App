@@ -125,7 +125,7 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
 //             view.addSubview(button)
          }
 
-    //crash test
+//    //crash test
 //    @objc func crashButtonTapped(_ sender: AnyObject) {
 //        let numbers = [0]
 //        let _ = numbers[1]
