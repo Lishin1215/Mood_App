@@ -68,21 +68,37 @@ class FireStoreManager {
         let db = Firestore.firestore()
         let updateRef = db.collection("users").document(userId).collection("articles")
         
-        let date = Date() //因為只有siri會用到這個function，而siri只能寫入“當日”心情（寫死ok)
+        let date = Date() //siri會用到這個function，而siri只能寫入“當日”心情（寫死ok)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from: date)
         
-        updateRef.document(dateString).updateData([
-            "mood": mood
-            
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
+
+        updateRef.document(dateString).getDocument { (document, error) in
+            if let document = document{
+                //判斷是否已“填入” （已填 -> update/ 未填 -> set)
+                if document.exists {
+                    updateRef.document(dateString).updateData([
+                        "mood": mood
+
+                    ]) { err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        } else {
+                            print("Document successfully updated")
+                        }
+                    }
+                //未填過
+                } else {
+                    FireStoreManager.shared.setData(date: Date(), mood: mood, sleepStart: "", sleepEnd: "", text: "", photo: "", handler: {})
+                }
             }
+            print(error)
+        
+
         }
+        
+        
     }
     
     
@@ -127,7 +143,7 @@ class FireStoreManager {
         }
     }
     
-    //statisticPage & lookBackPage要用到
+    //statisticPage/ lookBackPage/ homeVC / newPageVC 要用到
     func fetchMonthlyData(dateString: String) {
         let db = Firestore.firestore()
         let collectionRef = db.collection("users").document(userId).collection("articles")
@@ -248,6 +264,8 @@ class FireStoreManager {
         }
         
     }
+    
+    
     
     //listener監聽
     

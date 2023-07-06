@@ -28,11 +28,19 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
         print(intent.MoodScore)
         completion(RecordMoodIntentResponse.success(result: "Successfully"))
         
-        do {
-            try Auth.auth().useUserAccessGroup("Janet.MoodApp.auth")
-        } catch let error as NSError {
-            print("Error changing user access group: %@", error)
+        
+        if let keyChainGroup = Bundle.main.infoDictionary?["KeyChainGroup"] as? String {
+            
+            do {
+                try Auth.auth().useUserAccessGroup(keyChainGroup)
+                
+            } catch let error as NSError {
+                print("Error changing user access group: %@", error)
+            }
+        } else {
+            print("KeyChainGroup is nil")
         }
+        
         
         
         if let currentUser = Auth.auth().currentUser{
@@ -43,10 +51,9 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
             FireStoreManager.shared.setUserId(userId: uid)
         }
         
-        FireStoreManager.shared.setData(date: Date(), mood: String(Int(intent.MoodScore ?? 5)), sleepStart: "", sleepEnd: "", text: "", photo: "", handler: {})
-        
-        //update data (只改mood)
-//        FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 0)))
+
+        //update data (只改mood)（直接從update裡判斷是否已填過當日資料）
+        FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 0)))
     }
     
   
