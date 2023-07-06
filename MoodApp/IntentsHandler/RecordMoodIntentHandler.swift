@@ -51,10 +51,9 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
             FireStoreManager.shared.setUserId(userId: uid)
         }
         
-        FireStoreManager.shared.setData(date: Date(), mood: String(Int(intent.MoodScore ?? 5)), sleepStart: "", sleepEnd: "", text: "", photo: "", handler: {})
-        
-        //update data (只改mood)
-//        FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 0)))
+
+        //update data (只改mood)（直接從update裡判斷是否已填過當日資料）
+        FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 0)))
     }
     
   
