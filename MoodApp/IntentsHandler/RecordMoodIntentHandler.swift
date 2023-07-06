@@ -28,11 +28,19 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
         print(intent.MoodScore)
         completion(RecordMoodIntentResponse.success(result: "Successfully"))
         
-        do {
-            try Auth.auth().useUserAccessGroup("Janet.MoodApp.auth")
-        } catch let error as NSError {
-            print("Error changing user access group: %@", error)
+        
+        if let keyChainGroup = Bundle.main.infoDictionary?["KeyChainGroup"] as? String {
+            
+            do {
+                try Auth.auth().useUserAccessGroup(keyChainGroup)
+                
+            } catch let error as NSError {
+                print("Error changing user access group: %@", error)
+            }
+        } else {
+            print("KeyChainGroup is nil")
         }
+        
         
         
         if let currentUser = Auth.auth().currentUser{
