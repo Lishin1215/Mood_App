@@ -18,7 +18,23 @@ extension UIImageView {
         self.kf.setImage(with: url)
     }
     
+    //用在image變成video的部分
+    func addPhoto(with url: URL?, completion: @escaping(Result<UIImage, Error>) -> Void) {
+        
+        self.kf.setImage(with: url) { result in
+            
+            switch result {
+            case .success(let imageResult):
+                completion(.success(imageResult.image))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }
+
 
 extension UIButton {
     
