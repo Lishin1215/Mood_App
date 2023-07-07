@@ -157,7 +157,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     }
     
     
-    func isOverTenPhoto() -> Bool { //使用時機：fetch完data，才做判斷
+    func isOverFivePhoto() -> Bool { //使用時機：fetch完data，才做判斷
         if photoArray.count >= 5 {
             scrollView.isHidden = false
             keepRecordLabel.isHidden = true
@@ -255,7 +255,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         
         
         //判斷photoArray數量
-        if isOverTenPhoto() == true {
+        if isOverFivePhoto() == true {
             
             //所有圖片加總"寬"度
             scrollView.contentSize = CGSize(width: scrollView.frame.width * CGFloat(photoArray.count), height: scrollView.frame.height) //設了autoConstriant可以拿到frame (scrollView.frame.width)

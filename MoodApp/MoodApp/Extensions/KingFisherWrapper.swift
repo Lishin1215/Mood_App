@@ -18,21 +18,6 @@ extension UIImageView {
         self.kf.setImage(with: url)
     }
     
-    //用在image變成video的部分
-    func addPhoto(with url: URL?, completion: @escaping(Result<UIImage, Error>) -> Void) {
-        
-        self.kf.setImage(with: url) { result in
-            
-            switch result {
-            case .success(let imageResult):
-                completion(.success(imageResult.image))
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
 }
 
 
@@ -45,4 +30,42 @@ extension UIButton {
         self.imageView?.contentMode = .scaleAspectFit
     }
     
+}
+
+extension UIImage {
+    
+    //photo: [String] -> [UIImage]
+    static func createImageArray(from photoArray: [String], completion: @escaping([UIImage]) -> Void) {
+         
+        var images: [UIImage] = []
+        
+        let dispatchGroup = DispatchGroup()
+        
+        for photoURLString in photoArray {
+            dispatchGroup.enter()
+            
+            if let photoURL = URL(string: photoURLString) {
+                
+                let imageView = UIImageView()
+                
+                imageView.kf.setImage(with: photoURL) { result in
+                    
+                    switch result {
+                    case .success(let imageResult):
+                        images.append(imageResult.image)
+                        
+                    case .failure(let error):
+                        print("Failed to load image: \(error)")
+                    }
+                    
+                    dispatchGroup.leave()
+                }
+            } else {
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.notify(queue: .main) {
+            completion(images)
+        }
+    }
 }

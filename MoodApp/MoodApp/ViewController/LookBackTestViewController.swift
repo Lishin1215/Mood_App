@@ -29,6 +29,9 @@ class LookBackTestViewController: UIViewController {
     //創一個PopUp View加在上面 (delegate)
     let popUpView = PopUpMonthView()
     
+    //放到外面function要用
+    let playerView = UIView()
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -119,18 +122,31 @@ class LookBackTestViewController: UIViewController {
         NSLayoutConstraint.activate([
             keepRecordLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor), keepRecordLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
+        
+        //playerView
+//        let playerView = UIView()
+        playerView.backgroundColor = .grassGreen
+        containerView.addSubview(playerView)
+        
+        playerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            playerView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            playerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            playerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            playerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20)
+        ])
        
     }
     
     
-    func isOverTenPhoto() -> Bool { //使用時機：fetch完data，才做判斷
+    func isOverFivePhoto() -> Bool { //使用時機：fetch完data，才做判斷
         if photoArray.count >= 5 {
-//            scrollView.isHidden = false
+            playerView.isHidden = false
             keepRecordLabel.isHidden = true
             return true
         } else {
             keepRecordLabel.isHidden = false
-//            scrollView.isHidden = true
+            playerView.isHidden = true
             return false
         }
     }
@@ -185,21 +201,6 @@ class LookBackTestViewController: UIViewController {
             self.tabBarController?.tabBar.isHidden = false
         }
     }
-
-    func createImageArray(from photoArray: [String]) -> [UIImage] {
-        var images: [UIImage] = []
-        
-        for photoURLString in photoArray {
-                
-            if let photoURL = URL(string: photoURLString),
-               let imageData = try? Data(contentsOf: photoURL),
-               let image = UIImage(data: imageData) {
-                
-                images.append(image)
-            }
-        }
-        return images
-    }
     
     
     func createVideoFromImages(photoArray: [UIImage], outputURL: URL, completion: @escaping(Bool) -> Void) {
@@ -213,19 +214,45 @@ class LookBackTestViewController: UIViewController {
         
         let settings: [String: Any] = [
             AVVideoCodecKey: AVVideoCodecType.h264,
-            AVVideoCodecKey: size.width,
-            AVVideoCodecKey: size.height
+            AVVideoWidthKey: size.width,
+            AVVideoHeightKey: size.height
         ]
         
+        //delete any old file
+        do {
+          try FileManager.default.removeItem(at: outputURL)
+        } catch {
+          print("Could not remove file \(error.localizedDescription)")
+        }
+        
+//        guard let videoWriter = try? AVAssetWriter(outputURL: outputURL, fileType: .mov) else {
+//            completion(false)
+//            return
+//        }
+//        //generate 1080p settings
+//        let settingsAssistant = AVOutputSettingsAssistant(preset: .preset1920x1080)?.videoSettings
+//
+//        //create a single video input
+//        let videoWriterInput = AVAssetWriterInput(mediaType: .video, outputSettings: settingsAssistant)
+//
+//        //create an adaptor for the pixel buffer
+//        let pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: videoWriterInput, sourcePixelBufferAttributes: nil)
+//
+//        //add the input to the asset writer
+//        videoWriter.add(videoWriterInput)
+        
+        
+        
+        //create an assetwriter instance
         guard let videoWriter = try? AVAssetWriter(outputURL: outputURL, fileType: AVFileType.mp4) else {
             completion(false)
             return
         }
-        
+
         let videoWriterInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: settings)
-        
+
         let pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: videoWriterInput, sourcePixelBufferAttributes: nil)
-        
+
         if videoWriter.canAdd(videoWriterInput) {
             //add the input to the asset writer
             videoWriter.add(videoWriterInput)
@@ -292,8 +319,86 @@ extension LookBackTestViewController: FireStoreManagerDelegate {
         
         
         //判斷photoArray數量
-        if isOverTenPhoto() == true {
+        if isOverFivePhoto() == true {
             
+            //I. [photoString] -> [photoUIImage]
+            UIImage.createImageArray(from: photoArray) { photoImageArray in
+                //II. 照片 -> 影片
+                let outputURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("output.mp4")
+                
+                self.createVideoFromImages(photoArray: photoImageArray, outputURL: outputURL) { success in
+                    if success {
+                        print("影片創建成功！")
+                        
+                        //UI在main thread
+                        DispatchQueue.main.async {
+                            //創建 AVPlayer
+                            let player = AVPlayer(url: outputURL)
+                            //創建 AVPlayerLayer
+                            let playerLayer = AVPlayerLayer(player: player)
+                            
+                            //放到UIView(playerView)上
+                            playerLayer.frame = self.playerView.bounds
+                            playerLayer.videoGravity = .resizeAspect
+                            
+                            self.playerView.layer.addSublayer(playerLayer)
+                            
+                            player.play()
+                        }
+                        
+//                        //創建 AVPlayer
+//                        let player = AVPlayer(url: outputURL)
+//                        //創建 AVPlayerLayer
+//                        let playerLayer = AVPlayerLayer(player: player)
+//
+//                        //放到UIView上
+//    //                    let playerView = UIView()
+//                        playerLayer.frame = self.playerView.bounds
+//                        playerLayer.videoGravity = .resizeAspect
+//
+//                        self.playerView.layer.addSublayer(playerLayer)
+//
+//
+                        
+                    } else {
+                        print("影片創建失敗！")
+                    }
+                }
+            }
+            
+//            //II. 照片 -> 影片
+//            let outputURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("output.mp4")
+//
+//            createVideoFromImages(photoArray: photoImageArray, outputURL: outputURL) { success in
+//                if success {
+//                    print("影片創建成功！")
+//
+//                    //創建 AVPlayer
+//                    let player = AVPlayer(url: outputURL)
+//                    //創建 AVPlayerLayer
+//                    let playerLayer = AVPlayerLayer(player: player)
+//
+//                    //放到UIView上
+////                    let playerView = UIView()
+//                    playerLayer.frame = self.playerView.bounds
+//                    playerLayer.videoGravity = .resizeAspect
+//
+//                    self.playerView.layer.addSublayer(playerLayer)
+//
+//                    //playerView再放到containerView上
+//                    self.containerView.addSubview(self.playerView)
+//
+//                    NSLayoutConstraint.activate([
+//                        self.playerView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 20),
+//                        self.playerView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 16),
+//                        self.playerView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -16),
+//                        self.playerView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -20)
+//                    ])
+//
+//                } else {
+//                    print("影片創建失敗！")
+//                }
+//            }
           
         } else {
             print("Less than Ten Photos!")
@@ -325,5 +430,31 @@ extension LookBackTestViewController: PopUpViewDelegate {
         } else {
             print("Invalid month or year string")
         }
+    }
+}
+
+
+
+
+extension UIImage {
+    func pixelBuffer(width: Int, height: Int) -> CVPixelBuffer? {
+        var pixelBuffer: CVPixelBuffer?
+        
+        let attrs = [
+            kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
+            kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue
+        ] as CFDictionary
+        
+        let status = CVPixelBufferCreate(kCFAllocatorDefault,
+                                         width,
+                                         height,
+                                         kCVPixelFormatType_32ARGB,
+                                         attrs,
+                                         &pixelBuffer)
+        
+        guard let buffer = pixelBuffer, status == kCVReturnSuccess else {
+            return nil
+        }
+        return buffer
     }
 }

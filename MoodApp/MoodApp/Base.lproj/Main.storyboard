@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Look Back View Controller-->
+        <!--Look Back Test View Controller-->
         <scene sceneID="Gqe-pU-bzX">
             <objects>
-                <viewController id="im5-IA-1yb" customClass="LookBackViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="im5-IA-1yb" customClass="LookBackTestViewController" customModule="MoodApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6EO-ey-UIO">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -103,7 +103,6 @@
         <!--Home-->
         <scene sceneID="Fuu-OT-ChP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hf0-6P-p0K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TnE-JN-Enf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="gJ7-R7-zGc">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
@@ -119,6 +118,7 @@
                         <segue destination="mj1-xZ-Vc8" kind="relationship" relationship="rootViewController" id="KFc-wq-ybm"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hf0-6P-p0K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="384" y="-1382"/>
         </scene>

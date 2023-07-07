@@ -41,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
           
         
         // 使用keyChain與siri共用資料（因為在intent handler拿不到uid，所以要在moodApp裡寫這段，讓moodApp跟intent handler可以一起加入keychain，共用資料）
-        
         if let keyChainGroup = Bundle.main.infoDictionary?["KeyChainGroup"] as? String {
             print(keyChainGroup)
             do {
