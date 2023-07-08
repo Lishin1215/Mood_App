@@ -32,6 +32,9 @@ class LookBackTestViewController: UIViewController {
     //放到外面function要用
     let playerView = UIView()
     
+    //給shareButtonTapped用
+    var outputURL = URL(string: "")
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -69,6 +72,20 @@ class LookBackTestViewController: UIViewController {
             titleLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -30)
         ])
+        
+        
+        //share button
+        let shareButton = UIButton()
+        let shareImage = UIImage(systemName: "square.and.arrow.up")?.withRenderingMode(.alwaysTemplate)
+        shareButton.setImage(shareImage, for: .normal)
+        shareButton.tintColor = .darkBlack
+        
+        let barButton = UIBarButtonItem(customView: shareButton)
+        navigationItem.rightBarButtonItem = barButton
+
+        
+        shareButton.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
+        
         
         //date (當月）
         let date = Date()
@@ -135,6 +152,8 @@ class LookBackTestViewController: UIViewController {
             playerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             playerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20)
         ])
+        
+        
        
     }
     
@@ -149,6 +168,22 @@ class LookBackTestViewController: UIViewController {
             playerView.isHidden = true
             return false
         }
+    }
+    
+    
+    @objc func shareButtonTapped(_ sender: UIButton) {
+        print("sha sha sha look")
+        
+//        let localVideoPath = "your_video_path_here..."
+        let videoURL = self.outputURL
+
+            let activityItems: [Any] = [videoURL, "Check this out!"]
+            let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+
+            activityController.popoverPresentationController?.sourceView = view
+            activityController.popoverPresentationController?.sourceRect = view.frame
+
+            self.present(activityController, animated: true, completion: nil)
     }
     
     
@@ -251,7 +286,13 @@ class LookBackTestViewController: UIViewController {
 
         let videoWriterInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: settings)
 
-        let pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: videoWriterInput, sourcePixelBufferAttributes: nil)
+        let sourceBufferAttributes: [String:Any] = [
+                            String(kCVPixelBufferPixelFormatTypeKey): kCVPixelFormatType_32ARGB,
+                            String(kCVPixelBufferWidthKey): size.width,
+                            String(kCVPixelBufferHeightKey): size.height,
+                        ]
+        
+        let pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: videoWriterInput, sourcePixelBufferAttributes: sourceBufferAttributes)
 
         if videoWriter.canAdd(videoWriterInput) {
             //add the input to the asset writer
@@ -265,16 +306,19 @@ class LookBackTestViewController: UIViewController {
         videoWriter.startSession(atSourceTime: CMTime.zero)
         
         //determine how many frames we need to generate
-        let frameDuration = CMTimeMake(value: 1, timescale: 30)
+//        let frameDuration = CMTimeMake(value: 1, timescale: 30)
+        let frameDuration = CMTime(value: 3, timescale: 1)
         
         for(index, image) in photoArray.enumerated() {
             if videoWriterInput.isReadyForMoreMediaData {
                 
                 let presentationTime = CMTimeMultiply(frameDuration, multiplier: Int32(index))
                 
-                if let pixelBuffer = image.pixelBuffer(width: Int(size.width), height: Int(size.height)) {
-                    pixelBufferAdaptor.append(pixelBuffer, withPresentationTime: presentationTime)
-                }
+//                if let pixelBuffer = image.pixelBuffer(width: Int(size.width), height: Int(size.height)) {
+//                    pixelBufferAdaptor.append(pixelBuffer, withPresentationTime: presentationTime)
+//                }
+                
+                pixelBufferAdaptor.appendPixelBufferForImage(image, presentationTime: presentationTime)
             }
         }
         //close everything
@@ -326,6 +370,8 @@ extension LookBackTestViewController: FireStoreManagerDelegate {
                 //II. 照片 -> 影片
                 let outputURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("output.mp4")
                 
+                self.outputURL = outputURL
+                
                 self.createVideoFromImages(photoArray: photoImageArray, outputURL: outputURL) { success in
                     if success {
                         print("影片創建成功！")
@@ -346,19 +392,6 @@ extension LookBackTestViewController: FireStoreManagerDelegate {
                             player.play()
                         }
                         
-//                        //創建 AVPlayer
-//                        let player = AVPlayer(url: outputURL)
-//                        //創建 AVPlayerLayer
-//                        let playerLayer = AVPlayerLayer(player: player)
-//
-//                        //放到UIView上
-//    //                    let playerView = UIView()
-//                        playerLayer.frame = self.playerView.bounds
-//                        playerLayer.videoGravity = .resizeAspect
-//
-//                        self.playerView.layer.addSublayer(playerLayer)
-//
-//
                         
                     } else {
                         print("影片創建失敗！")
@@ -366,40 +399,7 @@ extension LookBackTestViewController: FireStoreManagerDelegate {
                 }
             }
             
-//            //II. 照片 -> 影片
-//            let outputURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("output.mp4")
-//
-//            createVideoFromImages(photoArray: photoImageArray, outputURL: outputURL) { success in
-//                if success {
-//                    print("影片創建成功！")
-//
-//                    //創建 AVPlayer
-//                    let player = AVPlayer(url: outputURL)
-//                    //創建 AVPlayerLayer
-//                    let playerLayer = AVPlayerLayer(player: player)
-//
-//                    //放到UIView上
-////                    let playerView = UIView()
-//                    playerLayer.frame = self.playerView.bounds
-//                    playerLayer.videoGravity = .resizeAspect
-//
-//                    self.playerView.layer.addSublayer(playerLayer)
-//
-//                    //playerView再放到containerView上
-//                    self.containerView.addSubview(self.playerView)
-//
-//                    NSLayoutConstraint.activate([
-//                        self.playerView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 20),
-//                        self.playerView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 16),
-//                        self.playerView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -16),
-//                        self.playerView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -20)
-//                    ])
-//
-//                } else {
-//                    print("影片創建失敗！")
-//                }
-//            }
-          
+
         } else {
             print("Less than Ten Photos!")
         }
@@ -458,3 +458,72 @@ extension UIImage {
         return buffer
     }
 }
+
+
+extension AVAssetWriterInputPixelBufferAdaptor {
+    func appendPixelBufferForImage(_ image: UIImage, presentationTime: CMTime) -> Bool {
+        var appendSucceeded = false
+
+        autoreleasepool {
+            guard let pixelBufferPool = self.pixelBufferPool else {
+                NSLog("appendPixelBufferForImage: ERROR - missing pixelBufferPool") // writer can have error:  writer.error=(String(describing: self.writer.error))
+                return
+            }
+
+            let pixelBufferPointer = UnsafeMutablePointer<CVPixelBuffer?>.allocate(capacity: 1)
+            let status: CVReturn = CVPixelBufferPoolCreatePixelBuffer(
+                kCFAllocatorDefault,
+                pixelBufferPool,
+                pixelBufferPointer
+            )
+
+            if let pixelBuffer = pixelBufferPointer.pointee, status == 0 {
+                pixelBuffer.fillPixelBufferFromImage(image)
+                appendSucceeded = self.append(pixelBuffer, withPresentationTime: presentationTime)
+                if !appendSucceeded {
+                    NSLog("VideoWriter appendPixelBufferForImage: ERROR appending")
+                }
+                pixelBufferPointer.deinitialize(count: 1)
+            } else {
+                NSLog("VideoWriter appendPixelBufferForImage: ERROR - Failed to allocate pixel buffer from pool, status=(status)") // -6680 = kCVReturnInvalidPixelFormat
+            }
+            pixelBufferPointer.deallocate()
+        }
+
+        return appendSucceeded
+    }
+}
+
+
+extension CVPixelBuffer {
+    func fillPixelBufferFromImage(_ image: UIImage) {
+        CVPixelBufferLockBaseAddress(self, [])
+
+        if let cgImage = image.cgImage {
+            let pixelData = CVPixelBufferGetBaseAddress(self)
+            let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+            guard
+                let context = CGContext.init(
+                    data: pixelData,
+                    width: Int(image.size.width),
+                    height: Int(image.size.height),
+                    bitsPerComponent: 8,
+                    bytesPerRow: CVPixelBufferGetBytesPerRow(self),
+                    space: rgbColorSpace,
+                    bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue
+                )
+            else {
+//                assert(false)
+                return
+            }
+
+            context.draw(cgImage, in: CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        } else if let ciImage = image.ciImage {
+//            VideoWriter.ciContext.render(ciImage, to: self)
+            print("error")
+        }
+        CVPixelBufferUnlockBaseAddress(self, [])
+    }
+}
+
+

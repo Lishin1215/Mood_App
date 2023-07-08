@@ -98,6 +98,25 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
             headerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.14)
         ])
         
+        //share button
+        let shareButton = UIButton()
+        let shareImage = UIImage(systemName: "square.and.arrow.up")?.withRenderingMode(.alwaysTemplate)
+        shareButton.setImage(shareImage, for: .normal)
+        shareButton.tintColor = .lightBlack
+        
+//        let barButton = UIBarButtonItem(customView: shareButton)
+//        navigationItem.rightBarButtonItem = barButton
+        headerView.addSubview(shareButton)
+
+        
+        shareButton.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
+        
+        shareButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            shareButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -20),
+            shareButton.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -30)
+        ])
+        
         //當月 (Date())
         let date = Date()
         let dateFormatter = DateFormatter()
@@ -127,7 +146,9 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-    
+    @objc func shareButtonTapped(_ sender: UIButton) {
+        print("sha sha sha")
+    }
     
     
     @objc func historyButtonTapped(_ sender: UIButton) {
