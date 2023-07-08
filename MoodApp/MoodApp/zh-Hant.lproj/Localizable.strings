@@ -53,6 +53,8 @@
 "averageBed" = "平均\n就寢時間";
 "averageWake" = "平均\n起床時間";
 "averageSleep" = "平均\n睡眠時間";
+"Success" = "成功 🎉";
+"Error" = "失敗 ❌";
 
 //newPageVC
 "addDay" = "記錄完畢";

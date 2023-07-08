@@ -148,6 +148,58 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     
     @objc func shareButtonTapped(_ sender: UIButton) {
         print("sha sha sha")
+        
+        //把cell做成圖片
+        var writePath = URL(string: "")
+        let sleepIndexPath = IndexPath(row: 1, section: 0)
+        
+        if let sleepCell = self.tableView.cellForRow(at: sleepIndexPath) as? SleepAnalysisCell {
+
+            UIGraphicsBeginImageContextWithOptions(sleepCell.layer.frame.size, false, 1) // 1 = scale
+        sleepCell.layer.render(in: UIGraphicsGetCurrentContext()!)
+            let viewImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            writePath = documentsDir.appendingPathComponent("sleep.png")
+            
+            do{
+                try viewImage!.pngData()!.write(to: writePath!)
+            } catch {
+                print("Could not remove file")
+            }
+
+                print("Saved image to:", writePath)
+            }
+
+        
+        let activityVC = UIActivityViewController(activityItems: [writePath], applicationActivities: nil)
+
+        activityVC.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+               // 跳alert
+               if error != nil {
+                   let controller = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: nil, preferredStyle: .alert)
+                   let action = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { _ in
+                       //關閉alert的執行動作
+                   }
+                   controller.addAction(action)
+                   self.present(controller, animated: true)
+               }
+                                                    
+               // 如果發送成功，跳出提示視窗顯示成功。
+               if completed {
+                   let controller = UIAlertController(title: NSLocalizedString("Success", comment: ""), message: nil, preferredStyle: .alert)
+                   let action = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { _ in
+                       //關閉alert的執行動作
+                   }
+                   controller.addAction(action)
+                   self.present(controller, animated: true)
+               }
+
+           }
+//        activityVC.popoverPresentationController?.sourceView = view
+//        activityVC.popoverPresentationController?.sourceRect = view.frame
+
+           self.present(activityVC, animated: true, completion: nil)
     }
     
     
