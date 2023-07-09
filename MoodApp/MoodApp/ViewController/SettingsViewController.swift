@@ -30,7 +30,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     //cell裡的物件
     let passwordSwitchButton = UISwitch()
     let datePicker = UIDatePicker()
-    let languageButton = UIButton()
+//    let languageButton = UIButton()
+    let peepingSwitchButton = UISwitch()
     let deleteButton = UIButton()
     
     //language
@@ -210,6 +211,17 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         present(controller, animated: true)
     }
     
+    @objc func peepingCondition(_ sender: UISwitch) {
+        if sender.isOn {
+            print("watch me nene")
+            
+            //開啟“人臉辨識”功能
+            FaceDetectionManager.shared.startCamera()
+        } else {
+            FaceDetectionManager.shared.stopCamera()
+        }
+    }
+    
     
     @objc func deleteAccountTapped(_ sender: UIButton) {
         print("要確定齁")
@@ -280,7 +292,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
 //MARK: UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        5
     }
     
     
@@ -333,19 +345,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             
             return cell
-//        } else if indexPath.row == 1 {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as?
-//                    SettingsCell
-//            else {fatalError("Could not create Cell")}
-//
-//            cell.setContainerViewTopAnchor(30)
-//
-//            cell.contentLabel.text = "Backup and Restore"
-//            NSLayoutConstraint.activate([
-//                cell.contentLabel.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
-//            ])
-            
-            return cell
+
         } else if indexPath.row == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as?
                     SettingsCell
@@ -447,7 +447,42 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         
             return cell
-        } else {
+        } else if indexPath.row == 3 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as?
+                    SettingsCell
+            else {fatalError("Could not create Cell")}
+            
+            cell.setContainerViewTopAnchor(30)
+            
+            cell.contentLabel.text = "Peeping Watch"
+            
+            NSLayoutConstraint.activate([
+                cell.contentLabel.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
+            ])
+            
+        //右側按鈕(switch)
+//            let peepingSwitchButton = UISwitch()
+            peepingSwitchButton.isOn = false
+            peepingSwitchButton.onTintColor = .pinkOrange
+            cell.addSubview(peepingSwitchButton)
+            peepingSwitchButton.addTarget(self, action: #selector(peepingCondition), for: .valueChanged)
+            
+            peepingSwitchButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                peepingSwitchButton.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor),
+                peepingSwitchButton.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -30)
+            ])
+            
+            // 先去判斷現在是否有設password （有 -> 打開 /沒有 -> 關）
+//            if StorageManager.shared.fetchPassword() != nil {
+//                peepingSwitchButton.isOn = true
+//            } else {
+//                peepingSwitchButton.isOn = false
+//            }
+            
+            
+            return cell
+        }else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as? SettingsCell
             else { fatalError("Could not create Cell")}
             

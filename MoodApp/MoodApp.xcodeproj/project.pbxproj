@@ -62,6 +62,8 @@
 		5B07430E2A4B6AA5008F4C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */; };
 		5B07430F2A4B6AAF008F4C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B0742652A3EBD62008F4C3D /* GoogleService-Info.plist */; };
 		5BCF3EB82A56B62C0004F4A4 /* LookBackTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3EB72A56B62C0004F4A4 /* LookBackTestViewController.swift */; };
+		5BCF3EBA2A5AE4C30004F4A4 /* FaceDetectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3EB92A5AE4C30004F4A4 /* FaceDetectionManager.swift */; };
+		5BCF3EBC2A5AEB030004F4A4 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCF3EBB2A5AEB030004F4A4 /* Vision.framework */; };
 		5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */; };
 		5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */; };
 		5BD4D78F2A526891009E8E89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BD4D7912A526891009E8E89 /* Localizable.strings */; };
@@ -173,6 +175,8 @@
 		5B0743122A4C19BE008F4C3D /* IntentsHandler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntentsHandler.entitlements; sourceTree = "<group>"; };
 		5B0743132A4C19C3008F4C3D /* IntentsHandlerUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntentsHandlerUI.entitlements; sourceTree = "<group>"; };
 		5BCF3EB72A56B62C0004F4A4 /* LookBackTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackTestViewController.swift; sourceTree = "<group>"; };
+		5BCF3EB92A5AE4C30004F4A4 /* FaceDetectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionManager.swift; sourceTree = "<group>"; };
+		5BCF3EBB2A5AEB030004F4A4 /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
 		5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMonthView.swift; sourceTree = "<group>"; };
 		5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCell.swift; sourceTree = "<group>"; };
 		5BD4D78A2A526773009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BCF3EBC2A5AEB030004F4A4 /* Vision.framework in Frameworks */,
 				1D1BADD61E57A214DB052DC6 /* Pods_MoodApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +231,7 @@
 		38D8090ABE8BE34934B58152 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5BCF3EBB2A5AEB030004F4A4 /* Vision.framework */,
 				5B0742DC2A4878E9008F4C3D /* FirebaseFirestore.framework */,
 				5B0742DA2A4878DA008F4C3D /* FirebaseFirestore.framework */,
 				5B0742D82A4878C9008F4C3D /* FirebaseStorage.framework */,
@@ -338,6 +344,7 @@
 				5B07426B2A3EC5AF008F4C3D /* FireStoreManager.swift */,
 				5B0742702A3F4259008F4C3D /* FireBaseStorageManager.swift */,
 				5BD4D7932A52BE03009E8E89 /* LocalizeUtils.swift */,
+				5BCF3EB92A5AE4C30004F4A4 /* FaceDetectionManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -670,6 +677,7 @@
 				5B0742752A419C6E008F4C3D /* MoodFlowCell.swift in Sources */,
 				5B07425C2A3C1E12008F4C3D /* NewPageCell.swift in Sources */,
 				5B0742832A45EE7E008F4C3D /* SleepBarChartView.swift in Sources */,
+				5BCF3EBA2A5AE4C30004F4A4 /* FaceDetectionManager.swift in Sources */,
 				5B0742732A41876C008F4C3D /* StatisticsViewController.swift in Sources */,
 				5B07423F2A39AC71008F4C3D /* HomeViewController.swift in Sources */,
 				5B07423B2A39AC71008F4C3D /* AppDelegate.swift in Sources */,
