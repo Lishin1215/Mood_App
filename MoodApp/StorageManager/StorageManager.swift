@@ -161,6 +161,45 @@ class StorageManager {
         }
     }
     
+    // 取得peeping狀態
+    func fetchPeepingMode() -> Bool? {
+        
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest()
+        
+        do {
+            let personalInfo = try context.fetch(fetchRequest)
+            
+            return personalInfo.first?.peepingMode
+        } catch {
+            print("Error fetching peepingMode: \(error.localizedDescription)")
+
+            return nil
+        }
+    }
+    
+    
+    func setPeepingMode(peepingMode: Bool?) {
+        
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<PersonalInfo> = PersonalInfo.fetchRequest()
+        
+        do {
+            let personalInfo = try context.fetch(fetchRequest).first ?? PersonalInfo(context: context)
+            
+            personalInfo.peepingMode = peepingMode ?? false
+            print(peepingMode)
+            
+            //最後存到coreData
+            try context.save()
+            
+        } catch {
+            print("Error setting peepingMode: \(error.localizedDescription)")
+        }
+    }
+    
 //    func deletePassword() {
 //
 //            let context = persistentContainer.viewContext

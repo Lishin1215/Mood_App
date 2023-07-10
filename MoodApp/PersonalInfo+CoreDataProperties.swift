@@ -2,7 +2,7 @@
 //  PersonalInfo+CoreDataProperties.swift
 //  MoodApp
 //
-//  Created by 簡莉芯 on 2023/7/4.
+//  Created by 簡莉芯 on 2023/7/10.
 //
 //
 
@@ -16,9 +16,10 @@ extension PersonalInfo {
         return NSFetchRequest<PersonalInfo>(entityName: "PersonalInfo")
     }
 
+    @NSManaged public var languageSelect: Int16
     @NSManaged public var passcode: String?
     @NSManaged public var reminderTime: Date?
-    @NSManaged public var languageSelect: Int16
+    @NSManaged public var peepingMode: Bool
 
 }
 

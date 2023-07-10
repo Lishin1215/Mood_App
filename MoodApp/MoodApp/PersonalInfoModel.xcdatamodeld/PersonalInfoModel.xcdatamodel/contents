@@ -3,6 +3,7 @@
     <entity name="PersonalInfo" representedClassName="PersonalInfo" syncable="YES">
         <attribute name="languageSelect" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="passcode" optional="YES" attributeType="String"/>
+        <attribute name="peepingMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="reminderTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
 </model>

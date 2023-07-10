@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
 //        //自己產生一個window
 //        window = UIWindow(frame: UIScreen.main.bounds)
+            
         
     //IQKeyboard
         IQKeyboardManager.shared.enable = true

@@ -212,10 +212,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         if sender.isOn {
            
             //存結果到coreData
+            StorageManager.shared.setPeepingMode(peepingMode: true)
             //開啟“人臉辨識”功能
             FaceDetectionManager.shared.startCamera()
         } else {
             FaceDetectionManager.shared.stopCamera()
+            
+            StorageManager.shared.setPeepingMode(peepingMode: false)
         }
     }
     
@@ -442,6 +445,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             } else {
                 segmentedControl.selectedSegmentIndex = 1
             }
+            print("拿到：\(StorageManager.shared.fetchLanguage())")
+            print("現在的語言： \(segmentedControl.selectedSegmentIndex)")
         
             return cell
         } else if indexPath.row == 3 {
@@ -470,13 +475,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                 peepingSwitchButton.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -30)
             ])
             
-            // 先去判斷現在是否有設password （有 -> 打開 /沒有 -> 關）
-//            if StorageManager.shared.fetchPassword() != nil {
-//                peepingSwitchButton.isOn = true
-//            } else {
-//                peepingSwitchButton.isOn = false
-//            }
-            
+            // 先去判斷現在是否有設peepingMode （有 -> 打開 /沒有 -> 關）
+            if StorageManager.shared.fetchPeepingMode() == true {
+                peepingSwitchButton.isOn = true
+            } else {
+                peepingSwitchButton.isOn = false
+            }
             
             return cell
         }else {
