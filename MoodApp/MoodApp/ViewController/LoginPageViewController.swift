@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import AuthenticationServices // Sign in with Apple 的主體框架
 import CryptoKit // 用來產生隨機字串 (Nonce) 的
 import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
@@ -38,6 +39,48 @@ class LoginPageViewController: UIViewController {
             authorizationAppleIDButton.heightAnchor.constraint(equalToConstant: 45),
             authorizationAppleIDButton.widthAnchor.constraint(equalToConstant: 310)
         ])
+        
+        //swiftUI image
+        
+        let images = ["image 8", "image 13", "image 22", "image 25", "image 7"]
+        let radius: CGFloat = 100
+        
+        // 创建五个 UIView
+        var imageViews: [UIView] = []
+        
+        for imageName in images {
+            
+            let imageSwiftUI = LoginContentView(moodImage: imageName)
+            
+            let host = UIHostingController(rootView: imageSwiftUI)
+            if let hostView = host.view {
+                
+                view.addSubview(hostView)
+                imageViews.append(hostView)
+                
+        }
+            
+    //使用 Auto Layout 约束将图像排列成一个圆形
+        for (index, imageView) in imageViews.enumerated() {
+            let angle = 2 * CGFloat.pi * CGFloat(index) / CGFloat(images.count)
+            let xAxis = radius * cos(angle)
+            let yAxis = radius * sin(angle)
+            
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: xAxis),
+                imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: yAxis),
+                imageView.widthAnchor.constraint(equalToConstant: 55),
+                imageView.heightAnchor.constraint(equalToConstant: 55)
+            ])
+        }
+            
+//            hostView.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint.activate([
+//                hostView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//                hostView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//            ])
+        }
     }
     
     
