@@ -300,24 +300,34 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
 
     func calculateAverageTime(timeStrings:[String]) -> String {
         
-        //把00:00換成最接近24:00來計算
-        var modifiedTimeStrings = timeStrings
-        while let index = modifiedTimeStrings.firstIndex(of: "00:00") {
-            modifiedTimeStrings[index] = "23:59"
-        }
+//        //把00:00換成最接近24:00來計算
+//        var modifiedTimeStrings = timeStrings
+//        while let index = modifiedTimeStrings.firstIndex(of: "00:00") {
+//            modifiedTimeStrings[index] = "23:59"
+//        }
+        
+        
         //把時間string轉換成Date，才能做計算
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         
         var totalTimeInterval: TimeInterval = 0
+        let calendar = Calendar.current // 對date進行“時間操作”
         
-        for timeString in modifiedTimeStrings {
-            if let date = dateFormatter.date(from: timeString) {
+        for timeString in timeStrings {
+            if var date = dateFormatter.date(from: timeString) {
+                //抓出hour
+                let hour = Int(timeString.split(separator: ":")[0]) ?? 0 //[0] --> 因為timeString切開會變成array (ex. 22:00 --> ["22","00"])
+                
+                //以 ”12:00 pm" 為基準 （ 小於 --> 加 1 天 ）
+                if hour < 12 { //用calendar去加一天
+                    date = calendar.date(byAdding: .day, value: +1, to: date) ?? Date()
+                }
                 totalTimeInterval += date.timeIntervalSinceReferenceDate
             }
         }
         
-        let averageTimeInterval = totalTimeInterval/Double(modifiedTimeStrings.count)
+        let averageTimeInterval = totalTimeInterval/Double(timeStrings.count)
         let averageDate = Date(timeIntervalSinceReferenceDate: averageTimeInterval)
         let averageTimeString = dateFormatter.string(from: averageDate)
         print("$$$ +\(averageTimeString)")

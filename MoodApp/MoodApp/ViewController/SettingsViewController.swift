@@ -321,7 +321,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         if indexPath.row == 0 {
             return 135
         } else if indexPath.row == 1 {
-            return 150
+            return 160
         } else {
             return 115
         }
@@ -522,7 +522,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
             return cell
-        }else if indexPath.row == 4 {
+        } else if indexPath.row == 4 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as? SettingsCell
             else { fatalError("Could not create Cell")}
             
