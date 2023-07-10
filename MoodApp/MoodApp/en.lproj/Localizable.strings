@@ -108,7 +108,7 @@
 
 //FaceDetectionManager
 "warning" = "Warning ⚠️";
-"warning message" = "Be careful for peeping!";
+"warningMessage" = "Be careful for peeping!";
 
 
 

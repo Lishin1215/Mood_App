@@ -103,5 +103,5 @@
 
 //FaceDetectionManager
 "warning" = "警告 ⚠️";
-"warning message" = "有人窺視中，請留意！";
+"warningMessage" = "有人窺視中，請留意！";
 
