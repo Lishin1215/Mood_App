@@ -91,6 +91,7 @@
 "English" = "English";
 "languageAlert" = "Notice 🔔";
 "languageMessage" = "Please close your app and reopen it to change language.";
+"peepingLabel" = "Peeping Watch";
 
 
 //passwordPage
@@ -102,6 +103,9 @@
 "settingMessage" = "PIN has been set";
 "ok" = "OK";
 
+//FaceDetectionManager
+"warning" = "Warning ⚠️";
+"warning message" = "";
 
 
 

@@ -149,30 +149,74 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     @objc func shareButtonTapped(_ sender: UIButton) {
         print("sha sha sha")
         
-        //把cell做成圖片
-        var writePath = URL(string: "")
+        //把cell做成圖片(convert UIView to .png)
+        //Mood Flow
+        var moodWritePath = URL(string: "")
+        let moodIndexPath = IndexPath(row: 0, section: 0)
+        
+        if let moodCell = self.tableView.cellForRow(at: moodIndexPath) as? MoodFlowCell {
+            
+            UIGraphicsBeginImageContextWithOptions(moodCell.layer.frame.size, false, 1) //Begin
+            //將moodCell渲染到current context
+            moodCell.layer.render(in: UIGraphicsGetCurrentContext()!)
+            
+            if let viewImage = UIGraphicsGetImageFromCurrentImageContext() { //變成image了
+                UIGraphicsEndImageContext() //End
+                
+                
+                //創建“資料夾的路徑”
+                let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                moodWritePath = documentsDir.appendingPathComponent("mood.png")
+                
+                do {
+                    //把viewImage寫入path
+                    if let imageData = viewImage.pngData() {
+                        try imageData.write(to: moodWritePath!)
+                        print("Saved image to: ", moodWritePath)
+                    }
+                   
+                } catch {
+                    print("Could not remove file")
+                }
+            } else {
+                print("Failed to get image from context")
+            }
+        }
+        
+        //Sleep Analysis
+        var sleepWritePath = URL(string: "")
         let sleepIndexPath = IndexPath(row: 1, section: 0)
         
         if let sleepCell = self.tableView.cellForRow(at: sleepIndexPath) as? SleepAnalysisCell {
 
             UIGraphicsBeginImageContextWithOptions(sleepCell.layer.frame.size, false, 1) // 1 = scale
-        sleepCell.layer.render(in: UIGraphicsGetCurrentContext()!)
-            let viewImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            writePath = documentsDir.appendingPathComponent("sleep.png")
+            sleepCell.layer.render(in: UIGraphicsGetCurrentContext()!)
             
-            do{
-                try viewImage!.pngData()!.write(to: writePath!)
-            } catch {
-                print("Could not remove file")
+            if let viewImage = UIGraphicsGetImageFromCurrentImageContext() { //變成image了
+                UIGraphicsEndImageContext() //End
+                
+                
+                //創建“資料夾的路徑”
+                let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                sleepWritePath = documentsDir.appendingPathComponent("sleep.png")
+                
+                do {
+                    //把viewImage寫入path
+                    if let imageData = viewImage.pngData() {
+                        try imageData.write(to: sleepWritePath!)
+                        print("Saved image to: ", sleepWritePath)
+                    }
+                   
+                } catch {
+                    print("Could not remove file")
+                }
+            } else {
+                print("Failed to get image from context")
             }
-
-                print("Saved image to:", writePath)
-            }
+        }
 
         
-        let activityVC = UIActivityViewController(activityItems: [writePath], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [moodWritePath, sleepWritePath], applicationActivities: nil)
 
         activityVC.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
                // 跳alert

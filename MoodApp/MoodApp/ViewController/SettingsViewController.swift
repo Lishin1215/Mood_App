@@ -215,6 +215,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         if sender.isOn {
             print("watch me nene")
             
+            //存結果到coreData
             //開啟“人臉辨識”功能
             FaceDetectionManager.shared.startCamera()
         } else {
@@ -454,7 +455,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             cell.setContainerViewTopAnchor(30)
             
-            cell.contentLabel.text = "Peeping Watch"
+            cell.contentLabel.text = NSLocalizedString("peepingLabel", comment: "")
             
             NSLayoutConstraint.activate([
                 cell.contentLabel.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)

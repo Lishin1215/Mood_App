@@ -84,6 +84,7 @@
 "English" = "英文";
 "languageAlert" = "提醒 🔔";
 "languageMessage" = "要關閉app再重新開啟後，才會更換語言喔！";
+"peepingLabel" = "防窺監視";
 
 
 //passwordPage
@@ -94,4 +95,8 @@
 "settingAlert" = "完成🥳";
 "settingMessage" = "密碼已成功設定";
 "ok" = "確定";
+
+//FaceDetectionManager
+"warning" = "警告 ⚠️";
+"warning message" = "";
 

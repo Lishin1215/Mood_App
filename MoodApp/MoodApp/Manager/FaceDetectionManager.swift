@@ -98,8 +98,8 @@ extension FaceDetectionManager {
         if observations.count >= 2 {
             // 超過兩個人臉，顯示警告
             DispatchQueue.main.async { //回到main thread (寫UI)
-                let controller = UIAlertController(title: "警告", message: "偵測到超過兩個人臉！", preferredStyle: .alert)
-                let action = UIAlertAction(title: "確定", style: .default)
+                let controller = UIAlertController(title: NSLocalizedString("warning", comment: ""), message: "偵測到超過兩個人臉！", preferredStyle: .alert)
+                let action = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default)
                 
                 controller.addAction(action)
                 //找rootVC(自己找到所位於的畫面VC)，跳alert
