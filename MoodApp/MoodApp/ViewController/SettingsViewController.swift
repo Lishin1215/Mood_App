@@ -29,6 +29,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let passwordSwitchButton = UISwitch()
     let datePicker = UIDatePicker()
     let peepingSwitchButton = UISwitch()
+    let logoutButton = UIButton()
     let deleteButton = UIButton()
     
     //language
@@ -223,6 +224,43 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
+    @objc func logoutTapped(_ sender: UIButton) {
+        print("登出登出")
+        
+        //跳alert --> confirm
+        let controller = UIAlertController(title: NSLocalizedString("logoutAccountAlert", comment: ""), message: NSLocalizedString("logoutMessage", comment: ""), preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: NSLocalizedString("logout", comment: ""), style: .destructive) { _ in
+            self.userLogout()
+        }
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel)
+        
+        controller.addAction(deleteAction)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
+        
+    }
+    
+    
+    func userLogout() {
+        
+        //I. firebase Auth
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
+        
+        //II. 跳回login Page
+        if let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true, completion: nil)
+        }
+    }
+    
+    
+    
     @objc func deleteAccountTapped(_ sender: UIButton) {
         print("要確定齁")
         
@@ -292,7 +330,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
 //MARK: UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        6
     }
     
     
@@ -445,6 +483,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             } else {
                 segmentedControl.selectedSegmentIndex = 1
             }
+            
             print("拿到：\(StorageManager.shared.fetchLanguage())")
             print("現在的語言： \(segmentedControl.selectedSegmentIndex)")
         
@@ -483,7 +522,32 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
             return cell
-        }else {
+        }else if indexPath.row == 4 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as? SettingsCell
+            else { fatalError("Could not create Cell")}
+            
+            cell.setContainerViewTopAnchor(30)
+            
+            cell.contentLabel.isHidden = true
+            
+            //logoutButton
+//            let logoutButton = UIButton()
+            logoutButton.setTitle(NSLocalizedString("logoutButton", comment: ""), for: .normal)
+            logoutButton.setTitleColor(.darkGray, for: .normal)
+            logoutButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            cell.addSubview(logoutButton)
+            
+            logoutButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
+            
+            
+            logoutButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                logoutButton.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
+                logoutButton.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
+            ])
+            
+            return cell
+        } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as? SettingsCell
             else { fatalError("Could not create Cell")}
             

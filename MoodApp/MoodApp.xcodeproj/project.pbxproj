@@ -71,8 +71,6 @@
 		5BCF3ECD2A5BBA300004F4A4 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3EC72A5BB5110004F4A4 /* PersonalInfo+CoreDataClass.swift */; };
 		5BCF3ECE2A5BBA310004F4A4 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3EC72A5BB5110004F4A4 /* PersonalInfo+CoreDataClass.swift */; };
 		5BCF3ED02A5BDA750004F4A4 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ECF2A5BDA750004F4A4 /* LaunchViewController.swift */; };
-		5BCF3ED22A5BFBEA0004F4A4 /* LoginContentViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ED12A5BFBEA0004F4A4 /* LoginContentViewTest.swift */; };
-		5BCF3ED42A5C01470004F4A4 /* Test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ED32A5C01470004F4A4 /* Test2.swift */; };
 		5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */; };
 		5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */; };
 		5BD4D78F2A526891009E8E89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BD4D7912A526891009E8E89 /* Localizable.strings */; };
@@ -183,8 +181,6 @@
 		5BCF3EC72A5BB5110004F4A4 /* PersonalInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		5BCF3EC82A5BB5110004F4A4 /* PersonalInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5BCF3ECF2A5BDA750004F4A4 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
-		5BCF3ED12A5BFBEA0004F4A4 /* LoginContentViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginContentViewTest.swift; sourceTree = "<group>"; };
-		5BCF3ED32A5C01470004F4A4 /* Test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2.swift; sourceTree = "<group>"; };
 		5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMonthView.swift; sourceTree = "<group>"; };
 		5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCell.swift; sourceTree = "<group>"; };
 		5BD4D78A2A526773009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -365,8 +361,6 @@
 				5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */,
 				5BD4D79F2A540289009E8E89 /* ContainerView.swift */,
 				5BD4D7B42A556C12009E8E89 /* LoginContentView.swift */,
-				5BCF3ED12A5BFBEA0004F4A4 /* LoginContentViewTest.swift */,
-				5BCF3ED32A5C01470004F4A4 /* Test2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -676,7 +670,6 @@
 				5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */,
 				5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */,
 				5B0742792A42A944008F4C3D /* LookBackViewController.swift in Sources */,
-				5BCF3ED42A5C01470004F4A4 /* Test2.swift in Sources */,
 				5B0742AD2A481E6F008F4C3D /* RecordMoodIntentHandler.swift in Sources */,
 				5B0742512A3AA87E008F4C3D /* TabBarViewController.swift in Sources */,
 				5B07426C2A3EC5AF008F4C3D /* FireStoreManager.swift in Sources */,
@@ -688,7 +681,6 @@
 				5BCF3EC92A5BB5110004F4A4 /* PersonalInfo+CoreDataClass.swift in Sources */,
 				5B0742752A419C6E008F4C3D /* MoodFlowCell.swift in Sources */,
 				5B07425C2A3C1E12008F4C3D /* NewPageCell.swift in Sources */,
-				5BCF3ED22A5BFBEA0004F4A4 /* LoginContentViewTest.swift in Sources */,
 				5B0742832A45EE7E008F4C3D /* SleepBarChartView.swift in Sources */,
 				5BCF3EBA2A5AE4C30004F4A4 /* FaceDetectionManager.swift in Sources */,
 				5B0742732A41876C008F4C3D /* StatisticsViewController.swift in Sources */,

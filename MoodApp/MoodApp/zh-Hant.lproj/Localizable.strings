@@ -85,6 +85,11 @@
 "languageAlert" = "提醒 🔔";
 "languageMessage" = "要關閉app再重新開啟後，才會更換語言喔！";
 "peepingLabel" = "防窺監視";
+"logoutButton" = "登出";
+"logoutAccountAlert" = "登出";
+"logoutMessage" = "確定要登出嗎?";
+"logout" = "登出";
+
 
 
 //passwordPage
@@ -98,5 +103,5 @@
 
 //FaceDetectionManager
 "warning" = "警告 ⚠️";
-"warning message" = "";
+"warning message" = "有人窺視中，請留意！";
 

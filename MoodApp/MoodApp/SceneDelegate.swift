@@ -37,9 +37,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
+        
+    // 避免已經login但coreData被刪除的情況
+        if StorageManager.shared.fetchLanguage() == nil {
+
+            //偵測系統預設語言，存到CoreData
+            LocalizeUtils.shared.settingUserLanguageCode()
+        }
+        
+        
     // signin with apple
         // 目前有user（已登入） -> HomeVC
-        
         
         if let currentUser = Auth.auth().currentUser{
             print("already log in")

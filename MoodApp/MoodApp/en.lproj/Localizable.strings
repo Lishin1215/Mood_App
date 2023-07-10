@@ -92,7 +92,10 @@
 "languageAlert" = "Notice 🔔";
 "languageMessage" = "Please close your app and reopen it to change language.";
 "peepingLabel" = "Peeping Watch";
-
+"logoutButton" = "Log Out";
+"logoutAccountAlert" = "Log Out";
+"logoutMessage" = "Are you sure to log out?";
+"logout" = "Logout";
 
 //passwordPage
 "passwordTitleNew" = "Enter your new PIN";
@@ -105,7 +108,7 @@
 
 //FaceDetectionManager
 "warning" = "Warning ⚠️";
-"warning message" = "";
+"warning message" = "Be careful for peeping!";
 
 
 
