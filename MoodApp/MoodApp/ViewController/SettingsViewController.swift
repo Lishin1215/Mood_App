@@ -252,7 +252,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
           print("Error signing out: %@", signOutError)
         }
         
-        //II. 跳回login Page
+        //II. 清掉settings (default)
+        StorageManager.shared.setPassword(newPasscode: nil)
+        
+        //III. 跳回login Page
         if let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
             loginVC.modalPresentationStyle = .fullScreen
             self.present(loginVC, animated: true, completion: nil)
