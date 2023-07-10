@@ -6,8 +6,6 @@
 //
 
 import UIKit
-//import AuthenticationServices // Sign in with Apple 的主體框架
-//import CryptoKit // 用來產生隨機字串 (Nonce) 的
 import FirebaseAuth // 用來與 Firebase Auth 進行串接用的
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -30,7 +28,6 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     //cell裡的物件
     let passwordSwitchButton = UISwitch()
     let datePicker = UIDatePicker()
-//    let languageButton = UIButton()
     let peepingSwitchButton = UISwitch()
     let deleteButton = UIButton()
     
@@ -213,8 +210,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @objc func peepingCondition(_ sender: UISwitch) {
         if sender.isOn {
-            print("watch me nene")
-            
+           
             //存結果到coreData
             //開啟“人臉辨識”功能
             FaceDetectionManager.shared.startCamera()
