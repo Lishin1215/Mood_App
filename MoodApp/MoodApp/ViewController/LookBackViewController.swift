@@ -247,6 +247,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
         }
         print(emptyArray)
         
+        
         //filter出空的string
         let filterArray = emptyArray.filter { !$0.isEmpty }
         print(filterArray)
@@ -259,6 +260,13 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
             
             //所有圖片加總"寬"度
             scrollView.contentSize = CGSize(width: scrollView.frame.width * CGFloat(photoArray.count), height: scrollView.frame.height) //設了autoConstriant可以拿到frame (scrollView.frame.width)
+            
+            
+            //先把scrollView上所有imageView拿掉（以免“之前月份”殘留）
+            for subview in self.scrollView.subviews { // 系統會自動判斷subviews數量，loop完後跳出
+                subview.removeFromSuperview()
+            }
+            
             //加入ImageView以顯示圖片
             for index in 0 ..< photoArray.count {
                 let scrollImageView = UIImageView()
@@ -294,7 +302,7 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
 //Conform to Protocol
     func didReceiveDate(year: String, month: String) {
         
-        //II. 收到點擊時間後 -> 改header的label
+        //II. 收到點擊時間後 -> 改header的label、停下前一次timer
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM, yyyy"
         
@@ -305,6 +313,9 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
             
             //改header label
             dateLabel.text = fullDateString
+            
+            //”停下“前一次scrollView的timer(因為已經點擊新的月份，會產生新的timer)
+            timer.invalidate()
             
             //III. 依照header label去 fetchMonthData
             FireStoreManager.shared.fetchMonthlyData(dateString: dateLabel.text ?? "")
