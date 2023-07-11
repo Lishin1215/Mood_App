@@ -76,7 +76,7 @@ extension FaceDetectionManager: AVCaptureVideoDataOutputSampleBufferDelegate {
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])
         
         do {
-            //執行先前設定好的“人臉辨識請求”
+            //執行先前已設定好的“人臉辨識請求”
             try imageRequestHandler.perform([self.faceDetectionRequest!])
         } catch {
             print("臉部偵測錯誤: \(error)")

@@ -252,8 +252,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
           print("Error signing out: %@", signOutError)
         }
         
-        //II. 清掉settings (default)
+        //II. 清掉所有settings (default)
         StorageManager.shared.setPassword(newPasscode: nil)
+        StorageManager.shared.setLanguage(newLanguage: nil)
+        StorageManager.shared.setReminderTime(newReminderTime: nil)
         
         //III. 跳回login Page
         if let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
