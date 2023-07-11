@@ -96,6 +96,7 @@
 "logoutAccountAlert" = "Log Out";
 "logoutMessage" = "Are you sure to log out?";
 "logout" = "Logout";
+"account" = "Account";
 
 //passwordPage
 "passwordTitleNew" = "Enter your new PIN";
@@ -109,6 +110,9 @@
 //FaceDetectionManager
 "warning" = "Warning ⚠️";
 "warningMessage" = "Be careful for peeping!";
+
+//login
+"tap" = "Tap emojis to see what will happen";
 
 
 

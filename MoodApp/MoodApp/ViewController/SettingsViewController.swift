@@ -323,8 +323,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
 //height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 135
+        if indexPath.row == 0 || indexPath.row == 4 {
+            return 136
         } else if indexPath.row == 1 {
             return 160
         } else {
@@ -354,8 +354,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             generalLabel.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                generalLabel.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 30),
-                generalLabel.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 30)
+                generalLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 30),
+                generalLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 30)
             ])
         
             //調整containerView topAnchor
@@ -531,7 +531,21 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseIdentifier, for: indexPath) as? SettingsCell
             else { fatalError("Could not create Cell")}
             
-            cell.setContainerViewTopAnchor(30)
+            
+        //accountLabel
+            let accountLabel = UILabel()
+            accountLabel.text = NSLocalizedString("account", comment: "")
+            accountLabel.textColor = .darkGray
+            accountLabel.font = UIFont.systemFont(ofSize: 15)
+            cell.addSubview(accountLabel)
+            
+            accountLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                accountLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 30),
+                accountLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 30)
+            ])
+            
+            cell.setContainerViewTopAnchor(60)
             
             cell.contentLabel.isHidden = true
             

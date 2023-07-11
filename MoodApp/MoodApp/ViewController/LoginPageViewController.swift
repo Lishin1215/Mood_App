@@ -40,6 +40,21 @@ class LoginPageViewController: UIViewController {
             authorizationAppleIDButton.widthAnchor.constraint(equalToConstant: 310)
         ])
         
+        //instruction
+        let instructionLabel = UILabel()
+        instructionLabel.text = NSLocalizedString("tap", comment: "")
+        instructionLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        instructionLabel.textAlignment = .center
+        instructionLabel.textColor = .darkGray
+        view.addSubview(instructionLabel)
+        
+        instructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            instructionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            instructionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        
         //swiftUI image
         
         let images = ["image 8", "image 13", "image 22", "image 25", "image 7"]
@@ -83,11 +98,6 @@ class LoginPageViewController: UIViewController {
         }
     }
     
-    
-//    // 淺色模式就顯示黑色的按鈕，深色模式就顯示白色的按鈕
-//    func chooseAppleButtonStyle() -> ASAuthorizationAppleIDButton.Style {
-//        return (UITraitCollection.current.userInterfaceStyle == .light) ?.black: .white
-//    }
     
     
     // 點擊 Sign In with Apple 按鈕後，請求授權

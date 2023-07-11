@@ -89,6 +89,8 @@
 "logoutAccountAlert" = "登出";
 "logoutMessage" = "確定要登出嗎?";
 "logout" = "登出";
+"account" = "帳號";
+
 
 
 
@@ -105,3 +107,5 @@
 "warning" = "警告 ⚠️";
 "warningMessage" = "有人窺視中，請留意！";
 
+//login
+"tap" = "按按看表情符號，看會發生什麼事";
