@@ -349,13 +349,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             let generalLabel = UILabel()
             generalLabel.text = NSLocalizedString("general", comment: "")
             generalLabel.textColor = .darkGray
-            generalLabel.font = UIFont.systemFont(ofSize: 15)
+            generalLabel.font = UIFont.systemFont(ofSize: 14)
             cell.addSubview(generalLabel)
             
             generalLabel.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 generalLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 30),
-                generalLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 30)
+                generalLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 35)
             ])
         
             //調整containerView topAnchor
@@ -427,7 +427,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             let calendar = Calendar.current
             let maxTime = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: Date())// 最大時間為當天的 23:59:59
             datePicker.maximumDate = maxTime
-            view.addSubview(datePicker)
+            cell.contentView.addSubview(datePicker)
+//            view.addSubview(datePicker)
             
             datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
             
@@ -469,7 +470,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             //右側點選語言(segmented)
 //            segmentedControl.tintColor = .orangeBrown
 //            segmentedControl.backgroundColor = .pinkOrange
-            view.addSubview(segmentedControl)
+//            view.addSubview(segmentedControl)
+            cell.contentView.addSubview(segmentedControl)
             
             segmentedControl.addTarget(self, action: #selector(languageSelected), for: .valueChanged)
             
@@ -536,13 +538,13 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             let accountLabel = UILabel()
             accountLabel.text = NSLocalizedString("account", comment: "")
             accountLabel.textColor = .darkGray
-            accountLabel.font = UIFont.systemFont(ofSize: 15)
+            accountLabel.font = UIFont.systemFont(ofSize: 14)
             cell.addSubview(accountLabel)
             
             accountLabel.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 accountLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 30),
-                accountLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 30)
+                accountLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 35)
             ])
             
             cell.setContainerViewTopAnchor(60)
