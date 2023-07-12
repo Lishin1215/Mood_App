@@ -221,7 +221,7 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
             footerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             footerView.heightAnchor.constraint(equalToConstant: 80)
         ])
-        //“加入購物車”按鈕
+        //“加入一天”按鈕
         let addDay = NSLocalizedString("addDay", comment: "")
         addDayButton.setTitle(addDay, for: .normal)
         
@@ -245,6 +245,17 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
    
+    func makeButtonGradient() {
+        //改變顏色（漸層色）
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = addDayButton.bounds
+        gradientLayer.cornerRadius = 10
+        gradientLayer.colors = [UIColor.gradientUseRed.cgColor, UIColor.gradientUseOrange.cgColor]
+        addDayButton.layer.insertSublayer(gradientLayer, at: 0) // 将渐变图层插入到按钮的背景图层下方
+        addDayButton.backgroundColor = .clear// 设置背景颜色为透明
+        addDayButton.setTitleColor(.white, for: .normal) // 设置标题文本颜色为白色
+    }
+    
     
     @objc func backButtonTapped(_ sender: UIButton) { //兩條路都需執行，“系統會記住”我們點選哪條路過來
         // 按日期到newPage的時候是要pop出來
@@ -268,8 +279,11 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
         self.moodIndex = sender.tag
         //addDayButton啟用（至少要選moodButton，才可加一天）
         addDayButton.isEnabled = true
-        addDayButton.backgroundColor = .pinkOrange
+        //改變顏色（漸層色）
+        makeButtonGradient()
     }
+    
+    
     
     @objc func sleepButtonTapped(_ sender: UIButton) {
        
@@ -411,7 +425,8 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                         moodButtonArray[Int(mood) ?? 0].backgroundColor = .lightPinkOrange
                         moodButtonArray[Int(mood) ?? 0].layer.cornerRadius = 22
                         self.addDayButton.isEnabled = true
-                        self.addDayButton.backgroundColor = .pinkOrange
+                        //改變顏色（漸層色）
+                        makeButtonGradient()
                         //*** assign到外面的變數存起來，這樣setData時才有資料
                         self.moodIndex = Int(mood)
                     }

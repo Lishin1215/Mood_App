@@ -39,6 +39,14 @@ extension UIColor {
         return UIColor(red: 0.478, green: 0.741, blue: 0.545, alpha: 1)
     }
     
+    static var gradientUseOrange: UIColor {
+        return UIColor(red: 1, green: 0.67, blue: 0.45, alpha: 1)
+    }
+    
+    static var gradientUseRed: UIColor {
+        return UIColor(red: 0.94, green: 0.54, blue: 0.45, alpha: 0.9)
+    }
+    
     
     //漸層橘
     static func gradientColor(with colors: [UIColor]) -> UIColor? {
