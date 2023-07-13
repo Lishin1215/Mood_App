@@ -41,22 +41,17 @@ class LoginPageViewController: UIViewController {
         ])
         
         //instruction
-        let instructionLabel = UILabel()
-        instructionLabel.text = NSLocalizedString("tap", comment: "")
-        instructionLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        instructionLabel.textAlignment = .center
-        instructionLabel.textColor = .darkGray
-        view.addSubview(instructionLabel)
-        
-        instructionLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            instructionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
-            instructionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
+        let instructionLabel = UILabel.createLabel(text: NSLocalizedString("tap", comment: ""),
+                                                   font: UIFont.systemFont(ofSize: 16, weight: .medium),
+                                                   textColor: .darkGray,
+                                                   textAlignment: .center,
+                                                   in: view,
+                                                   useSafeAreaLayoutGuide: true,
+                                                   topAnchorConstant: 80,
+                                                   leadingAnchorConstant: 0,
+                                                   centerXAnchorConstant: 0)
         
         //swiftUI image
-        
         let images = ["image 8", "image 13", "image 22", "image 25", "image 7"]
         let radius: CGFloat = 100
         

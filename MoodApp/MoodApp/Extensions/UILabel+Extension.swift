@@ -15,8 +15,9 @@ extension UILabel {
                             textColor: UIColor,
                             textAlignment: NSTextAlignment,
                             in view: UIView,
+                            useSafeAreaLayoutGuide: Bool = false,
                             topAnchorConstant: CGFloat,
-                            leadingAnchorConstant: CGFloat,
+                            leadingAnchorConstant: CGFloat? = nil,
                             trailingAnchorConstant: CGFloat? = nil,
                             centerXAnchorConstant: CGFloat? = nil,
                             centerYAnchorConstant: CGFloat? = nil)
@@ -32,10 +33,13 @@ extension UILabel {
         label.translatesAutoresizingMaskIntoConstraints = false
         
         //constraints
-        var constraints: [NSLayoutConstraint] = [
-            label.topAnchor.constraint(equalTo: view.topAnchor, constant: topAnchorConstant),
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingAnchorConstant)
-        ]
+        var constraints: [NSLayoutConstraint] = []
+        
+        
+        if let leadingAnchorConstant = leadingAnchorConstant {
+            
+            constraints.append(label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingAnchorConstant))
+        }
         
         if let trailingAnchorConstant = trailingAnchorConstant {
             
@@ -50,6 +54,12 @@ extension UILabel {
         if let centerYAnchorConstant = centerYAnchorConstant {
             
             constraints.append(label.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: centerYAnchorConstant))
+        } else {
+            if useSafeAreaLayoutGuide {
+                constraints.append(label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topAnchorConstant))
+            } else {
+                constraints.append(label.topAnchor.constraint(equalTo: view.topAnchor, constant: topAnchorConstant))
+            }
         }
         
         NSLayoutConstraint.activate(constraints)

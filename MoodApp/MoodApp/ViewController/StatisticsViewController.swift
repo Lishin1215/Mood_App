@@ -9,9 +9,9 @@ import UIKit
 import SwiftUI
 import FirebaseFirestore
 
-class StatisticsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FireStoreManagerDelegate, PopUpViewDelegate
+
+class StatisticsViewController: UIViewController, UITableViewDelegate, FireStoreManagerDelegate, PopUpViewDelegate
 {
-   
     
     //header
     let headerView = UIView()
@@ -25,9 +25,9 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     private var sleepTimeArray: [String] = []
     
     //計算結果
-    private var averageBedTime: String?
-    private var averageWakeTime: String?
-    private var averageSleepTime: String?
+    var averageBedTime: String?
+    var averageWakeTime: String?
+    var averageSleepTime: String?
     
     //swiftUI struct
     private var sleepTimeFlowArray: [SleepTimeFlow] = []
@@ -50,6 +50,11 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     
     let tableView = UITableView()
     
+    //dataSource & delegate
+    var dataSource = StatisticsTableViewDataSource()
+//    let delegate = StatisticsTableViewDelegate()
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -68,8 +73,12 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
         
         //delegate
 //        FireStoreManager.shared.delegate = self
+        
+        //dataSource分開寫（從dataSource.swift指回來）
+        self.dataSource.viewController = self
 
-        tableView.dataSource = self
+        
+        tableView.dataSource = dataSource
         tableView.delegate = self
         
         //register
@@ -593,6 +602,7 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
+//MARK: UITableView Delegate
 //height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
@@ -603,135 +613,5 @@ class StatisticsViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-   
-//MARK: UITableView DataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: MoodFlowCell.reuseIdentifier, for: indexPath) as?
-                    MoodFlowCell
-            else {fatalError("Could not create Cell")}
-            
-            
-            return cell
-        } else  {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: SleepAnalysisCell.reuseIdentifier, for: indexPath) as? SleepAnalysisCell
-            else {fatalError("Could not create Cell")}
-            
-            //sleepLabel
-            let sleepLabel = UILabel()
-            sleepLabel.removeFromSuperview()
-            sleepLabel.text = NSLocalizedString("sleepLabel", comment: "")
-            sleepLabel.textColor = .orangeBrown
-            sleepLabel.font = UIFont.systemFont(ofSize: 16)
-            cell.containerView.addSubview(sleepLabel)
-            
-            sleepLabel.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                sleepLabel.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 22),
-                sleepLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 22)
-            ])
-            
-            //hrs
-            let hrsLabel = UILabel()
-            hrsLabel.removeFromSuperview()
-            hrsLabel.text = NSLocalizedString("hrs", comment: "")
-            hrsLabel.textColor = .lightGray
-            hrsLabel.font = UIFont.systemFont(ofSize: 13)
-            cell.containerView.addSubview(hrsLabel)
-            
-            hrsLabel.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                hrsLabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -50),
-                hrsLabel.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 45)
-            ])
-            
-            //Average label
-            let bedTimeLabel = UILabel()
-            let wakeTimeLabel = UILabel()
-            let sleepTimelabel = UILabel()
-            
-            bedTimeLabel.text = NSLocalizedString("averageBed", comment: "")
-            bedTimeLabel.numberOfLines = 2
-            bedTimeLabel.textAlignment = .center
-            wakeTimeLabel.text = NSLocalizedString("averageWake", comment: "")
-            wakeTimeLabel.numberOfLines = 2
-            wakeTimeLabel.textAlignment = .center
-            sleepTimelabel.text = NSLocalizedString("averageSleep", comment: "")
-            sleepTimelabel.numberOfLines = 2
-            sleepTimelabel.textAlignment = .center
-            bedTimeLabel.font = UIFont.systemFont(ofSize: 13)
-            wakeTimeLabel.font = UIFont.systemFont(ofSize: 13)
-            sleepTimelabel.font = UIFont.systemFont(ofSize: 13)
-            bedTimeLabel.textColor = .lightGray
-            wakeTimeLabel.textColor = .lightGray
-            sleepTimelabel.textColor = .lightGray
-            cell.containerView.addSubview(bedTimeLabel)
-            cell.containerView.addSubview(wakeTimeLabel)
-            cell.containerView.addSubview(sleepTimelabel)
-            
-            bedTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-            wakeTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-            sleepTimelabel.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                bedTimeLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 35),
-                bedTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30),
-            ])
-            NSLayoutConstraint.activate([
-                wakeTimeLabel.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
-                wakeTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
-            ])
-            NSLayoutConstraint.activate([
-                sleepTimelabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -35),
-                sleepTimelabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
-            ])
-            
-//            //TimeLabel
-//            let bedTime = UILabel()
-//            let wakeTime = UILabel()
-//            let sleepTime = UILabel()
-            
-            //預設先拿掉TimeLabel，以免拿到資料後，更新會重複add (default)
-            bedTime.removeFromSuperview()
-            wakeTime.removeFromSuperview()
-            sleepTime.removeFromSuperview()
-            
-            bedTime.text = averageBedTime ?? "00:00"
-            wakeTime.text = averageWakeTime ?? "00:00"
-            sleepTime.text = averageSleepTime ?? "00:00"
-            bedTime.font = UIFont.boldSystemFont(ofSize: 18)
-            wakeTime.font = UIFont.boldSystemFont(ofSize: 18)
-            sleepTime.font = UIFont.boldSystemFont(ofSize: 18)
-            bedTime.textColor = .darkGray
-            wakeTime.textColor = .darkGray
-            sleepTime.textColor = .darkGray
-            cell.containerView.addSubview(bedTime)
-            cell.containerView.addSubview(wakeTime)
-            cell.containerView.addSubview(sleepTime)
-            
-            bedTime.translatesAutoresizingMaskIntoConstraints = false
-            wakeTime.translatesAutoresizingMaskIntoConstraints = false
-            sleepTime.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                bedTime.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 35),
-                bedTime.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
-            ])
-            NSLayoutConstraint.activate([
-                wakeTime.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
-                wakeTime.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
-            ])
-            NSLayoutConstraint.activate([
-                sleepTime.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -35),
-                sleepTime.centerYAnchor.constraint(equalTo: cell.containerView.centerYAnchor)
-            ])
-            
-            return cell
-        }
-    }
 
 }

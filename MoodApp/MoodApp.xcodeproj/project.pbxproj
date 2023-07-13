@@ -72,6 +72,7 @@
 		5BCF3ECE2A5BBA310004F4A4 /* PersonalInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3EC72A5BB5110004F4A4 /* PersonalInfo+CoreDataClass.swift */; };
 		5BCF3ED02A5BDA750004F4A4 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ECF2A5BDA750004F4A4 /* LaunchViewController.swift */; };
 		5BCF3ED62A5FAE880004F4A4 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ED52A5FAE880004F4A4 /* UILabel+Extension.swift */; };
+		5BCF3ED82A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ED72A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift */; };
 		5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */; };
 		5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */; };
 		5BD4D78F2A526891009E8E89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BD4D7912A526891009E8E89 /* Localizable.strings */; };
@@ -183,6 +184,7 @@
 		5BCF3EC82A5BB5110004F4A4 /* PersonalInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonalInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5BCF3ECF2A5BDA750004F4A4 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		5BCF3ED52A5FAE880004F4A4 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		5BCF3ED72A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewDataSource.swift; sourceTree = "<group>"; };
 		5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMonthView.swift; sourceTree = "<group>"; };
 		5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCell.swift; sourceTree = "<group>"; };
 		5BD4D78A2A526773009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				5B0742502A3AA87E008F4C3D /* TabBarViewController.swift */,
 				5B07423E2A39AC71008F4C3D /* HomeViewController.swift */,
 				5B0742722A41876C008F4C3D /* StatisticsViewController.swift */,
+				5BCF3ED72A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift */,
 				5B0742582A3C0ED8008F4C3D /* NewPageViewController.swift */,
 				5B0742782A42A943008F4C3D /* LookBackViewController.swift */,
 				5B07427A2A42B79C008F4C3D /* SettingsViewController.swift */,
@@ -704,6 +707,7 @@
 				5B0742692A3EC348008F4C3D /* Articles.swift in Sources */,
 				5BD4D7B52A556C12009E8E89 /* LoginContentView.swift in Sources */,
 				5B0742552A3AAD2A008F4C3D /* UIColor+Extension.swift in Sources */,
+				5BCF3ED82A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
