@@ -10,7 +10,17 @@ import UIKit
 
 extension UILabel {
     
-    static func createLabel(text: String, font: UIFont, textColor: UIColor, textAlignment: NSTextAlignment, in view: UIView, topAnchorConstant: CGFloat, leadingAnchorConstant: CGFloat, trailingAnchorConstant: CGFloat? = nil) -> UILabel {
+    static func createLabel(text: String,
+                            font: UIFont,
+                            textColor: UIColor,
+                            textAlignment: NSTextAlignment,
+                            in view: UIView,
+                            topAnchorConstant: CGFloat,
+                            leadingAnchorConstant: CGFloat,
+                            trailingAnchorConstant: CGFloat? = nil,
+                            centerXAnchorConstant: CGFloat? = nil,
+                            centerYAnchorConstant: CGFloat? = nil)
+    -> UILabel {
         
         let label = UILabel()
         label.text = text
@@ -20,11 +30,35 @@ extension UILabel {
         view.addSubview(label)
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+        
+        //constraints
+        var constraints: [NSLayoutConstraint] = [
             label.topAnchor.constraint(equalTo: view.topAnchor, constant: topAnchorConstant),
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingAnchorConstant),
-            trailingAnchorConstant != nil ? label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailingAnchorConstant ?? 0): nil
-        ].compactMap { $0 })
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingAnchorConstant)
+        ]
+        
+        if let trailingAnchorConstant = trailingAnchorConstant {
+            
+            constraints.append(label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailingAnchorConstant))
+        }
+        
+        if let centerXAnchorConstant = centerXAnchorConstant {
+            
+            constraints.append(label.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: centerXAnchorConstant))
+        }
+        
+        if let centerYAnchorConstant = centerYAnchorConstant {
+            
+            constraints.append(label.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: centerYAnchorConstant))
+        }
+        
+        NSLayoutConstraint.activate(constraints)
+        
+//        NSLayoutConstraint.activate([
+//            label.topAnchor.constraint(equalTo: view.topAnchor, constant: topAnchorConstant),
+//            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingAnchorConstant),
+//            trailingAnchorConstant != nil ? label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailingAnchorConstant ?? 0): nil
+//        ].compactMap { $0 })
         
         
         

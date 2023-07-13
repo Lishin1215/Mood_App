@@ -64,6 +64,9 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
         calendarView.calendar = gregorianCalendar
         view.addSubview(calendarView)
         calendarView.backgroundColor = .white
+        calendarView.tintColor = .gradientUseOrange
+      
+        
         
         //add constraints
         calendarView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,35 +94,26 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
         ])
         
         //title
-        let titleLabel = UILabel()
-        titleLabel.text = NSLocalizedString("title", comment: "")
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        titleLabel.textColor = .lightBlack
-        containerView.addSubview(titleLabel)
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20)
-        ])
-        
+        let titleLabel = UILabel.createLabel(text: NSLocalizedString("title", comment: ""),
+                                             font: UIFont.boldSystemFont(ofSize: 15),
+                                             textColor: .lightBlack,
+                                             textAlignment: .left,
+                                             in: containerView,
+                                             topAnchorConstant: 20,
+                                             leadingAnchorConstant: 20)
         
         //subtitle
-        let subtitleLabel = UILabel()
-        subtitleLabel.text = NSLocalizedString("subtitle", comment: "")
-        subtitleLabel.font = UIFont.systemFont(ofSize: 14)
-        subtitleLabel.textColor = .darkGray
-        subtitleLabel.textAlignment = .center
-        containerView.addSubview(subtitleLabel)
+        let subtitleLabel = UILabel.createLabel(text: NSLocalizedString("subtitle", comment: ""),
+                                                font: UIFont.systemFont(ofSize: 14),
+                                                textColor: .darkGray,
+                                                textAlignment: .center,
+                                                in: containerView,
+                                                topAnchorConstant: 55,
+                                                leadingAnchorConstant: 30,
+                                                trailingAnchorConstant: -30)
         
-        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            subtitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 55),
-            subtitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 30),
-            subtitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -30)
-        ])
     
-        
+ // //crashlytics example
 //        let button = UIButton(type: .roundedRect)
 //             button.frame = CGRect(x: 20, y: 50, width: 100, height: 30)
 //             button.setTitle("Test Crash", for: [])
@@ -176,8 +170,10 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
 
 }
 
-//MARK: Extension
+//MARK: UICalendarViewDelegate
 extension HomeViewController: UICalendarViewDelegate {
+    
+    //I. 日曆下面的裝飾
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
         
         let font = UIFont.systemFont(ofSize: 10)
@@ -189,32 +185,41 @@ extension HomeViewController: UICalendarViewDelegate {
             
             //藉由日期去dict中拿到對應心情圖案的string
             let correspondMoodString = dateMoodDict[dateComponents] ?? ""
-            if let changedImage = UIImage(named: correspondMoodString)?.withRenderingMode(.alwaysOriginal){
-                let scaledSize = CGSize(width: 18, height: changedImage.size.height * 18 / changedImage.size.width)
-                let renderer = UIGraphicsImageRenderer(size: scaledSize)
-                let scaledImage = renderer.image { _ in
-                    changedImage.draw(in: CGRect(origin: .zero, size: scaledSize))
-                }
-                return .image(scaledImage)
+            
+            if let changedImage = UIImage(named: correspondMoodString)?.withRenderingMode(.alwaysOriginal) {
+                
+                let scaledImage = self.renderImage(image: changedImage, targetSize: CGSize(width: 18, height: 18))
+                
+                return scaledImage != nil ? .image(scaledImage) : nil
             } else {
                 return nil
             }
         } else {
             //全部放灰色
             if let originalImage = UIImage(named: "Ellipse 4")?.withRenderingMode(.alwaysOriginal){
-                let scaledSize = CGSize(width: 18, height: originalImage.size.height * 18 / originalImage.size.width)
-                let renderer = UIGraphicsImageRenderer(size: scaledSize)
-                let scaledImage = renderer.image { _ in
-                    originalImage.draw(in: CGRect(origin: .zero, size: scaledSize))
-                }
-                return .image(scaledImage)
+                
+                let scaledImage = self.renderImage(image: originalImage, targetSize: CGSize(width: 18, height: 18))
+                
+                return scaledImage != nil ? .image(scaledImage) : nil
             }else {
                 return nil
             }
         }
     }
     
-    //抓“切換月份前的顯示月份” (”切換月份“時執行）
+    //用於decorationFor內
+    func renderImage(image Image: UIImage, targetSize: CGSize) -> UIImage {
+        
+        let scaledSize = CGSize(width: targetSize.width, height: Image.size.height * targetSize.width/Image.size.width)
+        let renderer = UIGraphicsImageRenderer(size: scaledSize)
+        let scaledImage = renderer.image { _ in
+            Image.draw(in: CGRect(origin: .zero, size: scaledSize))
+        }
+        return scaledImage
+    }
+    
+    
+    //II. 抓“切換月份前的顯示月份” (”切換月份“時執行）
     func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom previousDateComponents: DateComponents) {
         
         
@@ -233,10 +238,13 @@ extension HomeViewController: UICalendarViewDelegate {
     }
 }
 
+
+//MARK: UICalendarSelectionSingleDateDelegate
 extension HomeViewController: UICalendarSelectionSingleDateDelegate {
     
-    //點擊日期進入newPage
+    //I. 點擊日期進入newPage
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
+        
         if let date = dateComponents {
             self.selectDate = date
         }
@@ -246,7 +254,7 @@ extension HomeViewController: UICalendarSelectionSingleDateDelegate {
         performSegue(withIdentifier: "newPageSegue", sender: dateComponents)
     }
     
-    //不能點選未來時間
+    //II. 不能點選未來時間
     func dateSelection(_ selection: UICalendarSelectionSingleDate, canSelectDate dateComponents: DateComponents?) -> Bool {
         
         guard let date = dateComponents?.date else {
