@@ -62,6 +62,7 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
         calendarView.calendar = gregorianCalendar
         view.addSubview(calendarView)
         calendarView.backgroundColor = .white
+        calendarView.tintColor = .gradientUseOrange
         
         //add constraints
         calendarView.translatesAutoresizingMaskIntoConstraints = false
