@@ -89,15 +89,9 @@ class LoginPageViewController: UIViewController {
                 imageView.heightAnchor.constraint(equalToConstant: 55)
             ])
         }
-            
-//            hostView.translatesAutoresizingMaskIntoConstraints = false
-//            NSLayoutConstraint.activate([
-//                hostView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-//                hostView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//            ])
+
         }
     }
-    
     
     
     // 點擊 Sign In with Apple 按鈕後，請求授權
@@ -172,12 +166,9 @@ class LoginPageViewController: UIViewController {
     //傳資料到homePage
     override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
         //確認傳遞要項無誤
-        if segue.identifier == "loginSegue" {
-//            if let dateComponents = sender as? DateComponents,
+        if segue.identifier == "LoginSegue" {
               if let segueVC = segue.destination as? TabBarViewController {
-                //將任意點到的product資料，傳給newPageVC
-//                segueVC.dateComponents = dateComponents
-
+               
             }
         }
     }
@@ -289,12 +280,6 @@ extension LoginPageViewController {
                 self?.performSegue(withIdentifier: "LoginSegue", sender: nil)
             }
             
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "tabBarVC") as? TabBarViewController {
-//                self.navigationController?.pushViewController(tabBarVC, animated: true)
-//            }
-
-
             print("success")
         }
     }

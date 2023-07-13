@@ -21,11 +21,13 @@ class HomeViewController: UIViewController, FireStoreManagerDelegate {
     
     //改變calendar icon
     let moodImages = ["image 22", "image 7", "image 25", "image 13", "image 8"]
+    
     private var dateArray: [DateComponents] = [] {
         didSet {
             print("******", dateArray.map { ($0.month!, $0.day!) })
         }
     }
+    
     private var dateMoodDict: [DateComponents: String] = [:]
     
     
