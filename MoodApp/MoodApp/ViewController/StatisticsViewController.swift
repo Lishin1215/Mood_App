@@ -19,9 +19,9 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
     let historyButton = UIButton()
     
     //接收傳來的資料 (delegate)
-    private var moodArray:[MoodFlow] = []
-    private var sleepStartArray:[String] = []
-    private var sleepEndArray:[String] = []
+    private var moodArray: [MoodFlow] = []
+    private var sleepStartArray: [String] = []
+    private var sleepEndArray: [String] = []
     private var sleepTimeArray: [String] = []
     
     //計算結果
@@ -85,7 +85,7 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         tableView.register(MoodFlowCell.self, forCellReuseIdentifier: MoodFlowCell.reuseIdentifier)
         tableView.register(SleepAnalysisCell.self, forCellReuseIdentifier: SleepAnalysisCell.reuseIdentifier)
         
-        //        tableView.separatorStyle = .none
+        
         view.addSubview(tableView)
         headerView.backgroundColor = .pinkOrange
         view.addSubview(headerView)
@@ -113,11 +113,8 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         shareButton.setImage(shareImage, for: .normal)
         shareButton.tintColor = .lightBlack
         
-//        let barButton = UIBarButtonItem(customView: shareButton)
-//        navigationItem.rightBarButtonItem = barButton
         headerView.addSubview(shareButton)
 
-        
         shareButton.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
         
         shareButton.translatesAutoresizingMaskIntoConstraints = false
@@ -128,12 +125,12 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         
         //當月 (Date())
         let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM, yyyy" // 指定日期格式
-        let dateString = dateFormatter.string(from: date)
-        dateLabel.text = dateString
+        //用date extension (dateString)
+        let formattedDate = date.formatDateString(format: "MMMM, yyyy") // 指定日期格式
         
+        dateLabel.text = formattedDate
         dateLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        
         headerView.addSubview(dateLabel)
         
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -156,104 +153,93 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
     }
     
     @objc func shareButtonTapped(_ sender: UIButton) {
-        print("sha sha sha")
         
-        //把cell做成圖片(convert UIView to .png)
-        //Mood Flow
-        var moodWritePath = URL(string: "")
+        var moodWritePath: URL?
+        var sleepWritePath: URL?
+        
         let moodIndexPath = IndexPath(row: 0, section: 0)
-        
-        if let moodCell = self.tableView.cellForRow(at: moodIndexPath) as? MoodFlowCell {
+        if let moodCell = self.tableView.cellForRow(at: moodIndexPath) {
             
-            UIGraphicsBeginImageContextWithOptions(moodCell.layer.frame.size, false, 1) //Begin
-            //將moodCell渲染到current context
-            moodCell.layer.render(in: UIGraphicsGetCurrentContext()!)
-            
-            if let viewImage = UIGraphicsGetImageFromCurrentImageContext() { //變成image了
-                UIGraphicsEndImageContext() //End
-                
-                
-                //創建“資料夾的路徑”
-                let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                moodWritePath = documentsDir.appendingPathComponent("mood.png")
-                
-                do {
-                    //把viewImage寫入path
-                    if let imageData = viewImage.pngData() {
-                        try imageData.write(to: moodWritePath!)
-                        print("Saved image to: ", moodWritePath)
-                    }
-                   
-                } catch {
-                    print("Could not remove file")
-                }
-            } else {
-                print("Failed to get image from context")
-            }
+            // mood URL
+            moodWritePath = captureCellImage(moodCell, fileName: "mood.png")
         }
         
-        //Sleep Analysis
-        var sleepWritePath = URL(string: "")
         let sleepIndexPath = IndexPath(row: 1, section: 0)
-        
-        if let sleepCell = self.tableView.cellForRow(at: sleepIndexPath) as? SleepAnalysisCell {
-
-            UIGraphicsBeginImageContextWithOptions(sleepCell.layer.frame.size, false, 1) // 1 = scale
-            sleepCell.layer.render(in: UIGraphicsGetCurrentContext()!)
+        if let sleepCell = self.tableView.cellForRow(at: sleepIndexPath) {
             
-            if let viewImage = UIGraphicsGetImageFromCurrentImageContext() { //變成image了
-                UIGraphicsEndImageContext() //End
+            // sleep URL
+            sleepWritePath = captureCellImage(sleepCell, fileName: "sleep.png")
+        }
+        
+    //跳出分享畫面
+        //I. 要分享的東西
+        var activityItems: [Any] = []
+        
+        if let moodPath = moodWritePath {
+            activityItems.append(moodPath)
+        }
+        if let sleepPath = sleepWritePath {
+            activityItems.append(sleepPath)
+        }
+        
+        //II. 產生分享VC
+        let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        
+        //III. 分享結果（跳alert)
+        activityVC.completionWithItemsHandler = { [weak self] (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            
+            if let error = error {
+               
+                self?.showAlert(title: NSLocalizedString("Error", comment: ""), message: nil)
+            }
+            
+            if completed {
                 
-                
-                //創建“資料夾的路徑”
-                let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                sleepWritePath = documentsDir.appendingPathComponent("sleep.png")
-                
-                do {
-                    //把viewImage寫入path
-                    if let imageData = viewImage.pngData() {
-                        try imageData.write(to: sleepWritePath!)
-                        print("Saved image to: ", sleepWritePath)
-                    }
-                   
-                } catch {
-                    print("Could not remove file")
-                }
-            } else {
-                print("Failed to get image from context")
+                self?.showAlert(title: NSLocalizedString("Success", comment: ""), message: nil)
             }
         }
-
-        
-        let activityVC = UIActivityViewController(activityItems: [moodWritePath, sleepWritePath], applicationActivities: nil)
-
-        activityVC.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-               // 跳alert
-               if error != nil {
-                   let controller = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: nil, preferredStyle: .alert)
-                   let action = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { _ in
-                       //關閉alert的執行動作
-                   }
-                   controller.addAction(action)
-                   self.present(controller, animated: true)
-               }
-                                                    
-               // 如果發送成功，跳出提示視窗顯示成功。
-               if completed {
-                   let controller = UIAlertController(title: NSLocalizedString("Success", comment: ""), message: nil, preferredStyle: .alert)
-                   let action = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { _ in
-                       //關閉alert的執行動作
-                   }
-                   controller.addAction(action)
-                   self.present(controller, animated: true)
-               }
-
-           }
-//        activityVC.popoverPresentationController?.sourceView = view
-//        activityVC.popoverPresentationController?.sourceRect = view.frame
-
-           self.present(activityVC, animated: true, completion: nil)
+        //分享VC跳出
+        self.present(activityVC, animated: true, completion: nil)
     }
+    
+
+    
+    
+    //把cell做成圖片(convert UIView to .png) -> 產生URL路徑
+    func captureCellImage(_ cell: UITableViewCell, fileName: String) -> URL? {
+        
+        // Begin
+        UIGraphicsBeginImageContextWithOptions(cell.layer.frame.size, false, 1)
+        // 將cell渲染到current context
+        cell.layer.render(in: UIGraphicsGetCurrentContext()!)
+        // 有、無從context拿到image
+        guard let viewImage = UIGraphicsGetImageFromCurrentImageContext()
+        else {
+            print("failed to get image from context")
+            return nil // 跳出
+        }
+        // End
+        UIGraphicsEndImageContext()
+        
+        // 創建“資料夾的路徑”
+        let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let imagePath = documentsDir.appendingPathComponent(fileName) // image的url路徑
+        
+        // 把imageData寫入imagePath
+        do {
+            if let imageData = viewImage.pngData() {
+                try imageData.write(to: imagePath)
+                print("Save image to :", imagePath)
+                
+                return imagePath // URL
+            }
+        } catch {
+            print("Could not write image data")
+        }
+        
+        return nil
+    }
+    
     
     
     @objc func historyButtonTapped(_ sender: UIButton) {
@@ -307,14 +293,8 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         }
     }
 
+    //Bed & Wake
     func calculateAverageTime(timeStrings:[String]) -> String {
-        
-//        //把00:00換成最接近24:00來計算
-//        var modifiedTimeStrings = timeStrings
-//        while let index = modifiedTimeStrings.firstIndex(of: "00:00") {
-//            modifiedTimeStrings[index] = "23:59"
-//        }
-        
         
         //把時間string轉換成Date，才能做計算
         let dateFormatter = DateFormatter()
@@ -325,11 +305,11 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         
         for timeString in timeStrings {
             if var date = dateFormatter.date(from: timeString) {
-                //抓出hour
-                let hour = Int(timeString.split(separator: ":")[0]) ?? 0 //[0] --> 因為timeString切開會變成array (ex. 22:00 --> ["22","00"])
+                // 抓出hour
+                let hour = Int(timeString.split(separator: ":")[0]) ?? 0 // [0] --> 因為timeString切開會變成array (ex. 22:00 --> ["22","00"])
                 
-                //以 ”12:00 pm" 為基準 （ 小於 --> 加 1 天 ）
-                if hour < 12 { //用calendar去加一天
+                // 以 ”12:00 am" 為基準 （ 小於 --> 加 1 天 ）
+                if hour < 12 { // 用calendar去加一天
                     date = calendar.date(byAdding: .day, value: +1, to: date) ?? Date()
                 }
                 totalTimeInterval += date.timeIntervalSinceReferenceDate
@@ -337,6 +317,7 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         }
         
         let averageTimeInterval = totalTimeInterval/Double(timeStrings.count)
+        // 換回Date
         let averageDate = Date(timeIntervalSinceReferenceDate: averageTimeInterval)
         let averageTimeString = dateFormatter.string(from: averageDate)
         print("$$$ +\(averageTimeString)")
@@ -346,6 +327,7 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
     
     
     func calculateSleepTime(startArray: [String], endArray: [String]) -> [String] {
+        
         // 檢查兩個陣列的元素數量是否相同
         guard startArray.count == endArray.count else {
             print("Start array and end array must have the same number of elements")
@@ -357,6 +339,7 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         
         var sleepTimeArray: [String] = []
         
+        //先換成Date
         for index in 0..<startArray.count {
             if let startDate = dateFormatter.date(from: startArray[index]),
                var endDate = dateFormatter.date(from: endArray[index]) {
@@ -378,8 +361,11 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         return sleepTimeArray
     }
     
+    
     func sleepTimeAverage(timeStrings: [String]) -> String {
-        let totalSeconds = timeStrings.compactMap { Double($0)}.reduce(0, +) //string換成double(因為double是optional，所以用compactMap)，在累加
+        
+        //算出來是“秒“
+        let totalSeconds = timeStrings.compactMap { Double($0)}.reduce(0, +) //string換成double(因為double是optional，所以用compactMap)，再累加
         let averageSeconds = totalSeconds / Double(timeStrings.count)
         
         let hours = Int(averageSeconds / 3600) //先拿到“小時”，暫時不管小數點
@@ -387,13 +373,15 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         
         //變成“2位數”整數(ex. Int 5 --> "05" )
         let formattedTime = String(format: "%02d:%02d", hours, minutes)
+        
         return formattedTime
     }
     
     
     
-//conform to protocol
+//conform to protocol（後進）
     func manager(_ manager: FireStoreManager, didGet articles: [[String : Any]]) {
+        
         //empty array
         var moodFlowEmptyArray:[MoodFlow] = []
         var startEmptyArray:[String] = []
@@ -459,36 +447,38 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
         } else { //放入圖表
             //I. 處理完資料後，call "moodContent swiftUI"，把畫圖資料傳過來
             let moodFlowSwiftUI = MoodContentView(moodArray: self.moodArray)
+            
             //swiftUI提供結合UIKit(hostController
-            let host = UIHostingController(rootView: moodFlowSwiftUI)
-            //找到要放swiftUI的cell的indexPath
-            let indexPath = IndexPath(row: 0, section: 0)
-            
-            //在外面設一個空的hostView, 在addSubview前先default，避免重疊
-            self.hostView.removeFromSuperview()
-            
-            //**取得UIHostingController的view，再把他addSubview到對應的cell上
-            if let hostView = host.view,
-               let cell = tableView.cellForRow(at: indexPath) as? MoodFlowCell {
-                
-                //default 背景顏色
-                cell.containerView.backgroundColor = .white
-                cell.containerView.alpha = 1
-                //隱藏 no record
-                cell.noRecord.isHidden = true
-                
-                //給外面的hostView值
-                self.hostView = hostView
-                cell.addSubview(hostView)
-                
-                //設定swiftUI constraints
-                hostView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    hostView.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 35),
-                    hostView.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 16),
-                    hostView.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -16),
-                    hostView.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -5)
-                ])
+//            let host = UIHostingController(rootView: moodFlowSwiftUI)
+//            //找到要放swiftUI的cell的indexPath
+//            let indexPath = IndexPath(row: 0, section: 0)
+//
+//            //在外面設一個空的hostView, 在addSubview前先default，避免重疊
+//            self.hostView.removeFromSuperview()
+//
+//            //**取得UIHostingController的view，再把他addSubview到對應的cell上
+//            if let hostView = host.view,
+//               let cell = tableView.cellForRow(at: indexPath) as? MoodFlowCell {
+//
+//
+//                //default 背景顏色
+//                cell.containerView.backgroundColor = .white
+//                cell.containerView.alpha = 1
+//                //隱藏 no record
+//                cell.noRecord.isHidden = true
+//
+//                //給外面的hostView值
+//                self.hostView = hostView
+//                cell.addSubview(hostView)
+//
+//                //設定swiftUI constraints
+//                hostView.translatesAutoresizingMaskIntoConstraints = false
+//                NSLayoutConstraint.activate([
+//                    hostView.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 35),
+//                    hostView.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 16),
+//                    hostView.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -16),
+//                    hostView.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -5)
+//                ])
             }
         }
  
@@ -576,9 +566,58 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
             }
         }
     }
+   
+    private func setMoodFlowEmptyState() {
+        
+    }
+    
+//    private func setMoodFlowChart() {
+//
+//    }
+    
+    private func setSleepAnalysisEmptyState() {
+        
+    }
+    
+    private func calculateAndDisplaySleepAnalysis() {
+        
+    }
+    
+//    private func setSleepBarChart() {
+//
+//    }
+    
+    //swiftUI圖表結合UIKit
+    private func addSwiftUIView<T: View>(hostView: UIView, rootView: T, containerView: UIView, noRecordLabel: UILabel) {
+        
+        //swiftUI提供結合UIKit(hostController
+        let host = UIHostingController(rootView: rootView)
+        
+        //在外面設一個空的hostView, 在addSubview前先default，避免重疊
+        self.hostView.removeFromSuperview()
+        
+        //**取得UIHostingController的view，再把他addSubview到對應的cell上
+        if let hostView = host.view {
+            
+            //default 背景顏色
+            containerView.backgroundColor = .white
+            containerView.alpha = 1
+            noRecordLabel.isHidden = true
+            
+            hostView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(hostView)
+            
+            NSLayoutConstraint.activate([
+                hostView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 35),
+                hostView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+                hostView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+                hostView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5)
+            ])
+        }
+    }
     
 
-//Conform to Protocol
+//Conform to Protocol(先進）
     func didReceiveDate(year: String, month: String) {
         
     //II. 收到點擊時間後 -> 改header的label
@@ -596,14 +635,23 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
             //III. 依照header label去 fetchMonthData
             FireStoreManager.shared.fetchMonthlyData(dateString: dateLabel.text ?? "")
             
+            //IV. default cell (先把之前的label移掉）
+//            let indexPath = IndexPath(row: 1, section: 0)
+//
+//            if let cell = tableView.cellForRow(at: indexPath) as? SleepAnalysisCell {
+//
+//            //叫不到 sleepLabel/ hrsLabel
+//
+//            }
+            
         } else {
             print("Invalid month or year string")
         }
     }
     
     
-//MARK: UITableView Delegate
-//height
+// MARK: UITableView Delegate
+// height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 300
@@ -611,7 +659,6 @@ class StatisticsViewController: UIViewController, UITableViewDelegate, FireStore
             return 550
         }
     }
-    
     
 
 }

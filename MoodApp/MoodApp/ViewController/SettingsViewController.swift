@@ -294,7 +294,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
 
 
             // III. 在revoke撤銷憑證好才能delete帳號
-            if let user = Auth.auth().currentUser{
+            if let user = Auth.auth().currentUser {
                 user.delete { error in
                   if let error = error {
                       print("error: didn't delete user")

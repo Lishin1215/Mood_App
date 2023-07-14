@@ -73,6 +73,8 @@
 		5BCF3ED02A5BDA750004F4A4 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ECF2A5BDA750004F4A4 /* LaunchViewController.swift */; };
 		5BCF3ED62A5FAE880004F4A4 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ED52A5FAE880004F4A4 /* UILabel+Extension.swift */; };
 		5BCF3ED82A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ED72A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift */; };
+		5BCF3EDA2A6137B30004F4A4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ED92A6137B30004F4A4 /* Date+Extension.swift */; };
+		5BCF3EDC2A614C990004F4A4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3EDB2A614C990004F4A4 /* UIViewController+Extension.swift */; };
 		5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */; };
 		5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */; };
 		5BD4D78F2A526891009E8E89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BD4D7912A526891009E8E89 /* Localizable.strings */; };
@@ -185,6 +187,8 @@
 		5BCF3ECF2A5BDA750004F4A4 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		5BCF3ED52A5FAE880004F4A4 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		5BCF3ED72A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewDataSource.swift; sourceTree = "<group>"; };
+		5BCF3ED92A6137B30004F4A4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		5BCF3EDB2A614C990004F4A4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMonthView.swift; sourceTree = "<group>"; };
 		5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCell.swift; sourceTree = "<group>"; };
 		5BD4D78A2A526773009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -322,6 +326,8 @@
 				5B0742562A3AAD44008F4C3D /* UIFont+Extension.swift */,
 				5B07427E2A440715008F4C3D /* KingFisherWrapper.swift */,
 				5BCF3ED52A5FAE880004F4A4 /* UILabel+Extension.swift */,
+				5BCF3ED92A6137B30004F4A4 /* Date+Extension.swift */,
+				5BCF3EDB2A614C990004F4A4 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -680,11 +686,13 @@
 				5B0742512A3AA87E008F4C3D /* TabBarViewController.swift in Sources */,
 				5B07426C2A3EC5AF008F4C3D /* FireStoreManager.swift in Sources */,
 				5BCF3ED62A5FAE880004F4A4 /* UILabel+Extension.swift in Sources */,
+				5BCF3EDA2A6137B30004F4A4 /* Date+Extension.swift in Sources */,
 				5BCF3ECA2A5BB5110004F4A4 /* PersonalInfo+CoreDataProperties.swift in Sources */,
 				5B07427B2A42B79C008F4C3D /* SettingsViewController.swift in Sources */,
 				5BCF3ED02A5BDA750004F4A4 /* LaunchViewController.swift in Sources */,
 				5BCF3EB82A56B62C0004F4A4 /* LookBackTestViewController.swift in Sources */,
 				5B07427F2A440715008F4C3D /* KingFisherWrapper.swift in Sources */,
+				5BCF3EDC2A614C990004F4A4 /* UIViewController+Extension.swift in Sources */,
 				5BCF3EC92A5BB5110004F4A4 /* PersonalInfo+CoreDataClass.swift in Sources */,
 				5B0742752A419C6E008F4C3D /* MoodFlowCell.swift in Sources */,
 				5B07425C2A3C1E12008F4C3D /* NewPageCell.swift in Sources */,

@@ -22,9 +22,7 @@ class ContainerView: UIView {
         self.layer.shadowRadius = 4
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 120)
-        ])
+
     }
     
     required init?(coder: NSCoder) {

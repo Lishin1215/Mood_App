@@ -9,6 +9,7 @@ import UIKit
 
 class StatisticsTableViewDataSource: NSObject, UITableViewDataSource {
     
+    
     weak var viewController: StatisticsViewController?
     
     
@@ -37,7 +38,7 @@ class StatisticsTableViewDataSource: NSObject, UITableViewDataSource {
                 sleepLabel.textColor = .orangeBrown
                 sleepLabel.font = UIFont.systemFont(ofSize: 16)
                 cell.containerView.addSubview(sleepLabel)
-                
+
                 sleepLabel.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
                     sleepLabel.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 22),
@@ -58,46 +59,72 @@ class StatisticsTableViewDataSource: NSObject, UITableViewDataSource {
                     hrsLabel.topAnchor.constraint(equalTo: cell.containerView.topAnchor, constant: 45)
                 ])
                 
-                //Average label
-                let bedTimeLabel = UILabel()
-                let wakeTimeLabel = UILabel()
-                let sleepTimelabel = UILabel()
+                //Average label (
+                let bedTimeLabel = UILabel.createLabel(text: NSLocalizedString("averageBed", comment: ""),
+                                                       font: UIFont.systemFont(ofSize: 13),
+                                                       textColor: .lightGray, textAlignment: .center,
+                                                       numberOfLines: 2,
+                                                       in: cell.containerView,
+                                                       bottomAnchorConstant: 85, leadingAnchorConstant: 35)
+
                 
-                bedTimeLabel.text = NSLocalizedString("averageBed", comment: "")
-                bedTimeLabel.numberOfLines = 2
-                bedTimeLabel.textAlignment = .center
-                wakeTimeLabel.text = NSLocalizedString("averageWake", comment: "")
-                wakeTimeLabel.numberOfLines = 2
-                wakeTimeLabel.textAlignment = .center
-                sleepTimelabel.text = NSLocalizedString("averageSleep", comment: "")
-                sleepTimelabel.numberOfLines = 2
-                sleepTimelabel.textAlignment = .center
-                bedTimeLabel.font = UIFont.systemFont(ofSize: 13)
-                wakeTimeLabel.font = UIFont.systemFont(ofSize: 13)
-                sleepTimelabel.font = UIFont.systemFont(ofSize: 13)
-                bedTimeLabel.textColor = .lightGray
-                wakeTimeLabel.textColor = .lightGray
-                sleepTimelabel.textColor = .lightGray
-                cell.containerView.addSubview(bedTimeLabel)
-                cell.containerView.addSubview(wakeTimeLabel)
-                cell.containerView.addSubview(sleepTimelabel)
+                let wakeTimeLabel = UILabel.createLabel(text: NSLocalizedString("averageWake", comment: ""),
+                                                       font: UIFont.systemFont(ofSize: 13),
+                                                       textColor: .lightGray, textAlignment: .center,
+                                                        numberOfLines: 2,
+                                                        in: cell.containerView,
+                                                       bottomAnchorConstant: 85, centerXAnchorConstant: 0)
+
                 
-                bedTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-                wakeTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-                sleepTimelabel.translatesAutoresizingMaskIntoConstraints = false
+                let sleepTimeLabel = UILabel.createLabel(text: NSLocalizedString("averageSleep", comment: ""),
+                                                       font: UIFont.systemFont(ofSize: 13),
+                                                       textColor: .lightGray, textAlignment: .center,
+                                                        numberOfLines: 2,
+                                                        in: cell.containerView,
+                                                       bottomAnchorConstant: 85, trailingAnchorConstant: -35)
+
                 
-                NSLayoutConstraint.activate([
-                    bedTimeLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 35),
-                    bedTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30),
-                ])
-                NSLayoutConstraint.activate([
-                    wakeTimeLabel.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
-                    wakeTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
-                ])
-                NSLayoutConstraint.activate([
-                    sleepTimelabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -35),
-                    sleepTimelabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
-                ])
+//
+//                let bedTimeLabel = UILabel()
+//                let wakeTimeLabel = UILabel()
+//                let sleepTimelabel = UILabel()
+//
+//                bedTimeLabel.text = NSLocalizedString("averageBed", comment: "")
+//                bedTimeLabel.numberOfLines = 2
+//                bedTimeLabel.textAlignment = .center
+//                wakeTimeLabel.text = NSLocalizedString("averageWake", comment: "")
+//                wakeTimeLabel.numberOfLines = 2
+//                wakeTimeLabel.textAlignment = .center
+//                sleepTimelabel.text = NSLocalizedString("averageSleep", comment: "")
+//                sleepTimelabel.numberOfLines = 2
+//                sleepTimelabel.textAlignment = .center
+//                bedTimeLabel.font = UIFont.systemFont(ofSize: 13)
+//                wakeTimeLabel.font = UIFont.systemFont(ofSize: 13)
+//                sleepTimelabel.font = UIFont.systemFont(ofSize: 13)
+//                bedTimeLabel.textColor = .lightGray
+//                wakeTimeLabel.textColor = .lightGray
+//                sleepTimelabel.textColor = .lightGray
+//                cell.containerView.addSubview(bedTimeLabel)
+//                cell.containerView.addSubview(wakeTimeLabel)
+//                cell.containerView.addSubview(sleepTimelabel)
+//
+//                bedTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+//                wakeTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+//                sleepTimelabel.translatesAutoresizingMaskIntoConstraints = false
+//
+//                NSLayoutConstraint.activate([
+//                    bedTimeLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 35),
+//                    bedTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30),
+//                ])
+//                NSLayoutConstraint.activate([
+//                    wakeTimeLabel.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
+//                    wakeTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
+//                ])
+//                NSLayoutConstraint.activate([
+//                    sleepTimelabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -35),
+//                    sleepTimelabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
+//                ])
+                
                 
                 //TimeLabel (不能在裡面new，不然reload data會一直出現重複的）
 //                let bedTime = UILabel()

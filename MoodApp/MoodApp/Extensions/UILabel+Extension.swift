@@ -14,9 +14,11 @@ extension UILabel {
                             font: UIFont,
                             textColor: UIColor,
                             textAlignment: NSTextAlignment,
+                            numberOfLines: Int? = 1,
                             in view: UIView,
                             useSafeAreaLayoutGuide: Bool = false,
-                            topAnchorConstant: CGFloat,
+                            topAnchorConstant: CGFloat? = nil,
+                            bottomAnchorConstant: CGFloat? = nil,
                             leadingAnchorConstant: CGFloat? = nil,
                             trailingAnchorConstant: CGFloat? = nil,
                             centerXAnchorConstant: CGFloat? = nil,
@@ -28,6 +30,7 @@ extension UILabel {
         label.font = font
         label.textColor = textColor
         label.textAlignment = textAlignment
+        label.numberOfLines = numberOfLines ?? 1
         view.addSubview(label)
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +49,11 @@ extension UILabel {
             constraints.append(label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailingAnchorConstant))
         }
         
+        if let bottomAnchorConstant = bottomAnchorConstant {
+            
+            constraints.append(label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottomAnchorConstant))
+        }
+        
         if let centerXAnchorConstant = centerXAnchorConstant {
             
             constraints.append(label.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: centerXAnchorConstant))
@@ -56,9 +64,9 @@ extension UILabel {
             constraints.append(label.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: centerYAnchorConstant))
         } else {
             if useSafeAreaLayoutGuide {
-                constraints.append(label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topAnchorConstant))
+                constraints.append(label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topAnchorConstant ?? 0))
             } else {
-                constraints.append(label.topAnchor.constraint(equalTo: view.topAnchor, constant: topAnchorConstant))
+                constraints.append(label.topAnchor.constraint(equalTo: view.topAnchor, constant: topAnchorConstant ?? 0))
             }
         }
         
