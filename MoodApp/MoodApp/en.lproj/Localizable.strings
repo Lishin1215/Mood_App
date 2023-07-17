@@ -106,6 +106,8 @@
 "settingAlert" = "Success🥳";
 "settingMessage" = "PIN has been set";
 "ok" = "OK";
+"forgotPassword" = "Forgot Password?";
+"alertSubtitle" = "You will need to login again due to the protection.";
 
 //FaceDetectionManager
 "warning" = "Warning ⚠️";
