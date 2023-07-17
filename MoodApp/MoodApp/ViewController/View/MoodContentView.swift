@@ -55,23 +55,24 @@ struct MoodContentView: View {
     //swiftUI的骨幹，在這裡畫圖
     var body: some View {
         Chart {
-          //for 過moodFlowArray，把日期和mood分別作為一個點的x值與y值
-            //id -> 識別和區分的“資料點” （要放入不會重複的東西(ex.date))
+          // for 過moodFlowArray，把日期和mood分別作為一個點的x值與y值
+            // id -> 識別和區分的“資料點” （要放入不會重複的東西(ex.date))
             ForEach(moodFlowArray, id: \.date) { item in
                 LineMark(
                     x: .value("Date", item.date),
-                    //mood要轉換成Int，系統才會幫忙排序心情
-                    y: .value("Mood", Int(item.mood) ?? 0)
+                    // mood要轉換成Int，系統才會幫忙排序心情
+                    // 加1 -> 讓畫面顯示mood為 1-5
+                    y: .value("Mood", (Int(item.mood) ?? 0)+1)
                 )
-                .symbol(.circle) //點的圖案類型
+                .symbol(.circle) // 點的圖案類型
                 .foregroundStyle(Color(uiColor: .orangeBrown))
             }
         }
         // y軸
         .chartYAxis {
-            AxisMarks(position: .leading, values: [0,1,2,3,4]) //讓y軸固定5個值
+            AxisMarks(position: .leading, values: [1,2,3,4,5]) //讓y軸固定5個值
         }
-        .chartYScale(domain: 0...4) //限制y軸範圍
+        .chartYScale(domain: 1...5) //限制y軸範圍
         
         // x軸
         .chartXAxis {
@@ -87,8 +88,8 @@ struct MoodContentView: View {
                     }
                 }
                 
-                AxisGridLine() //網格線
-                AxisTick() //標點
+                AxisGridLine() // 網格線
+                AxisTick() // 標點
             }
         }
         

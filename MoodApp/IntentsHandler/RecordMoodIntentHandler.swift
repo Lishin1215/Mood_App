@@ -52,15 +52,16 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
         }
         
 
-        //update data (只改mood)（直接從update裡判斷是否已填過當日資料）
-        FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 0)))
+        // update data (只改mood)（直接從update裡判斷是否已填過當日資料）
+        // 減1 --> 讓mood index維持在 0-4
+        FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 1)-1))
     }
     
-  
+  // 判斷使用者說出的數字
     func resolveMoodScore(for intent: RecordMoodIntent, with completion: @escaping (RecordMoodMoodScoreResolutionResult) -> Void) {
-        let moodScore = Int(intent.MoodScore ?? 5)
+        let moodScore = Int(intent.MoodScore ?? 1)
         print(moodScore)
-        if(0...4).contains(moodScore) {
+        if(1...5).contains(moodScore) {
             completion(RecordMoodMoodScoreResolutionResult.success(with: moodScore))
         } else {
             completion(RecordMoodMoodScoreResolutionResult.needsValue()) //要求users再輸入

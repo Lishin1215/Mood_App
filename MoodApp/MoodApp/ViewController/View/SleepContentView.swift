@@ -15,9 +15,9 @@ class SleepContentViewDelegate: ObservableObject {
 struct Config {
     let radius: CGFloat
     let knobRadius: CGFloat
-    //the smallest amount of hours sleep, you can configure
+    // the smallest amount of hours sleep, you can configure
     let minSleepDuration: CGFloat
-    //24 hours in minutes, seperated in 15 minute blocks
+    // 24 hours in minutes, seperated in 15 minute blocks
     let countSteps: Int
     
     var diameter: CGFloat {
@@ -30,7 +30,7 @@ struct Config {
 }
 
 let config = Config(
-    radius: 150.0 ,
+    radius: 150.0,
     knobRadius: 22.0,
     minSleepDuration: 1.0,
     countSteps: 24*60/10
@@ -104,13 +104,13 @@ struct SleepContentView: View {
     func getSleepTime() -> String {
         let sleepTimeHour = 24 / 360 * rotationSleep;
         
-        //truncuate decimals
+        // truncuate decimals
         let onlyHours = Int(sleepTimeHour)
         
-        //remove full numbers and use rest to calculate the fraction of an hour
+        // remove full numbers and use rest to calculate the fraction of an hour
         var onlyMinutes = Int((sleepTimeHour-Double(onlyHours))*60)
         
-        //Round angle to always snap to minutes, that are multiples of 5 (5, 10, 15, 20, 25, ...)
+        // Round angle to always snap to minutes, that are multiples of 5 (5, 10, 15, 20, 25, ...)
         while onlyMinutes % 5 != 0 {
             onlyMinutes -= 1
         }
