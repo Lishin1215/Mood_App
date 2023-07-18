@@ -63,8 +63,8 @@ class FireStoreManager {
         }
     }
     
-    
-    func updateData(mood: String) {
+   //Siri走這條
+    func updateData(mood: String, completion: @escaping (()-> Void)) {
         let db = Firestore.firestore()
         let updateRef = db.collection("users").document(userId).collection("articles")
         
@@ -86,11 +86,13 @@ class FireStoreManager {
                             print("Error updating document: \(err)")
                         } else {
                             print("Document successfully updated")
+                            //***確定上傳之後再結束（siri)程式
+                            completion()
                         }
                     }
                 //未填過
                 } else {
-                    FireStoreManager.shared.setData(date: Date(), mood: mood, sleepStart: "", sleepEnd: "", text: "", photo: "", handler: {})
+                    FireStoreManager.shared.setData(date: Date(), mood: mood, sleepStart: "", sleepEnd: "", text: "", photo: "", handler: {completion()})
                 }
             }
             print(error)

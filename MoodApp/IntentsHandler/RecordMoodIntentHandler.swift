@@ -26,7 +26,7 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
     //正確接收到intent後執行
     func handle(intent: RecordMoodIntent, completion: @escaping (RecordMoodIntentResponse) -> Void) {
         print(intent.MoodScore)
-        completion(RecordMoodIntentResponse.success(result: "Successfully"))
+//        completion(RecordMoodIntentResponse.success(result: "Successfully"))
         
         
         if let keyChainGroup = Bundle.main.infoDictionary?["KeyChainGroup"] as? String {
@@ -54,7 +54,11 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
 
         // update data (只改mood)（直接從update裡判斷是否已填過當日資料）
         // 減1 --> 讓mood index維持在 0-4
-        FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 1)-1))
+        FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 1)-1)) {
+            
+            //***確定上傳之後再結束（siri)程式
+            completion(RecordMoodIntentResponse.success(result: "Successfully"))
+        }
     }
     
   // 判斷使用者說出的數字
