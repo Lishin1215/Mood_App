@@ -424,9 +424,9 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                     if let mood = article["mood"] as? String {
                         moodButtonArray[Int(mood) ?? 0].backgroundColor = .lightPinkOrange
                         moodButtonArray[Int(mood) ?? 0].layer.cornerRadius = 22
-                        self.addDayButton.isEnabled = true
+//                        self.addDayButton.isEnabled = true // 改變開啟addDayButton的時機
                         //改變顏色（漸層色）
-                        makeButtonGradient()
+//                        makeButtonGradient()
                         //*** assign到外面的變數存起來，這樣setData時才有資料
                         self.moodIndex = Int(mood)
                     }
@@ -459,13 +459,29 @@ class NewPageViewController: UIViewController, UITableViewDataSource, UITableVie
                                 
                                 //把photo放到button上
                                 let photoURL = URL(string: photo)
-                                cell.imageButton.addImage(with: photoURL)
+                                
+                                // 加completion -> 避免來不及addImage，而存到"空"的圖片
+                                cell.imageButton.addImage(with: photoURL){
+                                    
+                                //I. assign到外面的變數存起來 (拿到現在button上的UIImage)
+                                    self.selectedImage = cell.imageButton.currentImage ?? UIImage()
+                                    
+                                //II. 確定載完圖片後再開啟addDayButton
+                                    self.addDayButton.isEnabled = true
+                                   //改變顏色（漸層色）
+                                    self.makeButtonGradient()
+                                    
+                                    
+                                }
                                 
                                 cell.photoImageView.isHidden = true
-                                //assign到外面的變數存起來 (拿到現在button上的UIImage)
-                                self.selectedImage = cell.imageButton.currentImage ?? UIImage()
-                                
                             }
+                        } else { // 只有表情，但沒有圖片
+                            
+                        // I. 仍然要開啟addDayButton
+                            self.addDayButton.isEnabled = true
+                           // 改變顏色（漸層色）
+                           makeButtonGradient()
                         }
                     }
                     

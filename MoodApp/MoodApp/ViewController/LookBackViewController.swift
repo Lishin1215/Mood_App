@@ -171,6 +171,12 @@ class LookBackViewController: UIViewController, FireStoreManagerDelegate, UIScro
     
     func startTimer() {
         timer = Timer(timeInterval: 1.75, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
+        
+        //設定timer時間間隔容許度
+        timer.tolerance = 0.2
+        //每次從第0張開始循環
+//        counter = 0
+        
         RunLoop.current.add(timer, forMode: .common) //要寫這行才能成功call到autoScroll
     }
     

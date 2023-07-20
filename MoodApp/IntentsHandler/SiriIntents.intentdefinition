@@ -72,8 +72,12 @@
 					<integer>1</integer>
 					<key>INIntentParameterMetadata</key>
 					<dict>
+						<key>INIntentParameterMetadataDefaultValue</key>
+						<integer>1</integer>
 						<key>INIntentParameterMetadataMaximumValue</key>
-						<integer>4</integer>
+						<integer>5</integer>
+						<key>INIntentParameterMetadataMinimumValue</key>
+						<integer>1</integer>
 						<key>INIntentParameterMetadataType</key>
 						<string>Field</string>
 					</dict>
@@ -91,7 +95,7 @@
 							<key>INIntentParameterPromptDialogCustom</key>
 							<true/>
 							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>How's your mood today! Score it from 0-4!</string>
+							<string>How's your mood today! Score it from 1-5!</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
 							<string>jNA1mn</string>
 							<key>INIntentParameterPromptDialogType</key>

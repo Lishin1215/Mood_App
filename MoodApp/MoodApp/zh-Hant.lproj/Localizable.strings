@@ -91,9 +91,6 @@
 "logout" = "登出";
 "account" = "帳號";
 
-
-
-
 //passwordPage
 "passwordTitleNew" = "請設定您的新密碼";
 "passwordTitleOld" = "請輸入密碼";
@@ -102,6 +99,8 @@
 "settingAlert" = "完成🥳";
 "settingMessage" = "密碼已成功設定";
 "ok" = "確定";
+"forgotPassword" = "忘記密碼?";
+"alertSubtitle" = "為了您的使用安全，\n需要請您再登入一次";
 
 //FaceDetectionManager
 "warning" = "警告 ⚠️";

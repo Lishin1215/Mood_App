@@ -235,7 +235,47 @@ class PasswordViewController: UIViewController {
             subtitleLabel.isHidden = false
             subtitleLabel.text = NSLocalizedString("passwordSubTitle", comment: "")
             subtitleLabel.textColor = .brown
+            
+            //加入"忘記密碼"
+            let forgotPassword = UIButton()
+            forgotPassword.setTitle(NSLocalizedString("forgotPassword", comment: ""), for: .normal)
+            forgotPassword.setTitleColor(.pinkOrange, for: .normal)
+            forgotPassword.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            view.addSubview(forgotPassword)
+            
+            forgotPassword.addTarget(self, action: #selector(forgotPasswordTapped), for: .touchUpInside)
+            
+            forgotPassword.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                forgotPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                forgotPassword.bottomAnchor.constraint(equalTo: colorImageView.topAnchor, constant: -20)
+            ])
         }
+    }
+    
+    @objc func forgotPasswordTapped(_ sender: UIButton) {
+        print("DDD")
+        
+        // 跳alert
+        let controller = UIAlertController(title: NSLocalizedString("forgotPassword", comment: ""), message: NSLocalizedString("alertSubtitle", comment: ""), preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .destructive) {_ in
+            // I. 清掉所有settings (default)
+            StorageManager.shared.setPassword(newPasscode: nil)
+            StorageManager.shared.setLanguage(newLanguage: nil)
+            StorageManager.shared.setReminderTime(newReminderTime: nil)
+            // II. 導到 loginPage
+            if let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginPageViewController {
+                loginVC.modalPresentationStyle = .fullScreen
+                self.present(loginVC, animated: true)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel)
+        
+        controller.addAction(okAction)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
     }
 
     
@@ -299,6 +339,7 @@ class PasswordViewController: UIViewController {
         enter = ""
 
         subtitleLabel.isHidden = true
+        
     }
     
     

@@ -24,9 +24,12 @@ extension UIImageView {
 extension UIButton {
     
     // 定義一個設置圖片的方法，這裡使用了 Kingfisher 框架來下載圖片並緩存
-    func addImage(with url: URL?) {
+    // 加completion -> 避免來不及addImage，而存到"空"的圖片
+    func addImage(with url: URL?, completion: (() -> Void)?) {
         // 使用 Kingfisher 提供的方法來下載圖片
-        self.kf.setImage(with: url, for: .normal)
+        self.kf.setImage(with: url, for: .normal) {_ in
+            completion?()
+        }
         self.imageView?.contentMode = .scaleAspectFit
     }
     
