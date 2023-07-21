@@ -75,6 +75,8 @@
 		5BCF3ED82A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ED72A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift */; };
 		5BCF3EDA2A6137B30004F4A4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3ED92A6137B30004F4A4 /* Date+Extension.swift */; };
 		5BCF3EDC2A614C990004F4A4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3EDB2A614C990004F4A4 /* UIViewController+Extension.swift */; };
+		5BD425FE2A69681300A72C60 /* StatisticsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD425FD2A69681300A72C60 /* StatisticsVCTests.swift */; };
+		5BD426052A6A2CCD00A72C60 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD426042A6A2CCD00A72C60 /* DateTests.swift */; };
 		5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */; };
 		5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */; };
 		5BD4D78F2A526891009E8E89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BD4D7912A526891009E8E89 /* Localizable.strings */; };
@@ -103,6 +105,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5B0742872A4811BA008F4C3D;
 			remoteInfo = IntentsHandler;
+		};
+		5BD425FF2A69681300A72C60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5B07422F2A39AC71008F4C3D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B0742362A39AC71008F4C3D;
+			remoteInfo = MoodApp;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -189,6 +198,9 @@
 		5BCF3ED72A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewDataSource.swift; sourceTree = "<group>"; };
 		5BCF3ED92A6137B30004F4A4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		5BCF3EDB2A614C990004F4A4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		5BD425FB2A69681300A72C60 /* MoodAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoodAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BD425FD2A69681300A72C60 /* StatisticsVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsVCTests.swift; sourceTree = "<group>"; };
+		5BD426042A6A2CCD00A72C60 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
 		5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMonthView.swift; sourceTree = "<group>"; };
 		5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCell.swift; sourceTree = "<group>"; };
 		5BD4D78A2A526773009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -235,6 +247,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5BD425F82A69681300A72C60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -260,6 +279,7 @@
 				5B0742392A39AC71008F4C3D /* MoodApp */,
 				5B07428B2A4811BB008F4C3D /* IntentsHandler */,
 				5B0742962A4811BB008F4C3D /* IntentsHandlerUI */,
+				5BD425FC2A69681300A72C60 /* MoodAppTests */,
 				5B0742382A39AC71008F4C3D /* Products */,
 				D94C7DEF15C338EDC4255E4F /* Pods */,
 				38D8090ABE8BE34934B58152 /* Frameworks */,
@@ -272,6 +292,7 @@
 				5B0742372A39AC71008F4C3D /* MoodApp.app */,
 				5B0742882A4811BB008F4C3D /* IntentsHandler.appex */,
 				5B0742932A4811BB008F4C3D /* IntentsHandlerUI.appex */,
+				5BD425FB2A69681300A72C60 /* MoodAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -415,6 +436,15 @@
 			path = ../StorageManager;
 			sourceTree = "<group>";
 		};
+		5BD425FC2A69681300A72C60 /* MoodAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				5BD425FD2A69681300A72C60 /* StatisticsVCTests.swift */,
+				5BD426042A6A2CCD00A72C60 /* DateTests.swift */,
+			);
+			path = MoodAppTests;
+			sourceTree = "<group>";
+		};
 		D94C7DEF15C338EDC4255E4F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +520,24 @@
 			productReference = 5B0742932A4811BB008F4C3D /* IntentsHandlerUI.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		5BD425FA2A69681300A72C60 /* MoodAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5BD426032A69681300A72C60 /* Build configuration list for PBXNativeTarget "MoodAppTests" */;
+			buildPhases = (
+				5BD425F72A69681300A72C60 /* Sources */,
+				5BD425F82A69681300A72C60 /* Frameworks */,
+				5BD425F92A69681300A72C60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5BD426002A69681300A72C60 /* PBXTargetDependency */,
+			);
+			name = MoodAppTests;
+			productName = MoodAppTests;
+			productReference = 5BD425FB2A69681300A72C60 /* MoodAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -508,6 +556,10 @@
 					};
 					5B0742922A4811BB008F4C3D = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					5BD425FA2A69681300A72C60 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 5B0742362A39AC71008F4C3D;
 					};
 				};
 			};
@@ -528,6 +580,7 @@
 				5B0742362A39AC71008F4C3D /* MoodApp */,
 				5B0742872A4811BA008F4C3D /* IntentsHandler */,
 				5B0742922A4811BB008F4C3D /* IntentsHandlerUI */,
+				5BD425FA2A69681300A72C60 /* MoodAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -559,6 +612,13 @@
 			files = (
 				5B07430F2A4B6AAF008F4C3D /* GoogleService-Info.plist in Resources */,
 				5B07429B2A4811BB008F4C3D /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5BD425F92A69681300A72C60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +815,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5BD425F72A69681300A72C60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BD425FE2A69681300A72C60 /* StatisticsVCTests.swift in Sources */,
+				5BD426052A6A2CCD00A72C60 /* DateTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -767,6 +836,11 @@
 			isa = PBXTargetDependency;
 			target = 5B0742872A4811BA008F4C3D /* IntentsHandler */;
 			targetProxy = 5B0742A02A4811BB008F4C3D /* PBXContainerItemProxy */;
+		};
+		5BD426002A69681300A72C60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5B0742362A39AC71008F4C3D /* MoodApp */;
+			targetProxy = 5BD425FF2A69681300A72C60 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1113,6 +1187,45 @@
 			};
 			name = Release;
 		};
+		5BD426012A69681300A72C60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 86Q9XSU8XB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Janet.MoodAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoodApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MoodApp";
+			};
+			name = Debug;
+		};
+		5BD426022A69681300A72C60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86Q9XSU8XB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Janet.MoodAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoodApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MoodApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1148,6 +1261,15 @@
 			buildConfigurations = (
 				5B0742A42A4811BB008F4C3D /* Debug */,
 				5B0742A52A4811BB008F4C3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5BD426032A69681300A72C60 /* Build configuration list for PBXNativeTarget "MoodAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5BD426012A69681300A72C60 /* Debug */,
+				5BD426022A69681300A72C60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
