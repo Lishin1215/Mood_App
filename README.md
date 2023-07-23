@@ -9,5 +9,5 @@ Diary, Analysis, LookBack
 </p>
 
 <p align="center">
-	<a href="https://apps.apple.com/tw/app/tireless/id1619740150"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"></a>
+	<a href="https://apps.apple.com/tw/app/moodiaryapp/id6450440783"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"></a>
 </p>
