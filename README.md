@@ -11,3 +11,10 @@ Diary, Analysis, LookBack
 <p align="center">
 	<a href="https://apps.apple.com/tw/app/moodiaryapp/id6450440783"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"></a>
 </p>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/platform-iOS-lightgray">
+    <img src="https://img.shields.io/badge/license-MIT-informational">
+    <img src="https://img.shields.io/badge/release-v1.0.1-green">
+    <img src="https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat">
+</p>
