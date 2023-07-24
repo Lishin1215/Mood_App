@@ -11,12 +11,9 @@ class NewPageCell: UITableViewCell {
     
     static let reuseIdentifier = String(describing: NewPageCell.self)
     
-    let containerView = UIView()
+    let containerView = ContainerView()
     let moodLabel = UILabel()
     
-    
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
     
     // 初始化設置
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -25,12 +22,6 @@ class NewPageCell: UITableViewCell {
         //取消選取時的灰色背景
         selectionStyle = .none
         
-        containerView.backgroundColor = .white
-        containerView.layer.cornerRadius = 10
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 0.25
-        containerView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        containerView.layer.shadowRadius = 4
         addSubview(containerView)
         
         containerView.translatesAutoresizingMaskIntoConstraints = false

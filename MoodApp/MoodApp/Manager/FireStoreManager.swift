@@ -103,7 +103,7 @@ class FireStoreManager {
         
     }
     
-    
+    //newPage --> 拿全部資料跟selectedDate去對照，看當天是否有填寫過了
     func fetchData() {
         let db = Firestore.firestore()
         let collectionRef = db.collection("users").document(userId).collection("articles")  //db.collection("articles")

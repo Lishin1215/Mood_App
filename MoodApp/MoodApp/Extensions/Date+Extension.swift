@@ -18,3 +18,11 @@ extension Date {
         return dateString
     }
 }
+
+
+extension Calendar {
+    
+    static func convertToDate(from dateComponents: DateComponents) -> Date? {
+        return Calendar.current.date(from: dateComponents)
+    }
+}

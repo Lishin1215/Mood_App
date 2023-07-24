@@ -82,54 +82,6 @@ class StatisticsTableViewDataSource: NSObject, UITableViewDataSource {
                                                         numberOfLines: 2,
                                                         in: cell.containerView,
                                                        bottomAnchorConstant: 85, trailingAnchorConstant: -35)
-
-                
-//
-//                let bedTimeLabel = UILabel()
-//                let wakeTimeLabel = UILabel()
-//                let sleepTimelabel = UILabel()
-//
-//                bedTimeLabel.text = NSLocalizedString("averageBed", comment: "")
-//                bedTimeLabel.numberOfLines = 2
-//                bedTimeLabel.textAlignment = .center
-//                wakeTimeLabel.text = NSLocalizedString("averageWake", comment: "")
-//                wakeTimeLabel.numberOfLines = 2
-//                wakeTimeLabel.textAlignment = .center
-//                sleepTimelabel.text = NSLocalizedString("averageSleep", comment: "")
-//                sleepTimelabel.numberOfLines = 2
-//                sleepTimelabel.textAlignment = .center
-//                bedTimeLabel.font = UIFont.systemFont(ofSize: 13)
-//                wakeTimeLabel.font = UIFont.systemFont(ofSize: 13)
-//                sleepTimelabel.font = UIFont.systemFont(ofSize: 13)
-//                bedTimeLabel.textColor = .lightGray
-//                wakeTimeLabel.textColor = .lightGray
-//                sleepTimelabel.textColor = .lightGray
-//                cell.containerView.addSubview(bedTimeLabel)
-//                cell.containerView.addSubview(wakeTimeLabel)
-//                cell.containerView.addSubview(sleepTimelabel)
-//
-//                bedTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-//                wakeTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-//                sleepTimelabel.translatesAutoresizingMaskIntoConstraints = false
-//
-//                NSLayoutConstraint.activate([
-//                    bedTimeLabel.leadingAnchor.constraint(equalTo: cell.containerView.leadingAnchor, constant: 35),
-//                    bedTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30),
-//                ])
-//                NSLayoutConstraint.activate([
-//                    wakeTimeLabel.centerXAnchor.constraint(equalTo: cell.containerView.centerXAnchor),
-//                    wakeTimeLabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
-//                ])
-//                NSLayoutConstraint.activate([
-//                    sleepTimelabel.trailingAnchor.constraint(equalTo: cell.containerView.trailingAnchor, constant: -35),
-//                    sleepTimelabel.bottomAnchor.constraint(equalTo: cell.containerView.bottomAnchor, constant: -30)
-//                ])
-                
-                
-                //TimeLabel (不能在裡面new，不然reload data會一直出現重複的）
-//                let bedTime = UILabel()
-//                let wakeTime = UILabel()
-//                let sleepTime = UILabel()
                 
                 //預設先拿掉TimeLabel，以免拿到資料後，更新會重複add (default)
                 viewController?.bedTime.removeFromSuperview()

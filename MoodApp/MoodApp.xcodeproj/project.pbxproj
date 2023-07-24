@@ -77,6 +77,7 @@
 		5BCF3EDC2A614C990004F4A4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF3EDB2A614C990004F4A4 /* UIViewController+Extension.swift */; };
 		5BD425FE2A69681300A72C60 /* StatisticsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD425FD2A69681300A72C60 /* StatisticsVCTests.swift */; };
 		5BD426052A6A2CCD00A72C60 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD426042A6A2CCD00A72C60 /* DateTests.swift */; };
+		5BD426072A6E837D00A72C60 /* NewPageTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD426062A6E837D00A72C60 /* NewPageTableViewDataSource.swift */; };
 		5BD4D77F2A4E92BC009E8E89 /* PopUpMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */; };
 		5BD4D7812A4EC466009E8E89 /* PopUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */; };
 		5BD4D78F2A526891009E8E89 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BD4D7912A526891009E8E89 /* Localizable.strings */; };
@@ -201,6 +202,7 @@
 		5BD425FB2A69681300A72C60 /* MoodAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoodAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD425FD2A69681300A72C60 /* StatisticsVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsVCTests.swift; sourceTree = "<group>"; };
 		5BD426042A6A2CCD00A72C60 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
+		5BD426062A6E837D00A72C60 /* NewPageTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPageTableViewDataSource.swift; sourceTree = "<group>"; };
 		5BD4D77E2A4E92BC009E8E89 /* PopUpMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpMonthView.swift; sourceTree = "<group>"; };
 		5BD4D7802A4EC466009E8E89 /* PopUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpCell.swift; sourceTree = "<group>"; };
 		5BD4D78A2A526773009E8E89 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				5B07423E2A39AC71008F4C3D /* HomeViewController.swift */,
 				5B0742722A41876C008F4C3D /* StatisticsViewController.swift */,
 				5BCF3ED72A5FE6780004F4A4 /* StatisticsTableViewDataSource.swift */,
+				5BD426062A6E837D00A72C60 /* NewPageTableViewDataSource.swift */,
 				5B0742582A3C0ED8008F4C3D /* NewPageViewController.swift */,
 				5B0742782A42A943008F4C3D /* LookBackViewController.swift */,
 				5B07427A2A42B79C008F4C3D /* SettingsViewController.swift */,
@@ -734,6 +737,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BD426072A6E837D00A72C60 /* NewPageTableViewDataSource.swift in Sources */,
 				5B0742592A3C0ED8008F4C3D /* NewPageViewController.swift in Sources */,
 				5B0742AB2A481823008F4C3D /* SiriIntents.intentdefinition in Sources */,
 				5B0742812A4455F8008F4C3D /* MoodContentView.swift in Sources */,

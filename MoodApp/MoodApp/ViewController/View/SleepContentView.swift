@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  PracticeAppleSleep
+//  MoodApp
 //
-//  Created by Jasper Stritzke on 14.10.22.
+//  Created by 簡莉芯 on 2023/6/16.
 //
 
 import SwiftUI
