@@ -67,7 +67,7 @@ Authentication to facilitate Apple sign-in functionality.
 - [IQKeyboardManagerSwift](https://github.com/hackiftekhar/IQKeyboardManager)
 - [SwiftLint](https://github.com/realm/SwiftLint)
 - [Crashlytics](https://firebase.google.com/products/crashlytics?hl=en)
-- Kingfisher
+- [Kingfisher](https://github.com/onevcat/Kingfisher)
 
 ## Requirements
 - Xcode 14 or later</br>
@@ -80,7 +80,7 @@ Authentication to facilitate Apple sign-in functionality.
 ## Release Notes
 | Version | Notes |
 | :-----: | ----- |
-| 1.3  | Add tutorial on App Store description |
+| 1.3  | Added tutorial on App Store description |
 | 1.2  | Fixed bugs |
 | 1.1  | Two new features added |
 | 1.0  | Submitted to the App Store |
