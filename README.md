@@ -37,6 +37,11 @@ When adding more than five pictures in a month, this feature will be activated. 
 You can set a password for your diary, ensuring its security and make your secrets safe.
 - Mood recording with Siri </br>
 No need to open the app for recording. Just ask Siri to 'Record Mood' and assign a score for today. Siri will automatically write the mood in your diary.
+- Share your statistic charts with friends </br>
+When the monthly charts are generated, users can either share them with their friends or save them to their photo albums. 
+- Privacy Protection: Peeping Detection </br>
+Once you activate this function, it will promptly send an alert to you if someone attempts to peek at your "Moodiary" from behind.
+
 
 
 #### Skills
