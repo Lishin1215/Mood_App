@@ -22,7 +22,7 @@ Diary, Analysis, LookBack
 ## About MooDiary
 
 ## Features
-#### Hightlights
+#### Highlights
 
 #### Skills
 
@@ -30,13 +30,28 @@ Diary, Analysis, LookBack
 ## Screen Shots
 
 ## Libraries
+- Firebase
+- Kingfisher
+- Lottie
+- SwiftLint
+- Crashlytics
+- IQKeyboard
 
 ## Requirements
-
+- Xcode 14 or later</br>
+- iOS 16.0 or later</br>
+- SwiftLint
 
 ## Version
+- 1.3
 
 ## Release Notes
+| Version | Notes |
+| :-----: | ----- |
+| 1.3  | 1. Add reminder </br> 2. Add record statistics </br> 3. Fix bugs|
+| 1.2  | Submitted to the App Store |
+| 1.1  |
+| 1.0  |
 
 ## Contact
 
