@@ -86,8 +86,12 @@ Authentication to facilitate Apple sign-in functionality.
 | 1.0  | Submitted to the App Store |
 
 ## Contact
-Janet Chien</br>
+Janet Chien 簡莉芯</br>
 
 - email: <lishin1008@gmail.com>
 - <a href="https://www.linkedin.com/in/chien-li-hsin/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+
+## License
+
+This project is licensed under the terms of the MIT license.
 
