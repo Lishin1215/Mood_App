@@ -49,9 +49,9 @@ Diary, Analysis, LookBack
 | Version | Notes |
 | :-----: | ----- |
 | 1.3  | 1. Add reminder </br> 2. Add record statistics </br> 3. Fix bugs|
-| 1.2  | Submitted to the App Store |
+| 1.2  | 
 | 1.1  |
-| 1.0  |
+| 1.0  | Submitted to the App Store |
 
 ## Contact
 
