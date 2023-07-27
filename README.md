@@ -51,19 +51,19 @@ Authentication to facilitate Apple sign-in functionality.
 
 ## Screen Shots
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/17423239/170537857-be65d0c7-a8b0-4304-98f5-0c7d098b8498.png" width="550" />
+   <img src=" " width="550" />
 </p>
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/17423239/170537863-adf6dc8a-f1c9-43a2-8fb3-c16876af83e9.png" width="550" />
+   <img src=" " width="550" />
 </p>
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/17423239/170537872-9d5b8f50-7e99-462e-915d-7b4732f0f6dd.png" width="550" />
+   <img src=" " width="550" />
 </p>
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/17423239/170537928-f81689b4-5387-4c2d-bdd4-3c7913c50b72.png" width="550" />
+   <img src=" " width="550" />
 </p>
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/17423239/170537941-54b6f948-5263-4b7a-9c34-9b5df05c5027.png" width="550" />
+   <img src=" " width="550" />
 </p>
 
 ## Libraries
