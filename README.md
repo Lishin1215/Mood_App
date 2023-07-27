@@ -63,7 +63,6 @@ Authentication to facilitate Apple sign-in functionality.
   
 ## Libraries
 - [Firestore](https://firebase.google.com/products/firestore?gclid=Cj0KCQiA-qGNBhD3ARIsAO_o7ynVqh2xVTgG6WIKFSfdCN4x9lHJrit2kdCT99IfZPNxPPbbtPHr6qsaAv4lEALw_wcB&gclsrc=aw.ds)
-- [lottie-ios](https://github.com/airbnb/lottie-ios)
 - [IQKeyboardManagerSwift](https://github.com/hackiftekhar/IQKeyboardManager)
 - [SwiftLint](https://github.com/realm/SwiftLint)
 - [Crashlytics](https://firebase.google.com/products/crashlytics?hl=en)
