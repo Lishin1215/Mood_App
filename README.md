@@ -51,7 +51,7 @@ Authentication to facilitate Apple sign-in functionality.
 
 ## Screen Shots
 <p align="center">
-   <img src="https://github.com/Lishin1215/asset/blob/main/MoodApp截圖/background%20(6.5)/Frame%2010.jpg?raw=true " width="550" />
+   <img src="https://github.com/Lishin1215/asset/blob/main/MoodApp截圖/background%20(6.5)/Frame%2010.jpg?raw=true" width="550" />
 </p>
 <p align="center">
    <img src=" " width="550" />
