@@ -48,11 +48,14 @@ Diary, Analysis, LookBack
 ## Release Notes
 | Version | Notes |
 | :-----: | ----- |
-| 1.3  | 1. Add reminder </br> 2. Add record statistics </br> 3. Fix bugs|
-| 1.2  | 
-| 1.1  |
+| 1.3  | Add tutorial on App Store description |
+| 1.2  | Fixed bugs |
+| 1.1  | Added two new features |
 | 1.0  | Submitted to the App Store |
 
 ## Contact
+Janet Chien</br>
 
-## License
+- email: <lishin1008@gmail.com>
+- <a href="https://www.linkedin.com/in/chien-li-hsin/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+
