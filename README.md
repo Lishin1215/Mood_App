@@ -25,7 +25,19 @@ In today's world, where people are often influenced by social media and experien
 By using this app, you can shift your focus back to yourself and truly appreciate the uniqueness and preciousness of your own life.
 
 ## Features
-#### Highlights
+- Monthly Mood Calendar
+Record your feelings by tapping specific days or the '+' icon on the tab bar for today's mood. Access previous records by tapping the icon below the calendar date.
+- Simple daily recording with emojis and photos
+Adding a day to the app is simple. Choose to either tap the emoji or fill in all the details. Use the circular slider to select sleep time, and add a brief description if desired.
+- Mood flow and Sleep Tracking
+The app creates monthly charts based on your daily mood and sleep records, allowing you to easily track your mental and physical well-being.
+- Auto-generated monthly memoir
+When adding more than five pictures in a month, this feature will be activated. The app will automatically generate a monthly memoir for you, utilizing the photos you've added during that month.
+- Secure diary storage
+You can set a password for your diary, ensuring its security and make your secrets safe.
+- Mood recording with Siri
+No need to open the app for recording. Just ask Siri to 'Record Mood' and assign a score for today. Siri will automatically write the mood in your diary.
+
 
 #### Skills
 
