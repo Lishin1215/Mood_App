@@ -72,7 +72,7 @@ Authentication to facilitate Apple sign-in functionality.
 ## Requirements
 - Xcode 14 or later</br>
 - iOS 16.0 or later</br>
-- SwiftLint
+- Swift 5
 
 ## Version
 - 1.3
