@@ -25,7 +25,6 @@ In today's world, where people are often influenced by social media and experien
 By using this app, you can shift your focus back to yourself and truly appreciate the uniqueness and preciousness of your own life.
 
 ## Features
-#### Highlights
 - Monthly Mood Calendar </br>
 - Simple daily recording with emojis and photos </br>
 - Mood Flow and Sleep Tracking </br>
@@ -36,17 +35,6 @@ By using this app, you can shift your focus back to yourself and truly appreciat
 - Privacy Protection: Peeping Detection </br>
 
 
-
-#### Skills
-- Integrated SwiftUI with UIKit to create charts for data visualization and included sharing functionality.
-- Implemented SiriKit to enable voice interactions with users by designated keyword ”Record Mood”.
-- Integrated the Vision framework with the camera to achieve real-
- time face detection, enhancing app security and preventing unauthorized surveillance.
-- Utilized Firebase Firestore for data storage, Firebase Storage to generate URLs from pictures on users’ devices, and Firebase
-Authentication to facilitate Apple sign-in functionality.
-- Applied UICalendarView on the home page and enabled to convert date between DateComponent and DateFormatter formats.
-- Developed essential app settings, such as password management, local notification and localization functionality.
-- Managed the life cycle of the app and view controller to demonstrate various features, including Siri integration, login validation and password management.
 
 
 ## Screen Shots
@@ -60,6 +48,19 @@ Authentication to facilitate Apple sign-in functionality.
    <img src="https://github.com/Lishin1215/asset/blob/main/MoodApp截圖/background%20(6.5)/Frame%2010.jpg?raw=true " width="250" />
 </p>
 
+
+## Technical Highlights
+- Integrated SwiftUI with UIKit to create charts for data visualization and included sharing functionality.
+- Implemented SiriKit to enable voice interactions with users by designated keyword ”Record Mood”.
+- Integrated the Vision framework with the camera to achieve real-
+ time face detection, enhancing app security and preventing unauthorized surveillance.
+- Utilized Firebase Firestore for data storage, Firebase Storage to generate URLs from pictures on users’ devices, and Firebase
+Authentication to facilitate Apple sign-in functionality.
+- Applied UICalendarView on the home page and enabled to convert date between DateComponent and DateFormatter formats.
+- Developed essential app settings, such as password management, local notification and localization functionality.
+- Managed the life cycle of the app and view controller to demonstrate various features, including Siri integration, login validation and password management.
+
+  
 ## Libraries
 - Firebase
 - Kingfisher
