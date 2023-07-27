@@ -68,6 +68,9 @@ Authentication to facilitate Apple sign-in functionality.
 - [Crashlytics](https://firebase.google.com/products/crashlytics?hl=en)
 - [Kingfisher](https://github.com/onevcat/Kingfisher)
 
+## Resources
+- [flaticon](https://www.flaticon.com/packs/emoji-37?word=emoji)
+
 ## Requirements
 - Xcode 14 or later</br>
 - iOS 16.0 or later</br>
