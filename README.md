@@ -20,7 +20,8 @@ Diary, Analysis, LookBack
 </p>
 
 ## About MooDiary
-"MooDiaryApp is a simple app designed to help you record your daily life. In today's world, where people are often influenced by social media and experience heightened levels of anxiety, MooDiary offers a solution. </br>
+"MooDiaryApp is a simple app designed to help you record your daily life. </br>
+In today's world, where people are often influenced by social media and experience heightened levels of anxiety, MooDiary offers a solution. </br>
 By using this app, you can shift your focus back to yourself and truly appreciate the uniqueness and preciousness of your own life.
 
 ## Features
