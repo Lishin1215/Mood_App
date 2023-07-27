@@ -8,7 +8,7 @@
 Diary, Analysis, LookBack
 </p>
 
-<p align="left">
+<p align="center">
 	<a href="https://apps.apple.com/tw/app/moodiaryapp/id6450440783"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"></a>
 </p>
 
@@ -50,7 +50,7 @@ Authentication to facilitate Apple sign-in functionality.
 
 
 ## Screen Shots
-<p align="center">
+<p align="left">
    <img src="https://github.com/Lishin1215/asset/blob/main/MoodApp截圖/background%20(6.5)/Frame%2010.jpg?raw=true" width="250" />
 </p>
 <p align="center">
