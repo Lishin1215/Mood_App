@@ -29,10 +29,10 @@ By using this app, you can shift your focus back to yourself and truly appreciat
 - Monthly Mood Calendar </br>
 - Simple daily recording with emojis and photos </br>
 - Mood Flow and Sleep Tracking </br>
-- Auto-generated monthly memoir </br>
-- Secure diary storage </br>
-- Mood recording with Siri </br>
-- Statistic charts sharing </br>
+- Auto-generated Monthly Memoir </br>
+- Secure Diary Storage </br>
+- Mood Recording with Siri </br>
+- Statistic Charts Sharing </br>
 - Privacy Protection: Peeping Detection </br>
 
 
