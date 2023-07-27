@@ -1,7 +1,7 @@
 # MooDiary App
 
 <p align="center">
-  <img src="https://github.com/Lishin1215/asset/blob/main/appIcon/Group%20626526.jpg?raw=true" width="130" height="130"/>
+  <img src="https://github.com/Lishin1215/asset/blob/main/appIcon/Frame%20626527.jpg?raw=true" width="130" height="130"/>
 </p>
 
 <p align="center">
