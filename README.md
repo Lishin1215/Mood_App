@@ -25,6 +25,7 @@ In today's world, where people are often influenced by social media and experien
 By using this app, you can shift your focus back to yourself and truly appreciate the uniqueness and preciousness of your own life.
 
 ## Features
+#### Highlights
 - Monthly Mood Calendar </br>
 - Simple daily recording with emojis and photos </br>
 - Mood Flow and Sleep Tracking </br>
