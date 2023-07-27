@@ -69,7 +69,7 @@ Authentication to facilitate Apple sign-in functionality.
 - [Kingfisher](https://github.com/onevcat/Kingfisher)
 
 ## Resources
-- [flaticon](https://www.flaticon.com/packs/emoji-37?word=emoji)
+- Icons made by iconixar from [flaticon](https://www.flaticon.com/packs/emoji-37?word=emoji)
 
 ## Requirements
 - Xcode 14 or later</br>
