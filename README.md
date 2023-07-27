@@ -8,7 +8,7 @@
 Diary, Analysis, LookBack
 </p>
 
-<p align="center">
+<p align="left">
 	<a href="https://apps.apple.com/tw/app/moodiaryapp/id6450440783"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"></a>
 </p>
 
