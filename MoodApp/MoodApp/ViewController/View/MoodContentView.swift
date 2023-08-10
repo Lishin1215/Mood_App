@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 
-//畫圖需要的data structure，資料需要存成這樣
+// 畫圖需要的data structure，資料需要存成這樣
 struct MoodFlow {
     var date: Date //x軸
     var mood: String //y軸
@@ -19,14 +19,14 @@ struct MoodFlow {
 
 struct MoodContentView: View {
     
-//畫圖需要的資料，moodFlow的array
+// 畫圖需要的資料，moodFlow的array
     var moodFlowArray: [MoodFlow] = []
-    //x軸日期標點
-    var startOfMonth: Date = Date() //月的第一天，作為x軸的頭
-    var endOfMonth: Date = Date() //月的最後一天
+    // x軸日期標點
+    var startOfMonth: Date = Date() // 月的第一天，作為x軸的頭
+    var endOfMonth: Date = Date() // 月的最後一天
     var monthLabelArray: [Date] = []
     
-//用來將date轉換成"xx/xx"的形式
+// 用來將date轉換成"xx/xx"的形式
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"
@@ -34,7 +34,7 @@ struct MoodContentView: View {
     }()
     
 
-//***把statisticsVC拿到的moodArray傳過來
+// ***把statisticsVC拿到的moodArray傳過來
     init(moodArray: [MoodFlow]) {
         moodFlowArray = moodArray
         
@@ -42,17 +42,17 @@ struct MoodContentView: View {
 //        moodFlowArray = moodFlowArray.sorted(by: { $0.date < $1.date })
         
         // 從moodFlowArray的Date中，去確認圖表要用到哪個月份
-        startOfMonth = moodFlowArray[0].date.startDateOfMonth //該月第一天
-        endOfMonth = moodFlowArray[0].date.endDateOfMonth //該月最後一天
+        startOfMonth = moodFlowArray[0].date.startDateOfMonth // 該月第一天
+        endOfMonth = moodFlowArray[0].date.endDateOfMonth // 該月最後一天
         
-        //從startOfMonth到endOfMonth為止，產生一個間隔為5天的array (3600秒 * 24小時 * 5天）
+        // 從startOfMonth到endOfMonth為止，產生一個間隔為5天的array (3600秒 * 24小時 * 5天）
         monthLabelArray = Array(stride(from: startOfMonth, to: endOfMonth, by: 3600 * 24 * 5))
         
     
     }
     
     
-    //swiftUI的骨幹，在這裡畫圖
+    // swiftUI的骨幹，在這裡畫圖
     var body: some View {
         Chart {
           // for 過moodFlowArray，把日期和mood分別作為一個點的x值與y值
@@ -70,14 +70,14 @@ struct MoodContentView: View {
         }
         // y軸
         .chartYAxis {
-            AxisMarks(position: .leading, values: [1,2,3,4,5]) //讓y軸固定5個值
+            AxisMarks(position: .leading, values: [1,2,3,4,5]) // 讓y軸固定5個值
         }
         .chartYScale(domain: 1...5) //限制y軸範圍
         
         // x軸
         .chartXAxis {
             
-            //利用monthLabelArray作為x軸label，並把date轉換成"xx/xx"的形式
+            // 利用monthLabelArray作為x軸label，並把date轉換成"xx/xx"的形式
             AxisMarks(values: monthLabelArray) { value in
                 
                 if let date = value.as(Date.self) {

@@ -30,7 +30,7 @@ class FireStoreManager {
     
     
     func setUserId(userId: String) {
-        self.userId = userId //把登入後的credential放入userId
+        self.userId = userId // 把登入後的credential放入userId
         
     }
     

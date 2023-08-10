@@ -212,14 +212,11 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     @objc func peepingCondition(_ sender: UISwitch) {
         if sender.isOn {
            
-//            //存結果到coreData
-//            StorageManager.shared.setPeepingMode(peepingMode: true)
             //開啟“人臉辨識”功能
             FaceDetectionManager.shared.startCamera()
         } else {
             FaceDetectionManager.shared.stopCamera()
             
-//            StorageManager.shared.setPeepingMode(peepingMode: false)
         }
     }
     

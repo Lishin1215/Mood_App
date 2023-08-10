@@ -21,9 +21,7 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
     }
     
     
-    
-    
-    //正確接收到intent後執行
+    // 正確接收到intent後執行
     func handle(intent: RecordMoodIntent, completion: @escaping (RecordMoodIntentResponse) -> Void) {
         print(intent.MoodScore)
 //        completion(RecordMoodIntentResponse.success(result: "Successfully"))
@@ -43,7 +41,7 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
         
         
         
-        if let currentUser = Auth.auth().currentUser{
+        if let currentUser = Auth.auth().currentUser {
             print("already log in")
             let uid = currentUser.uid
             print(uid)
@@ -56,7 +54,7 @@ class RecordMoodIntentHandler: NSObject, RecordMoodIntentHandling {
         // 減1 --> 讓mood index維持在 0-4
         FireStoreManager.shared.updateData(mood: String(Int(intent.MoodScore ?? 1)-1)) {
             
-            //***確定上傳之後再結束（siri)程式
+            // ***確定上傳之後再結束（siri)程式
             completion(RecordMoodIntentResponse.success(result: "Successfully"))
         }
     }

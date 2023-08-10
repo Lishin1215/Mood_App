@@ -13,23 +13,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    //建立捷徑讓siri可以呼叫app
+    // 建立捷徑讓siri可以呼叫app
     private func donateIntent() {
-        let intent = RecordMoodIntent() //系統自動會有
-        intent.suggestedInvocationPhrase = "Record Mood"  //呼叫捷徑“要說的話” //siri要調成英文版
+        let intent = RecordMoodIntent() // 系統自動會有
+        intent.suggestedInvocationPhrase = "Record Mood"  // 呼叫捷徑“要說的話” //siri要調成英文版
         
-        let interaction = INInteraction(intent: intent, response: nil) //建立互動
-        interaction.donate { (error) in //在iphone上建立捷徑
+        let interaction = INInteraction(intent: intent, response: nil) // 建立互動
+        interaction.donate { (error) in // 在iphone上建立捷徑
             if error != nil {
                 if let error = error as? NSError {
                     print("Donate failed")
                 } else {
-                    print("Successfullt donated interation")
+                    print("Successfully donated interation")
                 }
             }
         }
         
     }
+
     
 //第一次打開app執行
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -41,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // 避免已經login但coreData被刪除的情況
         if StorageManager.shared.fetchLanguage() == nil {
 
-            //偵測系統預設語言，存到CoreData
+            // 偵測系統預設語言，存到CoreData
             LocalizeUtils.shared.settingUserLanguageCode()
         }
         
@@ -49,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // signin with apple
         // 目前有user（已登入） -> HomeVC
         
-        if let currentUser = Auth.auth().currentUser{
+        if let currentUser = Auth.auth().currentUser {
             print("already log in")
             
 //            do {
@@ -60,11 +61,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let uid = currentUser.uid
             print(uid)
-            //把登入後的credential(uid)放入userId
+            // 把登入後的credential(uid)放入userId
             FireStoreManager.shared.setUserId(userId: uid)
             
     // user == nil (未登入） -> LoginVC
-        } else{
+        } else {
             print("not log in yet")
 
             // 跳login Page
@@ -75,8 +76,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     self.window?.makeKeyAndVisible()
                 }
         }
-        
-        
         
         guard let _ = (scene as? UIWindowScene) else { return }
     }

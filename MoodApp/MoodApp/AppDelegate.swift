@@ -11,7 +11,7 @@ import FirebaseAuth
 import IQKeyboardManagerSwift
 import UserNotifications
 
-//@main
+// @main
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
@@ -23,13 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        window = UIWindow(frame: UIScreen.main.bounds)
             
         
-    //IQKeyboard
+    // IQKeyboard
         IQKeyboardManager.shared.enable = true
         
-    //firebase
+    // firebase
         FirebaseApp.configure()
         
-    //local notification
+    // local notification
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {(granted, error) in
             if granted {
                 print("允許")
@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 print("不允許")
             }
         })
-        //代理UNUserNotificationCenterDelegate，這麼做可讓 App 在“前景”狀態下收到通知
+        // 代理UNUserNotificationCenterDelegate，這麼做可讓 App 在“前景”狀態下收到通知
         UNUserNotificationCenter.current().delegate = self
           
         
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
       
     
-//local notification
+// local notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping(UNNotificationPresentationOptions) -> Void) {
             
             print("在前景收到通知...")

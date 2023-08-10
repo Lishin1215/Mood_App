@@ -47,9 +47,7 @@
 		5B0742AF2A4824E6008F4C3D /* SiriIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742AA2A481822008F4C3D /* SiriIntents.intentdefinition */; };
 		5B0742B02A4825C3008F4C3D /* RecordMoodIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742AC2A481E6F008F4C3D /* RecordMoodIntentHandler.swift */; };
 		5B0742B12A4825C3008F4C3D /* RecordMoodIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742AC2A481E6F008F4C3D /* RecordMoodIntentHandler.swift */; };
-		5B0742D12A487611008F4C3D /* IntentsFireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742D02A487611008F4C3D /* IntentsFireStoreManager.swift */; };
 		5B0742D32A4876C3008F4C3D /* IntentsUIFireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742D22A4876C3008F4C3D /* IntentsUIFireStoreManager.swift */; };
-		5B0742D52A4876E0008F4C3D /* IntentsArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742D42A4876E0008F4C3D /* IntentsArticles.swift */; };
 		5B0742D72A4876FD008F4C3D /* IntentsUIArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0742D62A4876FD008F4C3D /* IntentsUIArticles.swift */; };
 		5B0742E22A487C7F008F4C3D /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07426B2A3EC5AF008F4C3D /* FireStoreManager.swift */; };
 		5B0742E32A487C80008F4C3D /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07426B2A3EC5AF008F4C3D /* FireStoreManager.swift */; };
@@ -174,9 +172,7 @@
 		5B07429C2A4811BB008F4C3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B0742AA2A481822008F4C3D /* SiriIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = SiriIntents.intentdefinition; sourceTree = "<group>"; };
 		5B0742AC2A481E6F008F4C3D /* RecordMoodIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMoodIntentHandler.swift; sourceTree = "<group>"; };
-		5B0742D02A487611008F4C3D /* IntentsFireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsFireStoreManager.swift; sourceTree = "<group>"; };
 		5B0742D22A4876C3008F4C3D /* IntentsUIFireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsUIFireStoreManager.swift; sourceTree = "<group>"; };
-		5B0742D42A4876E0008F4C3D /* IntentsArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsArticles.swift; sourceTree = "<group>"; };
 		5B0742D62A4876FD008F4C3D /* IntentsUIArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsUIArticles.swift; sourceTree = "<group>"; };
 		5B0742D82A4878C9008F4C3D /* FirebaseStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B0742DA2A4878DA008F4C3D /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -409,8 +405,6 @@
 				5B07428C2A4811BB008F4C3D /* IntentHandler.swift */,
 				5B0742AC2A481E6F008F4C3D /* RecordMoodIntentHandler.swift */,
 				5B07428E2A4811BB008F4C3D /* Info.plist */,
-				5B0742D02A487611008F4C3D /* IntentsFireStoreManager.swift */,
-				5B0742D42A4876E0008F4C3D /* IntentsArticles.swift */,
 			);
 			path = IntentsHandler;
 			sourceTree = "<group>";
@@ -792,11 +786,9 @@
 				5B07428D2A4811BB008F4C3D /* IntentHandler.swift in Sources */,
 				5B0742B02A4825C3008F4C3D /* RecordMoodIntentHandler.swift in Sources */,
 				5BD4D7AF2A546C6E009E8E89 /* PersonalInfoModel.xcdatamodeld in Sources */,
-				5B0742D52A4876E0008F4C3D /* IntentsArticles.swift in Sources */,
 				5B0742AE2A4824E6008F4C3D /* SiriIntents.intentdefinition in Sources */,
 				5BCF3ECB2A5BBA2D0004F4A4 /* PersonalInfo+CoreDataProperties.swift in Sources */,
 				5BD4D7AD2A546BBB009E8E89 /* StorageManager.swift in Sources */,
-				5B0742D12A487611008F4C3D /* IntentsFireStoreManager.swift in Sources */,
 				5BCF3ECD2A5BBA300004F4A4 /* PersonalInfo+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
