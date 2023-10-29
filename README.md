@@ -87,6 +87,20 @@ Authentication to facilitate Apple sign-in functionality.
 | 1.1  | Two new features added |
 | 1.0  | Submitted to the App Store |
 
+## Acknowledgements
+
+I would like to express my sincere gratitude to [fumchin](https://github.com/fumchin) for his invaluable contributions to this project.
+
+Special thanks for the following contributions:
+
+- Assistance in implementation of the face detection function.
+- Assistance in implementation of SwiftUI charts and statistics.
+- Assistance in planning the entire application cycle.
+
+Your contributions have been instrumental in the success of this project.
+
+Thank you, [fumchin](https://github.com/fumchin)!
+
 ## Contact
 Janet Chien 簡莉芯</br>
 
